@@ -1,0 +1,21 @@
+<div class="dashboard">
+  <header class="welcome-msg">
+    <h1>Szia, Tanuló! 👋</h1>
+    <p>Válassz egy területet a mai fejlődéshez:</p>
+  </header>
+
+  <div class="subject-grid">
+    <div
+      class="subject-card"
+      *ngFor="let subject of subjects"
+      [style.border-left-color]="subject.color"
+    >
+      <div class="icon">{{ subject.icon }}</div>
+      <div class="info">
+        <h3>{{ subject.title }}</h3>
+        <p>{{ subject.lessons }} lecke érhető el</p>
+      </div>
+      <button class="action-btn">Indítás</button>
+    </div>
+  </div>
+</div>

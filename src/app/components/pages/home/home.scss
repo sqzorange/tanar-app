@@ -1,0 +1,127 @@
+// --- 1. Változók (Design System alapok) ---
+$brand-primary: #6366f1; // Modern indigó
+$brand-success: #10b981;
+$text-main: #1e293b;
+$text-muted: #64748b;
+$bg-app: #f8fafc;
+$white: #ffffff;
+
+// Árnyék a kártyáknak
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md:
+  0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -2px rgba(0, 0, 0, 0.1);
+
+// --- 2. Layout ---
+.dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+
+  .welcome-msg {
+    margin-bottom: 48px;
+    text-align: left;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: $text-main;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 1.125rem;
+      color: $text-muted;
+    }
+  }
+}
+
+// --- 3. Kártya Grid ---
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+
+  .subject-card {
+    background: $white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: $shadow-sm;
+    position: relative;
+    overflow: hidden;
+
+    // A bal oldali színes sáv helyett egy finomabb felső csík
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: currentColor; // Átveszi az inline style-ból a színt
+      opacity: 0.7;
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-md;
+      border-color: transparent;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+
+      .icon {
+        font-size: 2rem;
+        background: #f1f5f9;
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+      }
+
+      h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: $text-main;
+        margin: 0;
+      }
+    }
+
+    .info {
+      margin-bottom: 24px;
+      p {
+        color: $text-muted;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+    }
+
+    .action-btn {
+      margin-top: auto; // Mindig a kártya alján legyen
+      background: $text-main;
+      color: $white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: lighten($text-main, 10%);
+      }
+    }
+  }
+}
