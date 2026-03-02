@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule, Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+
+interface QuizTask {
+  title: string;
+  questions: { text: string; options: string[]; correctIndex: number }[];
+}
 
 @Component({
   selector: 'app-task-quiz',
@@ -9,48 +14,76 @@ import { Router } from '@angular/router';
   templateUrl: './task-quiz.html',
   styleUrl: './task-quiz.scss',
 })
-export class TaskQuizComponent {
-  questions = [
-    {
-      text: 'Melyik a helyes mondat? (Grammar Focus)',
-      options: ['I has a dog.', 'I have a dog.', 'I haves a dog.'],
-      correctIndex: 1,
+export class TaskQuizComponent implements OnInit {
+  taskDatabase: { [key: string]: QuizTask } = {
+    '10': {
+      title: 'Grammar Focus: Collocations',
+      questions: [
+        {
+          text: 'Complete: "The ___ of the tongue"',
+          options: ['Tip', 'Sole', 'Nape'],
+          correctIndex: 0,
+        }, // [cite: 85]
+        {
+          text: 'Medical term for "Adam\'s apple"?',
+          options: ['Zygoma', 'Mandibula', 'Laryngeal prominence'],
+          correctIndex: 2,
+        }, // [cite: 26, 44]
+        {
+          text: 'Complete: "The ___ of the foot"',
+          options: ['Nape', 'Sole', 'Palm'],
+          correctIndex: 1,
+        }, // [cite: 18, 58, 102]
+      ],
     },
-    {
-      text: 'Mit jelent a "Bemelegítés" szó az IT világában?',
-      options: ['A gép túlmelegedése', 'Ráhangolódó feladat', 'Kábelek csatlakoztatása'],
-      correctIndex: 1,
+    '11': {
+      title: 'Body Idioms Warmup',
+      questions: [
+        {
+          text: 'What does "cost an arm and a leg" mean?',
+          options: ['Very expensive', 'To take a risk', 'To help out'],
+          correctIndex: 0,
+        }, // [cite: 117, 125]
+        {
+          text: 'To ignore someone is to give them the cold ___',
+          options: ['Foot', 'Shoulder', 'Hand'],
+          correctIndex: 1,
+        }, // [cite: 131, 138]
+      ],
     },
-    {
-      text: 'Válaszd ki a kakukktojást!',
-      options: ['Keresztrejtvény', 'Kvíz', 'Alaplap'],
-      correctIndex: 2,
-    },
-  ];
+  };
 
+  currentTask!: QuizTask;
   currentQuestionIndex = 0;
   selectedOptionIndex: number | null = null;
   score = 0;
   isQuizFinished = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+  ) {}
 
-  get currentQuestion() {
-    return this.questions[this.currentQuestionIndex];
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id && this.taskDatabase[id]) {
+      this.currentTask = this.taskDatabase[id];
+    } else {
+      this.location.back();
+    }
   }
 
-  selectOption(index: number) {
-    this.selectedOptionIndex = index;
+  get currentQuestion() {
+    return this.currentTask.questions[this.currentQuestionIndex];
+  }
+  selectOption(i: number) {
+    this.selectedOptionIndex = i;
   }
 
   nextQuestion() {
-    if (this.selectedOptionIndex === null) return;
-    if (this.selectedOptionIndex === this.currentQuestion.correctIndex) {
-      this.score++;
-    }
+    if (this.selectedOptionIndex === this.currentQuestion.correctIndex) this.score++;
     this.selectedOptionIndex = null;
-
-    if (this.currentQuestionIndex < this.questions.length - 1) {
+    if (this.currentQuestionIndex < this.currentTask.questions.length - 1) {
       this.currentQuestionIndex++;
     } else {
       this.isQuizFinished = true;
@@ -59,12 +92,11 @@ export class TaskQuizComponent {
 
   restartQuiz() {
     this.currentQuestionIndex = 0;
-    this.selectedOptionIndex = null;
     this.score = 0;
     this.isQuizFinished = false;
   }
 
   goBack() {
-    this.router.navigate(['/home']);
+    this.location.back();
   }
 }

@@ -11,59 +11,54 @@ import { AuthService } from '../../services/auth';
   styleUrl: './home.scss',
 })
 export class HomeComponent {
-  units = [
+  // 4 Main Topics
+  topics = [
     {
       id: 1,
-      title: 'Bemelegítés',
-      description: 'Szótáras játék indításként',
-      icon: '🧠',
-      color: '#3b82f6',
+      title: 'Topic 1: Introduction to the Body',
+      description: 'Master anatomical terms, medical collocations, and common healthcare idioms.',
+      icon: '🩺',
+      color: '#6366f1',
+      isAvailable: true,
     },
     {
-      id: 8,
-      title: '8. Egység - Összegzés',
-      description: 'Keresztrejtvény (Crossword)',
-      icon: '🧩',
-      color: '#10b981',
+      id: 2,
+      title: 'Topic 2',
+      description: 'Advanced physiological systems and patient communication modules.',
+      icon: '🚧',
+      color: '#94a3b8',
+      isAvailable: false,
     },
     {
-      id: 9,
-      title: '9. Egység - Képes szavazás',
-      description: '9 opcióból 5 kiválasztása',
-      icon: '🖼️',
-      color: '#f59e0b',
+      id: 3,
+      title: 'Topic 3',
+      description: 'Clinical terminology and diagnostic reporting procedures.',
+      icon: '🚧',
+      color: '#94a3b8',
+      isAvailable: false,
     },
     {
-      id: 10,
-      title: '10-11. Egység - Kvíz',
-      description: 'Nyelvtani fókusz és interaktív elemek',
-      icon: '📝',
-      color: '#8b5cf6',
-    },
-    {
-      id: 13,
-      title: '13. Egység - Szövegdobozos',
-      description: 'Kitalálós és választós feladat',
-      icon: '💬',
-      color: '#ec4899',
-    },
-    {
-      id: 14,
-      title: 'Multimédia',
-      description: 'Videó a testrészekről + 5 kérdés',
-      icon: '📺',
-      color: '#ef4444',
+      id: 4,
+      title: 'Topic 4',
+      description: 'Pharmacological basics and medical ethics discussion.',
+      icon: '🚧',
+      color: '#94a3b8',
+      isAvailable: false,
     },
   ];
-
-  startTask(id: number) {
-    this.router.navigate(['/task', id]);
-  }
 
   constructor(
     private authService: AuthService,
     private router: Router,
   ) {}
+
+  openTopic(id: number) {
+    this.router.navigate(['/topic', id]);
+  }
+
+  onOpenShop() {
+    console.log('Opening Shop... (Feature under development)');
+  }
 
   onLogout() {
     this.authService.logout();

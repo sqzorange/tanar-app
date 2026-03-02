@@ -1,0 +1,231 @@
+$brand-primary: #6366f1;
+$bg-app: #f8fafc;
+$white: #ffffff;
+$text-main: #1e293b;
+$text-muted: #475569;
+$border-color: #e2e8f0;
+
+.lesson-layout {
+  min-height: 100vh;
+  background-color: $bg-app;
+  padding: 40px 20px;
+
+  .lesson-header {
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+
+    .back-btn {
+      background: $white;
+      border: none;
+      color: $text-muted;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 24px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s;
+      &:hover {
+        color: $brand-primary;
+        transform: translateX(-4px);
+      }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: $text-main;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .subtitle {
+      font-size: 1.15rem;
+      color: $text-muted;
+    }
+  }
+}
+
+.lesson-content {
+  max-width: 800px;
+  margin: 0 auto;
+  background: $white;
+  border-radius: 16px;
+  padding: 40px 48px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+  @media (max-width: 768px) {
+    padding: 24px;
+  }
+
+  .text-block {
+    margin-bottom: 40px;
+
+    h2 {
+      font-size: 1.75rem;
+      color: $text-main;
+      border-bottom: 2px solid $brand-primary;
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+    h4 {
+      font-size: 1.25rem;
+      color: $text-main;
+      margin-top: 32px;
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: $text-muted;
+      margin-bottom: 16px;
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+      .vocab-item {
+        background: #f1f5f9;
+        padding: 16px;
+        border-radius: 8px;
+        font-size: 1.05rem;
+        color: $text-main;
+        border-left: 4px solid $brand-primary;
+        display: flex;
+        flex-direction: column;
+        span {
+          font-size: 0.9rem;
+          color: $text-muted;
+          margin-top: 4px;
+          font-style: italic;
+        }
+      }
+    }
+
+    .idiom-list {
+      list-style-type: none;
+      padding: 0;
+      li {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: $text-muted;
+        margin-bottom: 16px;
+        padding-left: 28px;
+        position: relative;
+        &::before {
+          content: '💡';
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+        strong {
+          color: $text-main;
+          display: block;
+          margin-bottom: 4px;
+        }
+      }
+    }
+  }
+
+  /* Színes beágyazott kártyák a feladatokhoz */
+  .inline-task-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8fafc;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 24px 32px;
+    margin: 48px 0;
+    position: relative;
+    overflow: hidden;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 6px;
+      height: 100%;
+    }
+
+    // Témák színei
+    &.accent-blue::before {
+      background-color: #3b82f6;
+    }
+    &.accent-orange::before {
+      background-color: #f59e0b;
+    }
+    &.accent-green::before {
+      background-color: #10b981;
+    }
+    &.accent-purple::before {
+      background-color: #8b5cf6;
+    }
+    &.accent-red::before {
+      background-color: #ef4444;
+    }
+    &.accent-dark::before {
+      background-color: #334155;
+    }
+    &.accent-success::before {
+      background-color: #22c55e;
+    }
+
+    .task-info {
+      max-width: 65%;
+      @media (max-width: 600px) {
+        max-width: 100%;
+      }
+
+      .task-badge {
+        display: inline-block;
+        background: #e2e8f0;
+        color: #475569;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 4px 8px;
+        border-radius: 6px;
+        margin-bottom: 12px;
+      }
+      h3 {
+        margin: 0 0 8px 0;
+        color: $text-main;
+        font-size: 1.4rem;
+      }
+      p {
+        margin: 0;
+        color: $text-muted;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+    }
+
+    .start-task-btn {
+      background: $text-main;
+      color: $white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      &:hover {
+        background: $brand-primary;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      }
+    }
+  }
+}

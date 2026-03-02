@@ -23,7 +23,8 @@ export class LoginComponent {
   ) {}
 
   onLogin() {
-    console.log('Belépés adatai:', this.loginData);
+    // Frissített log üzenet
+    console.log('Login attempt with:', this.loginData.email);
 
     this.authService.login();
 

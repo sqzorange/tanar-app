@@ -1,27 +1,43 @@
 <div class="app-layout">
   <nav class="topbar">
-    <div class="logo">🎓 <span>TanárApp</span></div>
-    <button class="logout-btn" (click)="onLogout()">🚪 Kilépés</button>
+    <div class="logo">🎓 <span>TeacherApp</span></div>
+
+    <div class="nav-actions">
+      <button class="shop-btn" (click)="onOpenShop()">🛒 Shop</button>
+      <button class="logout-btn" (click)="onLogout()">🚪 Logout</button>
+    </div>
   </nav>
 
   <main class="dashboard">
     <header class="welcome-msg">
-      <h1>Szia, Tanuló! 👋</h1>
-      <p>Válassz egy feladatot a mai fejlődéshez:</p>
+      <h1>Welcome back, Student! 👋</h1>
+      <p>Select a topic to continue your medical English journey:</p>
     </header>
 
     <div class="subject-grid">
-      <div class="subject-card" *ngFor="let unit of units" [style.--theme-color]="unit.color">
+      <div
+        class="subject-card"
+        *ngFor="let topic of topics"
+        [style.--theme-color]="topic.color"
+        [class.unavailable]="!topic.isAvailable"
+      >
         <div class="card-header">
-          <div class="icon">{{ unit.icon }}</div>
-          <h3>{{ unit.title }}</h3>
+          <div class="icon">{{ topic.icon }}</div>
+          <h3>{{ topic.title }}</h3>
         </div>
 
         <div class="info">
-          <p>{{ unit.description }}</p>
+          <p>{{ topic.description }}</p>
         </div>
 
-        <button class="action-btn" (click)="startTask(unit.id)">Indítás</button>
+        <button
+          class="action-btn"
+          (click)="openTopic(topic.id)"
+          [style.background-color]="topic.isAvailable ? 'var(--theme-color)' : '#cbd5e1'"
+          [style.color]="topic.isAvailable ? '#ffffff' : '#64748b'"
+        >
+          {{ topic.isAvailable ? 'Open Topic' : 'Coming Soon' }}
+        </button>
       </div>
     </div>
   </main>

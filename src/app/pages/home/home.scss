@@ -37,23 +37,49 @@ $shadow-md:
     }
   }
 
-  .logout-btn {
-    background: transparent;
-    border: 1px solid #e2e8f0;
-    padding: 8px 16px;
-    border-radius: 8px;
-    color: $text-muted;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
+  .nav-actions {
     display: flex;
+    gap: 12px;
     align-items: center;
-    gap: 6px;
 
-    &:hover {
-      background: #fee2e2; // Halvány piros hoverre
-      color: #ef4444;
-      border-color: #fca5a5;
+    .shop-btn {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      padding: 8px 16px;
+      border-radius: 8px;
+      color: $text-main;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      &:hover {
+        background: #e0e7ff;
+        color: $brand-primary;
+        border-color: $brand-primary;
+      }
+    }
+
+    .logout-btn {
+      background: transparent;
+      border: 1px solid #e2e8f0;
+      padding: 8px 16px;
+      border-radius: 8px;
+      color: $text-muted;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+
+      &:hover {
+        background: #fee2e2;
+        color: #ef4444;
+        border-color: #fca5a5;
+      }
     }
   }
 }
@@ -97,7 +123,6 @@ $shadow-md:
     position: relative;
     overflow: hidden;
 
-    // Felső színes csík a CSS változó alapján
     &::before {
       content: '';
       position: absolute;
@@ -111,7 +136,7 @@ $shadow-md:
     &:hover {
       transform: translateY(-4px);
       box-shadow: $shadow-md;
-      border-color: var(--theme-color, transparent); // A keret is átveszi a színt hoverre!
+      border-color: var(--theme-color, transparent);
     }
 
     .card-header {
@@ -122,14 +147,12 @@ $shadow-md:
 
       .icon {
         font-size: 2rem;
-        background: #f1f5f9;
         width: 56px;
         height: 56px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 12px;
-        // Az ikon háttere is kap egy leheletnyi színt az adott témából
         color: var(--theme-color);
         background-color: color-mix(in srgb, var(--theme-color) 10%, transparent);
       }
@@ -154,7 +177,7 @@ $shadow-md:
 
     .action-btn {
       margin-top: auto;
-      background: var(--theme-color, $brand-primary); // A gomb is átveszi a lecke színét
+      background: var(--theme-color, $brand-primary);
       color: $white;
       border: none;
       padding: 12px 20px;

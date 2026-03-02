@@ -1,18 +1,18 @@
-<div class="task-layout">
+<div class="task-layout" *ngIf="currentTask">
   <header class="task-header">
     <button class="back-btn" (click)="goBack()">⬅ Vissza a leckékhez</button>
-    <h2>10. Egység: Kvíz</h2>
-    <p>Teszteld a tudásod! Válassz a lehetőségek közül.</p>
+    <h2>{{ currentTask.title }}</h2>
+    <p>Válassz a lehetőségek közül!</p>
   </header>
 
   <div class="quiz-container">
     <div *ngIf="!isQuizFinished" class="quiz-card">
       <div class="progress-info">
-        <span>Kérdés {{ currentQuestionIndex + 1 }} / {{ questions.length }}</span>
+        <span>Kérdés {{ currentQuestionIndex + 1 }} / {{ currentTask.questions.length }}</span>
         <div class="progress-bar">
           <div
             class="progress-fill"
-            [style.width.%]="((currentQuestionIndex + 1) / questions.length) * 100"
+            [style.width.%]="((currentQuestionIndex + 1) / currentTask.questions.length) * 100"
           ></div>
         </div>
       </div>
@@ -26,39 +26,26 @@
           [class.selected]="selectedOptionIndex === i"
           (click)="selectOption(i)"
         >
-          <span class="option-letter">{{ ['A', 'B', 'C', 'D'][i] }}</span>
+          <span class="option-letter">{{ ['A', 'B', 'C'][i] }}</span>
           <span class="option-text">{{ option }}</span>
         </button>
       </div>
 
       <button class="next-btn" [disabled]="selectedOptionIndex === null" (click)="nextQuestion()">
         {{
-          currentQuestionIndex === questions.length - 1
-            ? 'Befejezés és Értékelés'
+          currentQuestionIndex === currentTask.questions.length - 1
+            ? 'Befejezés'
             : 'Következő kérdés ➡️'
         }}
       </button>
     </div>
 
     <div *ngIf="isQuizFinished" class="quiz-card result-card">
-      <div class="result-icon">{{ score === questions.length ? '🏆' : '📚' }}</div>
-      <h3>Kvíz Vége!</h3>
       <div class="score-display">
         <span class="points">{{ score }}</span>
-        <span class="total">/ {{ questions.length }} pont</span>
+        <span class="total">/ {{ currentTask.questions.length }} pont</span>
       </div>
-      <p class="feedback">
-        {{
-          score === questions.length
-            ? 'Hibátlan teljesítmény! Gratulálok!'
-            : 'Szép munka, de van még mit gyakorolni!'
-        }}
-      </p>
-
-      <div class="action-buttons">
-        <button class="retry-btn" (click)="restartQuiz()">Újrapróbálom</button>
-        <button class="home-btn" (click)="goBack()">Vissza a Főmenübe</button>
-      </div>
+      <button class="home-btn" (click)="goBack()">Vissza</button>
     </div>
   </div>
 </div>
