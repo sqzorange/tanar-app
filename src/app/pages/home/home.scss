@@ -1,18 +1,63 @@
 // --- 1. Változók (Design System alapok) ---
 $brand-primary: #6366f1; // Modern indigó
-$brand-success: #10b981;
 $text-main: #1e293b;
 $text-muted: #64748b;
 $bg-app: #f8fafc;
 $white: #ffffff;
 
-// Árnyék a kártyáknak
 $shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 $shadow-md:
   0 4px 6px -1px rgba(0, 0, 0, 0.1),
   0 2px 4px -2px rgba(0, 0, 0, 0.1);
 
-// --- 2. Layout ---
+// --- 2. Layout & Topbar ---
+.app-layout {
+  min-height: 100vh;
+  background-color: $bg-app;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: $white;
+  box-shadow: $shadow-sm;
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: $text-main;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    span {
+      color: $brand-primary;
+    }
+  }
+
+  .logout-btn {
+    background: transparent;
+    border: 1px solid #e2e8f0;
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: $text-muted;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &:hover {
+      background: #fee2e2; // Halvány piros hoverre
+      color: #ef4444;
+      border-color: #fca5a5;
+    }
+  }
+}
+
 .dashboard {
   max-width: 1100px;
   margin: 0 auto;
@@ -20,8 +65,6 @@ $shadow-md:
 
   .welcome-msg {
     margin-bottom: 48px;
-    text-align: left;
-
     h1 {
       font-size: 2.5rem;
       font-weight: 800;
@@ -29,7 +72,6 @@ $shadow-md:
       letter-spacing: -0.025em;
       margin-bottom: 8px;
     }
-
     p {
       font-size: 1.125rem;
       color: $text-muted;
@@ -55,7 +97,7 @@ $shadow-md:
     position: relative;
     overflow: hidden;
 
-    // A bal oldali színes sáv helyett egy finomabb felső csík
+    // Felső színes csík a CSS változó alapján
     &::before {
       content: '';
       position: absolute;
@@ -63,14 +105,13 @@ $shadow-md:
       left: 0;
       width: 100%;
       height: 4px;
-      background-color: currentColor; // Átveszi az inline style-ból a színt
-      opacity: 0.7;
+      background-color: var(--theme-color, $brand-primary);
     }
 
     &:hover {
       transform: translateY(-4px);
       box-shadow: $shadow-md;
-      border-color: transparent;
+      border-color: var(--theme-color, transparent); // A keret is átveszi a színt hoverre!
     }
 
     .card-header {
@@ -88,6 +129,9 @@ $shadow-md:
         align-items: center;
         justify-content: center;
         border-radius: 12px;
+        // Az ikon háttere is kap egy leheletnyi színt az adott témából
+        color: var(--theme-color);
+        background-color: color-mix(in srgb, var(--theme-color) 10%, transparent);
       }
 
       h3 {
@@ -104,12 +148,13 @@ $shadow-md:
         color: $text-muted;
         font-size: 0.95rem;
         line-height: 1.5;
+        margin: 0;
       }
     }
 
     .action-btn {
-      margin-top: auto; // Mindig a kártya alján legyen
-      background: $text-main;
+      margin-top: auto;
+      background: var(--theme-color, $brand-primary); // A gomb is átveszi a lecke színét
       color: $white;
       border: none;
       padding: 12px 20px;
@@ -117,10 +162,10 @@ $shadow-md:
       font-weight: 600;
       font-size: 0.9rem;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: opacity 0.2s;
 
       &:hover {
-        background: lighten($text-main, 10%);
+        opacity: 0.9;
       }
     }
   }

@@ -1,0 +1,298 @@
+// --- 1. Változók (Egységesítve a home.scss-el) ---
+$brand-primary: #6366f1; // Modern indigó
+$brand-success: #10b981; // Zöld a sikeres leadáshoz
+$text-main: #1e293b;
+$text-muted: #64748b;
+$bg-app: #f8fafc;
+$white: #ffffff;
+$border-color: #e2e8f0;
+
+// Árnyékok (szintén a home.scss-ből)
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md:
+  0 4px 6px -1px rgba(0, 0, 0, 0.1),
+  0 2px 4px -2px rgba(0, 0, 0, 0.1);
+
+// --- 2. Fő Layout ---
+.task-layout {
+  min-height: 100vh;
+  background-color: $bg-app;
+  padding: 40px 20px;
+  max-width: 1000px; // Kicsit szélesebb, hogy kényelmesen elférjen a két oszlop
+  margin: 0 auto;
+
+  .task-header {
+    margin-bottom: 40px;
+
+    .back-btn {
+      background: none;
+      border: none;
+      color: $text-muted;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 24px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      background-color: $white;
+      box-shadow: $shadow-sm;
+
+      &:hover {
+        background-color: #f1f5f9;
+        color: $brand-primary;
+        transform: translateX(-4px); // Kicsit elmozdul balra hoverre
+      }
+    }
+
+    h2 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: $text-main;
+      letter-spacing: -0.025em;
+      margin-bottom: 8px;
+    }
+
+    p {
+      font-size: 1.125rem;
+      color: $text-muted;
+      margin: 0;
+
+      strong {
+        color: $brand-primary;
+      }
+    }
+  }
+}
+
+// --- 3. Drag and Drop Konténerek (Kártya stílus) ---
+.drag-drop-container {
+  display: flex;
+  gap: 32px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  .list-container {
+    flex: 1;
+    background: $white;
+    border: 1px solid $border-color;
+    border-radius: 16px; // Ugyanaz a lekerekítés, mint a Home kártyáknál
+    padding: 24px;
+    box-shadow: $shadow-sm;
+    display: flex;
+    flex-direction: column;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: $text-main;
+      margin-top: 0;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #f1f5f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .item-list {
+      min-height: 400px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-grow: 1; // Hogy kitöltse a helyet, ha kevés elem van benne
+
+      // A bedobó zóna stílusa (jobb oldal)
+      &.drop-zone {
+        background: #f8fafc;
+        border: 2px dashed #cbd5e1;
+        padding: 16px;
+        transition:
+          background-color 0.2s,
+          border-color 0.2s;
+
+        // Amikor áthúzunk felette valamit (CDK beépített class)
+        &.cdk-drop-list-receiving {
+          background-color: #f0fdf4;
+          border-color: $brand-success;
+        }
+      }
+    }
+
+    .empty-msg {
+      text-align: center;
+      color: $text-muted;
+      font-style: italic;
+      margin-top: 40px;
+      font-size: 1.05rem;
+    }
+
+    // --- Maguk a húzható elemek ---
+    .item-box {
+      padding: 16px 20px;
+      border: 1px solid $border-color;
+      background: $white;
+      border-radius: 10px;
+      cursor: grab;
+      font-weight: 600;
+      color: $text-main;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        border-color: #cbd5e1;
+        background-color: #f8fafc;
+      }
+
+      &:active {
+        cursor: grabbing;
+        box-shadow: $shadow-md;
+      }
+
+      // Stílus, amikor átkerült a jobb oldalra
+      &.selected {
+        border-left: 4px solid $brand-primary;
+        background-color: #fff;
+      }
+    }
+  }
+}
+
+// --- 4. Gomb és Footer (A korábbi modernizált verziód) ---
+.action-footer {
+  margin-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+
+  .status-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f1f5f9;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+
+    .info-icon {
+      font-size: 1.1rem;
+    }
+    p {
+      color: $text-main;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 18px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+
+    background: linear-gradient(135deg, lighten($brand-primary, 5%) 0%, $brand-primary 100%);
+    color: $white;
+    box-shadow:
+      0 4px 6px -1px color-mix(in srgb, $brand-primary 30%, transparent),
+      0 2px 4px -2px color-mix(in srgb, $brand-primary 20%, transparent);
+
+    .btn-icon {
+      font-size: 1.3rem;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover:not(:disabled) {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow:
+        0 10px 15px -3px color-mix(in srgb, $brand-primary 40%, transparent),
+        0 4px 6px -2px color-mix(in srgb, $brand-primary 25%, transparent);
+
+      .btn-icon {
+        transform: scale(1.2) rotate(5deg);
+      }
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(-1px) scale(0.99);
+      box-shadow: 0 2px 4px color-mix(in srgb, $brand-primary 30%, transparent);
+    }
+
+    &:disabled {
+      background: #e2e8f0;
+      color: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+
+      .btn-icon {
+        opacity: 0.4;
+      }
+    }
+
+    &:not(:disabled) {
+      animation: pulseActive 0.6s ease-out;
+    }
+  }
+}
+
+@keyframes pulseActive {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 color-mix(in srgb, $brand-primary 40%, transparent);
+  }
+  70% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 10px transparent;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+// --- 5. Angular CDK Automatikus Osztályok (A szép animációkért) ---
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  background-color: $white;
+  padding: 16px 20px;
+  font-weight: 600;
+  color: $text-main;
+  border: 1px solid $brand-primary; // Kék keret a mozgatott elemnek
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.3; // Kicsit látszik a helye, amíg húzzuk
+  background-color: #cbd5e1;
+  border: 1px dashed $text-muted;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.item-list.cdk-drop-list-dragging .item-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-// Helyes elérési út: 3 mappa vissza, majd be a services-be
-import { AuthService } from '../../../services/auth';
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-login',

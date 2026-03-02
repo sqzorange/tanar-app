@@ -1,0 +1,57 @@
+<div class="task-layout">
+  <header class="task-header">
+    <button class="back-btn" (click)="goBack()">⬅ Vissza a leckékhez</button>
+    <h2>9. Egység: Képes Szavazás</h2>
+    <p>Húzd be a szerinted legjobb <strong>5 opciót</strong> a jobb oldali dobozba!</p>
+  </header>
+
+  <div class="drag-drop-container">
+    <div class="list-container">
+      <h3>Elérhető opciók ({{ availableOptions.length }})</h3>
+      <div
+        cdkDropList
+        #availableList="cdkDropList"
+        [cdkDropListData]="availableOptions"
+        [cdkDropListConnectedTo]="[selectedList]"
+        class="item-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="item-box" *ngFor="let item of availableOptions" cdkDrag>
+          {{ item }}
+        </div>
+      </div>
+    </div>
+
+    <div class="list-container">
+      <h3>Kiválasztott ({{ selectedOptions.length }} / 5)</h3>
+      <div
+        cdkDropList
+        #selectedList="cdkDropList"
+        [cdkDropListData]="selectedOptions"
+        [cdkDropListConnectedTo]="[availableList]"
+        class="item-list drop-zone"
+        [cdkDropListEnterPredicate]="maxFiveItems"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="empty-msg" *ngIf="selectedOptions.length === 0">Húzd ide az elemeket...</div>
+
+        <div class="item-box selected" *ngFor="let item of selectedOptions" cdkDrag>
+          {{ item }}
+        </div>
+      </div>
+
+      <div class="action-footer">
+        <div class="status-message" *ngIf="selectedOptions.length < 5">
+          <span class="info-icon">ℹ️</span>
+          <p>
+            Még <strong>{{ 5 - selectedOptions.length }}</strong> elemet ki kell választanod!
+          </p>
+        </div>
+
+        <button class="submit-btn" [disabled]="selectedOptions.length !== 5" (click)="submitTask()">
+          Válaszok leadása <span class="btn-icon">✅</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
