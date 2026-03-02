@@ -1,61 +1,50 @@
-# Át kell írni!!
+# 🎓 MedLearn Interactive Dashboard
 
-# TanarApp
+An adaptive web application designed for medical students to practice healthcare English and anatomy through interactive modules.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+---
 
-## Development server
+## ✨ Content & Purpose
 
-To start a local development server, run:
+This platform serves as an interactive learning tool that transforms clinical curriculum into dynamic digital content.
 
-```bash
-ng serve
-```
+### 🦴 Anatomical Practice
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Modules for classifying and identifying human body parts.
 
-## Code scaffolding
+### 🗣️ Linguistic Training
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Exercises focusing on medical collocations and healthcare-related idioms.
 
-```bash
-ng generate component component-name
-```
+### 🎥 Multimedia Integration
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Integrated video-based case studies for comprehensive learning.
 
-```bash
-ng generate --help
-```
+### 📊 Knowledge Checks
 
-## Building
+Data-driven quizzes to monitor learning progress.
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## 🚀 Technical Architecture
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### 🔄 Universal Task Logic
 
-## Running unit tests
+The application uses a data-driven design. Instead of hardcoding individual tasks, the components dynamically fetch content from a centralized database based on the active route. This allows for seamless scaling as new units are added.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### 📱 Responsive Design
 
-```bash
-ng test
-```
+Built with a mobile-first approach using custom SCSS media queries. All interactive elements, including complex drag-and-drop zones and vocabulary grids, are optimized for both desktop and smartphone screens.
 
-## Running end-to-end tests
+### 🔐 Security
 
-For end-to-end (e2e) testing, run:
+Implements a strict Content Security Policy (CSP) to prevent unauthorized script execution and maintain a secure learning environment.
 
-```bash
-ng e2e
-```
+---
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 🛠️ Tech Stack
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Angular 17+** (Standalone Components)
+- **Angular CDK** (Drag and Drop functionality)
+- **SCSS** (Mobile-optimized styling)
+- **TypeScript** (Scalable task databases)
