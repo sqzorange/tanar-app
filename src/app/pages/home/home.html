@@ -1,7 +1,6 @@
 <div class="app-layout">
   <nav class="topbar">
     <div class="logo">🎓 <span>TeacherApp</span></div>
-
     <div class="nav-actions">
       <button class="shop-btn" (click)="onOpenShop()">🛒 Shop</button>
       <button class="logout-btn" (click)="onLogout()">🚪 Logout</button>
@@ -11,8 +10,41 @@
   <main class="dashboard">
     <header class="welcome-msg">
       <h1>Welcome back, Student! 👋</h1>
-      <p>Select a topic to continue your medical English journey:</p>
+      <p>Continue your medical English journey or set your priorities below:</p>
     </header>
+
+    <section class="vote-section" *ngIf="!isVoteSubmitted">
+      <div class="vote-card">
+        <div class="vote-header">
+          <h3>📊 Féléves prioritások beállítása</h3>
+          <p>Válassza ki azt az <strong>5 témakört</strong>, amire a legnagyobb szüksége van!</p>
+        </div>
+
+        <div class="vote-grid">
+          <div
+            *ngFor="let option of voteOptions"
+            class="vote-item"
+            [class.active]="isVoteSelected(option.id)"
+            (click)="toggleVote(option.id)"
+          >
+            <span class="vote-num">{{ option.id }}</span>
+            <span class="vote-text">{{ option.text }}</span>
+            <span class="vote-check" *ngIf="isVoteSelected(option.id)">✓</span>
+          </div>
+        </div>
+
+        <div class="vote-footer">
+          <span class="counter">Kiválasztva: {{ selectedVoteIds.length }} / 5</span>
+          <button
+            class="vote-submit-btn"
+            [disabled]="selectedVoteIds.length !== 5"
+            (click)="submitVote()"
+          >
+            Választás mentése
+          </button>
+        </div>
+      </div>
+    </section>
 
     <div class="subject-grid">
       <div
@@ -25,16 +57,13 @@
           <div class="icon">{{ topic.icon }}</div>
           <h3>{{ topic.title }}</h3>
         </div>
-
         <div class="info">
           <p>{{ topic.description }}</p>
         </div>
-
         <button
           class="action-btn"
           (click)="openTopic(topic.id)"
           [style.background-color]="topic.isAvailable ? 'var(--theme-color)' : '#cbd5e1'"
-          [style.color]="topic.isAvailable ? '#ffffff' : '#64748b'"
         >
           {{ topic.isAvailable ? 'Open Topic' : 'Coming Soon' }}
         </button>

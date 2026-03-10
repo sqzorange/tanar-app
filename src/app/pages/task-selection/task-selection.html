@@ -1,0 +1,45 @@
+<div class="selection-layout">
+  <div class="selection-card">
+    <header class="card-header">
+      <button class="back-link" (click)="goBack()">
+        <span class="icon">⬅</span> Vissza a műszerfalra
+      </button>
+      <h1>{{ title }}</h1>
+      <p class="instruction-text">{{ instruction }}</p>
+    </header>
+
+    <div class="options-container">
+      <div
+        *ngFor="let option of options"
+        class="option-row"
+        [class.selected]="isSelected(option.id)"
+        (click)="toggleSelection(option.id)"
+      >
+        <div class="checkbox-wrapper">
+          <div class="custom-checkbox">
+            <span *ngIf="isSelected(option.id)">✓</span>
+          </div>
+        </div>
+        <div class="option-content">
+          <span class="option-number">{{ option.id }}.</span>
+          <span class="option-text">{{ option.text }}</span>
+        </div>
+      </div>
+    </div>
+
+    <footer class="card-footer">
+      <div class="status-bar">
+        <div class="progress-label">
+          Kiválasztva: <strong>{{ selectedIds.length }}</strong> / 5
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" [style.width.%]="(selectedIds.length / 5) * 100"></div>
+        </div>
+      </div>
+
+      <button class="submit-btn" [disabled]="selectedIds.length !== 5" (click)="submitSelection()">
+        Sorrend véglegesítése
+      </button>
+    </footer>
+  </div>
+</div>

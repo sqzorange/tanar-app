@@ -6,10 +6,12 @@ import { TaskQuizComponent } from './pages/task-quiz/task-quiz';
 import { TaskComingSoonComponent } from './pages/task-coming-soon/task-coming-soon';
 import { TopicOneComponent } from './pages/topic-one/topic-one';
 import { authGuard } from './services/guard';
+import { RegisterComponent } from './pages/register/register';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'topic/1', component: TopicOneComponent, canActivate: [authGuard] },
 

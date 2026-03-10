@@ -1,62 +1,87 @@
 <div class="task-layout" *ngIf="currentTask">
   <header class="task-header">
-    <button class="back-btn" (click)="goBack()">⬅ Vissza a leckéhez</button>
+    <button class="back-btn" (click)="goBack()">⬅ Vissza</button>
     <h2>{{ currentTask.title }}</h2>
     <p [innerHTML]="currentTask.instruction"></p>
   </header>
 
-  <div class="drag-drop-container">
-    <div class="list-container">
-      <h3>Elérhető kifejezések ({{ availableOptions.length }})</h3>
+  <div class="visual-drop-container" *ngIf="currentTask.type === 'list-to-image'">
+    <div class="list-container source-list">
+      <h3>Kifejezések</h3>
       <div
         cdkDropList
-        #availableList="cdkDropList"
+        id="availableList"
         [cdkDropListData]="availableOptions"
-        [cdkDropListConnectedTo]="[selectedList]"
+        [cdkDropListConnectedTo]="zoneLists"
         class="item-list"
-        (cdkDropListDropped)="drop($event)"
       >
-        <div class="item-box" *ngFor="let item of availableOptions" cdkDrag>
+        <div class="item-box" *ngFor="let item of availableOptions" cdkDrag [cdkDragData]="item">
           {{ item }}
         </div>
       </div>
     </div>
 
-    <div class="list-container">
-      <h3>Kiválasztott ({{ selectedOptions.length }} / {{ currentTask.requiredCount }})</h3>
+    <div class="image-map-container">
+      <img [src]="currentTask.imageSrc" alt="Anatomy" class="anatomy-image" />
+
       <div
+        *ngFor="let zone of currentTask.dropZones"
+        class="image-drop-zone"
         cdkDropList
-        #selectedList="cdkDropList"
-        [cdkDropListData]="selectedOptions"
-        [cdkDropListConnectedTo]="[availableList]"
-        class="item-list drop-zone"
-        [cdkDropListEnterPredicate]="maxAllowedItems"
-        (cdkDropListDropped)="drop($event)"
+        [id]="zone.label"
+        [cdkDropListConnectedTo]="['availableList']"
+        (cdkDropListDropped)="dropOnImage($event, zone.label)"
+        [style.top.%]="zone.top"
+        [style.left.%]="zone.left"
       >
-        <div class="empty-msg" *ngIf="selectedOptions.length === 0">Húzd ide a megoldásokat...</div>
-
-        <div class="item-box selected" *ngFor="let item of selectedOptions" cdkDrag>
-          {{ item }}
+        <span class="placeholder-msg" *ngIf="!droppedItems[zone.label]">Húzd ide...</span>
+        <div class="dropped-item" *ngIf="droppedItems[zone.label]">
+          {{ droppedItems[zone.label] }}
         </div>
-      </div>
-
-      <div class="action-footer">
-        <div class="status-message" *ngIf="selectedOptions.length < currentTask.requiredCount">
-          <span class="info-icon">ℹ️</span>
-          <p>
-            Még <strong>{{ currentTask.requiredCount - selectedOptions.length }}</strong> testrészt
-            be kell húznod!
-          </p>
-        </div>
-
-        <button
-          class="submit-btn"
-          [disabled]="selectedOptions.length !== currentTask.requiredCount"
-          (click)="submitTask()"
-        >
-          Válaszok ellenőrzése <span class="btn-icon">✅</span>
-        </button>
       </div>
     </div>
   </div>
+
+  <div class="drag-drop-container" *ngIf="currentTask.type === 'list-to-list'">
+    <div class="list-container">
+      <div
+        cdkDropList
+        #sourceList="cdkDropList"
+        [cdkDropListData]="availableOptions"
+        [cdkDropListConnectedTo]="[destList]"
+        class="item-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="item-box" *ngFor="let item of availableOptions" cdkDrag>{{ item }}</div>
+      </div>
+    </div>
+
+    <div class="list-container">
+      <div
+        cdkDropList
+        #destList="cdkDropList"
+        [cdkDropListData]="selectedOptions"
+        [cdkDropListConnectedTo]="[sourceList]"
+        class="item-list drop-zone"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="empty-msg" *ngIf="selectedOptions.length === 0">Húzd ide...</div>
+        <div class="item-box selected" *ngFor="let item of selectedOptions" cdkDrag>{{ item }}</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="action-footer">
+    <button
+      class="submit-btn"
+      (click)="submitTask()"
+      [disabled]="
+        currentTask.type === 'list-to-image'
+          ? getDroppedItemsCount() !== currentTask.requiredCount
+          : selectedOptions.length !== currentTask.requiredCount
+      "
+    >
+      Ellenőrzés ✅
+    </button>
+  </footer>
 </div>

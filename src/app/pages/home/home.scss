@@ -10,6 +10,139 @@ $shadow-md:
   0 4px 6px -1px rgba(0, 0, 0, 0.1),
   0 2px 4px -2px rgba(0, 0, 0, 0.1);
 
+// ... (Eredeti változók maradnak)
+
+.vote-section {
+  margin-bottom: 48px;
+  animation: fadeIn 0.6s ease-out;
+
+  .vote-card {
+    background: $white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: $shadow-md;
+    border: 1px solid #e2e8f0;
+
+    .vote-header {
+      margin-bottom: 24px;
+      h3 {
+        font-size: 1.5rem;
+        color: $text-main;
+        margin: 0 0 8px 0;
+      }
+      p {
+        color: $text-muted;
+        margin: 0;
+      }
+    }
+
+    .vote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .vote-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      border: 2px solid #f1f5f9;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+
+      &:hover {
+        border-color: #e2e8f0;
+        background: #f8fafc;
+      }
+
+      &.active {
+        border-color: $brand-primary;
+        background: rgba($brand-primary, 0.05);
+        .vote-num {
+          background: $brand-primary;
+          color: white;
+        }
+        .vote-text {
+          color: $brand-primary;
+          font-weight: 600;
+        }
+      }
+
+      .vote-num {
+        width: 24px;
+        height: 24px;
+        background: #e2e8f0;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.8rem;
+        font-weight: 700;
+        margin-right: 12px;
+      }
+
+      .vote-text {
+        font-size: 0.9rem;
+        color: #475569;
+        flex: 1;
+      }
+      .vote-check {
+        color: $brand-primary;
+        font-weight: bold;
+      }
+    }
+
+    .vote-footer {
+      margin-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 20px;
+      border-top: 1px solid #f1f5f9;
+
+      .counter {
+        color: $text-muted;
+        font-weight: 600;
+      }
+
+      .vote-submit-btn {
+        padding: 12px 24px;
+        background: $brand-primary;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:disabled {
+          background: #cbd5e1;
+          cursor: not-allowed;
+        }
+        &:hover:not(:disabled) {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba($brand-primary, 0.2);
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ... (Többi eredeti stílus marad)
+
 // --- 2. Layout & Topbar ---
 .app-layout {
   min-height: 100vh;

@@ -1,0 +1,68 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="logo-circle">📝</div>
+      <h1>Create Account</h1>
+      <p>Join our medical English community</p>
+    </div>
+
+    <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+      <div class="form-group">
+        <label for="username">Full Name</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          [(ngModel)]="registerData.username"
+          placeholder="John Doe"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="registerData.email"
+          placeholder="your.email@provider.com"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="registerData.password"
+          placeholder="••••••••"
+          required
+          minlength="6"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          name="confirmPassword"
+          [(ngModel)]="registerData.confirmPassword"
+          placeholder="••••••••"
+          required
+        />
+      </div>
+
+      <button type="submit" class="login-btn" [disabled]="!registerForm.valid">
+        Create Account
+      </button>
+
+      <div class="login-footer">
+        <p>Already have an account? <a routerLink="/login">Log In</a></p>
+      </div>
+    </form>
+  </div>
+</div>

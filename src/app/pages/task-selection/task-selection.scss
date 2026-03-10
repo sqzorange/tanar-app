@@ -1,0 +1,183 @@
+$brand-primary: #6366f1;
+$brand-success: #10b981;
+$text-main: #1e293b;
+$text-muted: #64748b;
+$bg-app: #f1f5f9;
+$white: #ffffff;
+
+.selection-layout {
+  min-height: 100vh;
+  background-color: $bg-app;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.selection-card {
+  background: $white;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 24px;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  padding: 40px;
+
+  .card-header {
+    margin-bottom: 32px;
+
+    .back-link {
+      background: none;
+      border: none;
+      color: $text-muted;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 0;
+      transition: color 0.2s;
+      &:hover {
+        color: $brand-primary;
+      }
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: $text-main;
+      margin: 0 0 12px 0;
+      letter-spacing: -0.025em;
+    }
+    .instruction-text {
+      color: $text-muted;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .option-row {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      border-color: #cbd5e1;
+      background-color: #f8fafc;
+    }
+
+    &.selected {
+      border-color: $brand-primary;
+      background-color: rgba($brand-primary, 0.04);
+
+      .custom-checkbox {
+        background-color: $brand-primary;
+        border-color: $brand-primary;
+        color: white;
+      }
+
+      .option-text {
+        color: $text-main;
+        font-weight: 600;
+      }
+    }
+
+    .checkbox-wrapper {
+      margin-right: 16px;
+      .custom-checkbox {
+        width: 24px;
+        height: 24px;
+        border: 2px solid #cbd5e1;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        transition: all 0.2s;
+      }
+    }
+
+    .option-content {
+      display: flex;
+      gap: 8px;
+      .option-number {
+        color: $text-muted;
+        font-weight: 600;
+        min-width: 20px;
+      }
+      .option-text {
+        color: #475569;
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+    }
+  }
+}
+
+.card-footer {
+  margin-top: 40px;
+
+  .status-bar {
+    margin-bottom: 24px;
+    .progress-label {
+      text-align: center;
+      color: $text-muted;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+      strong {
+        color: $brand-primary;
+        font-weight: 700;
+      }
+    }
+    .progress-track {
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 3px;
+      overflow: hidden;
+      .progress-fill {
+        height: 100%;
+        background: $brand-primary;
+        transition: width 0.3s ease;
+      }
+    }
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: $brand-primary;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 6px -1px rgba($brand-primary, 0.2);
+
+    &:disabled {
+      background: #cbd5e1;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background: darken($brand-primary, 5%);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba($brand-primary, 0.3);
+    }
+  }
+}
