@@ -1,14 +1,14 @@
 <div class="task-layout" *ngIf="currentTask">
   <header class="task-header">
-    <button class="back-btn" (click)="goBack()">⬅ Vissza a leckékhez</button>
+    <button class="back-btn" (click)="goBack()">⬅ Back to Unit</button>
     <h2>{{ currentTask.title }}</h2>
-    <p>Válassz a lehetőségek közül!</p>
+    <p>Choose an option!</p>
   </header>
 
   <div class="quiz-container">
     <div *ngIf="!isQuizFinished" class="quiz-card">
       <div class="progress-info">
-        <span>Kérdés {{ currentQuestionIndex + 1 }} / {{ currentTask.questions.length }}</span>
+        <span>Question {{ currentQuestionIndex + 1 }} of {{ currentTask.questions.length }}</span>
         <div class="progress-bar">
           <div
             class="progress-fill"
@@ -33,9 +33,7 @@
 
       <button class="next-btn" [disabled]="selectedOptionIndex === null" (click)="nextQuestion()">
         {{
-          currentQuestionIndex === currentTask.questions.length - 1
-            ? 'Befejezés'
-            : 'Következő kérdés ➡️'
+          currentQuestionIndex === currentTask.questions.length - 1 ? 'Finish' : 'Next Question ➡️'
         }}
       </button>
     </div>
@@ -43,9 +41,9 @@
     <div *ngIf="isQuizFinished" class="quiz-card result-card">
       <div class="score-display">
         <span class="points">{{ score }}</span>
-        <span class="total">/ {{ currentTask.questions.length }} pont</span>
+        <span class="total">/ {{ currentTask.questions.length }} points</span>
       </div>
-      <button class="home-btn" (click)="goBack()">Vissza</button>
+      <button class="home-btn" (click)="goBack()">Back</button>
     </div>
   </div>
 </div>

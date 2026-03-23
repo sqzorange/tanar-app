@@ -1,13 +1,13 @@
 <div class="task-layout" *ngIf="currentTask">
   <header class="task-header">
-    <button class="back-btn" (click)="goBack()">⬅ Vissza</button>
+    <button class="back-btn" (click)="goBack()">⬅ Back</button>
     <h2>{{ currentTask.title }}</h2>
     <p [innerHTML]="currentTask.instruction"></p>
   </header>
 
   <div class="task-container">
     <div class="list-container source-container">
-      <h3>Elérhető kifejezések</h3>
+      <h3>Available Terms</h3>
       <div
         cdkDropList
         id="availableList"
@@ -33,7 +33,7 @@
         [style.top.%]="zone.top"
         [style.left.%]="zone.left"
       >
-        <span class="placeholder-msg" *ngIf="!droppedItems[zone.label]">Húzd ide...</span>
+        <span class="placeholder-msg" *ngIf="!droppedItems[zone.label]">Drop here...</span>
         <div class="dropped-item" *ngIf="droppedItems[zone.label]">
           {{ droppedItems[zone.label] }}
         </div>
@@ -41,7 +41,7 @@
     </div>
 
     <div class="list-container" *ngIf="currentTask.type === 'list-to-table'">
-      <h3>Anatómiai Táblázat</h3>
+      <h3>Anatomy Table</h3>
       <div class="interactive-table">
         <div class="table-header">
           <span>Medical Term</span>
@@ -164,7 +164,7 @@
       (click)="submitTask()"
       [disabled]="getDroppedItemsCount() !== currentTask.requiredCount"
     >
-      Ellenőrzés ✅
+      Check Answers ✅
     </button>
   </footer>
 </div>

@@ -1,16 +1,14 @@
-<div class="selection-layout">
+<div class="selection-layout" *ngIf="currentTask">
   <div class="selection-card">
     <header class="card-header">
-      <button class="back-link" (click)="goBack()">
-        <span class="icon">⬅</span> Vissza a műszerfalra
-      </button>
-      <h1>{{ title }}</h1>
-      <p class="instruction-text">{{ instruction }}</p>
+      <button class="back-link" (click)="goBack()"><span class="icon">⬅</span> Back</button>
+      <h1>{{ currentTask.title }}</h1>
+      <p class="instruction-text">{{ currentTask.instruction }}</p>
     </header>
 
     <div class="options-container">
       <div
-        *ngFor="let option of options"
+        *ngFor="let option of currentTask.options"
         class="option-row"
         [class.selected]="isSelected(option.id)"
         (click)="toggleSelection(option.id)"
@@ -30,15 +28,22 @@
     <footer class="card-footer">
       <div class="status-bar">
         <div class="progress-label">
-          Kiválasztva: <strong>{{ selectedIds.length }}</strong> / 5
+          Selected: <strong>{{ selectedIds.length }}</strong> / {{ currentTask.requiredCount }}
         </div>
         <div class="progress-track">
-          <div class="progress-fill" [style.width.%]="(selectedIds.length / 5) * 100"></div>
+          <div
+            class="progress-fill"
+            [style.width.%]="(selectedIds.length / currentTask.requiredCount) * 100"
+          ></div>
         </div>
       </div>
 
-      <button class="submit-btn" [disabled]="selectedIds.length !== 5" (click)="submitSelection()">
-        Sorrend véglegesítése
+      <button
+        class="submit-btn"
+        [disabled]="selectedIds.length !== currentTask.requiredCount"
+        (click)="submitSelection()"
+      >
+        Submit Selection
       </button>
     </footer>
   </div>

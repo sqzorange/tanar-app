@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SELECTION_DATABASE, SelectionTask } from '../../tasks-data';
 
 @Component({
   selector: 'app-task-selection',
@@ -9,37 +10,35 @@ import { Router } from '@angular/router';
   templateUrl: './task-selection.html',
   styleUrl: './task-selection.scss',
 })
-export class TaskSelectionComponent {
-  title = 'Féléves témakörök prioritása';
-  instruction =
-    'Válasszon ki pontosan 5 témakört, amelyeket mindenképpen vegyünk át ebben a félévben!';
-
-  // A lista a beküldött Mentimeter kép alapján
-  options = [
-    { id: 1, text: 'Egészség, betegség, panaszok' },
-    { id: 2, text: 'Testrészek, szervrendszerek' },
-    { id: 3, text: 'Fogorvosképzés hazánkban és külföldön' },
-    { id: 4, text: 'Az egészségügyi ellátók, munkakörök' },
-    { id: 5, text: 'Szak- és továbbképzés hazánkban és külföldön' },
-    { id: 6, text: 'Tananyagok feldolgozása, kivonatolás, tömörítés, tanulási technikák' },
-    { id: 7, text: 'ppt, prezi... kiselőadások módszertana' },
-    { id: 8, text: 'Jegyzetelési technikák, olvasott szövegértés' },
-    { id: 9, text: 'Jegyzetelési technikák, hallott szövegértés' },
-  ];
-
+export class TaskSelectionComponent implements OnInit {
+  currentTask!: SelectionTask;
   selectedIds: number[] = [];
 
   constructor(
     private location: Location,
     private router: Router,
+    private route: ActivatedRoute,
   ) {}
+
+  ngOnInit() {
+    // Kiolvassuk az URL-ből az ID-t
+    const id = this.route.snapshot.paramMap.get('id');
+
+    if (id && SELECTION_DATABASE[id]) {
+      this.currentTask = SELECTION_DATABASE[id];
+    } else {
+      console.error('Selection task not found!');
+      this.location.back();
+    }
+  }
 
   toggleSelection(id: number) {
     const index = this.selectedIds.indexOf(id);
     if (index > -1) {
       this.selectedIds.splice(index, 1);
     } else {
-      if (this.selectedIds.length < 5) {
+      // Csak akkor engedünk újat választani, ha még nem értük el a limitet
+      if (this.selectedIds.length < this.currentTask.requiredCount) {
         this.selectedIds.push(id);
       }
     }
@@ -50,9 +49,9 @@ export class TaskSelectionComponent {
   }
 
   submitSelection() {
-    if (this.selectedIds.length === 5) {
-      console.log('Kiválasztott témák ID-i:', this.selectedIds);
-      alert('Köszönjük a visszajelzést! A prioritások rögzítve lettek.');
+    if (this.selectedIds.length === this.currentTask.requiredCount) {
+      console.log('Selected option IDs:', this.selectedIds);
+      alert('Thank you for your feedback! Your selection has been recorded.');
       this.router.navigate(['/home']);
     }
   }
