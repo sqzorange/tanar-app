@@ -155,7 +155,43 @@
       </div>
     </div>
 
-    <div class="list-container" *ngIf="currentTask.type === 'list-to-list'"></div>
+    <div class="list-to-list-container" *ngIf="currentTask.type === 'list-to-list'">
+      <div class="classification-board">
+        <div class="classification-column">
+          <div class="column-header anterior-header">Anterior part of the body</div>
+          <div
+            class="column-drop-list"
+            id="anteriorList"
+            cdkDropList
+            [cdkDropListData]="anteriorList"
+            [cdkDropListConnectedTo]="['availableList', 'posteriorList']"
+            (cdkDropListDropped)="dropToList($event)"
+          >
+            <div class="classification-item" *ngFor="let item of anteriorList" cdkDrag>
+              {{ item }}
+            </div>
+            <div class="empty-row" *ngIf="anteriorList.length === 0">Drop items here</div>
+          </div>
+        </div>
+
+        <div class="classification-column">
+          <div class="column-header posterior-header">Posterior part of the body</div>
+          <div
+            class="column-drop-list"
+            id="posteriorList"
+            cdkDropList
+            [cdkDropListData]="posteriorList"
+            [cdkDropListConnectedTo]="['availableList', 'anteriorList']"
+            (cdkDropListDropped)="dropToList($event)"
+          >
+            <div class="classification-item" *ngFor="let item of posteriorList" cdkDrag>
+              {{ item }}
+            </div>
+            <div class="empty-row" *ngIf="posteriorList.length === 0">Drop items here</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <footer class="action-footer">

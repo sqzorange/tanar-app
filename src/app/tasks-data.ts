@@ -72,7 +72,46 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
       { label: 'row8_medical', correctAnswer: 'inner elbow, elbow pit' },
     ],
   },
-  // Ide jöhet a 15-ös task később...
+  '15': {
+    id: '15',
+    title: 'Anterior vs. Posterior Classification',
+    instruction: 'Place the words in the box under the correct heading.',
+    type: 'list-to-list',
+    availableOptions: [
+      'shoulder blades',
+      'sacrum',
+      'chest',
+      'back of head',
+      'cheek bone',
+      'Achilles tendon',
+      'lower back',
+      'jaw',
+      'instep',
+      'heel',
+      'calf',
+      'buttocks',
+      'forehead',
+      'spine',
+      'shin',
+      'chin',
+      'collarbone',
+      'navel',
+      'knee cap',
+      'nape',
+    ],
+    requiredCount: 20,
+    dropZones: [
+      {
+        label: 'anterior',
+        correctAnswer: 'chest,cheek bone,jaw,instep,forehead,shin,chin,collarbone,navel,knee cap',
+      },
+      {
+        label: 'posterior',
+        correctAnswer:
+          'shoulder blades,sacrum,back of head,Achilles tendon,lower back,heel,calf,buttocks,spine,nape',
+      },
+    ],
+  },
 };
 
 export const QUIZ_DATABASE: { [key: string]: QuizTask } = {
