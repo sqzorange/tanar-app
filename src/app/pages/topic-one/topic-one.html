@@ -115,11 +115,39 @@
       <h2>Grammar & Main words</h2>
       <h3>Collocations</h3>
       <div class="vocab-grid">
-        <div class="vocab-item"><strong> Forehead</strong></div>
-        <div class="vocab-item"><strong> Adam's apple</strong></div>
-        <div class="vocab-item"><strong>Mandible</strong>Lower jaw</div>
-        <div class="vocab-item"><strong>Zygoma</strong> Cheekbone</div>
-        <div class="vocab-item"><strong>Mentum</strong> Chin</div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Forehead')" title="Listen">🔊</button>
+            <strong>Forehead</strong>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Adam\'s apple')" title="Listen">🔊</button>
+            <strong>Adam's apple</strong>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Mandible')" title="Listen">🔊</button>
+            <strong>Mandible</strong>
+          </div>
+          <span>Lower jaw</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Zygoma')" title="Listen">🔊</button>
+            <strong>Zygoma</strong>
+          </div>
+          <span>Cheekbone</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Mentum')" title="Listen">🔊</button>
+            <strong>Mentum</strong>
+          </div>
+          <span>Chin</span>
+        </div>
       </div>
     </section>
 
@@ -130,20 +158,72 @@
       </div>
       <button class="start-task-btn" (click)="openTask('dragdrop', 12)">Start Trunk task ➡️</button>
     </div>
+
     <section class="text-block">
       <h2>Grammar & Main words</h2>
       <h3>Collocations</h3>
       <div class="vocab-grid">
-        <div class="vocab-item"><strong>Axilla</strong>armpit</div>
-        <div class="vocab-item"><strong>Clavicula</strong>collar bone, clavicle</div>
-        <div class="vocab-item"><strong>Setrnum</strong>breast bone</div>
-        <div class="vocab-item"><strong>Costae</strong> ribs</div>
-        <div class="vocab-item"><strong>Abdomen</strong> belly, tummy, stomach</div>
-        <div class="vocab-item"><strong>Umbilicus</strong> navel, belly button</div>
-        <div class="vocab-item"><strong>Thorax</strong> chest</div>
-        <div class="vocab-item"><strong>Antecubital fossa</strong> inner elbow, elbow pit</div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Axilla')" title="Listen">🔊</button>
+            <strong>Axilla</strong>
+          </div>
+          <span>armpit</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Clavicula')" title="Listen">🔊</button>
+            <strong>Clavicula</strong>
+          </div>
+          <span>collar bone, clavicle</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Sternum')" title="Listen">🔊</button>
+            <strong>Sternum</strong>
+          </div>
+          <span>breast bone</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Costae')" title="Listen">🔊</button>
+            <strong>Costae</strong>
+          </div>
+          <span>ribs</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Abdomen')" title="Listen">🔊</button>
+            <strong>Abdomen</strong>
+          </div>
+          <span>belly, tummy, stomach</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Umbilicus')" title="Listen">🔊</button>
+            <strong>Umbilicus</strong>
+          </div>
+          <span>navel, belly button</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Thorax')" title="Listen">🔊</button>
+            <strong>Thorax</strong>
+          </div>
+          <span>chest</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Antecubital fossa')" title="Listen">
+              🔊
+            </button>
+            <strong>Antecubital fossa</strong>
+          </div>
+          <span>inner elbow, elbow pit</span>
+        </div>
       </div>
     </section>
+
     <div class="inline-task-card accent-green">
       <div class="task-info">
         <span class="task-badge">Terminology Master</span>
@@ -166,10 +246,34 @@
       <h2>Grammar & Language Focus</h2>
       <h3>Collocations</h3>
       <div class="vocab-grid">
-        <div class="vocab-item"><strong>Tip</strong> of the nose / tongue</div>
-        <div class="vocab-item"><strong>Palm</strong> of the hand</div>
-        <div class="vocab-item"><strong>Nape</strong> of the neck</div>
-        <div class="vocab-item"><strong>Sole / heel</strong> of the foot</div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Tip')" title="Listen">🔊</button>
+            <strong>Tip</strong>
+          </div>
+          <span>of the nose / tongue</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Palm')" title="Listen">🔊</button>
+            <strong>Palm</strong>
+          </div>
+          <span>of the hand</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Nape')" title="Listen">🔊</button>
+            <strong>Nape</strong>
+          </div>
+          <span>of the neck</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Sole')" title="Listen">🔊</button>
+            <strong>Sole / heel</strong>
+          </div>
+          <span>of the foot</span>
+        </div>
       </div>
 
       <h3>Idioms in Healthcare</h3>
