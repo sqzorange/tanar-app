@@ -68,6 +68,13 @@ $border-color: #e2e8f0;
       margin-bottom: 20px;
       display: inline-block;
     }
+    h3 {
+      font-size: 1.5rem;
+      color: $text-main;
+      margin-top: 32px;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
     h4 {
       font-size: 1.25rem;
       color: $text-main;
@@ -79,6 +86,66 @@ $border-color: #e2e8f0;
       line-height: 1.7;
       color: $text-muted;
       margin-bottom: 16px;
+    }
+
+    // --- INTERAKTÍV HOVER KÁRTYA STÍLUSA ---
+    .medical-term {
+      color: $brand-primary;
+      cursor: help;
+      position: relative;
+      border-bottom: 2px dashed rgba($brand-primary, 0.3);
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: rgba($brand-primary, 0.05);
+        border-bottom-color: $brand-primary;
+
+        &::after,
+        &::before {
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      // A kártya (Tooltip)
+      &::after {
+        content: attr(data-desc);
+        position: absolute;
+        bottom: 140%;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        width: 220px;
+        padding: 12px 16px;
+        background: $text-main;
+        color: $white;
+        font-size: 0.9rem;
+        line-height: 1.4;
+        font-weight: 400;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.25);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      // Kis háromszög a kártya alján
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 125%;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        border: 8px solid transparent;
+        border-top-color: $text-main;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 100;
+      }
     }
 
     .vocab-grid {
@@ -157,7 +224,6 @@ $border-color: #e2e8f0;
       height: 100%;
     }
 
-    // Témák színei
     &.accent-blue::before {
       background-color: #3b82f6;
     }

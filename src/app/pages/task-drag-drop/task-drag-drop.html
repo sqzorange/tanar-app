@@ -5,15 +5,15 @@
     <p [innerHTML]="currentTask.instruction"></p>
   </header>
 
-  <div class="visual-drop-container" *ngIf="currentTask.type === 'list-to-image'">
-    <div class="list-container source-list">
-      <h3>Kifejezések</h3>
+  <div class="task-container">
+    <div class="list-container source-container">
+      <h3>Elérhető kifejezések</h3>
       <div
         cdkDropList
         id="availableList"
         [cdkDropListData]="availableOptions"
         [cdkDropListConnectedTo]="zoneLists"
-        class="item-list"
+        class="item-list source-grid"
       >
         <div class="item-box" *ngFor="let item of availableOptions" cdkDrag [cdkDragData]="item">
           {{ item }}
@@ -21,16 +21,15 @@
       </div>
     </div>
 
-    <div class="image-map-container">
+    <div class="image-map-container" *ngIf="currentTask.type === 'list-to-image'">
       <img [src]="currentTask.imageSrc" alt="Anatomy" class="anatomy-image" />
-
       <div
         *ngFor="let zone of currentTask.dropZones"
         class="image-drop-zone"
         cdkDropList
         [id]="zone.label"
         [cdkDropListConnectedTo]="['availableList']"
-        (cdkDropListDropped)="dropOnImage($event, zone.label)"
+        (cdkDropListDropped)="dropOnZone($event, zone.label)"
         [style.top.%]="zone.top"
         [style.left.%]="zone.left"
       >
@@ -40,46 +39,130 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="drag-drop-container" *ngIf="currentTask.type === 'list-to-list'">
-    <div class="list-container">
-      <div
-        cdkDropList
-        #sourceList="cdkDropList"
-        [cdkDropListData]="availableOptions"
-        [cdkDropListConnectedTo]="[destList]"
-        class="item-list"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div class="item-box" *ngFor="let item of availableOptions" cdkDrag>{{ item }}</div>
+    <div class="list-container" *ngIf="currentTask.type === 'list-to-table'">
+      <h3>Anatómiai Táblázat</h3>
+      <div class="interactive-table">
+        <div class="table-header">
+          <span>Medical Term</span>
+          <span>Everyday Term</span>
+        </div>
+
+        <div class="table-row">
+          <div class="cell static">axilla</div>
+          <div
+            class="cell drop-cell"
+            cdkDropList
+            id="row1_everyday"
+            [cdkDropListConnectedTo]="['availableList']"
+            (cdkDropListDropped)="dropOnZone($event, 'row1_everyday')"
+          >
+            <span class="placeholder" *ngIf="!droppedItems['row1_everyday']">???</span>
+            <div class="dropped-val" *ngIf="droppedItems['row1_everyday']">
+              {{ droppedItems['row1_everyday'] }}
+            </div>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div
+            class="cell drop-cell"
+            cdkDropList
+            id="row2_medical"
+            [cdkDropListConnectedTo]="['availableList']"
+            (cdkDropListDropped)="dropOnZone($event, 'row2_medical')"
+          >
+            <span class="placeholder" *ngIf="!droppedItems['row2_medical']">???</span>
+            <div class="dropped-val" *ngIf="droppedItems['row2_medical']">
+              {{ droppedItems['row2_medical'] }}
+            </div>
+          </div>
+          <div class="cell static">collar bone, clavicle</div>
+        </div>
+
+        <div class="table-row">
+          <div
+            class="cell drop-cell"
+            cdkDropList
+            id="row3_medical"
+            [cdkDropListConnectedTo]="['availableList']"
+            (cdkDropListDropped)="dropOnZone($event, 'row3_medical')"
+          >
+            <span class="placeholder" *ngIf="!droppedItems['row3_medical']">???</span>
+            <div class="dropped-val" *ngIf="droppedItems['row3_medical']">
+              {{ droppedItems['row3_medical'] }}
+            </div>
+          </div>
+          <div class="cell static">breast bone</div>
+        </div>
+
+        <div class="table-row">
+          <div class="cell static">costae</div>
+          <div
+            class="cell drop-cell"
+            cdkDropList
+            id="row4_everyday"
+            [cdkDropListConnectedTo]="['availableList']"
+            (cdkDropListDropped)="dropOnZone($event, 'row4_everyday')"
+          >
+            <span class="placeholder" *ngIf="!droppedItems['row4_everyday']">???</span>
+            <div class="dropped-val" *ngIf="droppedItems['row4_everyday']">
+              {{ droppedItems['row4_everyday'] }}
+            </div>
+          </div>
+        </div>
+
+        <div class="table-row">
+          <div class="cell static">abdomen</div>
+          <div class="cell static">belly, tummy, stomach</div>
+        </div>
+        <div class="table-row">
+          <div class="cell static">umbilicus</div>
+          <div class="cell static">navel, belly button</div>
+        </div>
+
+        <div class="table-row">
+          <div
+            class="cell drop-cell"
+            cdkDropList
+            id="row7_medical"
+            [cdkDropListConnectedTo]="['availableList']"
+            (cdkDropListDropped)="dropOnZone($event, 'row7_medical')"
+          >
+            <span class="placeholder" *ngIf="!droppedItems['row7_medical']">???</span>
+            <div class="dropped-val" *ngIf="droppedItems['row7_medical']">
+              {{ droppedItems['row7_medical'] }}
+            </div>
+          </div>
+          <div class="cell static">chest</div>
+        </div>
+
+        <div class="table-row">
+          <div
+            class="cell drop-cell"
+            cdkDropList
+            id="row8_medical"
+            [cdkDropListConnectedTo]="['availableList']"
+            (cdkDropListDropped)="dropOnZone($event, 'row8_medical')"
+          >
+            <span class="placeholder" *ngIf="!droppedItems['row8_medical']">???</span>
+            <div class="dropped-val" *ngIf="droppedItems['row8_medical']">
+              {{ droppedItems['row8_medical'] }}
+            </div>
+          </div>
+          <div class="cell static">inner elbow, elbow pit</div>
+        </div>
       </div>
     </div>
 
-    <div class="list-container">
-      <div
-        cdkDropList
-        #destList="cdkDropList"
-        [cdkDropListData]="selectedOptions"
-        [cdkDropListConnectedTo]="[sourceList]"
-        class="item-list drop-zone"
-        (cdkDropListDropped)="drop($event)"
-      >
-        <div class="empty-msg" *ngIf="selectedOptions.length === 0">Húzd ide...</div>
-        <div class="item-box selected" *ngFor="let item of selectedOptions" cdkDrag>{{ item }}</div>
-      </div>
-    </div>
+    <div class="list-container" *ngIf="currentTask.type === 'list-to-list'"></div>
   </div>
 
   <footer class="action-footer">
     <button
       class="submit-btn"
       (click)="submitTask()"
-      [disabled]="
-        currentTask.type === 'list-to-image'
-          ? getDroppedItemsCount() !== currentTask.requiredCount
-          : selectedOptions.length !== currentTask.requiredCount
-      "
+      [disabled]="getDroppedItemsCount() !== currentTask.requiredCount"
     >
       Ellenőrzés ✅
     </button>

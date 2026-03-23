@@ -12,17 +12,17 @@ import {
 
 interface DropZone {
   label: string;
-  top: number;
-  left: number;
+  top?: number;
+  left?: number;
   correctAnswer: string;
 }
 
 interface DragDropTask {
   title: string;
   instruction: string;
-  type: 'list-to-list' | 'list-to-image';
+  type: 'list-to-list' | 'list-to-image' | 'list-to-table';
   availableOptions: string[];
-  correctAnswers: string[];
+  correctAnswers?: string[];
   requiredCount: number;
   imageSrc?: string;
   dropZones?: DropZone[];
@@ -38,7 +38,7 @@ interface DragDropTask {
 export class TaskDragDropComponent implements OnInit {
   taskDatabase: { [key: string]: DragDropTask } = {
     '9': {
-      title: 'Head and Neck Identification (Visual Challenge)',
+      title: 'Head and Neck Identification',
       instruction:
         'A bal oldali listából húzd a megfelelő anatómiai kifejezést a kép megfelelő részére!',
       type: 'list-to-image',
@@ -50,13 +50,6 @@ export class TaskDragDropComponent implements OnInit {
         'Forehead',
         'Mentum (Chin)',
       ],
-      correctAnswers: [
-        'Forehead',
-        'Zygoma (Cheekbone)',
-        'Mandible (Lower jaw)',
-        'Mentum (Chin)',
-        "Adam's apple",
-      ],
       requiredCount: 5,
       dropZones: [
         { label: 'A1', top: 15, left: 15, correctAnswer: 'Forehead' },
@@ -66,21 +59,35 @@ export class TaskDragDropComponent implements OnInit {
         { label: 'A5', top: 80, left: 20, correctAnswer: "Adam's apple" },
       ],
     },
-    '15': {
-      title: 'The Limbs (Végtagok)',
-      instruction: 'Húzd be pontosan a 4 végtagokhoz tartozó csontot!',
-      type: 'list-to-list',
-      availableOptions: ['Scapula', 'Costae', 'Femur', 'Abdomen', 'Fibula', 'Hallux'],
-      correctAnswers: ['Scapula', 'Femur', 'Fibula', 'Hallux'],
-      requiredCount: 4,
+    '12': {
+      title: 'Trunk: Medical vs. Everyday Terms',
+      instruction: 'Húzd a hiányzó kifejezéseket a táblázat üres celláiba!',
+      type: 'list-to-table',
+      imageSrc: '../../../../public/trunk_anatomy.png',
+      availableOptions: [
+        'armpit',
+        'clavicula',
+        'sternum',
+        'ribs',
+        'chest',
+        'inner elbow, elbow pit',
+      ],
+      requiredCount: 6,
+      dropZones: [
+        { label: 'row1_everyday', correctAnswer: 'armpit' },
+        { label: 'row2_medical', correctAnswer: 'clavicula' },
+        { label: 'row3_medical', correctAnswer: 'sternum' },
+        { label: 'row4_everyday', correctAnswer: 'ribs' },
+        { label: 'row7_medical', correctAnswer: 'chest' },
+        { label: 'row8_medical', correctAnswer: 'inner elbow, elbow pit' },
+      ],
     },
   };
 
   currentTask!: DragDropTask;
   availableOptions: string[] = [];
-  selectedOptions: string[] = [];
   droppedItems: { [key: string]: string | null } = {};
-  zoneLists: string[] = []; // A kép drop zónáihoz
+  zoneLists: string[] = [];
 
   constructor(
     private router: Router,
@@ -92,10 +99,19 @@ export class TaskDragDropComponent implements OnInit {
     const taskId = this.route.snapshot.paramMap.get('id');
     if (taskId && this.taskDatabase[taskId]) {
       this.currentTask = this.taskDatabase[taskId];
-      this.availableOptions = [...this.currentTask.availableOptions];
 
+      // Kezdő opciók betöltése és összekeverése
+      this.availableOptions = [...this.currentTask.availableOptions].sort(
+        () => Math.random() - 0.5,
+      );
+
+      // Drop zónák inicializálása
       if (this.currentTask.dropZones) {
-        this.currentTask.dropZones.forEach((zone) => (this.droppedItems[zone.label] = null));
+        this.droppedItems = {};
+        this.currentTask.dropZones.forEach((zone) => {
+          this.droppedItems[zone.label] = null;
+        });
+        // Ez kell a CDK-nak, hogy tudja, mely listákhoz csatlakozhat a forrás
         this.zoneLists = this.currentTask.dropZones.map((z) => z.label);
       }
     } else {
@@ -103,65 +119,66 @@ export class TaskDragDropComponent implements OnInit {
     }
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex,
-      );
-    }
-  }
-
-  dropOnImage(event: CdkDragDrop<any>, zoneLabel: string) {
+  // Ez a metódus kezeli a bedobást a kép pontjaira ÉS a táblázat celláiba is
+  dropOnZone(event: CdkDragDrop<any>, zoneLabel: string) {
     const droppedItem = event.item.data;
+
+    // Ha már van elem az adott zónában, azt visszatesszük az elérhető listába
     if (this.droppedItems[zoneLabel]) {
       this.availableOptions.push(this.droppedItems[zoneLabel]!);
     }
+
+    // Beállítjuk az új elemet a zónához
     this.droppedItems[zoneLabel] = droppedItem;
+
+    // Eltávolítjuk a forrás listából
     const index = this.availableOptions.indexOf(droppedItem);
-    if (index > -1) this.availableOptions.splice(index, 1);
+    if (index > -1) {
+      this.availableOptions.splice(index, 1);
+    }
   }
 
+  // Ellenőrizzük, hány mezőt töltöttek már ki (a gomb aktiválásához)
   getDroppedItemsCount(): number {
     return Object.values(this.droppedItems).filter((item) => item !== null).length;
   }
 
   submitTask() {
-    let isPerfect = false;
-    if (this.currentTask.type === 'list-to-image') {
-      isPerfect = true;
-      this.currentTask.dropZones?.forEach((zone) => {
-        if (this.droppedItems[zone.label] !== zone.correctAnswer) isPerfect = false;
-      });
-    } else {
-      isPerfect =
-        this.selectedOptions.every((option) => this.currentTask.correctAnswers.includes(option)) &&
-        this.selectedOptions.length === this.currentTask.requiredCount;
-    }
+    let isPerfect = true;
+
+    // Végigmenni a zónákon és ellenőrizni a helyes választ
+    this.currentTask.dropZones?.forEach((zone) => {
+      if (this.droppedItems[zone.label] !== zone.correctAnswer) {
+        isPerfect = false;
+      }
+    });
 
     if (isPerfect) {
       alert('Tökéletes munka! 🏆');
       this.location.back();
     } else {
-      alert('Sajnos van benne hiba! ❌');
+      alert('Sajnos van benne hiba! ❌ Próbáld újra!');
       this.resetTask();
     }
   }
 
+  // Minden elemet visszateszünk a forrás listába
   resetTask() {
-    if (this.currentTask.type === 'list-to-image') {
-      Object.values(this.droppedItems).forEach((item) => {
-        if (item) this.availableOptions.push(item);
+    Object.values(this.droppedItems).forEach((item) => {
+      if (item) {
+        this.availableOptions.push(item);
+      }
+    });
+
+    // Ürítjük a zónákat
+    if (this.currentTask.dropZones) {
+      this.currentTask.dropZones.forEach((z) => {
+        this.droppedItems[z.label] = null;
       });
-      this.currentTask.dropZones?.forEach((z) => (this.droppedItems[z.label] = null));
-    } else {
-      this.availableOptions.push(...this.selectedOptions);
-      this.selectedOptions = [];
     }
+
+    // Újrakeverjük a válaszokat
+    this.availableOptions.sort(() => Math.random() - 0.5);
   }
 
   goBack() {
