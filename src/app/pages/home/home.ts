@@ -22,12 +22,13 @@ export class HomeComponent {
       isAvailable: true,
     },
     {
-      id: 2,
-      title: 'Topic 2',
-      description: 'Advanced physiological systems and patient communication modules.',
-      icon: '🚧',
-      color: '#94a3b8',
-      isAvailable: false,
+      id: 2, // Ez az ID fogja meghatározni a routingot
+      title: 'Topic 2: Health and Illness', // A PDF címe
+      description:
+        'Learn how to ask about health, describe recovery, and use medical idioms correctly.',
+      icon: '🤒', // Átírtam az ikont
+      color: '#f59e0b', // Narancssárga téma
+      isAvailable: true, // Ezt állítsd TRUE-ra, hogy kattintható legyen!
     },
     {
       id: 3,
