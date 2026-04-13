@@ -155,10 +155,34 @@
       </div>
     </div>
 
+    <div class="list-container" *ngIf="currentTask.type === 'list-to-text'">
+      <h3>Dialogue</h3>
+      <div class="text-with-gaps">
+        <div class="sentence-row" *ngFor="let zone of currentTask.dropZones">
+          <span class="text-part">{{ (zone.textWithGap || '').split('{gap}')[0] }}</span>
+
+          <div
+            class="inline-drop-zone"
+            cdkDropList
+            [id]="zone.label"
+            [cdkDropListConnectedTo]="['availableList']"
+            (cdkDropListDropped)="dropOnZone($event, zone.label)"
+          >
+            <span class="placeholder" *ngIf="!droppedItems[zone.label]">...</span>
+            <div class="dropped-val" *ngIf="droppedItems[zone.label]">
+              {{ droppedItems[zone.label] }}
+            </div>
+          </div>
+
+          <span class="text-part">{{ (zone.textWithGap || '').split('{gap}')[1] }}</span>
+        </div>
+      </div>
+    </div>
+
     <div class="list-to-list-container" *ngIf="currentTask.type === 'list-to-list'">
       <div class="classification-board">
         <div class="classification-column">
-          <div class="column-header anterior-header">Anterior part of the body</div>
+          <div class="column-header anterior-header">{{ currentTask.dropZones?.[0]?.label }}</div>
           <div
             class="column-drop-list"
             id="anteriorList"
@@ -175,7 +199,7 @@
         </div>
 
         <div class="classification-column">
-          <div class="column-header posterior-header">Posterior part of the body</div>
+          <div class="column-header posterior-header">{{ currentTask.dropZones?.[1]?.label }}</div>
           <div
             class="column-drop-list"
             id="posteriorList"

@@ -4,13 +4,14 @@ export interface DropZone {
   top?: number;
   left?: number;
   correctAnswer: string;
+  textWithGap?: string;
 }
 
 export interface DragDropTask {
-  id: string; // ÚJ: Egyedi azonosító
+  id: string;
   title: string;
   instruction: string;
-  type: 'list-to-list' | 'list-to-image' | 'list-to-table';
+  type: 'list-to-list' | 'list-to-image' | 'list-to-table' | 'list-to-text';
   availableOptions: string[];
   correctAnswers?: string[];
   requiredCount: number;
@@ -25,7 +26,7 @@ export interface QuizQuestion {
 }
 
 export interface QuizTask {
-  id: string; // ÚJ: Egyedi azonosító
+  id: string;
   title: string;
   questions: QuizQuestion[];
 }
@@ -112,6 +113,101 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
       },
     ],
   },
+  '2_1': {
+    id: '2_1',
+    title: 'Synonym Collection: Health & Illness',
+    instruction:
+      'Sort the following expressions into the correct categories: synonyms for <strong>"Ill"</strong> and synonyms for <strong>"Not ill"</strong>.',
+    type: 'list-to-list',
+    availableOptions: [
+      'unwell',
+      'healthy',
+      'sick',
+      'fit',
+      'in poor health',
+      'well',
+      'in good health',
+      'nauseous',
+    ],
+    requiredCount: 8,
+    dropZones: [
+      {
+        label: 'Ill (Sick)',
+        correctAnswer: 'unwell,sick,in poor health,nauseous',
+      },
+      {
+        label: 'Not ill (Healthy)',
+        correctAnswer: 'healthy,fit,well,in good health',
+      },
+    ],
+  },
+  '2_2': {
+    id: '2_2',
+    title: 'Clinical Skills: What can the patient mean?',
+    instruction:
+      'Patients often use the word <strong>"sick"</strong> to mean different things (general illness or nausea/vomiting). Drag the possible clinical meanings into the correct category based on the patient\'s statement.',
+    type: 'list-to-list',
+    availableOptions: [
+      'I vomited this morning',
+      'I felt nauseous this morning',
+      'I was unwell this morning',
+      'I feel ill right now',
+      'I am nauseous',
+      'I have the urge to vomit',
+      'I feel unwell',
+    ],
+    requiredCount: 7,
+    dropZones: [
+      {
+        label: 'Statement: "I was sick this morning."',
+        correctAnswer:
+          'I vomited this morning,I felt nauseous this morning,I was unwell this morning',
+      },
+      {
+        label: 'Statement: "I feel sick."',
+        correctAnswer: 'I feel ill right now,I am nauseous,I have the urge to vomit,I feel unwell',
+      },
+    ],
+  },
+  '2_3': {
+    id: '2_3',
+    title: 'Clinical Conversation: Doctor & Patient',
+    instruction:
+      'Complete the conversation by dragging the correct medical expressions into the gaps.',
+    type: 'list-to-text',
+    availableOptions: ['unwell', 'ill', 'health', 'fit', 'well', 'sick', 'vomiting', 'illnesses'],
+    requiredCount: 8,
+    dropZones: [
+      { label: 'gap_1', textWithGap: 'Patient: Not very {gap}.', correctAnswer: 'unwell' },
+      {
+        label: 'gap_2',
+        textWithGap: 'Doctor: How long have you been feeling {gap}?',
+        correctAnswer: 'ill',
+      },
+      {
+        label: 'gap_3',
+        textWithGap: 'Doctor: What is your {gap} like normally?',
+        correctAnswer: 'health',
+      },
+      {
+        label: 'gap_4',
+        textWithGap: "Patient: Very good. I'm usually quite {gap}...",
+        correctAnswer: 'fit',
+      },
+      { label: 'gap_5', textWithGap: 'Patient: ...and {gap}.', correctAnswer: 'well' },
+      { label: 'gap_6', textWithGap: 'Doctor: Do you feel {gap}?', correctAnswer: 'sick' },
+      {
+        label: 'gap_7',
+        textWithGap: 'Doctor: Have you actually been {gap}?',
+        correctAnswer: 'vomiting',
+      },
+      {
+        label: 'gap_8',
+        textWithGap: 'Doctor: Have you had any serious {gap} in the past?',
+        correctAnswer: 'illnesses',
+      },
+    ],
+  },
 };
 
 export const QUIZ_DATABASE: { [key: string]: QuizTask } = {
@@ -153,6 +249,7 @@ export const QUIZ_DATABASE: { [key: string]: QuizTask } = {
     ],
   },
 };
+
 // --- ÚJ INTERFÉSZEK A SELECTION FELADATHOZ ---
 export interface SelectionOption {
   id: number;

@@ -22,11 +22,11 @@ export class TaskDragDropComponent implements OnInit {
   currentTask!: DragDropTask;
   availableOptions: string[] = [];
 
-  // Változók a képhez és táblázathoz
+  // Változók a képhez, táblázathoz és a lyukas szöveghez (list-to-text)
   droppedItems: { [key: string]: string | null } = {};
   zoneLists: string[] = [];
 
-  // Változók a list-to-list (15-ös) feladathoz
+  // Változók a list-to-list (két oszlopos) feladathoz
   anteriorList: string[] = [];
   posteriorList: string[] = [];
 
@@ -49,6 +49,7 @@ export class TaskDragDropComponent implements OnInit {
         // A CDK-nak tudnia kell, hova húzhatunk
         this.zoneLists = ['anteriorList', 'posteriorList'];
       } else if (this.currentTask.dropZones) {
+        // Ez fut le a list-to-table, list-to-image ÉS a list-to-text esetében is!
         this.droppedItems = {};
         this.currentTask.dropZones.forEach((zone) => {
           this.droppedItems[zone.label] = null;
@@ -61,7 +62,7 @@ export class TaskDragDropComponent implements OnInit {
     }
   }
 
-  // Drop metódus a képhez és táblázathoz
+  // Drop metódus a képhez, táblázathoz és szöveghez
   dropOnZone(event: CdkDragDrop<any>, zoneLabel: string) {
     const droppedItem = event.item.data;
     if (this.droppedItems[zoneLabel]) {
@@ -74,13 +75,11 @@ export class TaskDragDropComponent implements OnInit {
     }
   }
 
-  // Drop metódus a List-to-List (15-ös) feladathoz
+  // Drop metódus a List-to-List feladathoz
   dropToList(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      // Ha ugyanazon a listán belül mozgatjuk
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      // Ha áthúzzuk egyikből a másikba
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -101,25 +100,21 @@ export class TaskDragDropComponent implements OnInit {
     let isPerfect = true;
 
     if (this.currentTask.type === 'list-to-list') {
-      // Ellenőrzés a list-to-list feladathoz
-      const correctAnterior =
-        this.currentTask.dropZones?.find((z) => z.label === 'anterior')?.correctAnswer.split(',') ||
-        [];
-      const correctPosterior =
-        this.currentTask.dropZones
-          ?.find((z) => z.label === 'posterior')
-          ?.correctAnswer.split(',') || [];
+      // JAVÍTÁS: Dinamikusan olvassuk ki a helyes válaszokat a feladat adatbázisából!
+      const correctList1 = this.currentTask.dropZones?.[0]?.correctAnswer.split(',') || [];
+      const correctList2 = this.currentTask.dropZones?.[1]?.correctAnswer.split(',') || [];
 
-      // Megnézzük, hogy minden az anteriorList-ben lévő elem benne van-e a helyes listában
+      // Ellenőrizzük az első oszlopot (pl. Anterior vagy Sick)
       this.anteriorList.forEach((item) => {
-        if (!correctAnterior.includes(item)) isPerfect = false;
+        if (!correctList1.includes(item)) isPerfect = false;
       });
-      // Ugyanez a posteriorra
+
+      // Ellenőrizzük a második oszlopot (pl. Posterior vagy Not Sick)
       this.posteriorList.forEach((item) => {
-        if (!correctPosterior.includes(item)) isPerfect = false;
+        if (!correctList2.includes(item)) isPerfect = false;
       });
     } else {
-      // Ellenőrzés a képhez/táblázathoz
+      // Ellenőrzés a képhez, táblázathoz és lyukas szöveghez
       this.currentTask.dropZones?.forEach((zone) => {
         if (this.droppedItems[zone.label] !== zone.correctAnswer) {
           isPerfect = false;
@@ -138,12 +133,10 @@ export class TaskDragDropComponent implements OnInit {
 
   resetTask() {
     if (this.currentTask.type === 'list-to-list') {
-      // Mindent visszadobunk a forrásba
       this.availableOptions.push(...this.anteriorList, ...this.posteriorList);
       this.anteriorList = [];
       this.posteriorList = [];
     } else {
-      // Reset logika képhez/táblázathoz
       Object.values(this.droppedItems).forEach((item) => {
         if (item) this.availableOptions.push(item);
       });
