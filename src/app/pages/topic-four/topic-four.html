@@ -1,0 +1,334 @@
+<div class="lesson-layout">
+  <header class="lesson-header">
+    <button class="back-btn" (click)="goBack()">⬅ Back to Dashboard</button>
+    <h1>Topic 4: Dental Education</h1>
+    <p class="subtitle">
+      Explore the goals of education, the structure of dental studies at the University of Szeged,
+      international degree titles, and essential academic vocabulary.
+    </p>
+  </header>
+
+  <article class="lesson-content">
+    <div class="inline-task-card accent-blue">
+      <div class="task-info">
+        <span class="task-badge">Task 1</span>
+        <h3>Opinion Exchange</h3>
+        <p>
+          What are the main goals of education? Discuss with your neighbour and order the sentences
+          by importance.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('discussion', 1)">Start Task 1 ➡️</button>
+    </div>
+
+    <section class="text-block">
+      <h2>The Value of Education</h2>
+      <p>
+        Education serves many purposes in our lives and society. Consider how you would rank the
+        following goals:
+      </p>
+      <ul class="idiom-list">
+        <li>
+          <strong>Knowledge & Skills:</strong> Education provides knowledge to and develops skills
+          in individuals.
+        </li>
+        <li>
+          <strong>Career Preparation:</strong> It prepares you for your future job and broadens your
+          options of seeking a career.
+        </li>
+        <li>
+          <strong>Worldview:</strong> It enables you to achieve greater understanding and
+          appreciation of our world, and opens your horizons.
+        </li>
+        <li><strong>Financial Success:</strong> It enables you to earn a lot of money.</li>
+        <li>
+          <strong>Personal Growth:</strong> It allows clever youth to develop themselves and is the
+          key to success.
+        </li>
+        <li>
+          <strong>Global Impact:</strong> It is a powerful weapon to make a change in the world.
+        </li>
+      </ul>
+    </section>
+
+    <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
+
+    <div class="inline-task-card accent-orange">
+      <div class="task-info">
+        <span class="task-badge">Task 2</span>
+        <h3>Reading Comprehension</h3>
+        <p>
+          Discuss why you chose dentistry and the University of Szeged. Then, scan the text to find
+          specific information about the program.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('quiz', 2)">Start Task 2 ➡️</button>
+    </div>
+
+    <section class="text-block">
+      <h2>Faculty of Dentistry, University of Szeged</h2>
+      <p>
+        Dental education was introduced in the University of Szeged in 1960, and the School of
+        Dentistry was transformed into the Faculty of Dentistry in 2007. The English-language dental
+        program was launched in the academic year of 2004/2005. The programme is an undivided
+        master's programme lasting 10 semesters (300 EU Credits), and graduates acquire the title
+        <em>Doctor Medicinae Dentaire</em>.
+      </p>
+      <p>
+        The programme is designed to unify basic and clinical sciences, proceeding concurrently
+        throughout the curriculum. In the first three years, students are taught the basic sciences
+        of medicine and dentistry. From the second year on, there is more emphasis on the study of
+        dental diseases and their treatment.
+      </p>
+      <p>
+        The last two years serve as the intensive clinical study of each of the various disciplines
+        of dentistry. In the final year, students participate in elective programmes, clinical
+        conferences, and hospital-based trainings. Furthermore, citizens of the EU will receive
+        their licenses automatically within the Community, and graduates can apply for hospital
+        residency positions worldwide.
+      </p>
+    </section>
+
+    <div class="inline-task-card accent-green">
+      <div class="task-info">
+        <span class="task-badge">Task 3</span>
+        <h3>Faculty Departments</h3>
+        <p>
+          Fill in the missing letters in the departments of the faculty and match them with their
+          short descriptions.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('match', 3)">Start Task 3 ➡️</button>
+    </div>
+
+    <section class="text-block">
+      <h3>Specialized Dental Departments</h3>
+      <p>
+        During your clinical years, you will rotate through various specialized departments. Here is
+        what they focus on:
+      </p>
+      <ul class="idiom-list">
+        <li>
+          <strong
+            class="medical-term"
+            data-desc="Focuses on diagnosis and management of medically related diseases affecting the oral and maxillofacial region."
+            >Oral Medicine / Pathology</strong
+          >
+          It is primarily a non-surgical specialty consisting of diagnostic biopsies, small
+          excisions, and therapeutic injections.
+        </li>
+        <li>
+          <strong
+            class="medical-term"
+            data-desc="Deals with prevention and treatment of diseases or defects of the teeth."
+            >Restorative and Esthetic Dentistry</strong
+          >
+          Focuses on restorations, providing harmonious form and function, including cosmetic and
+          digital dentistry.
+        </li>
+        <li>
+          <strong class="medical-term" data-desc="Concerned with the replacement of natural teeth."
+            >Prosthodontics</strong
+          >
+          Utilizes fixed or removable appliances, including dentures, bridges, and implants.
+        </li>
+        <li>
+          <strong
+            class="medical-term"
+            data-desc="Concerned with the diagnosis, prevention, and correction of malpositioned teeth or jaws."
+            >Orthodontics and Pediatric Dentistry</strong
+          >
+          Also includes the treatment of conditions and diseases related to oral health in children.
+        </li>
+        <li>
+          <strong
+            class="medical-term"
+            data-desc="Prevention and treatment of gums and underlying bones."
+            >Periodontology</strong
+          >
+          Focuses on the tissues that support the teeth.
+        </li>
+        <li>
+          <strong
+            class="medical-term"
+            data-desc="Focuses on the surgical management of the jaw and oral cavity."
+            >Oral and Maxillofacial Surgery</strong
+          >
+          Handles complex surgical procedures in the facial region.
+        </li>
+      </ul>
+    </section>
+
+    <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
+
+    <div class="inline-task-card accent-purple">
+      <div class="task-info">
+        <span class="task-badge">Task 4</span>
+        <h3>Titles by Countries</h3>
+        <p>
+          Read about dental degrees in other countries. What is the main difference between Hungary
+          and English-speaking countries regarding dental education?
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('discussion', 4)">Start Task 4 ➡️</button>
+    </div>
+
+    <section class="text-block">
+      <h2>Dental Degrees Worldwide</h2>
+      <p>
+        <strong>USA & Canada:</strong> Dentists earn either a D.D.S. (Doctor of Dental Surgery) or a
+        D.M.D. (Doctor of Medicine in Dentistry) degree. These programs are different only in name
+        and signify the same capabilities to practice dentistry. Candidates must first complete a
+        bachelor's degree (usually in biology or chemistry) before applying to a 4-year D.M.D. or
+        D.D.S. program. The first two years focus on classroom learning, while the last two years
+        involve clinical rotations.
+      </p>
+      <p>
+        <strong>UK & Australia:</strong> Students earn a B.D.S., B.Ch.D., or B.Dent.S. (Bachelor of
+        Dental Surgery). Later, they can pursue a 1-5 year Master of Dentistry course (M.D.S. or
+        M.Ch.D.). Most UK universities prefer applicants to have at least two years of clinical
+        experience working as a dentist before applying for a postgraduate degree.
+      </p>
+      <p>
+        <strong>Other Nations:</strong> In Germany, the title is <em>Dr. med. dent.</em> (Doctor of
+        Dentistry). In Brazil, it is <em>Doutor em Odontologia</em>, and in France,
+        <em>Docteur en Chirurgie Dentaire</em>.
+      </p>
+    </section>
+
+    <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
+
+    <div class="inline-task-card accent-dark">
+      <div class="task-info">
+        <span class="task-badge">Task 5</span>
+        <h3>Academic Scenarios</h3>
+        <p>
+          Use academic terms to describe what happens when you fail an exam, or who to contact if
+          you have a problem with your studies.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('roleplay', 5)">Start Task 5 ➡️</button>
+    </div>
+
+    <section class="text-block">
+      <h2>Academic Vocabulary</h2>
+      <h3>Teacher Titles</h3>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Assistant lecturer')" title="Listen">
+              🔊
+            </button>
+            <strong>Assistant lecturer</strong>
+          </div>
+          <span>tanársegéd</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Senior lecturer')" title="Listen">
+              🔊
+            </button>
+            <strong>Senior lecturer</strong>
+          </div>
+          <span>egyetemi adjunktus</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Associate professor')" title="Listen">
+              🔊
+            </button>
+            <strong>Associate professor</strong>
+          </div>
+          <span>egyetemi docens</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Professor')" title="Listen">🔊</button>
+            <strong>Professor</strong>
+          </div>
+          <span>egyetemi tanár</span>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 32px">University Structure & Studies</h3>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Dean')" title="Listen">🔊</button>
+            <strong>Dean</strong>
+          </div>
+          <span>dékán (Head of the faculty)</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Rector')" title="Listen">🔊</button>
+            <strong>Rector</strong>
+          </div>
+          <span>egyetemi rektor</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Department')" title="Listen">🔊</button>
+            <strong>Department</strong>
+          </div>
+          <span>tanszék</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Academic Office')" title="Listen">
+              🔊
+            </button>
+            <strong>Academic Office</strong>
+          </div>
+          <span>tanulmányi osztály</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Prerequisite')" title="Listen">🔊</button>
+            <strong>Prerequisite</strong>
+          </div>
+          <span>előkövetelmény</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Obligatory course-unit')" title="Listen">
+              🔊
+            </button>
+            <strong>Obligatory course</strong>
+          </div>
+          <span>kötelező tantárgy</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Elective course-unit')" title="Listen">
+              🔊
+            </button>
+            <strong>Elective course</strong>
+          </div>
+          <span>kötelezően választható tantárgy</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound('Retake examination')" title="Listen">
+              🔊
+            </button>
+            <strong>Retake exam</strong>
+          </div>
+          <span>javító vizsga</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="inline-task-card accent-blue" style="margin-top: 48px">
+      <div class="task-info">
+        <span class="task-badge">Task 6</span>
+        <h3>Describe Your Studies</h3>
+        <p>
+          Use at least five of the academic terms from the lists above to describe your dental
+          studies to a foreign student.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('presentation', 6)">Start Task 6 ➡️</button>
+    </div>
+  </article>
+</div>

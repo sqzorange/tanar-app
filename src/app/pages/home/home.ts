@@ -32,19 +32,21 @@ export class HomeComponent {
     },
     {
       id: 3,
-      title: 'Topic 3',
-      description: 'Clinical terminology and diagnostic reporting procedures.',
-      icon: '🚧',
-      color: '#94a3b8',
-      isAvailable: false,
+      title: 'Topic 3: Body Systems, Digestion & Nutrition',
+      description:
+        'Explore the major systems of the human body, their functions, and medical terminology.',
+      icon: '🫁',
+      color: '#10b981',
+      isAvailable: true,
     },
     {
       id: 4,
-      title: 'Topic 4',
-      description: 'Pharmacological basics and medical ethics discussion.',
-      icon: '🚧',
-      color: '#94a3b8',
-      isAvailable: false,
+      title: 'Topic 4: Dental Education',
+      description:
+        'Explore dental studies, university structure, international degrees, and academic vocabulary.',
+      icon: '🦷',
+      color: '#8b5cf6',
+      isAvailable: true,
     },
   ];
 

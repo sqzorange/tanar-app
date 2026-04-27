@@ -6,6 +6,8 @@ import { TaskQuizComponent } from './pages/task-quiz/task-quiz';
 import { TaskComingSoonComponent } from './pages/task-coming-soon/task-coming-soon';
 import { TopicOneComponent } from './pages/topic-one/topic-one';
 import { TopicTwoComponent } from './pages/topic-two/topic-two';
+import { TopicThreeComponent } from './pages/topic-three/topic-three';
+import { TopicFourComponent } from './pages/topic-four/topic-four';
 import { authGuard } from './services/guard';
 import { RegisterComponent } from './pages/register/register';
 import { TaskInlineChoiceComponent } from './pages/task-inline-choice/task-inline-choice';
@@ -18,6 +20,8 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'topic/1', component: TopicOneComponent, canActivate: [authGuard] },
   { path: 'topic/2', component: TopicTwoComponent, canActivate: [authGuard] },
+  { path: 'topic/3', component: TopicThreeComponent, canActivate: [authGuard] },
+  { path: 'topic/4', component: TopicFourComponent, canActivate: [authGuard] },
   {
     path: 'task/inline-choice/:id',
     component: TaskInlineChoiceComponent,

@@ -1,0 +1,356 @@
+<div class="lesson-layout">
+  <header class="lesson-header">
+    <button class="back-btn" (click)="goBack()">⬅ Back to Dashboard</button>
+    <h1>Topic 3: Body Systems, Digestion & Nutrition</h1>
+    <p class="subtitle">
+      Comprehensive guide to the human body systems, the gastrointestinal tract, and the essentials
+      of nutrition.
+    </p>
+  </header>
+
+  <article class="lesson-content">
+    <div class="inline-task-card accent-blue">
+      <div class="task-info">
+        <span class="task-badge">Task 1</span>
+        <h3>Body Systems Terminology</h3>
+        <p>
+          Which body system are the medical terms (e.g., cartilage, thyroid, aorta) connected with?
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('match', 3_1)">Start Task 1 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-orange">
+      <div class="task-info">
+        <span class="task-badge">Task 2</span>
+        <h3>Multiple Choice Options</h3>
+        <p>
+          Choose the correct body parts related to systems like Integumentary, Musculoskeletal, etc.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('quiz', 3_2)">Start Task 2 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-green">
+      <div class="task-info">
+        <span class="task-badge">Task 3</span>
+        <h3>Missing Letters</h3>
+        <p>
+          Fill in the missing letters in the words representing parts of different body systems.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('fill-in', 3_3)">Start Task 3 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-purple">
+      <div class="task-info">
+        <span class="task-badge">Task 4</span>
+        <h3>Picture Identification</h3>
+        <p>Name the body systems illustrated in the anatomical pictures.</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('visual', 3_4)">Start Task 4 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-red">
+      <div class="task-info">
+        <span class="task-badge">Task 5</span>
+        <h3>Adjectives to Nouns</h3>
+        <p>Find the corresponding noun for anatomical adjectives (e.g., lymphatic -> lymph).</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('match', 3_5)">Start Task 5 ➡️</button>
+    </div>
+
+    <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
+
+    <section class="text-block">
+      <h2>The digestive system</h2>
+      <h3>What is the digestive system?</h3>
+      <p>
+        The digestive system is made up of the gastrointestinal tract—also called the GI tract or
+        digestive tract—and the <strong class="medical-term" data-desc="hepar">liver</strong>,
+        <strong class="medical-term" data-desc="produces enzymes and insulin">pancreas</strong>, and
+        <strong class="medical-term" data-desc="cholecysta / vesica fellea">gallbladder</strong>.
+        The GI tract is a series of hollow organs joined in a long, twisting tube from the mouth to
+        the anus. The hollow organs that make up the GI tract are the mouth,
+        <strong class="medical-term" data-desc="gullet">oesophagus</strong>,
+        <strong class="medical-term" data-desc="ventriculus / gaster">stomach</strong>, small
+        intestine, large intestine, and anus. The liver, pancreas, and gallbladder are the solid
+        organs of the digestive system.
+      </p>
+      <p>
+        The small intestine has three parts. The first part is called the
+        <strong class="medical-term" data-desc="first section of small intestine">duodenum</strong>.
+        The
+        <strong class="medical-term" data-desc="middle section of small intestine">jejunum</strong>
+        is in the middle and the
+        <strong class="medical-term" data-desc="final section of small intestine">ileum</strong> is
+        at the end. The large intestine includes the
+        <strong class="medical-term" data-desc="finger-shaped pouch">appendix</strong>,
+        <strong class="medical-term" data-desc="first part of large intestine">caecum</strong>,
+        colon, and rectum. The appendix is a finger-shaped pouch attached to the caecum. The caecum
+        is the first part of the large intestine. The
+        <strong class="medical-term" data-desc="main part of large intestine">colon</strong>
+        is next. The
+        <strong class="medical-term" data-desc="end of large intestine">rectum</strong> is the end
+        of the large intestine.
+      </p>
+    </section>
+
+    <div class="inline-task-card accent-blue">
+      <div class="task-info">
+        <span class="task-badge">Task 6</span>
+        <h3>Translation of Organs</h3>
+        <p>
+          Give the English translation of the organs of the gastrointestinal system from
+          Hungarian/Latin.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('translation', 3_6)">Start Task 6 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-orange">
+      <div class="task-info">
+        <span class="task-badge">Task 7</span>
+        <h3>General vs. Medical English</h3>
+        <p>
+          Match the general English terms (e.g., mouth, spit, bowel) to the medical English ones.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('match', 3_7)">Start Task 7 ➡️</button>
+    </div>
+
+    <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
+
+    <section class="text-block">
+      <h2>The digestive process</h2>
+      <p>
+        Each part of your digestive system helps to move food and liquid through your GI tract,
+        break food and liquid into smaller parts, or both. Once foods are broken into small enough
+        parts, your body can absorb and move the nutrients to where they are needed. Your large
+        intestine absorbs water, and the waste products of digestion become stool. Nerves and
+        hormones help control the digestive process.
+      </p>
+    </section>
+
+    <div class="inline-task-card accent-green">
+      <div class="task-info">
+        <span class="task-badge">Task 8</span>
+        <h3>Organ Movements</h3>
+        <p>Answer the question in the table: What movement is involved in each organ?</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('fill-in', 3_8)">Start Task 8 ➡️</button>
+    </div>
+
+    <section class="text-block">
+      <p>
+        Food moves through your GI tract by a process called
+        <strong class="medical-term" data-desc="wave-like muscle contractions">peristalsis</strong>.
+        The large, hollow organs of your GI tract contain a layer of muscle that enables their walls
+        to move. The movement pushes food and liquid through your GI tract and mixes the contents
+        within each organ. The muscle behind the food contracts and squeezes the food forward, while
+        the muscle in front of the food relaxes to allow the food to move. The digestive process
+        starts when you put food in your mouth.
+      </p>
+      <p>
+        <strong>Mouth.</strong> Food starts to move through your GI tract when you eat. When you
+        swallow, your tongue pushes the food into your throat. A small flap of tissue, called the
+        <strong class="medical-term" data-desc="cartilage flap over windpipe">epiglottis</strong>,
+        folds over your windpipe to prevent choking and the food passes into your oesophagus.
+      </p>
+      <p>
+        <strong>Oesophagus.</strong> Once you begin swallowing, the process becomes automatic. Your
+        brain signals the muscles of the oesophagus and peristalsis begins.
+      </p>
+    </section>
+
+    <section class="text-block">
+      <p>
+        <strong>Lower oesophageal sphincter.</strong> When food reaches the end of your oesophagus,
+        a ring-like muscle— called the
+        <strong class="medical-term" data-desc="valve preventing backflow"
+          >lower oesophageal sphincter</strong
+        >
+        —relaxes and lets food pass into your stomach. This sphincter usually stays closed to keep
+        what’s in your stomach from flowing back into your oesophagus.
+      </p>
+      <p>
+        <strong>Stomach.</strong> After food enters your stomach, the stomach muscles mix the food
+        and liquid with digestive juices. The stomach slowly empties its contents, called
+        <strong class="medical-term" data-desc="semi-fluid digested mass">chyme</strong>, into your
+        small intestine.
+      </p>
+      <p>
+        <strong>Small intestine.</strong> The muscles of the small intestine mix food with digestive
+        juices from the pancreas, liver, and intestine, and push the mixture forward for further
+        digestion. The walls of the small intestine absorb water and the digested nutrients into
+        your bloodstream. As peristalsis continues, the waste products of the digestive process move
+        into the large intestine.
+      </p>
+      <p>
+        <strong>Large intestine.</strong> Waste products from the digestive process include
+        undigested parts of food, fluid, and older cells from the lining of your GI tract. The large
+        intestine absorbs water and changes the waste from liquid into stool. Peristalsis helps move
+        the stool into your rectum.
+      </p>
+      <p>
+        <strong>Rectum.</strong> The lower end of your large intestine, the rectum, stores stool
+        until it pushes stool out of your anus during a bowel movement.
+      </p>
+    </section>
+
+    <section class="text-block">
+      <h2>Faeces</h2>
+      <p>
+        The <strong>Bristol Stool Scale</strong> is a useful reference for patients and healthcare
+        professionals to check if the form of poop is healthy - looking at size, shape and
+        consistency. In case you’re wondering, the chart is named after the hospital at which it was
+        developed - The Bristol Royal Infirmary, a teaching hospital in England.
+      </p>
+      <p>
+        The Bristol Stool Scale depicts 7 types of stool, ranging from the hard and difficult to
+        pass to the liquid form of diarrhoea. Your poop is made up of waste products your body needs
+        to remove, which may include undigested food (such as fibre, which cannot be digested),
+        bacteria and salts.
+      </p>
+      <p>
+        The colour can vary from black, due to altered blood as in
+        <strong class="medical-term" data-desc="black tarry stool">melaena</strong>, to yellow, grey
+        or even white. Melaena stools are often described as tarry — like tar, the black sticky
+        substance that is used in road making. The stools may be red when fresh blood is present.
+        Blood that can only be detected with special tests is called
+        <strong class="medical-term" data-desc="FOB">faecal occult blood (FOB)</strong>. When there
+        is a high fat content, the stools are pale, and are sometimes described as clay-coloured.
+        Stools that are large in volume are described as bulky. A bad smell is described as foul or
+        offensive.
+      </p>
+    </section>
+
+    <div class="inline-task-card accent-dark">
+      <div class="task-info">
+        <span class="task-badge">Task 9</span>
+        <h3>Terms: Doctors vs. Patients</h3>
+        <p>
+          Collect the terms used to describe faeces by doctors compared to the terms used by
+          patients.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('dragdrop', 3_9)">Start Task 9 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-purple">
+      <div class="task-info">
+        <span class="task-badge">Task 10</span>
+        <h3>Doctor's Questions</h3>
+        <p>
+          Match features (blood, bowel habit, bulk, consistency) to the corresponding questions
+          asked by doctors.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('match', 3_10)">Start Task 10 ➡️</button>
+    </div>
+
+    <hr style="margin: 48px 0; border: none; border-top: 2px solid #e2e8f0" />
+
+    <section class="text-block" style="margin-bottom: 24px">
+      <h2>Nutrition and Obesity</h2>
+      <p>
+        Understanding what fuels the body is just as important as knowing how it is digested. Let's
+        explore the essential nutrients and current dietary challenges.
+      </p>
+    </section>
+
+    <div class="inline-task-card accent-success">
+      <div class="task-info">
+        <span class="task-badge">Task 11</span>
+        <h3>Speaking: Pairwork</h3>
+        <p>
+          Talk about why our body needs the things shown. What does it contain? Which part of the
+          body is it especially good for?
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('discussion', 3_11)">
+        Start Task 11 ➡️
+      </button>
+    </div>
+
+    <div class="inline-task-card accent-blue">
+      <div class="task-info">
+        <span class="task-badge">Task 12</span>
+        <h3>Vitamins & Minerals</h3>
+        <p>
+          Complete the descriptions of vitamins, minerals, and oils with the correct words (e.g.,
+          skin, bones, nervous system).
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('fill-in', 3_12)">Start Task 12 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-orange">
+      <div class="task-info">
+        <span class="task-badge">Task 13</span>
+        <h3>Project Work</h3>
+        <p>
+          Research substances like Vitamin E, Vitamin K, Potassium, etc., and write about why our
+          body needs them.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('project', 3_13)">Start Task 13 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-red">
+      <div class="task-info">
+        <span class="task-badge">Task 14</span>
+        <h3>Pre-Reading Discussion</h3>
+        <p>
+          Pairwork: Do you like fast food? How often do you eat it? Do you think it is addictive?
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('discussion', 3_14)">
+        Start Task 14 ➡️
+      </button>
+    </div>
+
+    <div class="inline-task-card accent-purple">
+      <div class="task-info">
+        <span class="task-badge">Task 15</span>
+        <h3>Reading: Fast Food</h3>
+        <p>
+          Read the article 'Super Size Me' and decide if the sentences are True (T) or False (F).
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('quiz', 3_15)">Start Task 15 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-green">
+      <div class="task-info">
+        <span class="task-badge">Task 16</span>
+        <h3>Vocabulary: Food</h3>
+        <p>
+          Fill in the missing words (absorbed, balanced, energy, etc.) in the text about a healthy
+          diet.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('fill-in', 3_16)">Start Task 16 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-dark">
+      <div class="task-info">
+        <span class="task-badge">Task 17</span>
+        <h3>Energy Drinks: Headlines</h3>
+        <p>Read the headlines about energy drinks and guess if they are true or false.</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('quiz', 3_17)">Start Task 17 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-blue">
+      <div class="task-info">
+        <span class="task-badge">Task 18</span>
+        <h3>Listening Comprehension</h3>
+        <p>Listen to the recording about energy drinks and discuss the questions in pairs.</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('discussion', 3_18)">
+        Start Task 18 ➡️
+      </button>
+    </div>
+  </article>
+</div>
