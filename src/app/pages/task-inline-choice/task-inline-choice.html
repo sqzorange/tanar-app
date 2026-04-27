@@ -1,0 +1,37 @@
+<div class="task-layout" *ngIf="currentTask">
+  <header class="task-header">
+    <button class="back-btn" (click)="goBack()">⬅ Back</button>
+    <h2>{{ currentTask.title }}</h2>
+    <p>{{ currentTask.instruction }}</p>
+  </header>
+
+  <div class="task-container">
+    <div class="sentences-list">
+      <div class="sentence-row" *ngFor="let sentence of currentTask.sentences; let i = index">
+        <div class="sentence-number">{{ i + 1 }}.</div>
+        <p class="sentence-text">
+          {{ sentence.before }}
+
+          <span class="inline-options">
+            <button
+              *ngFor="let opt of sentence.options"
+              class="choice-btn"
+              [class.selected]="selectedAnswers[i] === opt"
+              (click)="selectOption(i, opt)"
+            >
+              {{ opt }}
+            </button>
+          </span>
+
+          {{ sentence.after }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="action-footer">
+    <button class="submit-btn" [disabled]="!isAllAnswered()" (click)="submitTask()">
+      Check Answers ✅
+    </button>
+  </footer>
+</div>

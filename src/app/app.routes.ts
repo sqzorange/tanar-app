@@ -8,6 +8,8 @@ import { TopicOneComponent } from './pages/topic-one/topic-one';
 import { TopicTwoComponent } from './pages/topic-two/topic-two';
 import { authGuard } from './services/guard';
 import { RegisterComponent } from './pages/register/register';
+import { TaskInlineChoiceComponent } from './pages/task-inline-choice/task-inline-choice';
+import { TaskListeningComponent } from './pages/task-listening/task-listening';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,7 +18,12 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'topic/1', component: TopicOneComponent, canActivate: [authGuard] },
   { path: 'topic/2', component: TopicTwoComponent, canActivate: [authGuard] },
-
+  {
+    path: 'task/inline-choice/:id',
+    component: TaskInlineChoiceComponent,
+    canActivate: [authGuard],
+  },
+  { path: 'task/listening/:id', component: TaskListeningComponent, canActivate: [authGuard] },
   // JAVÍTOTT UNIVERZÁLIS ÚTVONALAK
   { path: 'task/dragdrop/:id', component: TaskDragDropComponent, canActivate: [authGuard] },
   { path: 'task/quiz/:id', component: TaskQuizComponent, canActivate: [authGuard] },

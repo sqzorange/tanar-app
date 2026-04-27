@@ -1,0 +1,309 @@
+$brand-primary: #6366f1;
+$bg-app: #f8fafc;
+$white: #ffffff;
+$text-main: #1e293b;
+$text-muted: #64748b;
+$border-color: #e2e8f0;
+
+.task-layout {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+
+  .task-header {
+    margin-bottom: 32px;
+    .back-btn {
+      background: $white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      font-weight: 600;
+      color: $text-muted;
+      &:hover {
+        color: $brand-primary;
+      }
+    }
+    h2 {
+      color: $text-main;
+      font-size: 2rem;
+      margin: 16px 0 8px;
+    }
+    p {
+      color: $text-muted;
+      font-size: 1.1rem;
+      margin: 0;
+    }
+  }
+}
+
+.audio-player-card {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, $white 0%, #f1f5f9 100%);
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 40px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+
+  .audio-icon {
+    font-size: 3rem;
+    background: $brand-primary;
+    color: $white;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 24px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 10px rgba($brand-primary, 0.3);
+  }
+
+  .audio-controls-wrapper {
+    flex-grow: 1;
+    h3 {
+      margin: 0 0 4px 0;
+      color: $text-main;
+      font-size: 1.25rem;
+    }
+    .audio-status {
+      margin: 0 0 12px 0;
+      color: $text-muted;
+      font-size: 0.9rem;
+    }
+    .custom-audio {
+      width: 100%;
+      height: 40px;
+      outline: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    text-align: center;
+    .audio-icon {
+      margin: 0 0 16px 0;
+    }
+  }
+}
+
+.questions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .question-card {
+    background: $white;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+
+    .question-header {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      .q-number {
+        background: rgba($brand-primary, 0.1);
+        color: $brand-primary;
+        font-weight: 800;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        margin-right: 16px;
+        flex-shrink: 0;
+      }
+      .q-text {
+        margin: 0;
+        font-size: 1.15rem;
+        color: $text-main;
+        line-height: 1.4;
+        font-weight: 600;
+        padding-top: 4px;
+      }
+    }
+
+    .answer-group {
+      padding-left: 48px; // Behúzva a szám vonala alá
+      .answer-input {
+        width: 100%;
+        padding: 16px;
+        border-radius: 10px;
+        border: 2px solid #e2e8f0;
+        background: #f8fafc;
+        font-family: inherit;
+        font-size: 1.05rem;
+        color: $text-main;
+        resize: vertical;
+        transition: all 0.2s;
+
+        &:focus {
+          outline: none;
+          border-color: $brand-primary;
+          background: $white;
+          box-shadow: 0 0 0 4px rgba($brand-primary, 0.1);
+        }
+      }
+      @media (max-width: 600px) {
+        padding-left: 0;
+      }
+    }
+  }
+}
+
+.action-footer {
+  margin-top: 40px;
+  text-align: center;
+  .submit-btn {
+    width: 100%;
+    max-width: 300px;
+    padding: 16px;
+    border-radius: 12px;
+    background: $brand-primary;
+    color: $white;
+    border: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.2s;
+    &:disabled {
+      background: #cbd5e1;
+      cursor: not-allowed;
+    }
+    &:not(:disabled):hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba($brand-primary, 0.3);
+    }
+  }
+}
+// --- AI LOADING STATE ---
+.ai-loading-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: $white;
+  border-radius: 16px;
+  border: 1px solid $border-color;
+
+  .spinner {
+    font-size: 4rem;
+    animation: float 2s ease-in-out infinite;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    color: $brand-primary;
+    margin: 0 0 8px 0;
+  }
+  p {
+    color: $text-muted;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+// --- AI FEEDBACK STYLES ---
+.ai-feedback-group {
+  padding-left: 48px;
+
+  .user-answer-display {
+    background: #f8fafc;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border-left: 4px solid #cbd5e1;
+    color: $text-main;
+    font-style: italic;
+    margin-bottom: 12px;
+    strong {
+      font-style: normal;
+      color: $text-muted;
+      margin-right: 8px;
+    }
+  }
+
+  .feedback-card {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+
+    .status-icon {
+      font-size: 1.5rem;
+      margin-right: 16px;
+    }
+    .feedback-content {
+      h4 {
+        margin: 0 0 4px 0;
+        font-size: 1.05rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      p {
+        margin: 0;
+        font-size: 0.95rem;
+        line-height: 1.4;
+      }
+    }
+
+    // Dinamikus színek az értékelés alapján
+    &.status-correct {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+      h4 {
+        color: #166534;
+      }
+      p {
+        color: #15803d;
+      }
+    }
+    &.status-partial {
+      background: #fffbeb;
+      border-color: #fef08a;
+      h4 {
+        color: #854d0e;
+      }
+      p {
+        color: #a16207;
+      }
+    }
+    &.status-incorrect {
+      background: #fef2f2;
+      border-color: #fecaca;
+      h4 {
+        color: #991b1b;
+      }
+      p {
+        color: #b91c1c;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    padding-left: 0;
+  }
+}
+
+.action-footer .retry-btn {
+  background: $white;
+  color: $brand-primary;
+  border: 2px solid $brand-primary;
+  &:hover {
+    background: #f1f5f9;
+    color: $brand-primary;
+  }
+}

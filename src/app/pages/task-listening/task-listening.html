@@ -1,0 +1,75 @@
+<div class="task-layout" *ngIf="currentTask">
+  <header class="task-header">
+    <button class="back-btn" (click)="goBack()">⬅ Back</button>
+    <h2>{{ currentTask.title }}</h2>
+    <p>{{ currentTask.instruction }}</p>
+  </header>
+
+  <div class="audio-player-card">
+    <div class="audio-icon">🎧</div>
+    <div class="audio-controls-wrapper">
+      <h3>Listening Track</h3>
+      <p class="audio-status">Click play to start listening</p>
+      <audio controls [src]="currentTask.audioSrc" class="custom-audio">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </div>
+
+  <div class="ai-loading-state" *ngIf="gradingState === 'grading'">
+    <div class="spinner">🤖</div>
+    <h3>AI is analyzing your answers...</h3>
+    <p>Please wait a moment while I review your work.</p>
+  </div>
+
+  <div class="questions-container" *ngIf="gradingState !== 'grading'">
+    <div class="question-card" *ngFor="let q of currentTask.questions; let i = index">
+      <div class="question-header">
+        <span class="q-number">{{ i + 1 }}</span>
+        <p class="q-text">{{ q.text }}</p>
+      </div>
+
+      <div class="answer-group" *ngIf="gradingState === 'idle'">
+        <textarea
+          class="answer-input"
+          rows="2"
+          placeholder="Type your answer here..."
+          [(ngModel)]="userAnswers[i]"
+        >
+        </textarea>
+      </div>
+
+      <div class="ai-feedback-group" *ngIf="gradingState === 'completed'">
+        <div class="user-answer-display">
+          <strong>Your answer:</strong> {{ userAnswers[i] || '— No answer provided —' }}
+        </div>
+
+        <div class="feedback-card" [ngClass]="'status-' + aiFeedback[i].status">
+          <div class="status-icon">
+            <span *ngIf="aiFeedback[i].status === 'correct'">✅</span>
+            <span *ngIf="aiFeedback[i].status === 'partial'">⚠️</span>
+            <span *ngIf="aiFeedback[i].status === 'incorrect'">❌</span>
+          </div>
+          <div class="feedback-content">
+            <h4>{{ aiFeedback[i].status | titlecase }}</h4>
+            <p>{{ aiFeedback[i].feedback }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="action-footer" *ngIf="gradingState !== 'grading'">
+    <button
+      *ngIf="gradingState === 'idle'"
+      class="submit-btn"
+      [disabled]="!isAllAnswered()"
+      (click)="submitTask()"
+    >
+      Submit for AI Grading 🤖
+    </button>
+    <button *ngIf="gradingState === 'completed'" class="submit-btn retry-btn" (click)="retryTask()">
+      Try Again 🔄
+    </button>
+  </footer>
+</div>

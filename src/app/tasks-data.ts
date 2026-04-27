@@ -19,6 +19,19 @@ export interface DragDropTask {
   dropZones?: DropZone[];
 }
 
+export interface ListeningQuestion {
+  text: string;
+  correctAnswer: string; // <-- EZ HIÁNYZOTT!
+}
+
+export interface ListeningTask {
+  id: string;
+  title: string;
+  instruction: string;
+  audioSrc: string;
+  questions: ListeningQuestion[];
+}
+
 export interface QuizQuestion {
   text: string;
   options: string[];
@@ -29,6 +42,35 @@ export interface QuizTask {
   id: string;
   title: string;
   questions: QuizQuestion[];
+}
+
+// --- ÚJ INTERFÉSZ AZ INLINE KATTINTÓS FELADATHOZ ---
+export interface InlineChoiceSentence {
+  before: string;
+  options: string[];
+  after: string;
+  correctAnswer: string;
+}
+
+export interface InlineChoiceTask {
+  id: string;
+  title: string;
+  instruction: string;
+  sentences: InlineChoiceSentence[];
+}
+
+// --- ÚJ INTERFÉSZEK A SELECTION FELADATHOZ ---
+export interface SelectionOption {
+  id: number;
+  text: string;
+}
+
+export interface SelectionTask {
+  id: string;
+  title: string;
+  instruction: string;
+  options: SelectionOption[];
+  requiredCount: number;
 }
 
 // Az adatbázisok exportálása
@@ -250,19 +292,106 @@ export const QUIZ_DATABASE: { [key: string]: QuizTask } = {
   },
 };
 
-// --- ÚJ INTERFÉSZEK A SELECTION FELADATHOZ ---
-export interface SelectionOption {
-  id: number;
-  text: string;
-}
-
-export interface SelectionTask {
-  id: string;
-  title: string;
-  instruction: string;
-  options: SelectionOption[];
-  requiredCount: number;
-}
+export const INLINE_CHOICE_DATABASE: { [key: string]: InlineChoiceTask } = {
+  '2_4_sentences': {
+    id: '2_4_sentences',
+    title: 'Task 4 - Sickness and Recovery',
+    instruction: 'Choose the correct word to complete each sentence.',
+    sentences: [
+      {
+        before: 'Her condition',
+        options: ['deteriorated', 'improved'],
+        after: 'and she died.',
+        correctAnswer: 'deteriorated',
+      },
+      {
+        before: 'He',
+        options: ['relapsed', 'recovered'],
+        after: 'and was allowed to go home from hospital.',
+        correctAnswer: 'recovered',
+      },
+      {
+        before: 'The cause of sleeping',
+        options: ['illness', 'sickness'],
+        after: 'was discovered in 1901.',
+        correctAnswer: 'sickness',
+      },
+      {
+        before: 'The patient made a full',
+        options: ['remission', 'recovery'],
+        after: '.',
+        correctAnswer: 'recovery',
+      },
+      {
+        before: 'I have been in',
+        options: ['poor', 'good'],
+        after: 'health for months and feel very fit.',
+        correctAnswer: 'good',
+      },
+      {
+        before: 'It was a month before I',
+        options: ['got over', 'got better'],
+        after: 'the illness.',
+        correctAnswer: 'got over',
+      },
+      {
+        before: 'He seems to be rather',
+        options: ['unhealthy', 'unwell'],
+        after: '— his diet is bad and he never exercises.',
+        correctAnswer: 'unhealthy',
+      },
+    ],
+  },
+  '2_9_expressions': {
+    id: '2_9_expressions',
+    title: 'Task 9 - Body Functions',
+    instruction: 'Choose the correct expression from the brackets to complete the sentences below.',
+    sentences: [
+      {
+        before: '1/a. When I eat solid food, I have to',
+        options: ['bite', 'chew'],
+        after: 'it for a long time before I can swallow it.',
+        correctAnswer: 'chew',
+      },
+      {
+        before: '1/b. When I eat solid food, I have to chew it for a long time before I can',
+        options: ['swallow', 'eat'],
+        after: 'it.',
+        correctAnswer: 'swallow',
+      },
+      {
+        before: '2. Do you have any pain when you',
+        options: ['pass', 'have'],
+        after: 'stools?',
+        correctAnswer: 'pass',
+      },
+      {
+        before: '3. I have no',
+        options: ['taste', 'appetite'],
+        after: "and I've lost five kilos in the last few weeks.",
+        correctAnswer: 'appetite',
+      },
+      {
+        before: '4. When did you last',
+        options: ['have', 'pass'],
+        after: 'a period?',
+        correctAnswer: 'have',
+      },
+      {
+        before: '5. The garden is full of flowers, but my',
+        options: ['sense', 'sensation'],
+        after: "of smell has disappeared and I can't enjoy the perfume.",
+        correctAnswer: 'sense',
+      },
+      {
+        before: '6. Take a deep',
+        options: ['breathe', 'breath'],
+        after: 'in.',
+        correctAnswer: 'breath',
+      },
+    ],
+  },
+};
 
 export const SELECTION_DATABASE: { [key: string]: SelectionTask } = {
   '1': {
@@ -280,6 +409,59 @@ export const SELECTION_DATABASE: { [key: string]: SelectionTask } = {
       { id: 7, text: 'Methodology of short presentations (ppt, prezi...)' },
       { id: 8, text: 'Note-taking techniques, reading comprehension' },
       { id: 9, text: 'Note-taking techniques, listening comprehension' },
+    ],
+  },
+};
+
+export const LISTENING_DATABASE: { [key: string]: ListeningTask } = {
+  '2_13_listening': {
+    id: '2_13_listening',
+    title: 'Task 13 - Listening: Comprehension',
+    instruction: 'Listen to the audio and answer the questions below in your own words.',
+    audioSrc: '/tanar-app/public/placeholder_audio.mp3',
+    questions: [
+      {
+        text: 'What did the article say an allergy to peanuts can be?',
+        // Bármelyik szót elfogadja:
+        correctAnswer: 'deadly | lethal | fatal | kill | dangerous',
+      },
+      {
+        text: 'How many different studies did the researchers look at?',
+        correctAnswer: '146 | one hundred and forty',
+      },
+      {
+        text: "How many children's data did the researchers look at?",
+        correctAnswer: '200 | 200,000 | 200000 | two hundred',
+      },
+      {
+        text: 'How much less likely to get an egg allergy were babies who ate eggs?',
+        correctAnswer: '40 | forty',
+      },
+      {
+        text: 'How much less likely to get a peanut allergy were babies who ate peanuts?',
+        correctAnswer: '70 | seventy',
+      },
+      {
+        text: 'What are the two most common childhood food allergies?',
+        // Itt VESSZŐ van a két csoport között, tehát egy tojás ÉS egy mogyoró szó is kell!
+        correctAnswer: 'egg | eggs, peanut | peanuts',
+      },
+      {
+        text: 'What might happen if babies eat whole nuts?',
+        correctAnswer: 'choke | choking | block | breathe',
+      },
+      {
+        text: 'What kind of peanut butter did a doctor say babies should eat?',
+        correctAnswer: 'smooth | creamy',
+      },
+      {
+        text: 'How should parents give babies food they might be allergic to?',
+        correctAnswer: 'small | tiny | little | bit | gradually',
+      },
+      {
+        text: 'What thing did the researchers say needed to be done more?',
+        correctAnswer: 'research | studies | study | investigate',
+      },
     ],
   },
 };

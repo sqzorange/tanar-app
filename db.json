@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "username": "Teszt Elek",
+      "email": "teszt@teszt.hu",
+      "password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+      "metadata": {
+        "registeredAt": "2026-04-27T09:49:24.795Z"
+      },
+      "id": "9IlfysLozKg"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

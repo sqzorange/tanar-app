@@ -1,3 +1,4 @@
+// src/app/pages/login/login.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
@@ -12,22 +13,33 @@ import { AuthService } from '../../services/auth';
   styleUrl: './login.scss',
 })
 export class LoginComponent {
-  loginData = {
-    email: '',
-    password: '',
-  };
+  loginData = { email: '', password: '' };
 
   constructor(
     private router: Router,
     private authService: AuthService,
   ) {}
 
-  onLogin() {
-    // Frissített log üzenet
-    console.log('Login attempt with:', this.loginData.email);
+  async onLogin() {
+    const emailLower = this.loginData.email.toLowerCase();
+    const hashedPw = await this.hashPassword(this.loginData.password);
 
-    this.authService.login();
+    this.authService.findUserByEmail(emailLower).subscribe((users) => {
+      const user = users.find((u) => u.password === hashedPw);
 
-    this.router.navigate(['/home']);
+      if (user) {
+        this.authService.login({ id: user.id, username: user.username, email: user.email });
+        this.router.navigate(['/home']);
+      } else {
+        alert('Hibás email vagy jelszó!');
+      }
+    });
+  }
+
+  private async hashPassword(password: string): Promise<string> {
+    const msgBuffer = new TextEncoder().encode(password);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
   }
 }
