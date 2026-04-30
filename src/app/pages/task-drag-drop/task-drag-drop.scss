@@ -75,7 +75,7 @@ $border-color: #e2e8f0;
   }
 }
 
-// KÉP ALAPÚ POZICIONÁLÁS (9-es feladathoz)
+// KÉP ALAPÚ POZICIONÁLÁS
 .image-map-container {
   position: relative;
   flex: 1;
@@ -84,18 +84,16 @@ $border-color: #e2e8f0;
   padding: 10px;
 
   .anatomy-image {
-    max-width: 100%;
+    width: 100%;
     display: block;
+    max-width: 700px;
     border-radius: 12px;
   }
 
   .image-drop-zone {
     position: absolute;
-    width: 130px;
-    height: 34px;
-    border: 2px dashed $brand-orange;
-    border-radius: 6px;
-    background: rgba(white, 0.8);
+    background: transparent;
+    border: none;
     transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
@@ -105,66 +103,76 @@ $border-color: #e2e8f0;
     .dropped-item {
       background: $brand-primary;
       color: white;
-      font-size: 0.75rem;
-      padding: 4px 8px;
-      border-radius: 4px;
-      width: 90%;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
       text-align: center;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     }
-    .placeholder-msg {
-      font-size: 0.7rem;
-      color: $text-muted;
+
+    .placeholder {
+      color: $brand-orange;
+      font-weight: bold;
+      font-size: 1rem;
     }
   }
 }
 
-// TÁBLÁZAT STÍLUSOK (12-es feladathoz)
+// DINAMIKUS TÁBLÁZAT STÍLUSOK (CSS Grid + Rowspan mágia)
 .interactive-table {
   flex: 1;
+  display: grid;
   border: 1px solid $border-color;
   border-radius: 12px;
   overflow: hidden;
+  background: $border-color; // A rés (gap) fogja adni a belső vonalakat!
+  gap: 1px;
 
-  .table-header {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: #475569;
-    color: white;
+  .cell {
     padding: 10px;
-    font-weight: bold;
-  }
+    display: flex;
+    align-items: center;
+    background: white; // Alapértelmezett háttér, hogy a gap látszódjon
 
-  .table-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-bottom: 1px solid $border-color;
-    min-height: 48px;
+    // !!! JAVÍTÁS ITT: A fejléc most már felülírja a fehér hátteret !!!
+    &.header-cell {
+      background: #475569;
+      color: white;
+      padding: 12px 10px;
+      font-weight: bold;
+    }
 
-    .cell {
-      padding: 8px;
-      display: flex;
-      align-items: center;
+    &.static {
+      background: #f8fafc;
+      color: #64748b;
+      font-size: 0.9rem;
+      white-space: pre-wrap; // Így az enterek (\n) új sorként jelennek meg!
+    }
 
-      &.static {
-        background: #f8fafc;
+    &.drop-cell {
+      justify-content: center;
+      flex-wrap: wrap; // Ha hosszú a szöveg
+      text-align: center;
+      gap: 6px; // Távolság a bedobott gomb és az előtte/utána lévő szöveg között
+
+      .placeholder {
+        color: $brand-orange;
+        font-weight: bold;
+      }
+      .dropped-val {
+        background: $brand-primary;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.85rem;
+        width: fit-content;
+      }
+      .static-text {
         color: #64748b;
         font-size: 0.9rem;
-      }
-      &.drop-cell {
-        justify-content: center;
-        background: white;
-        .placeholder {
-          color: $brand-orange;
-          font-weight: bold;
-        }
-        .dropped-val {
-          background: $brand-primary;
-          color: white;
-          padding: 5px 10px;
-          border-radius: 5px;
-          font-size: 0.85rem;
-          width: fit-content;
-        }
+        white-space: pre-wrap;
       }
     }
   }

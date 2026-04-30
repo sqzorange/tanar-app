@@ -21,6 +21,7 @@
       </div>
     </div>
 
+    <!-- KÉPES FELADATOK (list-to-image) -->
     <div class="image-map-container" *ngIf="currentTask.type === 'list-to-image'">
       <img [src]="currentTask.imageSrc" alt="Anatomy" class="anatomy-image" />
       <div
@@ -33,128 +34,67 @@
         [style.top.%]="zone.top"
         [style.left.%]="zone.left"
       >
-        <span class="placeholder-msg" *ngIf="!droppedItems[zone.label]">Drop here...</span>
+        <span class="placeholder" *ngIf="!droppedItems[zone.label]">???</span>
         <div class="dropped-item" *ngIf="droppedItems[zone.label]">
           {{ droppedItems[zone.label] }}
         </div>
       </div>
     </div>
 
+    <!-- DINAMIKUS TÁBLÁZAT FELADATOK (list-to-table) -->
     <div class="list-container" *ngIf="currentTask.type === 'list-to-table'">
       <h3>Anatomy Table</h3>
-      <div class="interactive-table">
-        <div class="table-header">
-          <span>Medical Term</span>
-          <span>Everyday Term</span>
-        </div>
-
-        <div class="table-row">
-          <div class="cell static">axilla</div>
-          <div
-            class="cell drop-cell"
-            cdkDropList
-            id="row1_everyday"
-            [cdkDropListConnectedTo]="['availableList']"
-            (cdkDropListDropped)="dropOnZone($event, 'row1_everyday')"
-          >
-            <span class="placeholder" *ngIf="!droppedItems['row1_everyday']">???</span>
-            <div class="dropped-val" *ngIf="droppedItems['row1_everyday']">
-              {{ droppedItems['row1_everyday'] }}
-            </div>
+      <!-- Maga a container lett a rács! -->
+      <div
+        class="interactive-table"
+        [style.grid-template-columns]="
+          'repeat(' + (currentTask.tableHeaders?.length || 1) + ', 1fr)'
+        "
+      >
+        <!-- Dinamikus Fejléc -->
+        <ng-container *ngIf="currentTask.tableHeaders">
+          <div class="cell header-cell" *ngFor="let header of currentTask.tableHeaders">
+            {{ header }}
           </div>
-        </div>
+        </ng-container>
 
-        <div class="table-row">
-          <div
-            class="cell drop-cell"
-            cdkDropList
-            id="row2_medical"
-            [cdkDropListConnectedTo]="['availableList']"
-            (cdkDropListDropped)="dropOnZone($event, 'row2_medical')"
-          >
-            <span class="placeholder" *ngIf="!droppedItems['row2_medical']">???</span>
-            <div class="dropped-val" *ngIf="droppedItems['row2_medical']">
-              {{ droppedItems['row2_medical'] }}
+        <!-- Dinamikus Sorok ömlesztve, a Grid lerendezi! -->
+        <ng-container *ngFor="let row of currentTask.tableRows">
+          <ng-container *ngFor="let cell of row">
+            <!-- Ha sima szöveg (Figyeld a grid-row span kötést!) -->
+            <div
+              class="cell static"
+              *ngIf="cell.type === 'static'"
+              [style.grid-row]="cell.rowspan ? 'span ' + cell.rowspan : 'auto'"
+            >
+              {{ cell.value }}
             </div>
-          </div>
-          <div class="cell static">collar bone, clavicle</div>
-        </div>
 
-        <div class="table-row">
-          <div
-            class="cell drop-cell"
-            cdkDropList
-            id="row3_medical"
-            [cdkDropListConnectedTo]="['availableList']"
-            (cdkDropListDropped)="dropOnZone($event, 'row3_medical')"
-          >
-            <span class="placeholder" *ngIf="!droppedItems['row3_medical']">???</span>
-            <div class="dropped-val" *ngIf="droppedItems['row3_medical']">
-              {{ droppedItems['row3_medical'] }}
+            <!-- Ha bedobó zóna -->
+            <div
+              class="cell drop-cell"
+              *ngIf="cell.type === 'drop'"
+              [style.grid-row]="cell.rowspan ? 'span ' + cell.rowspan : 'auto'"
+              cdkDropList
+              [id]="cell.value"
+              [cdkDropListConnectedTo]="['availableList']"
+              (cdkDropListDropped)="dropOnZone($event, cell.value)"
+            >
+              <span class="static-text" *ngIf="cell.textBefore">{{ cell.textBefore }}</span>
+
+              <span class="placeholder" *ngIf="!droppedItems[cell.value]">???</span>
+              <div class="dropped-val" *ngIf="droppedItems[cell.value]">
+                {{ droppedItems[cell.value] }}
+              </div>
+
+              <span class="static-text" *ngIf="cell.textAfter">{{ cell.textAfter }}</span>
             </div>
-          </div>
-          <div class="cell static">breast bone</div>
-        </div>
-
-        <div class="table-row">
-          <div class="cell static">costae</div>
-          <div
-            class="cell drop-cell"
-            cdkDropList
-            id="row4_everyday"
-            [cdkDropListConnectedTo]="['availableList']"
-            (cdkDropListDropped)="dropOnZone($event, 'row4_everyday')"
-          >
-            <span class="placeholder" *ngIf="!droppedItems['row4_everyday']">???</span>
-            <div class="dropped-val" *ngIf="droppedItems['row4_everyday']">
-              {{ droppedItems['row4_everyday'] }}
-            </div>
-          </div>
-        </div>
-
-        <div class="table-row">
-          <div class="cell static">abdomen</div>
-          <div class="cell static">belly, tummy, stomach</div>
-        </div>
-        <div class="table-row">
-          <div class="cell static">umbilicus</div>
-          <div class="cell static">navel, belly button</div>
-        </div>
-
-        <div class="table-row">
-          <div
-            class="cell drop-cell"
-            cdkDropList
-            id="row7_medical"
-            [cdkDropListConnectedTo]="['availableList']"
-            (cdkDropListDropped)="dropOnZone($event, 'row7_medical')"
-          >
-            <span class="placeholder" *ngIf="!droppedItems['row7_medical']">???</span>
-            <div class="dropped-val" *ngIf="droppedItems['row7_medical']">
-              {{ droppedItems['row7_medical'] }}
-            </div>
-          </div>
-          <div class="cell static">chest</div>
-        </div>
-
-        <div class="table-row">
-          <div
-            class="cell drop-cell"
-            cdkDropList
-            id="row8_medical"
-            [cdkDropListConnectedTo]="['availableList']"
-            (cdkDropListDropped)="dropOnZone($event, 'row8_medical')"
-          >
-            <span class="placeholder" *ngIf="!droppedItems['row8_medical']">???</span>
-            <div class="dropped-val" *ngIf="droppedItems['row8_medical']">
-              {{ droppedItems['row8_medical'] }}
-            </div>
-          </div>
-          <div class="cell static">inner elbow, elbow pit</div>
-        </div>
+          </ng-container>
+        </ng-container>
       </div>
     </div>
 
+    <!-- SZÖVEGES FELADATOK (list-to-text) -->
     <div class="list-container" *ngIf="currentTask.type === 'list-to-text'">
       <h3>Dialogue</h3>
       <div class="text-with-gaps">
@@ -179,6 +119,7 @@
       </div>
     </div>
 
+    <!-- KÉT OSZLOPOS FELADATOK (list-to-list) -->
     <div class="list-to-list-container" *ngIf="currentTask.type === 'list-to-list'">
       <div class="classification-board">
         <div class="classification-column">

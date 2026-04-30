@@ -7,6 +7,14 @@ export interface DropZone {
   textWithGap?: string;
 }
 
+export interface TableCell {
+  type: 'static' | 'drop';
+  value: string;
+  textBefore?: string;
+  textAfter?: string;
+  rowspan?: number; // <-- ÚJ: Sorok összevonása
+}
+
 export interface DragDropTask {
   id: string;
   title: string;
@@ -17,11 +25,13 @@ export interface DragDropTask {
   requiredCount: number;
   imageSrc?: string;
   dropZones?: DropZone[];
+  tableHeaders?: string[];
+  tableRows?: TableCell[][];
 }
 
 export interface ListeningQuestion {
   text: string;
-  correctAnswer: string; // <-- EZ HIÁNYZOTT!
+  correctAnswer: string;
 }
 
 export interface ListeningTask {
@@ -81,7 +91,7 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
     instruction:
       'Drag the appropriate anatomical term from the left list to the correct part of the image!',
     type: 'list-to-image',
-    imageSrc: '../../../../public/head_neck_anatomy.png',
+    imageSrc: '/assets/head_neck_anatomy.png',
     availableOptions: [
       'Zygoma (Cheekbone)',
       'Mandible (Lower jaw)',
@@ -103,7 +113,6 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
     title: 'Trunk: Medical vs. Everyday Terms',
     instruction: 'Drag the missing terms into the empty cells of the table!',
     type: 'list-to-table',
-    imageSrc: '../../../../public/trunk_anatomy.png',
     availableOptions: ['armpit', 'clavicula', 'sternum', 'ribs', 'chest', 'inner elbow, elbow pit'],
     requiredCount: 6,
     dropZones: [
@@ -113,6 +122,41 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
       { label: 'row4_everyday', correctAnswer: 'ribs' },
       { label: 'row7_medical', correctAnswer: 'chest' },
       { label: 'row8_medical', correctAnswer: 'inner elbow, elbow pit' },
+    ],
+    tableHeaders: ['Medical Term', 'Everyday Term'],
+    tableRows: [
+      [
+        { type: 'static', value: 'axilla' },
+        { type: 'drop', value: 'row1_everyday' },
+      ],
+      [
+        { type: 'drop', value: 'row2_medical' },
+        { type: 'static', value: 'collar bone, clavicle' },
+      ],
+      [
+        { type: 'drop', value: 'row3_medical' },
+        { type: 'static', value: 'breast bone' },
+      ],
+      [
+        { type: 'static', value: 'costae' },
+        { type: 'drop', value: 'row4_everyday' },
+      ],
+      [
+        { type: 'static', value: 'abdomen' },
+        { type: 'static', value: 'belly, tummy, stomach' },
+      ],
+      [
+        { type: 'static', value: 'umbilicus' },
+        { type: 'static', value: 'navel, belly button' },
+      ],
+      [
+        { type: 'drop', value: 'row7_medical' },
+        { type: 'static', value: 'chest' },
+      ],
+      [
+        { type: 'drop', value: 'row8_medical' },
+        { type: 'static', value: 'inner elbow, elbow pit' },
+      ],
     ],
   },
   '15': {
@@ -250,6 +294,77 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
       },
     ],
   },
+  '2_6': {
+    id: '2_6',
+    title: 'Task 6 - Body Functions',
+    instruction: 'Drag the correct words to fill in the empty cells of the table!',
+    type: 'list-to-table',
+    availableOptions: ['walk', 'take', 'exhale', 'micturate', 'water', 'faeces', 'period'],
+    requiredCount: 7,
+    dropZones: [
+      { label: 'gap_1_walk', correctAnswer: 'walk' },
+      { label: 'gap_2_take', correctAnswer: 'take' },
+      { label: 'gap_3_exhale', correctAnswer: 'exhale' },
+      { label: 'gap_4_micturate', correctAnswer: 'micturate' },
+      { label: 'gap_5_water', correctAnswer: 'water' },
+      { label: 'gap_6_faeces', correctAnswer: 'faeces' },
+      { label: 'gap_7_period', correctAnswer: 'period' },
+    ],
+    tableHeaders: ['Function', 'Verb', 'Noun'],
+    // --- ITT AZ IGAZI MÁGIA: A ROWSPAN HASZNÁLATA ---
+    tableRows: [
+      [
+        { type: 'static', value: 'speaking' },
+        { type: 'static', value: 'speak' },
+        { type: 'static', value: 'speech' },
+      ],
+      [
+        { type: 'static', value: 'walking' },
+        { type: 'drop', value: 'gap_1_walk' },
+        { type: 'static', value: 'gait' },
+      ],
+      [
+        // Ez a cella 3 sort ölel fel! A \n miatt szépen két sorba törik.
+        { type: 'static', value: 'breathing\nrespiration', rowspan: 3 },
+        { type: 'static', value: 'inhale / breathe in' },
+        // Ez is 3 sort ölel fel!
+        { type: 'static', value: 'breath', rowspan: 3 },
+      ],
+      [
+        // Mivel az 1. és 3. oszlop már foglalt a fenti rowspan miatt, ide csak a középsőt adjuk meg!
+        { type: 'drop', value: 'gap_2_take', textAfter: 'a breath in' },
+      ],
+      [
+        // Szintén csak a középső
+        { type: 'drop', value: 'gap_3_exhale', textAfter: '/ breathe out' },
+      ],
+      [
+        { type: 'static', value: 'urination\nmicturition', rowspan: 3 },
+        { type: 'static', value: 'urinate' },
+        { type: 'static', value: 'urine', rowspan: 3 },
+      ],
+      [{ type: 'drop', value: 'gap_4_micturate' }],
+      [{ type: 'drop', value: 'gap_5_water', textBefore: 'pass urine / pass' }],
+      [
+        { type: 'static', value: 'defecation', rowspan: 2 },
+        { type: 'static', value: 'defecate' },
+        { type: 'static', value: 'faeces' },
+      ],
+      [
+        { type: 'drop', value: 'gap_6_faeces', textBefore: 'pass', textAfter: '/ pass stools' },
+        { type: 'static', value: 'stools' },
+      ],
+      [
+        { type: 'static', value: 'menstruation', rowspan: 2 },
+        { type: 'static', value: 'menstruate' },
+        { type: 'static', value: '(menstrual) period' },
+      ],
+      [
+        { type: 'drop', value: 'gap_7_period', textBefore: 'have a' },
+        { type: 'static', value: '(monthly) period' },
+      ],
+    ],
+  },
 };
 
 export const QUIZ_DATABASE: { [key: string]: QuizTask } = {
@@ -342,6 +457,7 @@ export const INLINE_CHOICE_DATABASE: { [key: string]: InlineChoiceTask } = {
       },
     ],
   },
+
   '2_9_expressions': {
     id: '2_9_expressions',
     title: 'Task 9 - Body Functions',
@@ -418,11 +534,10 @@ export const LISTENING_DATABASE: { [key: string]: ListeningTask } = {
     id: '2_13_listening',
     title: 'Task 13 - Listening: Comprehension',
     instruction: 'Listen to the audio and answer the questions below in your own words.',
-    audioSrc: '/tanar-app/public/placeholder_audio.mp3',
+    audioSrc: '/assets/allergies_ff_1.mp3',
     questions: [
       {
         text: 'What did the article say an allergy to peanuts can be?',
-        // Bármelyik szót elfogadja:
         correctAnswer: 'deadly | lethal | fatal | kill | dangerous',
       },
       {
@@ -443,7 +558,6 @@ export const LISTENING_DATABASE: { [key: string]: ListeningTask } = {
       },
       {
         text: 'What are the two most common childhood food allergies?',
-        // Itt VESSZŐ van a két csoport között, tehát egy tojás ÉS egy mogyoró szó is kell!
         correctAnswer: 'egg | eggs, peanut | peanuts',
       },
       {

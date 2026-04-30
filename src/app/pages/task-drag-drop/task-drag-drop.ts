@@ -37,29 +37,38 @@ export class TaskDragDropComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const taskId = this.route.snapshot.paramMap.get('id');
-    if (taskId && DRAG_DROP_DATABASE[taskId]) {
-      this.currentTask = DRAG_DROP_DATABASE[taskId];
+    // A snapshot helyett feliratkozunk (subscribe) a paraméterek változására
+    this.route.paramMap.subscribe((params) => {
+      const taskId = params.get('id');
 
-      this.availableOptions = [...this.currentTask.availableOptions].sort(
-        () => Math.random() - 0.5,
-      );
+      if (taskId && DRAG_DROP_DATABASE[taskId]) {
+        this.currentTask = DRAG_DROP_DATABASE[taskId];
 
-      if (this.currentTask.type === 'list-to-list') {
-        // A CDK-nak tudnia kell, hova húzhatunk
-        this.zoneLists = ['anteriorList', 'posteriorList'];
-      } else if (this.currentTask.dropZones) {
-        // Ez fut le a list-to-table, list-to-image ÉS a list-to-text esetében is!
-        this.droppedItems = {};
-        this.currentTask.dropZones.forEach((zone) => {
-          this.droppedItems[zone.label] = null;
-        });
-        this.zoneLists = this.currentTask.dropZones.map((z) => z.label);
+        // Opciók összekeverése
+        this.availableOptions = [...this.currentTask.availableOptions].sort(
+          () => Math.random() - 0.5,
+        );
+
+        if (this.currentTask.type === 'list-to-list') {
+          // A CDK-nak tudnia kell, hova húzhatunk
+          this.zoneLists = ['anteriorList', 'posteriorList'];
+
+          // Ha visszatérünk egy feladatra, nullázzuk a listákat
+          this.anteriorList = [];
+          this.posteriorList = [];
+        } else if (this.currentTask.dropZones) {
+          // Ez fut le a list-to-table, list-to-image ÉS a list-to-text esetében is!
+          this.droppedItems = {};
+          this.currentTask.dropZones.forEach((zone) => {
+            this.droppedItems[zone.label] = null;
+          });
+          this.zoneLists = this.currentTask.dropZones.map((z) => z.label);
+        }
+      } else {
+        console.error('Drag & Drop task not found!');
+        this.location.back();
       }
-    } else {
-      console.error('Drag & Drop task not found!');
-      this.location.back();
-    }
+    });
   }
 
   // Drop metódus a képhez, táblázathoz és szöveghez
