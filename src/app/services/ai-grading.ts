@@ -61,6 +61,6 @@ export class AiGradingService {
     });
 
     // 500ms késleltetés a "gondolkodás" szimulálására
-    return of(results).pipe(delay(100));
+    return of(results);
   }
 }

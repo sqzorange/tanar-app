@@ -12,6 +12,7 @@ import { authGuard } from './services/guard';
 import { RegisterComponent } from './pages/register/register';
 import { TaskInlineChoiceComponent } from './pages/task-inline-choice/task-inline-choice';
 import { TaskListeningComponent } from './pages/task-listening/task-listening';
+import { TaskAiFillInComponent } from './pages/task-ai-fill-in/task-ai-fill-in';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -22,17 +23,23 @@ export const routes: Routes = [
   { path: 'topic/2', component: TopicTwoComponent, canActivate: [authGuard] },
   { path: 'topic/3', component: TopicThreeComponent, canActivate: [authGuard] },
   { path: 'topic/4', component: TopicFourComponent, canActivate: [authGuard] },
+
+  // FELADATOK ÚTVONALAI
   {
     path: 'task/inline-choice/:id',
     component: TaskInlineChoiceComponent,
     canActivate: [authGuard],
   },
   { path: 'task/listening/:id', component: TaskListeningComponent, canActivate: [authGuard] },
-  // JAVÍTOTT UNIVERZÁLIS ÚTVONALAK
   { path: 'task/dragdrop/:id', component: TaskDragDropComponent, canActivate: [authGuard] },
   { path: 'task/quiz/:id', component: TaskQuizComponent, canActivate: [authGuard] },
 
+  // --- ÚJ AI-FILL-IN ÚTVONAL ---
+  { path: 'task/ai-fill-in/:id', component: TaskAiFillInComponent, canActivate: [authGuard] },
+
   // Minden más Topic a "Hamarosan érkezik" oldalra visz
   { path: 'topic/:id', component: TaskComingSoonComponent, canActivate: [authGuard] },
+
+  // "Biztonsági háló": Ha semmi sem illeszkedik, irány a login!
   { path: '**', redirectTo: 'login' },
 ];

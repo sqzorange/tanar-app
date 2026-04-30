@@ -1,0 +1,205 @@
+@use 'sass:color';
+
+$brand-primary: #6366f1;
+$brand-orange: #f59e0b;
+$white: #ffffff;
+$text-main: #1e293b;
+$text-muted: #64748b;
+$bg-app: #f8fafc;
+$border-color: #e2e8f0;
+
+$color-correct: #10b981; // Zöld
+$color-partial: #f59e0b; // Narancs
+$color-incorrect: #ef4444; // Piros
+
+.task-layout {
+  padding: 40px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  .task-header {
+    margin-bottom: 30px;
+    .back-btn {
+      background: $white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      &:hover {
+        color: $brand-primary;
+      }
+    }
+    h2 {
+      margin-top: 15px;
+      color: $text-main;
+    }
+    p {
+      color: $text-muted;
+      font-size: 1.1rem;
+    }
+  }
+}
+
+.task-container {
+  background: $white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid $border-color;
+}
+
+.sentences-card {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; // Távolság a mondatok között
+}
+
+.sentence-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .sentence-content {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 1.1rem;
+    color: $text-main;
+    line-height: 1.8;
+
+    .fill-in-input {
+      padding: 6px 12px;
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: $brand-primary;
+      background: #f8fafc;
+      width: 220px;
+      text-align: center;
+      transition: all 0.2s ease;
+      outline: none;
+
+      &:focus {
+        border-color: $brand-primary;
+        border-style: solid;
+        background: $white;
+        box-shadow: 0 0 0 3px rgba($brand-primary, 0.2);
+      }
+
+      &:disabled {
+        background: #e2e8f0;
+        cursor: not-allowed;
+      }
+
+      // Visszajelzés színezése a beviteli mezőn
+      &.correct-border {
+        border: 2px solid $color-correct;
+        background: rgba($color-correct, 0.05);
+        color: darken($color-correct, 10%);
+      }
+      &.partial-border {
+        border: 2px solid $color-partial;
+        background: rgba($color-partial, 0.05);
+        color: darken($color-partial, 10%);
+      }
+      &.incorrect-border {
+        border: 2px solid $color-incorrect;
+        background: rgba($color-incorrect, 0.05);
+        color: $color-incorrect;
+      }
+    }
+  }
+}
+
+// AI Visszajelző Doboz
+.feedback-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  animation: fadeIn 0.3s ease-out;
+
+  .icon {
+    font-size: 1.2rem;
+  }
+
+  .feedback-text {
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  // Színek állapotok szerint
+  &.correct {
+    background-color: rgba($color-correct, 0.1);
+    color: darken($color-correct, 20%);
+    border-left: 4px solid $color-correct;
+  }
+  &.partial {
+    background-color: rgba($color-partial, 0.15);
+    color: darken($color-partial, 30%);
+    border-left: 4px solid $color-partial;
+  }
+  &.incorrect {
+    background-color: rgba($color-incorrect, 0.1);
+    color: darken($color-incorrect, 20%);
+    border-left: 4px solid $color-incorrect;
+  }
+}
+
+.action-footer {
+  margin-top: 30px;
+  text-align: center;
+
+  .ai-btn {
+    width: 100%;
+    max-width: 350px;
+    padding: 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, $brand-primary, #8b5cf6); // Menő AI-os színátmenet
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba($brand-primary, 0.3);
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s,
+      filter 0.2s;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba($brand-primary, 0.4);
+    }
+
+    &:disabled {
+      background: #94a3b8;
+      box-shadow: none;
+      cursor: wait;
+      filter: grayscale(0.5);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

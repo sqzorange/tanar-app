@@ -12,7 +12,7 @@ export interface TableCell {
   value: string;
   textBefore?: string;
   textAfter?: string;
-  rowspan?: number; // <-- ÚJ: Sorok összevonása
+  rowspan?: number;
 }
 
 export interface DragDropTask {
@@ -83,7 +83,19 @@ export interface SelectionTask {
   requiredCount: number;
 }
 
-// Az adatbázisok exportálása
+export interface AiFillInSentence {
+  before: string;
+  after: string;
+  correctAnswer: string;
+}
+
+export interface AiFillInTask {
+  id: string;
+  title: string;
+  instruction: string;
+  sentences: AiFillInSentence[];
+}
+
 export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
   '9': {
     id: '9',
@@ -311,7 +323,6 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
       { label: 'gap_7_period', correctAnswer: 'period' },
     ],
     tableHeaders: ['Function', 'Verb', 'Noun'],
-    // --- ITT AZ IGAZI MÁGIA: A ROWSPAN HASZNÁLATA ---
     tableRows: [
       [
         { type: 'static', value: 'speaking' },
@@ -324,20 +335,12 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
         { type: 'static', value: 'gait' },
       ],
       [
-        // Ez a cella 3 sort ölel fel! A \n miatt szépen két sorba törik.
         { type: 'static', value: 'breathing\nrespiration', rowspan: 3 },
         { type: 'static', value: 'inhale / breathe in' },
-        // Ez is 3 sort ölel fel!
         { type: 'static', value: 'breath', rowspan: 3 },
       ],
-      [
-        // Mivel az 1. és 3. oszlop már foglalt a fenti rowspan miatt, ide csak a középsőt adjuk meg!
-        { type: 'drop', value: 'gap_2_take', textAfter: 'a breath in' },
-      ],
-      [
-        // Szintén csak a középső
-        { type: 'drop', value: 'gap_3_exhale', textAfter: '/ breathe out' },
-      ],
+      [{ type: 'drop', value: 'gap_2_take', textAfter: 'a breath in' }],
+      [{ type: 'drop', value: 'gap_3_exhale', textAfter: '/ breathe out' }],
       [
         { type: 'static', value: 'urination\nmicturition', rowspan: 3 },
         { type: 'static', value: 'urinate' },
@@ -362,6 +365,45 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
       [
         { type: 'drop', value: 'gap_7_period', textBefore: 'have a' },
         { type: 'static', value: '(monthly) period' },
+      ],
+    ],
+  },
+  '2_7': {
+    id: '2_7',
+    title: 'Task 7 - Symptoms and Questions',
+    instruction:
+      'Match the medical symptoms to the questions a doctor would ask by dragging the correct symptom next to the appropriate question.',
+    type: 'list-to-table',
+    availableOptions: ['dysuria', 'dysphagia', 'diplopia', 'dysphasia', 'dyspnoea'],
+    requiredCount: 5,
+    dropZones: [
+      { label: 'gap_a_breathing', correctAnswer: 'dyspnoea' },
+      { label: 'gap_b_water', correctAnswer: 'dysuria' },
+      { label: 'gap_c_speech', correctAnswer: 'dysphasia' },
+      { label: 'gap_d_swallowing', correctAnswer: 'dysphagia' },
+      { label: 'gap_e_vision', correctAnswer: 'diplopia' },
+    ],
+    tableHeaders: ["Doctor's Question", 'Medical Symptom'],
+    tableRows: [
+      [
+        { type: 'static', value: 'a) What is your breathing like?' },
+        { type: 'drop', value: 'gap_a_breathing' },
+      ],
+      [
+        { type: 'static', value: 'b) Do you have any pain when you pass water?' },
+        { type: 'drop', value: 'gap_b_water' },
+      ],
+      [
+        { type: 'static', value: 'c) Do you have any difficulty with your speech?' },
+        { type: 'drop', value: 'gap_c_speech' },
+      ],
+      [
+        { type: 'static', value: 'd) Do you have any trouble swallowing?' },
+        { type: 'drop', value: 'gap_d_swallowing' },
+      ],
+      [
+        { type: 'static', value: 'e) Is your vision normal?' },
+        { type: 'drop', value: 'gap_e_vision' },
       ],
     ],
   },
@@ -457,7 +499,6 @@ export const INLINE_CHOICE_DATABASE: { [key: string]: InlineChoiceTask } = {
       },
     ],
   },
-
   '2_9_expressions': {
     id: '2_9_expressions',
     title: 'Task 9 - Body Functions',
@@ -575,6 +616,47 @@ export const LISTENING_DATABASE: { [key: string]: ListeningTask } = {
       {
         text: 'What thing did the researchers say needed to be done more?',
         correctAnswer: 'research | studies | study | investigate',
+      },
+    ],
+  },
+};
+
+export const AI_FILL_IN_DATABASE: { [key: string]: AiFillInTask } = {
+  '2_8_ai_fill': {
+    id: '2_8_ai_fill',
+    title: 'Task 8 - Describing Symptoms',
+    instruction:
+      'Patients are describing symptoms of the conditions shown in brackets. Type the missing word or phrase. The AI will evaluate your answers!',
+    sentences: [
+      {
+        before: "1. I've got pain and",
+        after: 'in both feet. (peripheral neuropathy)',
+        correctAnswer: 'numbness | tingling | loss of sensation | lack of feeling',
+      },
+      {
+        before: "2. I'm having difficulty",
+        after: 'solid food. (oesophageal stricture)',
+        correctAnswer: 'swallowing | eating',
+      },
+      {
+        before: '3. I have a lot of problems',
+        after: '. (prostatic hypertrophy)',
+        correctAnswer: 'passing urine | urinating | peeing | passing water',
+      },
+      {
+        before: "4. I've been",
+        after: "more than usual, even when it's not hot. (hyperthyroidism)",
+        correctAnswer: 'sweating | perspiring',
+      },
+      {
+        before: "5. I've noticed that my hands",
+        after: "when I'm not using them. (Parkinsonism)",
+        correctAnswer: 'shake | tremble | shaking | trembling',
+      },
+      {
+        before: '6. I have trouble',
+        after: 'when I climb the stairs. (left heart failure)',
+        correctAnswer: 'breathing | catching my breath',
       },
     ],
   },

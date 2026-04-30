@@ -1,0 +1,51 @@
+<div class="task-layout" *ngIf="currentTask">
+  <header class="task-header">
+    <button class="back-btn" (click)="goBack()">⬅ Back</button>
+    <h2>{{ currentTask.title }}</h2>
+    <p [innerHTML]="currentTask.instruction"></p>
+  </header>
+
+  <div class="task-container">
+    <div class="sentences-card">
+      <div class="sentence-row" *ngFor="let sentence of currentTask.sentences; let i = index">
+        <div class="sentence-content">
+          <span class="text-part">{{ sentence.before }}</span>
+
+          <input
+            type="text"
+            class="fill-in-input"
+            [(ngModel)]="userAnswers[i]"
+            [disabled]="isGrading"
+            placeholder="type your answer..."
+            [class.correct-border]="gradingResults?.[i]?.status === 'correct'"
+            [class.partial-border]="gradingResults?.[i]?.status === 'partial'"
+            [class.incorrect-border]="gradingResults?.[i]?.status === 'incorrect'"
+          />
+
+          <span class="text-part">{{ sentence.after }}</span>
+        </div>
+
+        <!-- AI Visszajelző Doboz (Csak ellenőrzés után jelenik meg) -->
+        <div class="feedback-box" *ngIf="gradingResults" [ngClass]="gradingResults[i].status">
+          <span class="icon">
+            {{
+              gradingResults[i].status === 'correct'
+                ? '✅'
+                : gradingResults[i].status === 'partial'
+                  ? '⚠️'
+                  : '❌'
+            }}
+          </span>
+          <span class="feedback-text">{{ gradingResults[i].feedback }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="action-footer">
+    <button class="submit-btn ai-btn" (click)="submitTask()" [disabled]="isGrading">
+      <!-- Kis animációs szöveg gombnyomáskor -->
+      {{ isGrading ? '🤖 AI is analyzing...' : 'Evaluate with AI 🤖' }}
+    </button>
+  </footer>
+</div>
