@@ -543,6 +543,56 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
       { label: 'gap_8', correctAnswer: 'ileum' },
     ],
   },
+  '3_10': {
+    id: '3_10',
+    title: "Doctor's Questions",
+    instruction: "Drag the correct feature (e.g., blood, bulk) to match the doctor's question.",
+    type: 'list-to-table',
+    availableOptions: [
+      'blood',
+      'bowel habit',
+      'change in bowel habit',
+      'bulk',
+      'colour',
+      'consistency',
+    ],
+    requiredCount: 6,
+    tableHeaders: ['Feature', "Doctor's Question"],
+    tableRows: [
+      [
+        { type: 'drop', value: 'gap_1' },
+        { type: 'static', value: 'How often do you open your bowels?' },
+      ],
+      [
+        { type: 'drop', value: 'gap_2' },
+        { type: 'static', value: 'Are you going to the toilet more often than normal?' },
+      ],
+      [
+        { type: 'drop', value: 'gap_3' },
+        { type: 'static', value: 'Are the motions hard or loose?' },
+      ],
+      [
+        { type: 'drop', value: 'gap_4' },
+        { type: 'static', value: 'Do the motions have an unusual smell?' },
+      ],
+      [
+        { type: 'drop', value: 'gap_5' },
+        { type: 'static', value: 'What about the appearance of the stools?' },
+      ],
+      [
+        { type: 'drop', value: 'gap_6' },
+        { type: 'static', value: 'Have you passed black stools?' },
+      ],
+    ],
+    dropZones: [
+      { label: 'gap_1', correctAnswer: 'bowel habit' },
+      { label: 'gap_2', correctAnswer: 'change in bowel habit' },
+      { label: 'gap_3', correctAnswer: 'consistency' },
+      { label: 'gap_4', correctAnswer: 'bulk' }, // Note: In medical context, bulky stools (steatorrhea) often have an unusual smell.
+      { label: 'gap_5', correctAnswer: 'colour' },
+      { label: 'gap_6', correctAnswer: 'blood' },
+    ],
+  },
 };
 
 export const QUIZ_DATABASE: { [key: string]: QuizTask } = {
@@ -747,6 +797,61 @@ export const INLINE_CHOICE_DATABASE: { [key: string]: InlineChoiceTask } = {
         options: ['breathe', 'breath'],
         after: 'in.',
         correctAnswer: 'breath',
+      },
+    ],
+  },
+  '2_12_tf': {
+    id: '2_12_tf',
+    title: 'Task 12 - Before Listening (True / False)',
+    instruction: 'Read the headline. Guess if a–h below are true (True) or false (False).',
+    sentences: [
+      {
+        before: 'a) The article says most people are allergic to eggs or peanuts.',
+        options: ['True', 'False'],
+        after: '',
+        correctAnswer: 'False',
+      },
+      {
+        before: 'b) Researchers looked at 146 different studies.',
+        options: ['True', 'False'],
+        after: '',
+        correctAnswer: 'True',
+      },
+      {
+        before: 'c) Researchers looked at data on just fewer than 200,000 children.',
+        options: ['True', 'False'],
+        after: '',
+        correctAnswer: 'False',
+      },
+      {
+        before: 'd) Babies who ate eggs were 70% less likely to get an egg allergy.',
+        options: ['True', 'False'],
+        after: '',
+        correctAnswer: 'False',
+      },
+      {
+        before: 'e) Egg allergies are one of the most common food allergies for children.',
+        options: ['True', 'False'],
+        after: '',
+        correctAnswer: 'True',
+      },
+      {
+        before: 'f) A doctor said it was OK for babies to eat crunchy peanut butter.',
+        options: ['True', 'False'],
+        after: '',
+        correctAnswer: 'False',
+      },
+      {
+        before: 'g) Being allergic to soy is quite common.',
+        options: ['True', 'False'],
+        after: '',
+        correctAnswer: 'False',
+      },
+      {
+        before: 'h) Researchers want to find out the best age to give eggs to babies.',
+        options: ['True', 'False'],
+        after: '',
+        correctAnswer: 'True',
       },
     ],
   },

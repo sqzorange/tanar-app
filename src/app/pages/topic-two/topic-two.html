@@ -221,30 +221,74 @@
       </button>
     </div>
 
-    <div class="inline-task-card accent-purple">
+    <div class="inline-task-card accent-green">
       <div class="task-info">
         <div class="task-number-tag">Task 9</div>
-        <span class="task-badge">Vocabulary</span>
+        <span class="task-badge">Inline Choice</span>
         <h3>Body Functions Expressions</h3>
-        <p>Choose the correct expression from the brackets to complete the sentences below.</p>
+        <p>
+          Choose the correct expression from the brackets (e.g., bite/chew, pass/have) to complete
+          the sentences below.
+        </p>
       </div>
       <button class="start-task-btn" (click)="openTask('inline-choice', '2_9_expressions')">
         Start Task ➡️
       </button>
     </div>
 
-    <div class="inline-task-card accent-purple">
-      <div class="task-info">
-        <div class="task-number-tag">
-          Task 10 - GROUP WORK – ALLERGENS: What would life be like if you were allergic to these
-          things? What would you do? Complete this table with your partner(s). Share with the other
-          groups what you wrote.
-        </div>
-        <span class="task-badge">Assessment</span>
-        <h3>Unit 2 Final Review</h3>
-        <p>Check your understanding of health, recovery, and bodily functions.</p>
+    <div class="task-section inline-table-task">
+      <div class="task-header">
+        <div class="task-number-tag">Task 10</div>
+        <h3>GROUP WORK – ALLERGENS</h3>
+        <p>
+          What would life be like if you were allergic to these things? What would you do? Complete
+          this table with your partner(s). Share with the other groups what you wrote.
+        </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('quiz', '2_4')">Launch Test ➡️</button>
+
+      <div class="table-responsive">
+        <table class="group-work-table">
+          <thead>
+            <tr>
+              <th>Allergen</th>
+              <th>What life would be like</th>
+              <th>What you would do</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="allergen-name">Computers</td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+            </tr>
+            <tr>
+              <td class="allergen-name">Chocolate</td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+            </tr>
+            <tr>
+              <td class="allergen-name">Shopping malls</td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+            </tr>
+            <tr>
+              <td class="allergen-name">Paper</td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+            </tr>
+            <tr>
+              <td class="allergen-name">Flowers</td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+            </tr>
+            <tr>
+              <td class="allergen-name">Plastic</td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="inline-task-card accent-purple">
@@ -262,15 +306,18 @@
 
     <div class="inline-task-card accent-purple">
       <div class="task-info">
-        <div class="task-number-tag">
-          Task 12 - BEFORE LISTENING: 1 TRUE / FALSE: Read the headline. Guess if a–h below are true
-          (T) or false (F).
-        </div>
-        <span class="task-badge">Assessment</span>
-        <h3>Unit 2 Final Review</h3>
-        <p>Check your understanding of health, recovery, and bodily functions.</p>
+        <div class="task-number-tag">Task 12</div>
+        <span class="task-badge">True / False</span>
+        <h3>Before Listening</h3>
+        <p>
+          Read the statements about allergies and guess if they are True or False before listening
+          to the audio track.
+        </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('quiz', '2_4')">Launch Test ➡️</button>
+      <!-- Figyeld az inline-choice típust és az új azonosítót! -->
+      <button class="start-task-btn" (click)="openTask('inline-choice', '2_12_tf')">
+        Start Task ➡️
+      </button>
     </div>
 
     <div class="inline-task-card accent-purple">

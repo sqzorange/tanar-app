@@ -390,3 +390,103 @@ $border-color: #e2e8f0;
     }
   }
 }
+// Kiegészítés a Topic 2 stílusaihoz
+
+.inline-table-task {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e2e8f0;
+  margin-top: 30px; // Távolság a felette lévő elemektől
+  margin-bottom: 30px;
+
+  .task-header {
+    margin-bottom: 20px;
+
+    .task-number-tag {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #6366f1; // Brand primary
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+    h3 {
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+    p {
+      color: #64748b;
+      line-height: 1.5;
+    }
+  }
+
+  .table-responsive {
+    width: 100%;
+    overflow-x: auto; // Ha túl kicsi a képernyő (mobil), lehessen görgetni oldalra
+  }
+
+  .group-work-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+
+    th,
+    td {
+      border: 1px solid #e2e8f0;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #475569; // A tankönyvi képhez hasonló sötét szürkéskék
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    td {
+      background-color: #f8fafc;
+      vertical-align: top;
+
+      &.allergen-name {
+        color: #1e293b;
+        font-weight: 500;
+        width: 20%; // Az első oszlop ne foglaljon túl nagy helyet
+        vertical-align: middle;
+      }
+
+      // A szövegbeviteli mezők stílusai
+      textarea {
+        width: 100%;
+        min-height: 70px; // Elég hely több mondatnak
+        padding: 10px;
+        border: 2px dashed #cbd5e1;
+        border-radius: 8px;
+        background: #ffffff;
+        font-family: inherit;
+        font-size: 0.95rem;
+        color: #1e293b;
+        resize: vertical; // Csak lefelé lehessen nagyítani
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+
+        &:focus {
+          border-color: #6366f1;
+          border-style: solid;
+          box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        &::placeholder {
+          color: #94a3b8;
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
