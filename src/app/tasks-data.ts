@@ -407,6 +407,142 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
       ],
     ],
   },
+  '3_5': {
+    id: '3_5',
+    title: 'Adjectives to Nouns',
+    instruction: 'Drag the correct noun from the list to match each anatomical adjective!',
+    type: 'list-to-table',
+    availableOptions: [
+      'lymph',
+      'muscle',
+      'nerve',
+      'skeleton',
+      'circulation',
+      'respiration',
+      'digestion',
+      'integument',
+      'urine',
+      'reproduction',
+    ],
+    requiredCount: 10,
+    tableHeaders: ['Adjective', 'Noun'],
+    tableRows: [
+      [
+        { type: 'static', value: 'lymphatic' },
+        { type: 'drop', value: 'gap_1' },
+      ],
+      [
+        { type: 'static', value: 'muscular' },
+        { type: 'drop', value: 'gap_2' },
+      ],
+      [
+        { type: 'static', value: 'nervous' },
+        { type: 'drop', value: 'gap_3' },
+      ],
+      [
+        { type: 'static', value: 'skeletal' },
+        { type: 'drop', value: 'gap_4' },
+      ],
+      [
+        { type: 'static', value: 'circulatory' },
+        { type: 'drop', value: 'gap_5' },
+      ],
+      [
+        { type: 'static', value: 'respiratory' },
+        { type: 'drop', value: 'gap_6' },
+      ],
+      [
+        { type: 'static', value: 'digestive' },
+        { type: 'drop', value: 'gap_7' },
+      ],
+      [
+        { type: 'static', value: 'integumentary' },
+        { type: 'drop', value: 'gap_8' },
+      ],
+      [
+        { type: 'static', value: 'urinary' },
+        { type: 'drop', value: 'gap_9' },
+      ],
+      [
+        { type: 'static', value: 'reproductive' },
+        { type: 'drop', value: 'gap_10' },
+      ],
+    ],
+    dropZones: [
+      { label: 'gap_1', correctAnswer: 'lymph' },
+      { label: 'gap_2', correctAnswer: 'muscle' },
+      { label: 'gap_3', correctAnswer: 'nerve' },
+      { label: 'gap_4', correctAnswer: 'skeleton' },
+      { label: 'gap_5', correctAnswer: 'circulation' },
+      { label: 'gap_6', correctAnswer: 'respiration' },
+      { label: 'gap_7', correctAnswer: 'digestion' },
+      { label: 'gap_8', correctAnswer: 'integument' },
+      { label: 'gap_9', correctAnswer: 'urine' },
+      { label: 'gap_10', correctAnswer: 'reproduction' },
+    ],
+  },
+  '3_7': {
+    id: '3_7',
+    title: 'General vs. Medical English',
+    instruction: 'Drag the medical terms to match the general English expressions!',
+    type: 'list-to-table',
+    availableOptions: [
+      'oesophagus',
+      'duodenum, jejunum, ileum, colon, rectum',
+      'buccal cavity',
+      'colon',
+      'saliva',
+      'hard and soft palate',
+      'pharynx',
+      'ileum',
+    ],
+    requiredCount: 8,
+    tableHeaders: ['General English', 'Medical English'],
+    tableRows: [
+      [
+        { type: 'static', value: 'mouth' },
+        { type: 'drop', value: 'gap_1' },
+      ],
+      [
+        { type: 'static', value: 'roof of the mouth' },
+        { type: 'drop', value: 'gap_2' },
+      ],
+      [
+        { type: 'static', value: 'spit' },
+        { type: 'drop', value: 'gap_3' },
+      ],
+      [
+        { type: 'static', value: 'bowel' },
+        { type: 'drop', value: 'gap_4' },
+      ],
+      [
+        { type: 'static', value: 'throat' },
+        { type: 'drop', value: 'gap_5' },
+      ],
+      [
+        { type: 'static', value: 'gullet' },
+        { type: 'drop', value: 'gap_6' },
+      ],
+      [
+        { type: 'static', value: 'small intestine' },
+        { type: 'drop', value: 'gap_7' },
+      ],
+      [
+        { type: 'static', value: 'large intestine' },
+        { type: 'drop', value: 'gap_8' },
+      ],
+    ],
+    dropZones: [
+      { label: 'gap_1', correctAnswer: 'buccal cavity' },
+      { label: 'gap_2', correctAnswer: 'hard and soft palate' },
+      { label: 'gap_3', correctAnswer: 'saliva' },
+      { label: 'gap_4', correctAnswer: 'colon' },
+      { label: 'gap_5', correctAnswer: 'pharynx' },
+      { label: 'gap_6', correctAnswer: 'oesophagus' },
+      { label: 'gap_7', correctAnswer: 'duodenum, jejunum, ileum, colon, rectum' },
+      { label: 'gap_8', correctAnswer: 'ileum' },
+    ],
+  },
 };
 
 export const QUIZ_DATABASE: { [key: string]: QuizTask } = {
@@ -443,6 +579,72 @@ export const QUIZ_DATABASE: { [key: string]: QuizTask } = {
       {
         text: 'To ignore someone is to give them the cold ___',
         options: ['Foot', 'Shoulder', 'Hand'],
+        correctIndex: 1,
+      },
+    ],
+  },
+  '3_2': {
+    id: '3_2',
+    title: 'Multiple Choice: Body Parts & Systems',
+    questions: [
+      {
+        text: 'Which body part belongs to the Skeletal System?',
+        options: ['cartilage', 'thyroid', 'aorta', 'neurone'],
+        correctIndex: 0,
+      },
+      {
+        text: 'Which term is related to the Reproductive System?',
+        options: ['sweat', 'semen', 'vein', 'villi'],
+        correctIndex: 1,
+      },
+      {
+        text: 'Which body part belongs to the Integumentary System?',
+        options: ['bone', 'hair', 'bladder', 'bronchus'],
+        correctIndex: 1,
+      },
+      {
+        text: 'Which term is related to the Endocrine System?',
+        options: ['thyroid', 'rib', 'urea', 'mucus'],
+        correctIndex: 0,
+      },
+      {
+        text: 'Which body part belongs to the Cardiovascular System?',
+        options: ['gland', 'tendon', 'aorta', 'node'],
+        correctIndex: 2,
+      },
+      {
+        text: 'Which term is related to the Digestive System?',
+        options: ['marrow', 'fibrin', 'villi', 'olfactory'],
+        correctIndex: 2,
+      },
+      {
+        text: 'Which body part belongs to the Urinary System?',
+        options: ['bladder', 'cartilage', 'sweat', 'valve'],
+        correctIndex: 0,
+      },
+      {
+        text: 'Which term is related to the Musculoskeletal System?',
+        options: ['ova', 'tendon', 'hair', 'gland'],
+        correctIndex: 1,
+      },
+      {
+        text: 'Which body part belongs to Haematology?',
+        options: ['nephron', 'leucocytes', 'bronchus', 'rib'],
+        correctIndex: 1,
+      },
+      {
+        text: 'Which term is related to the Lymphatic System?',
+        options: ['nodes', 'aorta', 'villi', 'thyroid'],
+        correctIndex: 0,
+      },
+      {
+        text: 'Which body part belongs to the Nervous System?',
+        options: ['cartilage', 'semen', 'sweat', 'neurones'],
+        correctIndex: 3,
+      },
+      {
+        text: 'Which term is related to the Respiratory System?',
+        options: ['bladder', 'bronchus', 'tendon', 'fibrin'],
         correctIndex: 1,
       },
     ],
@@ -657,6 +859,74 @@ export const AI_FILL_IN_DATABASE: { [key: string]: AiFillInTask } = {
         before: '6. I have trouble',
         after: 'when I climb the stairs. (left heart failure)',
         correctAnswer: 'breathing | catching my breath',
+      },
+    ],
+  },
+  '3_1': {
+    id: '3_1',
+    title: 'Body Systems Terminology',
+    instruction:
+      'Type the name of the body system (without the word "system") that matches the given medical terms.',
+    sentences: [
+      {
+        before: 'a) movement, bone, cartilage, ribs →',
+        after: ' SYSTEM',
+        correctAnswer: 'skeletal',
+      },
+      {
+        before: 'b) ova, menstruation, semen, oestrogen →',
+        after: ' SYSTEM',
+        correctAnswer: 'reproductive',
+      },
+      {
+        before: 'c) hair, sweat, verruca, pustules →',
+        after: ' SYSTEM',
+        correctAnswer: 'integumentary',
+      },
+      {
+        before: 'd) thyroid, carriers, gland, neurosecretion →',
+        after: ' SYSTEM',
+        correctAnswer: 'endocrine',
+      },
+      {
+        before: 'e) vein, valve, pressure, aorta →',
+        after: ' SYSTEM',
+        correctAnswer: 'cardiovascular',
+      },
+      {
+        before: 'f) peritoneal cavity, chewing, absorption, villi →',
+        after: ' SYSTEM',
+        correctAnswer: 'digestive',
+      },
+      {
+        before: 'g) urea, bladder, cortex, nephron →',
+        after: ' SYSTEM',
+        correctAnswer: 'urinary',
+      },
+      {
+        before: 'h) striated, contraction, fibres, tendon →',
+        after: ' SYSTEM',
+        correctAnswer: 'musculoskeletal',
+      },
+      {
+        before: 'i) leucocytes, coagulation, anaemia, fibrin →',
+        after: '',
+        correctAnswer: 'haematology | hematology',
+      },
+      {
+        before: 'j) vessels, nodes, marrow, infection →',
+        after: ' SYSTEM',
+        correctAnswer: 'lymphatic',
+      },
+      {
+        before: 'k) neurones, sensitivity, brain, olfactory →',
+        after: ' SYSTEM',
+        correctAnswer: 'nervous',
+      },
+      {
+        before: 'l) bronchus, mucus, nose, ventilation →',
+        after: ' SYSTEM',
+        correctAnswer: 'respiratory',
       },
     ],
   },
