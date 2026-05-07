@@ -28,8 +28,20 @@ export class LoginComponent {
       const user = users.find((u) => u.password === hashedPw);
 
       if (user) {
-        this.authService.login({ id: user.id, username: user.username, email: user.email });
-        this.router.navigate(['/home']);
+        // 1. BELETESSZÜK A ROLE-T IS A SESSION-BE!
+        this.authService.login({
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          role: user.role, // <-- Ez hiányzott!
+        });
+
+        // 2. IRÁNYÍTÁS SZEREPKÖR ALAPJÁN
+        if (user.role === 'admin') {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/home']);
+        }
       } else {
         alert('Hibás email vagy jelszó!');
       }

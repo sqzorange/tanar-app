@@ -1,7 +1,17 @@
+1_quiz back button
+
+2_2 páratlan(?)
 2_5: Nincs megoldókulcs
 2_11:pause, nincs ihlet
+2_15 kiválaszt
 
 
 5: UI kész
 Hiányzik:
+
+5_2 Kahoot
+5_7 Kahoot
 5_7= alatti szöveg
+
+overall:
+hibaüzenetek/kiértékelés

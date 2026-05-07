@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth';
+import { AuthService } from '../../services/auth'; // Ellenőrizd a pontos útvonalat!
 
 @Component({
   selector: 'app-register',
@@ -18,6 +18,7 @@ export class RegisterComponent {
     email: '',
     password: '',
     confirmPassword: '',
+    role: 'student', // <-- ÚJ: Alapértelmezett szerepkör
   };
 
   constructor(
@@ -44,11 +45,12 @@ export class RegisterComponent {
         // 2. Jelszó hashelése
         const hashedPassword = await this.hashPassword(this.registerData.password);
 
-        // 3. Új felhasználó objektum
+        // 3. Új felhasználó objektum (a ROLE is bekerült!)
         const newUser = {
           username: this.registerData.username,
           email: emailLower,
           password: hashedPassword,
+          role: this.registerData.role, // <-- ÚJ: Elmentjük a szerepkört
           metadata: { registeredAt: new Date().toISOString() },
         };
 
@@ -58,9 +60,15 @@ export class RegisterComponent {
             id: savedUser.id,
             username: savedUser.username,
             email: savedUser.email,
+            role: savedUser.role, // <-- ÚJ: A session is tudja, hogy ő micsoda
           };
           this.authService.login(session);
-          this.router.navigate(['/home']);
+          // Ha admin, menjen az admin felületre, egyébként a home-ra
+          if (session.role === 'admin') {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/home']);
+          }
         });
       });
     } catch (e) {

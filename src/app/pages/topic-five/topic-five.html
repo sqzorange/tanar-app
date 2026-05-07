@@ -17,14 +17,11 @@
           <span class="task-badge">Task 1</span>
           <h3>Discussion: Partner Work</h3>
           <p>Discuss the questions below with a partner:</p>
-          <ul style="margin-top: 12px; padding-left: 20px; color: #475569">
+          <ul class="task-list">
             <li>Who works in a dentist's team?</li>
             <li>In what form can dentists work in Hungary?</li>
           </ul>
         </div>
-        <button class="start-task-btn" (click)="openTask('discussion', '5_1')">
-          Start Task 1 ➡️
-        </button>
       </div>
 
       <h3>What is Dentistry?</h3>
@@ -33,7 +30,9 @@
         conditions, disorders, and diseases of the
         <strong class="medical-term" data-desc="teeth, gums, and jaw structures">oral cavity</strong
         >. Although many dental issues are largely preventable, they're also incredibly prevalent.
-        According to the 2019 Global Burden of Disease Report, untreated
+        According to the
+        <a href="https://ghdx.healthdata.org/gbd-2019">2019 Global Burden of Disease Report</a>,
+        untreated
         <strong class="medical-term" data-desc="tooth decay, cavities">dental caries</strong>
         in permanent teeth is the most common health condition in the world and is estimated to
         affect over 3 billion people annually. As such, dentists play an integral role in global
@@ -77,7 +76,13 @@
               🔊
             </button>
           </div>
-          <span>Military, prisons, underserved areas, academic settings; lower pay</span>
+          <span
+            >Military, prisons,
+            <a
+              href="https://szakszervezetek.hu/hirek/21226-tovabb-fogynak-a-hazi-es-fogorvosi-praxisok"
+              >underserved areas</a
+            >, academic settings; lower pay</span
+          >
         </div>
       </div>
 
@@ -105,30 +110,10 @@
     <div class="inline-task-card accent-orange">
       <div class="task-info">
         <span class="task-badge">Task 2</span>
-        <h3>Reading Comprehension: Kahoot</h3>
-        <p>Answer the questions about the text in a Kahoot quiz.</p>
+        <h3>Reading Comprehension: Quiz</h3>
+        <p>Answer the questions about the text in a quiz.</p>
       </div>
-      <button class="start-task-btn" (click)="openTask('quiz', '5_2')">Start Task 2 ➡️</button>
-    </div>
-
-    <div class="inline-task-card accent-green">
-      <div class="task-info">
-        <span class="task-badge">Task 2b</span>
-        <h3>Vocabulary: Synonyms</h3>
-        <p>Can you think of synonyms for the bold words in the text?</p>
-      </div>
-      <button class="start-task-btn" (click)="openTask('match', '5_2b')">Start Task 2b ➡️</button>
-    </div>
-
-    <div class="inline-task-card accent-purple">
-      <div class="task-info">
-        <span class="task-badge">Task 2c</span>
-        <h3>Critical Thinking: Hungary Context</h3>
-        <p>Which parts of the text could / could not be describing Hungary?</p>
-      </div>
-      <button class="start-task-btn" (click)="openTask('discussion', '5_2c')">
-        Start Task 2c ➡️
-      </button>
+      <button class="start-task-btn" (click)="openTask('quiz', '5_2')">Start Task ➡️</button>
     </div>
 
     <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
@@ -143,13 +128,7 @@
           <h3>Discussion: Essential Team Members</h3>
           <p>Discuss who you think are essential members of a dentist's team.</p>
         </div>
-        <button class="start-task-btn" (click)="openTask('discussion', '5_3')">
-          Start Task 3 ➡️
-        </button>
       </div>
-
-      <h3>Match the Jobs with Their Definitions</h3>
-      <p>Drag each job title to its correct definition:</p>
 
       <div class="vocab-grid">
         <div class="vocab-item">
@@ -217,18 +196,19 @@
         <h3>Matching: Dental Team Roles</h3>
         <p>Match each job with its correct definition.</p>
       </div>
-      <button class="start-task-btn" (click)="openTask('match', '5_4')">Start Task 4 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('dragdrop', '5_4')">Start Task ➡️</button>
     </div>
 
-    <div class="inline-task-card accent-green">
+    <div class="inline-task-card accent-blue">
       <div class="task-info">
         <span class="task-badge">Task 5</span>
         <h3>Discussion: Practice Types</h3>
-        <p>Which roles are common in private practice? Who works in a tighter team?</p>
+        <p>Discuss the questions below with a partner:</p>
+        <ul class="task-list">
+          <li>Which roles/jobs are common in private practice?</li>
+          <li>Who works together in a tighter team?</li>
+        </ul>
       </div>
-      <button class="start-task-btn" (click)="openTask('discussion', '5_5')">
-        Start Task 5 ➡️
-      </button>
     </div>
 
     <div class="inline-task-card accent-purple">
@@ -237,7 +217,7 @@
         <h3>Listening: Dental Hygienist</h3>
         <p>Watch the video, note unknown words, and discuss the hygienist's role.</p>
       </div>
-      <button class="start-task-btn" (click)="openTask('listening', '5_6')">Start Task 6 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('listening', '5_6')">Start Task ➡️</button>
     </div>
 
     <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
@@ -246,150 +226,178 @@
     <section class="text-block">
       <h2>The Dentist: Specializations</h2>
 
-      <div class="inline-task-card accent-blue">
+      <div class="inline-task-card accent-orange">
         <div class="task-info">
           <span class="task-badge">Task 7</span>
           <h3>Brainstorm: Fields of Dentistry</h3>
           <p>What main fields of dentistry can you think of?</p>
         </div>
         <button class="start-task-btn" (click)="openTask('discussion', '5_7')">
-          Start Task 7 ➡️
+          Start Task ➡️
         </button>
       </div>
 
       <h3>Read and Learn: Dental Specializations</h3>
-      <p>Read the text, highlight useful words, and complete the Kahoot:</p>
 
-      <div class="vocab-grid">
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>General Dentist</strong>
-            <button class="tts-btn" (click)="speak('general dentist')" title="Listen">🔊</button>
-          </div>
-          <span>Restorative dentistry, hygiene care, exams, fillings, crowns, whitening</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>Periodontist</strong>
-            <button class="tts-btn" (click)="speak('periodontist')" title="Listen">🔊</button>
-          </div>
-          <span>Gums and supporting bone/tissue specialist</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>Endodontist</strong>
-            <button class="tts-btn" (click)="speak('endodontist')" title="Listen">🔊</button>
-          </div>
-          <span>Root canal and dental pulp specialist</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>Orthodontist</strong>
-            <button class="tts-btn" (click)="speak('orthodontist')" title="Listen">🔊</button>
-          </div>
-          <span>Teeth and jaw alignment specialist (braces)</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>Oral & Maxillofacial Surgeon</strong>
-            <button
-              class="tts-btn"
-              (click)="speak('oral and maxillofacial surgeon')"
-              title="Listen"
-            >
-              🔊
-            </button>
-          </div>
-          <span>Surgery of face, jaw, and oral cavity</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>Prosthodontist</strong>
-            <button class="tts-btn" (click)="speak('prosthodontist')" title="Listen">🔊</button>
-          </div>
-          <span>Replacement of teeth: dentures, bridges, implants</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>Pediatric Dentist (Pedodontist)</strong>
-            <button class="tts-btn" (click)="speak('pediatric dentist')" title="Listen">🔊</button>
-          </div>
-          <span>Children's oral health specialist</span>
-        </div>
-      </div>
+      <p>
+        <strong class="medical-term" data-desc="general dental care, fillings, crowns, hygiene"
+          >General Dentist</strong
+        >
+        — The typical general dentist will stick mostly to
+        <strong class="medical-term" data-desc="fillings, crowns, bridges, veneers"
+          >restorative dentistry</strong
+        >
+        and hygiene care in their office. This includes, but is not limited to, initial and
+        emergency exams, including oral cancer screenings, cleanings and periodic hygiene exams, gum
+        treatments for gum disease, white fillings to repair decayed or broken teeth, porcelain
+        crowns, bridges and veneers, implant porcelain crowns and teeth whitening.
+      </p>
 
-      <h3>Advanced Specializations</h3>
+      <p>
+        <strong class="medical-term" data-desc="gums and supporting bone/tissue specialist"
+          >Periodontist</strong
+        >
+        — The dental subspecialty concerned with the gums and underlying bones and tissues that
+        support the teeth.
+      </p>
 
-      <div class="vocab-grid">
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>Dental Anesthesiology</strong>
-            <button class="tts-btn" (click)="speak('dental anesthesiology')" title="Listen">
-              🔊
-            </button>
-          </div>
-          <span>Advanced sedation and general anesthesia care for dental procedures</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>Dental Public Health</strong>
-            <button class="tts-btn" (click)="speak('dental public health')" title="Listen">
-              🔊
-            </button>
-          </div>
-          <span>Community-focused policies and programs for oral health</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>Oral & Maxillofacial Radiology</strong>
-            <button
-              class="tts-btn"
-              (click)="speak('oral and maxillofacial radiology')"
-              title="Listen"
-            >
-              🔊
-            </button>
-          </div>
-          <span>Imaging specialist: x-rays, CT scans, MRIs for diagnosis</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>Oral Medicine</strong>
-            <button class="tts-btn" (click)="speak('oral medicine')" title="Listen">🔊</button>
-          </div>
-          <span>Non-surgical diagnosis of medically related oral diseases</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <strong>Orofacial Pain (OFP)</strong>
-            <button class="tts-btn" (click)="speak('orofacial pain')" title="Listen">🔊</button>
-          </div>
-          <span>Diagnosis and treatment of jaw, face, head, neck pain disorders</span>
-        </div>
-      </div>
+      <p>
+        <strong class="medical-term" data-desc="root canal and dental pulp specialist"
+          >Endodontist</strong
+        >
+        — The dental subspecialty concerned with the inside of the tooth including the
+        <strong
+          class="medical-term"
+          data-desc="soft tissue inside the tooth containing nerves and blood vessels"
+          >dental pulp</strong
+        >
+        and the tissues surrounding the roots of a tooth. These dentists are best known for
+        performing
+        <strong
+          class="medical-term"
+          data-desc="procedure to remove infected pulp from inside a tooth"
+          >root canals</strong
+        >
+        and other procedures to help patients retain their natural teeth.
+      </p>
+
+      <p>
+        <strong class="medical-term" data-desc="teeth and jaw alignment specialist, braces"
+          >Orthodontist</strong
+        >
+        — The dental subspecialty concerned with the diagnosis, prevention, and correction of
+        <strong class="medical-term" data-desc="misaligned teeth or jaws"
+          >malpositioned teeth or jaws</strong
+        >. These are the specialists that you'd typically go to for braces or other malalignment
+        issues.
+      </p>
+
+      <p>
+        <strong class="medical-term" data-desc="surgery of face, jaw, and oral cavity"
+          >Oral and Maxillofacial Surgeon (OMFS)</strong
+        >
+        — The subspecialty of dentistry that focuses on the surgical management of the face, jaw,
+        and oral cavity.
+      </p>
+
+      <p>
+        <strong class="medical-term" data-desc="replacement of teeth: dentures, bridges, implants"
+          >Prosthodontist</strong
+        >
+        — Prosthodontics is concerned with the replacement of natural teeth with
+        <strong class="medical-term" data-desc="fixed or removable artificial teeth"
+          >fixed or removable appliances</strong
+        >, including dentures, bridges, and implants.
+      </p>
+
+      <p>
+        <strong class="medical-term" data-desc="children's oral health specialist"
+          >Pedodontist / Pediatric Dentist</strong
+        >
+        — Focuses on the treatment of a wide variety of conditions and diseases related to oral
+        health in children.
+      </p>
+
+      <h4>Advanced Specializations</h4>
+
+      <p>
+        <strong
+          class="medical-term"
+          data-desc="advanced sedation and general anesthesia for dental procedures"
+          >Dental Anesthesiology</strong
+        >
+        — The field of dentistry that provides advanced sedation and general anesthesia care for
+        patients requiring dental procedures. Dental anesthesiologists can practice in a wide
+        variety of settings including private practices, surgery centers, hospitals, and educational
+        institutions.
+      </p>
+
+      <p>
+        <strong class="medical-term" data-desc="community-focused oral health policies and programs"
+          >Dental Public Health</strong
+        >
+        — The specialty of dentistry that focuses on developing policies and programs that help the
+        community at large.
+      </p>
+
+      <p>
+        <strong class="medical-term" data-desc="imaging specialist: x-rays, CT scans, MRIs"
+          >Oral and Maxillofacial Radiology</strong
+        >
+        — The subspecialty of dentistry focused on all types of imaging of the teeth and jaws. Oral
+        and maxillofacial radiologists take and interpret a wide variety of imaging studies
+        including x-rays, CT scans, and MRIs to help diagnose and treat oral and maxillofacial
+        diseases and conditions.
+      </p>
+
+      <p>
+        <strong
+          class="medical-term"
+          data-desc="non-surgical diagnosis of medically related oral diseases"
+          >Oral Medicine</strong
+        >
+        — A relatively new dental specialty that focuses on the diagnosis and management of
+        medically related diseases, disorders, and conditions affecting the oral and maxillofacial
+        region. It is primarily a non-surgical specialty with procedures consisting of diagnostic
+        biopsies, small excisions, and therapeutic injections, among others.
+      </p>
+
+      <p>
+        <strong
+          class="medical-term"
+          data-desc="diagnosis and treatment of jaw, face, head, neck pain"
+          >Orofacial Pain (OFP)</strong
+        >
+        — The subspecialty of dentistry that focuses on the diagnosis, management, and treatment of
+        pain disorders of the jaw, mouth, face, head, and neck. Common conditions that an OFP
+        dentist will see include
+        <strong class="medical-term" data-desc="jaw joint disorder"
+          >temporomandibular muscle and joint (TMJ) disorders</strong
+        >, jaw movement disorders, neuropathic and neurovascular pain disorders, headaches, and
+        sleep disorders.
+      </p>
     </section>
 
     <div class="inline-task-card accent-red">
       <div class="task-info">
         <span class="task-badge">Task 8</span>
         <h3>Personal Connection: Discussion</h3>
-        <p>
-          Are there any dentists in your family? Who are their colleagues? What is their specific
-          field?
-        </p>
+        <p>Discuss the questions below with a partner:</p>
+        <ul class="task-list">
+          <li>Are there any dentists in your family?</li>
+          <li>Who are their colleagues?</li>
+          <li>What is their specific field?</li>
+        </ul>
       </div>
-      <button class="start-task-btn" (click)="openTask('discussion', '5_8')">
-        Start Task 8 ➡️
-      </button>
     </div>
 
     <div class="inline-task-card accent-dark">
       <div class="task-info">
         <span class="task-badge">Task 9</span>
-        <h3>Final Quiz: Specializations Kahoot</h3>
-        <p>Test your knowledge of dental specializations in a fun Kahoot quiz!</p>
+        <h3>Final Quiz: Specializations</h3>
+        <p>Test your knowledge of dental specializations in a fun quiz!</p>
       </div>
-      <button class="start-task-btn" (click)="openTask('quiz', '5_9')">Start Task 9 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('quiz', '5_9')">Start Task ➡️</button>
     </div>
   </article>
 </div>

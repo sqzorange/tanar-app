@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+// src/app/pages/home/home.component.ts
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../services/auth';
+import { ALL_TOPICS, TopicMeta } from '../../config/topics-config';
 
 @Component({
   selector: 'app-home',
@@ -10,56 +13,14 @@ import { AuthService } from '../../services/auth';
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class HomeComponent {
-  // --- Eredeti Topikok ---
-  topics = [
-    {
-      id: 1,
-      title: 'Topic 1: Introduction to the Body',
-      description: 'Master anatomical terms, medical collocations, and common healthcare idioms.',
-      icon: '🩺',
-      color: '#6366f1',
-      isAvailable: true,
-    },
-    {
-      id: 2, // Ez az ID fogja meghatározni a routingot
-      title: 'Topic 2: Health and Illness', // A PDF címe
-      description:
-        'Learn how to ask about health, describe recovery, and use medical idioms correctly.',
-      icon: '🤒', // Átírtam az ikont
-      color: '#f59e0b', // Narancssárga téma
-      isAvailable: true, // Ezt állítsd TRUE-ra, hogy kattintható legyen!
-    },
-    {
-      id: 3,
-      title: 'Topic 3: Body Systems, Digestion & Nutrition',
-      description:
-        'Explore the major systems of the human body, their functions, and medical terminology.',
-      icon: '🫁',
-      color: '#10b981',
-      isAvailable: true,
-    },
-    {
-      id: 4,
-      title: 'Topic 4: Dental Education',
-      description:
-        'Explore dental studies, university structure, international degrees, and academic vocabulary.',
-      icon: '🦷',
-      color: '#8b5cf6',
-      isAvailable: true,
-    },
-    {
-      id: 5,
-      title: 'Topic 5: People in Dentistry',
-      description:
-        'Explore the dental team, practice types, and specializations in modern dentistry.',
-      icon: '🦷',
-      color: '#6137cd',
-      isAvailable: true,
-    },
-  ];
+export class HomeComponent implements OnInit {
+  // --- Dinamikus témák és állapotok ---
+  topics: TopicMeta[] = [];
+  username: string = '';
+  loading: boolean = true;
+  isAdmin: boolean = false;
 
-  // --- ÚJ: Szavazás adatai (Mentimeter alapján) ---
+  // --- Szavazás adatai ---
   voteOptions = [
     { id: 1, text: 'Egészség, betegség, panaszok' },
     { id: 2, text: 'Testrészek, szervrendszerek' },
@@ -73,12 +34,53 @@ export class HomeComponent {
   ];
 
   selectedVoteIds: number[] = [];
-  isVoteSubmitted = false; // Elrejtjük, ha már kész
+  isVoteSubmitted = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef, // <-- Változásérzékelő az azonnali frissítéshez
   ) {}
+
+  ngOnInit() {
+    // 1. Felhasználó adatainak betöltése a sessionből
+    const currentUser = this.authService.getCurrentUser();
+
+    // Debug infó a konzolra
+    console.log('Aktuális user a sessionben:', currentUser);
+
+    if (currentUser && currentUser.id) {
+      this.username = currentUser.username || 'Student';
+      this.isAdmin = currentUser.role === 'admin';
+
+      this.http.get<any>(`http://localhost:3000/users/${currentUser.id}`).subscribe({
+        next: (user) => {
+          this.username = user.username;
+
+          console.log('Adatok megérkeztek a szervertől:', user);
+          if (this.isAdmin) {
+            this.topics = ALL_TOPICS;
+          } else {
+            // Ha diák, akkor csak a ráosztottakat
+            const assignedIds = user.assignedTopics || [];
+            this.topics = ALL_TOPICS.filter((t) => assignedIds.map(Number).includes(Number(t.id)));
+          }
+
+          this.loading = false;
+          this.cdr.detectChanges();
+        },
+        error: (err) => {
+          console.error('Hiba az adatok lekérésekor:', err);
+          this.loading = false;
+          this.cdr.detectChanges();
+        },
+      });
+    } else {
+      console.error('Nincs bejelentkezett felhasználó vagy hiányzik az ID!');
+      this.loading = false;
+    }
+  }
 
   // --- Szavazás Logika ---
   toggleVote(id: number) {
@@ -101,12 +103,18 @@ export class HomeComponent {
     }
   }
 
-  // --- Eredeti navigáció ---
+  // --- Navigáció ---
   openTopic(id: number) {
+    // Emlékezz: A topics-config.ts-ben levő route adja meg a pontos útvonalat
+    // VAGY ha id alapján megy a routingod, akkor ez így jó marad:
     this.router.navigate(['/topic', id]);
   }
+
   onOpenShop() {
     console.log('Shop... (Under dev)');
+  }
+  goToAdmin() {
+    this.router.navigate(['/admin']);
   }
   onLogout() {
     this.authService.logout();

@@ -14,6 +14,8 @@ import { TaskInlineChoiceComponent } from './pages/task-inline-choice/task-inlin
 import { TaskListeningComponent } from './pages/task-listening/task-listening';
 import { TaskAiFillInComponent } from './pages/task-ai-fill-in/task-ai-fill-in';
 import { TopicFiveComponent } from './pages/topic-five/topic-five';
+import { adminGuard } from './services/admin.guard';
+import { AdminComponent } from './pages/admin/admin';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -25,7 +27,11 @@ export const routes: Routes = [
   { path: 'topic/3', component: TopicThreeComponent, canActivate: [authGuard] },
   { path: 'topic/4', component: TopicFourComponent, canActivate: [authGuard] },
   { path: 'topic/5', component: TopicFiveComponent, canActivate: [authGuard] },
-
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [authGuard, adminGuard], // Mindkét guard kell!
+  },
   // FELADATOK ÚTVONALAI
   {
     path: 'task/inline-choice/:id',

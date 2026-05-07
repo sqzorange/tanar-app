@@ -1,13 +1,76 @@
 {
   "users": [
     {
-      "username": "Teszt Elek",
-      "email": "teszt@teszt.hu",
-      "password": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+      "username": "Admin ida",
+      "email": "admin@admin.com",
+      "password": "0afb00138d8e73348ec1fe41fd3d3a8fcbd90156b263bfa5791ba0e095f42cfc",
+      "role": "admin",
       "metadata": {
-        "registeredAt": "2026-04-27T09:49:24.795Z"
+        "registeredAt": "2026-05-07T13:13:25.065Z"
       },
-      "id": "9IlfysLozKg"
+      "id": "DiXZ-UOCejA"
+    },
+    {
+      "username": "Student Alma",
+      "email": "student1@gmail.com",
+      "password": "49fe07d0f041bced9ba827a10c2cd31b2089229d4b4e3a63b074ed7a4370e88f",
+      "role": "student",
+      "metadata": {
+        "registeredAt": "2026-05-07T13:14:56.582Z"
+      },
+      "id": "znEqZW5J5JQ",
+      "assignedTopics": [
+        1
+      ]
+    },
+    {
+      "username": "Student Körte",
+      "email": "student2@gmail.com",
+      "password": "2d850eb5460ffb6bb9ae11186a2d78cc22d9df387f9cdbd3a297e0d1ea08a54b",
+      "role": "student",
+      "metadata": {
+        "registeredAt": "2026-05-07T13:17:06.271Z"
+      },
+      "id": "hTmSxjqD5gU",
+      "assignedTopics": [
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "group_1",
+      "name": "Hétfői Csoport",
+      "studentIds": [
+        "hTmSxjqD5gU"
+      ],
+      "topicIds": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "id": "group_2",
+      "name": "Kedd - Haladók",
+      "studentIds": [],
+      "topicIds": [
+        4,
+        5,
+        2
+      ]
+    },
+    {
+      "id": "-ejjzblZOBo",
+      "name": "Szerda",
+      "studentIds": [
+        "znEqZW5J5JQ"
+      ],
+      "topicIds": [
+        1
+      ]
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

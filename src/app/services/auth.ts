@@ -1,7 +1,7 @@
 // src/app/services/auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -47,5 +47,15 @@ export class AuthService {
 
   getCurrentUser() {
     return this.currentUser;
+  }
+
+  // --- ÚJ METÓDUSOK A JOGOSULTSÁGOKHOZ ---
+
+  getUserRole(): string {
+    return this.currentUser ? this.currentUser.role : 'guest';
+  }
+
+  isAdmin(): boolean {
+    return this.loggedIn && this.currentUser?.role === 'admin';
   }
 }

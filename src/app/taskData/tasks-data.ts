@@ -20,17 +20,20 @@ import {
   topic2AiFillIn,
 } from './topic-2-data';
 import { topic3DragDrop, topic3Quiz, topic3AiFillIn } from './topic-3-data';
+import { topic5DragDrop, topic5Quiz, topic5AiFillIn } from './topic-5-data';
 
 // 3. Összefűzzük az adatbázisokat az Angular komponensek számára
 export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
   ...topic1DragDrop,
   ...topic2DragDrop,
   ...topic3DragDrop,
+  ...topic5DragDrop,
 };
 
 export const QUIZ_DATABASE: { [key: string]: QuizTask } = {
   ...topic1Quiz,
   ...topic3Quiz,
+  ...topic5Quiz,
 };
 
 export const INLINE_CHOICE_DATABASE: { [key: string]: InlineChoiceTask } = {
@@ -48,4 +51,5 @@ export const LISTENING_DATABASE: { [key: string]: ListeningTask } = {
 export const AI_FILL_IN_DATABASE: { [key: string]: AiFillInTask } = {
   ...topic2AiFillIn,
   ...topic3AiFillIn,
+  ...topic5AiFillIn,
 };

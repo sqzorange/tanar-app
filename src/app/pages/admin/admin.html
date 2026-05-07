@@ -1,0 +1,140 @@
+<div class="admin-layout">
+  <header class="admin-header">
+    <div class="header-content">
+      <h1>👨‍🏫 Teacher Dashboard</h1>
+      <div class="header-actions">
+        <button class="view-home-btn" (click)="goToHome()">🎓 View as Student</button>
+        <button class="logout-btn" (click)="logout()">🚪 Logout</button>
+      </div>
+    </div>
+    <p>Manage your groups, assign students, and distribute topics seamlessly.</p>
+  </header>
+
+  <div class="admin-container">
+    <div class="sidebar">
+      <h2>📚 Available Topics</h2>
+      <div
+        class="topic-list master-list"
+        cdkDropList
+        id="masterTopicsList"
+        [cdkDropListConnectedTo]="getTopicDropLists()"
+        [cdkDropListData]="availableTopics"
+        cdkDropListSortingDisabled="true"
+      >
+        <div class="topic-item" *ngFor="let topic of availableTopics" cdkDrag>
+          <span class="drag-handle">⠿</span> {{ topic.title }}
+        </div>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-header-row">
+        <h2>👤 Unassigned Students</h2>
+        <button class="icon-sort-btn" (click)="toggleSort()" title="Sort by registration date">
+          {{ sortOrder === 'desc' ? '⬇️' : '⬆️' }}
+        </button>
+      </div>
+      <div
+        class="topic-list master-list"
+        cdkDropList
+        id="unassignedStudentsList"
+        [cdkDropListConnectedTo]="getStudentDropLists()"
+        [cdkDropListData]="unassignedStudents"
+      >
+        <div class="empty-state" *ngIf="unassignedStudents.length === 0">
+          All students are in groups! 🎉
+        </div>
+        <div class="topic-item student-item" *ngFor="let student of unassignedStudents" cdkDrag>
+          <span class="drag-handle">⠿</span>
+          <strong>{{ student.username }}</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="add-group-bar">
+        <input
+          type="text"
+          [(ngModel)]="newGroupName"
+          placeholder="Create new group (e.g., Monday Beginners)..."
+          (keyup.enter)="addGroup()"
+        />
+        <button class="add-btn" (click)="addGroup()">+ Add Group</button>
+      </div>
+
+      <div class="groups-list">
+        <div class="empty-state-main" *ngIf="groups.length === 0">
+          No groups created yet. Create your first group above!
+        </div>
+
+        <div class="group-card" *ngFor="let group of groups">
+          <div class="group-header" (click)="toggleGroup(group.id)">
+            <div class="group-title">
+              <span class="toggle-icon">{{ selectedGroupId === group.id ? '▼' : '▶' }}</span>
+              <h3>{{ group.name }}</h3>
+              <span class="badge">{{ group.studentList.length }} Students</span>
+              <span class="badge topic-badge">{{ group.topicList.length }} Topics</span>
+            </div>
+            <button
+              class="delete-group-btn"
+              (click)="deleteGroup(group.id); $event.stopPropagation()"
+              title="Delete Group"
+            >
+              🗑️
+            </button>
+          </div>
+
+          <div class="group-body" *ngIf="selectedGroupId === group.id">
+            <div class="drop-zones-container">
+              <div class="drop-zone-col">
+                <h4>👥 Students</h4>
+                <p class="drop-instruction">Drag students here from the left</p>
+                <div
+                  class="topic-list user-topic-list"
+                  cdkDropList
+                  [id]="'group-students-' + group.id"
+                  [cdkDropListData]="group.studentList"
+                  (cdkDropListDropped)="dropStudent($event, group)"
+                >
+                  <div class="empty-state" *ngIf="group.studentList.length === 0">
+                    No students yet.
+                  </div>
+                  <div
+                    class="topic-item assigned-student"
+                    *ngFor="let student of group.studentList; let i = index"
+                    cdkDrag
+                  >
+                    <span>{{ student.username }}</span>
+                    <button class="remove-btn" (click)="removeStudent(group, i)">✖</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="drop-zone-col">
+                <h4>📚 Topics</h4>
+                <p class="drop-instruction">Drag topics here from the left</p>
+                <div
+                  class="topic-list user-topic-list"
+                  cdkDropList
+                  [id]="'group-topics-' + group.id"
+                  [cdkDropListData]="group.topicList"
+                  (cdkDropListDropped)="dropTopic($event, group)"
+                >
+                  <div class="empty-state" *ngIf="group.topicList.length === 0">No topics yet.</div>
+                  <div
+                    class="topic-item assigned-item"
+                    *ngFor="let topic of group.topicList; let i = index"
+                    cdkDrag
+                  >
+                    <span>{{ topic.title }}</span>
+                    <button class="remove-btn" (click)="removeTopic(group, i)">✖</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

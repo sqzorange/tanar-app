@@ -2,6 +2,10 @@
   <nav class="topbar">
     <div class="logo">🎓 <span>TeacherApp</span></div>
     <div class="nav-actions">
+      <button class="admin-link-btn" *ngIf="isAdmin" (click)="goToAdmin()">
+        👨‍🏫 Back to Admin Dashboard
+      </button>
+
       <button class="shop-btn" (click)="onOpenShop()">🛒 Shop</button>
       <button class="logout-btn" (click)="onLogout()">🚪 Logout</button>
     </div>
@@ -9,7 +13,7 @@
 
   <main class="dashboard">
     <header class="welcome-msg">
-      <h1>Welcome back, Student! 👋</h1>
+      <h1>Welcome back, {{ username }}! 👋</h1>
       <p>Continue your medical English journey or set your priorities below:</p>
     </header>
 
@@ -46,7 +50,15 @@
       </div>
     </section>
 
-    <div class="subject-grid">
+    <div
+      class="loading-state"
+      *ngIf="loading"
+      style="text-align: center; padding: 40px; color: #64748b"
+    >
+      <p>📚 Loading your assigned units...</p>
+    </div>
+
+    <div class="subject-grid" *ngIf="!loading && topics.length > 0">
       <div
         class="subject-card"
         *ngFor="let topic of topics"
@@ -68,6 +80,24 @@
           {{ topic.isAvailable ? 'Open Topic' : 'Coming Soon' }}
         </button>
       </div>
+    </div>
+
+    <div
+      class="empty-state"
+      *ngIf="!loading && topics.length === 0"
+      style="
+        text-align: center;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 12px;
+        border: 2px dashed #cbd5e1;
+        margin-top: 20px;
+      "
+    >
+      <h3 style="color: #475569; margin-bottom: 10px">No Units Assigned Yet</h3>
+      <p style="color: #64748b">
+        Your teacher hasn't assigned any study materials to you yet. Please check back later!
+      </p>
     </div>
   </main>
 </div>
