@@ -13,6 +13,7 @@ import { RegisterComponent } from './pages/register/register';
 import { TaskInlineChoiceComponent } from './pages/task-inline-choice/task-inline-choice';
 import { TaskListeningComponent } from './pages/task-listening/task-listening';
 import { TaskAiFillInComponent } from './pages/task-ai-fill-in/task-ai-fill-in';
+import { TopicFiveComponent } from './pages/topic-five/topic-five';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,6 +24,7 @@ export const routes: Routes = [
   { path: 'topic/2', component: TopicTwoComponent, canActivate: [authGuard] },
   { path: 'topic/3', component: TopicThreeComponent, canActivate: [authGuard] },
   { path: 'topic/4', component: TopicFourComponent, canActivate: [authGuard] },
+  { path: 'topic/5', component: TopicFiveComponent, canActivate: [authGuard] },
 
   // FELADATOK ÚTVONALAI
   {

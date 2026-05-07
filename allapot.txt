@@ -1,0 +1,7 @@
+2_5: Nincs megoldókulcs
+2_11:pause, nincs ihlet
+
+
+5: UI kész
+Hiányzik:
+5_7= alatti szöveg

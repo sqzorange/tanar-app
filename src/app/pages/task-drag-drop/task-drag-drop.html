@@ -94,28 +94,32 @@
       </div>
     </div>
 
-    <!-- SZÖVEGES FELADATOK (list-to-text) -->
     <div class="list-container" *ngIf="currentTask.type === 'list-to-text'">
       <h3>Dialogue</h3>
       <div class="text-with-gaps">
-        <div class="sentence-row" *ngFor="let zone of currentTask.dropZones">
-          <span class="text-part">{{ (zone.textWithGap || '').split('{gap}')[0] }}</span>
+        <ng-container *ngFor="let zone of currentTask.dropZones">
+          <span class="text-part" [innerHTML]="(zone.textWithGap || '').split('{gap}')[0]"></span>
 
           <div
+            *ngIf="(zone.textWithGap || '').includes('{gap}')"
             class="inline-drop-zone"
             cdkDropList
             [id]="zone.label"
             [cdkDropListConnectedTo]="['availableList']"
             (cdkDropListDropped)="dropOnZone($event, zone.label)"
           >
-            <span class="placeholder" *ngIf="!droppedItems[zone.label]">...</span>
+            <span class="placeholder" *ngIf="!droppedItems[zone.label]">???</span>
             <div class="dropped-val" *ngIf="droppedItems[zone.label]">
               {{ droppedItems[zone.label] }}
             </div>
           </div>
 
-          <span class="text-part">{{ (zone.textWithGap || '').split('{gap}')[1] }}</span>
-        </div>
+          <span
+            class="text-part"
+            *ngIf="(zone.textWithGap || '').includes('{gap}')"
+            [innerHTML]="(zone.textWithGap || '').split('{gap}')[1]"
+          ></span>
+        </ng-container>
       </div>
     </div>
 

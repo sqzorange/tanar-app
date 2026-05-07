@@ -276,33 +276,77 @@ export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
     availableOptions: ['unwell', 'ill', 'health', 'fit', 'well', 'sick', 'vomiting', 'illnesses'],
     requiredCount: 8,
     dropZones: [
-      { label: 'gap_1', textWithGap: 'Patient: Not very {gap}.', correctAnswer: 'unwell' },
+      {
+        label: 'no_gap_1',
+        correctAnswer: '',
+        textWithGap: '<strong>Doctor:</strong> How are you feeling today?',
+      },
+      {
+        label: 'gap_1',
+        correctAnswer: 'unwell',
+        textWithGap: '<br><br><strong>Patient:</strong> Not very {gap}.',
+      },
       {
         label: 'gap_2',
-        textWithGap: 'Doctor: How long have you been feeling {gap}?',
         correctAnswer: 'ill',
+        textWithGap: '<br><br><strong>Doctor:</strong> How long have you been feeling {gap}?',
+      },
+      {
+        label: 'no_gap_2',
+        correctAnswer: '',
+        textWithGap: '<br><br><strong>Patient:</strong> About a week.',
       },
       {
         label: 'gap_3',
-        textWithGap: 'Doctor: What is your {gap} like normally?',
         correctAnswer: 'health',
+        textWithGap: '<br><br><strong>Doctor:</strong> What is your {gap} like normally?',
       },
       {
         label: 'gap_4',
-        textWithGap: "Patient: Very good. I'm usually quite {gap}...",
         correctAnswer: 'fit',
+        textWithGap: "<br><br><strong>Patient:</strong> Very good. I'm usually quite {gap}",
       },
-      { label: 'gap_5', textWithGap: 'Patient: ...and {gap}.', correctAnswer: 'well' },
-      { label: 'gap_6', textWithGap: 'Doctor: Do you feel {gap}?', correctAnswer: 'sick' },
+      { label: 'gap_5', correctAnswer: 'well', textWithGap: ' and {gap}.' },
+      {
+        label: 'no_gap_3',
+        correctAnswer: '',
+        textWithGap: '<br><br><strong>Doctor:</strong> What is the problem now?',
+      },
+
+      // ITT A JAVÍTÁS: Egy sorba került a gyomor és a kérdés, ahogy a képen!
+      {
+        label: 'gap_6',
+        correctAnswer: 'sick',
+        textWithGap:
+          "<br><br><strong>Patient:</strong> It's my stomach. <strong>Doctor:</strong> Do you feel {gap}?",
+      },
+
+      // ITT A HIÁNYZÓ "YES"
+      {
+        label: 'no_gap_yes',
+        correctAnswer: '',
+        textWithGap: '<br><br><strong>Patient:</strong> Yes.',
+      },
+
       {
         label: 'gap_7',
-        textWithGap: 'Doctor: Have you actually been {gap}?',
         correctAnswer: 'vomiting',
+        textWithGap: '<br><br><strong>Doctor:</strong> Have you actually been {gap}?',
+      },
+      {
+        label: 'no_gap_no',
+        correctAnswer: '',
+        textWithGap: '<br><br><strong>Patient:</strong> No.',
       },
       {
         label: 'gap_8',
-        textWithGap: 'Doctor: Have you had any serious {gap} in the past?',
         correctAnswer: 'illnesses',
+        textWithGap: '<br><br><strong>Doctor:</strong> Have you had any serious {gap} in the past?',
+      },
+      {
+        label: 'no_gap_end',
+        correctAnswer: '',
+        textWithGap: '<br><br><strong>Patient:</strong> No, none at all.',
       },
     ],
   },

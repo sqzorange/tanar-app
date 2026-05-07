@@ -137,11 +137,7 @@
       </p>
 
       <div class="image-container">
-        <img
-          src="../../../../public/eating_pic.png"
-          alt="Eating and Digestion diagram"
-          class="lesson-image"
-        />
+        <img src="assets\eating_pic.png" alt="Eating and Digestion diagram" class="lesson-image" />
       </div>
     </section>
 
@@ -178,19 +174,32 @@
       <button class="start-task-btn" (click)="openTask('dragdrop', '2_6')">Match Terms ➡️</button>
     </div>
 
-    <section class="text-block">
-      <h2>Communication Focus</h2>
-      <p>
-        It is very important to show people when you are saying an opinion and show that it is not a
-        fact. Giving an opinion as a fact is not very polite in the UK.
-      </p>
-      <h3>Agreeing and Disagreeing</h3>
-      <ul class="idiom-list">
-        <li><strong>I reckon...:</strong> A casual way to give an opinion.</li>
-        <li><strong>Personally, I think...:</strong> A polite way to show it's your view alone.</li>
-        <li><strong>I'm afraid I don't agree:</strong> A polite way to disagree.</li>
-        <li><strong>I couldn't agree more:</strong> Strong agreement.</li>
-      </ul>
+    <section class="text-block history-auscultation-section">
+      <div class="content-split">
+        <div class="history-part">
+          <h3>When taking a <strong>history</strong>, doctors can ask:</h3>
+          <table class="history-table">
+            <tbody>
+              <tr>
+                <td rowspan="2" class="static-phrase">Do you have any</td>
+                <td class="middle-col">trouble<br />difficulty<br />problems</td>
+                <td>walking?<br />breathing?<br />passing urine?<br />with your speech?</td>
+              </tr>
+              <tr>
+                <td class="middle-col">pain</td>
+                <td>when you breathe in?</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="auscultation-part">
+          <h3>When auscultating a patient's lungs, the doctor tells the patient:</h3>
+          <ul>
+            <li>Take a deep breath in, hold your breath, then breathe out completely.</li>
+          </ul>
+        </div>
+      </div>
     </section>
 
     <div class="inline-task-card accent-purple">
@@ -314,7 +323,6 @@
           to the audio track.
         </p>
       </div>
-      <!-- Figyeld az inline-choice típust és az új azonosítót! -->
       <button class="start-task-btn" (click)="openTask('inline-choice', '2_12_tf')">
         Start Task ➡️
       </button>
@@ -335,37 +343,17 @@
     <div class="inline-task-card accent-purple">
       <div class="task-info">
         <div class="task-number-tag">
-          Task 14 - AFTER LISTENING – PAIRWORK: Discuss allergies from two different points of view.
-          Student A should turn to page 7, Student B should turn to page 8. Do not look at each
-          other’s questions.
+          Task 15 - Agreeing and Disagreeing, Asking for Opinion and Giving Opinion
         </div>
         <span class="task-badge">Assessment</span>
-        <h3>Unit 2 Final Review</h3>
-        <p>Check your understanding of health, recovery, and bodily functions.</p>
+        <h3>Giving your opinion</h3>
+        <p>
+          Expressions to use in speaking and writing. We often give our opinions to friends and
+          collegues.
+        </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('quiz', '2_4')">Launch Test ➡️</button>
     </div>
-
-    <div class="inline-task-card accent-purple">
-      <div class="task-info">
-        <div class="task-number-tag">
-          Task 15 - Which of the following opinions would you classify as casual and which would be
-          considered polite?
-        </div>
-        <span class="task-badge">Assessment</span>
-        <h3>Unit 2 Final Review</h3>
-        <p>Check your understanding of health, recovery, and bodily functions.</p>
-      </div>
-      <button class="start-task-btn" (click)="openTask('quiz', '2_4')">Launch Test ➡️</button>
-    </div>
-
     <section class="text-block">
-      <h2>Giving your opinion</h2>
-      <p>
-        Expressions to use in speaking and writing. We often give our opinions to friends and
-        colleagues.
-      </p>
-
       <div class="phrase-container">
         <div class="phrase-card">
           <div class="phrase-index">1</div>
@@ -539,17 +527,47 @@
       </div>
     </section>
 
-    <div class="inline-task-card accent-purple">
-      <div class="task-info">
-        <div class="task-number-tag">Task 16 - GROUP WORK</div>
-        <span class="task-badge">Communication Skills</span>
-        <h3>ROLE PLAY:</h3>
+    <div class="task-section role-play-task">
+      <div class="task-header">
+        <div class="task-number-tag">Task 16</div>
+        <h3>GROUPWORK – ROLE PLAY:</h3>
         <p>
           In your group prepare a debate about the given topic below using the expressions from
           above.
         </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('quiz', '2_debate')">Start Debate ➡️</button>
+
+      <div class="role-play-container">
+        <div class="role-card">
+          <p>
+            <strong>Role A – Eggs</strong> You think eggs are the worst things to be allergic to.
+            Tell the others three reasons why. Tell them why their things aren't as bad. Also, tell
+            the others which is the least worrying of these (and why): dust, penicillin or dogs.
+          </p>
+        </div>
+        <div class="role-card">
+          <p>
+            <strong>Role B – Dust</strong> You think dust is the worst thing to be allergic to. Tell
+            the others three reasons why. Tell them why their things aren't as bad. Also, tell the
+            others which is the least worrying of these (and why): eggs, penicillin or dogs.
+          </p>
+        </div>
+        <div class="role-card">
+          <p>
+            <strong>Role C – Penicillin</strong> You think penicillin is the worst thing to be
+            allergic to. Tell the others three reasons why. Tell them why their things aren't as
+            bad. Also, tell the others which is the least worrying of these (and why): dust, eggs or
+            dogs.
+          </p>
+        </div>
+        <div class="role-card">
+          <p>
+            <strong>Role D – Dogs</strong> You think dogs are the worst things to be allergic to.
+            Tell the others three reasons why. Tell them why their things aren't as bad. Also, tell
+            the others which is the least worrying of these (and why): dust, penicillin or eggs.
+          </p>
+        </div>
+      </div>
     </div>
   </article>
 </div>

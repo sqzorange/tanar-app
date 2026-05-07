@@ -1,0 +1,395 @@
+<div class="lesson-layout">
+  <header class="lesson-header">
+    <button class="back-btn" (click)="goBack()">⬅ Back to Dashboard</button>
+    <h1>Topic 5: People in Dentistry</h1>
+    <p class="subtitle">
+      Explore the dental team, practice types, and specializations in modern dentistry.
+    </p>
+  </header>
+
+  <article class="lesson-content">
+    <!-- === SECTION 1: Dentistry and Types of Service === -->
+    <section class="text-block">
+      <h2>Dentistry and Types of Service</h2>
+
+      <div class="inline-task-card accent-blue">
+        <div class="task-info">
+          <span class="task-badge">Task 1</span>
+          <h3>Discussion: Partner Work</h3>
+          <p>Discuss the questions below with a partner:</p>
+          <ul style="margin-top: 12px; padding-left: 20px; color: #475569">
+            <li>Who works in a dentist's team?</li>
+            <li>In what form can dentists work in Hungary?</li>
+          </ul>
+        </div>
+        <button class="start-task-btn" (click)="openTask('discussion', '5_1')">
+          Start Task 1 ➡️
+        </button>
+      </div>
+
+      <h3>What is Dentistry?</h3>
+      <p>
+        Dentistry is the field of medicine focused on the diagnosis, treatment, and prevention of
+        conditions, disorders, and diseases of the
+        <strong class="medical-term" data-desc="teeth, gums, and jaw structures">oral cavity</strong
+        >. Although many dental issues are largely preventable, they're also incredibly prevalent.
+        According to the 2019 Global Burden of Disease Report, untreated
+        <strong class="medical-term" data-desc="tooth decay, cavities">dental caries</strong>
+        in permanent teeth is the most common health condition in the world and is estimated to
+        affect over 3 billion people annually. As such, dentists play an integral role in global
+        health.
+      </p>
+      <p>
+        Dentists also perform a wide variety of procedures, from the routine to the complex. This
+        includes minor surgeries of the teeth and jaws as well as other conditions such as
+        <strong class="medical-term" data-desc="jaw joint disorder"
+          >temporomandibular joint (TMJ) disorder</strong
+        >. That being said, the specific conditions you see on a day-to-day basis will depend
+        heavily on your geographic location, area of focus, and practice type.
+      </p>
+
+      <h3>Private Practice vs Dental Service Organization vs Public Service</h3>
+      <p>This brings us to an important method of differentiating a dentist's practice:</p>
+
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Private Practice</strong>
+            <button class="tts-btn" (click)="speak('private practice')" title="Listen">🔊</button>
+          </div>
+          <span>Small, independent offices; higher earning potential; business burdens</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Dental Service Organization (DSO)</strong>
+            <button class="tts-btn" (click)="speak('dental service organization')" title="Listen">
+              🔊
+            </button>
+          </div>
+          <span
+            >Corporations overseeing multiple clinics; employees see higher patient volumes</span
+          >
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Public Service</strong>
+            <button class="tts-btn" (click)="speak('public service dentistry')" title="Listen">
+              🔊
+            </button>
+          </div>
+          <span>Military, prisons, underserved areas, academic settings; lower pay</span>
+        </div>
+      </div>
+
+      <p>
+        <strong>Private practice</strong> is the most common practice type among dentists. Dentists
+        working in this setting will typically work in small, independent offices providing dental
+        care for patients. Although earning potential is often higher in private practice, it comes
+        with the additional financial and administrative burdens of running a business.
+      </p>
+      <p>
+        Next, there are <strong>Dental Service Organizations</strong> or <strong>DSOs</strong>.
+        These are corporations that oversee multiple dental clinics. Dentists working in these
+        clinics are employees and tend to see higher volumes of patients than their private practice
+        colleagues. That being said, patient volumes will vary from practice to practice based on
+        the size and structure of the specific DSO.
+      </p>
+      <p>
+        Lastly, some dentists work in <strong>public service</strong>. This includes working for the
+        military, in prisons or underserved areas (note: more than 200 local, district dentists are
+        wanted in Hungary), or in the academic setting. In general, dentists working in the public
+        service setting will earn less than their colleagues in private or DSO practices.
+      </p>
+    </section>
+
+    <div class="inline-task-card accent-orange">
+      <div class="task-info">
+        <span class="task-badge">Task 2</span>
+        <h3>Reading Comprehension: Kahoot</h3>
+        <p>Answer the questions about the text in a Kahoot quiz.</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('quiz', '5_2')">Start Task 2 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-green">
+      <div class="task-info">
+        <span class="task-badge">Task 2b</span>
+        <h3>Vocabulary: Synonyms</h3>
+        <p>Can you think of synonyms for the bold words in the text?</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('match', '5_2b')">Start Task 2b ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-purple">
+      <div class="task-info">
+        <span class="task-badge">Task 2c</span>
+        <h3>Critical Thinking: Hungary Context</h3>
+        <p>Which parts of the text could / could not be describing Hungary?</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('discussion', '5_2c')">
+        Start Task 2c ➡️
+      </button>
+    </div>
+
+    <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
+
+    <!-- === SECTION 2: The Dental Team === -->
+    <section class="text-block">
+      <h2>The Dental Team</h2>
+
+      <div class="inline-task-card accent-blue">
+        <div class="task-info">
+          <span class="task-badge">Task 3</span>
+          <h3>Discussion: Essential Team Members</h3>
+          <p>Discuss who you think are essential members of a dentist's team.</p>
+        </div>
+        <button class="start-task-btn" (click)="openTask('discussion', '5_3')">
+          Start Task 3 ➡️
+        </button>
+      </div>
+
+      <h3>Match the Jobs with Their Definitions</h3>
+      <p>Drag each job title to its correct definition:</p>
+
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>dental hygienist</strong>
+            <button class="tts-btn" (click)="speak('dental hygienist')" title="Listen">🔊</button>
+          </div>
+          <span>Saves teeth by preventing and treating gum disease, helping with bad breath</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>dental nurse/assistant</strong>
+            <button class="tts-btn" (click)="speak('dental assistant')" title="Listen">🔊</button>
+          </div>
+          <span>Office support, basic procedures, chairside assistance for advanced care</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>marketing manager</strong>
+            <button class="tts-btn" (click)="speak('marketing manager')" title="Listen">🔊</button>
+          </div>
+          <span>Promotes services and products of the dental surgery</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>dentist</strong>
+            <button class="tts-btn" (click)="speak('dentist')" title="Listen">🔊</button>
+          </div>
+          <span>Diagnoses, plans treatment, prescribes medication for mouth, jaws, teeth</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>laboratory technician</strong>
+            <button class="tts-btn" (click)="speak('dental technician')" title="Listen">🔊</button>
+          </div>
+          <span>Makes prostheses, crowns, bridges, braces based on dentist instructions</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>sterile processing technician</strong>
+            <button class="tts-btn" (click)="speak('sterile processing')" title="Listen">🔊</button>
+          </div>
+          <span>Sterilizes instruments: sorting, cleaning, decontaminating</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>janitor/cleaning crew</strong>
+            <button class="tts-btn" (click)="speak('janitor')" title="Listen">🔊</button>
+          </div>
+          <span>Keeps premises clean, tends heating system, makes minor repairs</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>receptionist</strong>
+            <button class="tts-btn" (click)="speak('receptionist')" title="Listen">🔊</button>
+          </div>
+          <span>Greets visitors, answers phones, maintains professional composure</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="inline-task-card accent-orange">
+      <div class="task-info">
+        <span class="task-badge">Task 4</span>
+        <h3>Matching: Dental Team Roles</h3>
+        <p>Match each job with its correct definition.</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('match', '5_4')">Start Task 4 ➡️</button>
+    </div>
+
+    <div class="inline-task-card accent-green">
+      <div class="task-info">
+        <span class="task-badge">Task 5</span>
+        <h3>Discussion: Practice Types</h3>
+        <p>Which roles are common in private practice? Who works in a tighter team?</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('discussion', '5_5')">
+        Start Task 5 ➡️
+      </button>
+    </div>
+
+    <div class="inline-task-card accent-purple">
+      <div class="task-info">
+        <span class="task-badge">Task 6</span>
+        <h3>Listening: Dental Hygienist</h3>
+        <p>Watch the video, note unknown words, and discuss the hygienist's role.</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('listening', '5_6')">Start Task 6 ➡️</button>
+    </div>
+
+    <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
+
+    <!-- === SECTION 3: Dental Specializations === -->
+    <section class="text-block">
+      <h2>The Dentist: Specializations</h2>
+
+      <div class="inline-task-card accent-blue">
+        <div class="task-info">
+          <span class="task-badge">Task 7</span>
+          <h3>Brainstorm: Fields of Dentistry</h3>
+          <p>What main fields of dentistry can you think of?</p>
+        </div>
+        <button class="start-task-btn" (click)="openTask('discussion', '5_7')">
+          Start Task 7 ➡️
+        </button>
+      </div>
+
+      <h3>Read and Learn: Dental Specializations</h3>
+      <p>Read the text, highlight useful words, and complete the Kahoot:</p>
+
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>General Dentist</strong>
+            <button class="tts-btn" (click)="speak('general dentist')" title="Listen">🔊</button>
+          </div>
+          <span>Restorative dentistry, hygiene care, exams, fillings, crowns, whitening</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Periodontist</strong>
+            <button class="tts-btn" (click)="speak('periodontist')" title="Listen">🔊</button>
+          </div>
+          <span>Gums and supporting bone/tissue specialist</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Endodontist</strong>
+            <button class="tts-btn" (click)="speak('endodontist')" title="Listen">🔊</button>
+          </div>
+          <span>Root canal and dental pulp specialist</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Orthodontist</strong>
+            <button class="tts-btn" (click)="speak('orthodontist')" title="Listen">🔊</button>
+          </div>
+          <span>Teeth and jaw alignment specialist (braces)</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Oral & Maxillofacial Surgeon</strong>
+            <button
+              class="tts-btn"
+              (click)="speak('oral and maxillofacial surgeon')"
+              title="Listen"
+            >
+              🔊
+            </button>
+          </div>
+          <span>Surgery of face, jaw, and oral cavity</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Prosthodontist</strong>
+            <button class="tts-btn" (click)="speak('prosthodontist')" title="Listen">🔊</button>
+          </div>
+          <span>Replacement of teeth: dentures, bridges, implants</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Pediatric Dentist (Pedodontist)</strong>
+            <button class="tts-btn" (click)="speak('pediatric dentist')" title="Listen">🔊</button>
+          </div>
+          <span>Children's oral health specialist</span>
+        </div>
+      </div>
+
+      <h3>Advanced Specializations</h3>
+
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Dental Anesthesiology</strong>
+            <button class="tts-btn" (click)="speak('dental anesthesiology')" title="Listen">
+              🔊
+            </button>
+          </div>
+          <span>Advanced sedation and general anesthesia care for dental procedures</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Dental Public Health</strong>
+            <button class="tts-btn" (click)="speak('dental public health')" title="Listen">
+              🔊
+            </button>
+          </div>
+          <span>Community-focused policies and programs for oral health</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Oral & Maxillofacial Radiology</strong>
+            <button
+              class="tts-btn"
+              (click)="speak('oral and maxillofacial radiology')"
+              title="Listen"
+            >
+              🔊
+            </button>
+          </div>
+          <span>Imaging specialist: x-rays, CT scans, MRIs for diagnosis</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Oral Medicine</strong>
+            <button class="tts-btn" (click)="speak('oral medicine')" title="Listen">🔊</button>
+          </div>
+          <span>Non-surgical diagnosis of medically related oral diseases</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <strong>Orofacial Pain (OFP)</strong>
+            <button class="tts-btn" (click)="speak('orofacial pain')" title="Listen">🔊</button>
+          </div>
+          <span>Diagnosis and treatment of jaw, face, head, neck pain disorders</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="inline-task-card accent-red">
+      <div class="task-info">
+        <span class="task-badge">Task 8</span>
+        <h3>Personal Connection: Discussion</h3>
+        <p>
+          Are there any dentists in your family? Who are their colleagues? What is their specific
+          field?
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('discussion', '5_8')">
+        Start Task 8 ➡️
+      </button>
+    </div>
+
+    <div class="inline-task-card accent-dark">
+      <div class="task-info">
+        <span class="task-badge">Task 9</span>
+        <h3>Final Quiz: Specializations Kahoot</h3>
+        <p>Test your knowledge of dental specializations in a fun Kahoot quiz!</p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('quiz', '5_9')">Start Task 9 ➡️</button>
+    </div>
+  </article>
+</div>

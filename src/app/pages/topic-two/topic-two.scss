@@ -1,4 +1,8 @@
-// --- VÁLTOZÓK ---
+@use 'sass:color';
+
+// ==========================================================================
+// VÁLTOZÓK (Színek és alapbeállítások)
+// ==========================================================================
 $brand-primary: #6366f1;
 $bg-app: #f8fafc;
 $white: #ffffff;
@@ -6,6 +10,23 @@ $text-main: #1e293b;
 $text-muted: #475569;
 $border-color: #e2e8f0;
 
+// ==========================================================================
+// MIXINEK ÉS ALAP OSZTÁLYOK (Újrahasznosítható blokkok)
+// ==========================================================================
+
+// Ez egy rejtett osztály (%), amit más elemek örökölhetnek a DRY elv jegyében
+%task-card-base {
+  background: $white;
+  border-radius: 12px; // Egységesítettük a 16px-et 12px-re a konzisztencia miatt
+  padding: 30px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid $border-color;
+  margin: 40px 0;
+}
+
+// ==========================================================================
+// FŐ ELRENDEZÉS (Layout & Header)
+// ==========================================================================
 .lesson-layout {
   min-height: 100vh;
   background-color: $bg-app;
@@ -26,6 +47,7 @@ $border-color: #e2e8f0;
       border-radius: 8px;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
       transition: all 0.2s;
+
       &:hover {
         color: $brand-primary;
         transform: translateX(-4px);
@@ -58,6 +80,9 @@ $border-color: #e2e8f0;
     padding: 24px;
   }
 
+  // ==========================================================================
+  // SZÖVEGES BLOKKOK & MAGYARÁZATOK
+  // ==========================================================================
   .text-block {
     margin-bottom: 40px;
 
@@ -69,6 +94,7 @@ $border-color: #e2e8f0;
       margin-bottom: 20px;
       display: inline-block;
     }
+
     h3 {
       font-size: 1.5rem;
       color: $text-main;
@@ -76,6 +102,7 @@ $border-color: #e2e8f0;
       margin-bottom: 16px;
       font-weight: 700;
     }
+
     p {
       font-size: 1.1rem;
       line-height: 1.7;
@@ -83,7 +110,7 @@ $border-color: #e2e8f0;
       margin-bottom: 16px;
     }
 
-    // --- INTERAKTÍV TOOLTIP (Medical Terms) ---
+    // Interaktív aláhúzott szavak (Tooltip funkcióval)
     .medical-term {
       color: $brand-primary;
       cursor: help;
@@ -103,6 +130,7 @@ $border-color: #e2e8f0;
         }
       }
 
+      // Tooltip doboza
       &::after {
         content: attr(data-desc);
         position: absolute;
@@ -123,6 +151,7 @@ $border-color: #e2e8f0;
         z-index: 100;
       }
 
+      // Tooltip kis nyila
       &::before {
         content: '';
         position: absolute;
@@ -138,7 +167,7 @@ $border-color: #e2e8f0;
       }
     }
 
-    // --- VOCABULARY GRID ---
+    // Szószedet kártyák
     .vocab-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -172,7 +201,7 @@ $border-color: #e2e8f0;
       }
     }
 
-    // --- IDIOM LIST ---
+    // Listák stílusa (pl. izzólámpa ikonnal)
     .idiom-list {
       list-style: none;
       padding: 0;
@@ -182,11 +211,13 @@ $border-color: #e2e8f0;
         margin-bottom: 16px;
         padding-left: 32px;
         position: relative;
+
         &::before {
           content: '💡';
           position: absolute;
           left: 0;
         }
+
         strong {
           color: $text-main;
         }
@@ -194,7 +225,9 @@ $border-color: #e2e8f0;
     }
   }
 
-  // --- INLINE TASK CARDS ---
+  // ==========================================================================
+  // FELADAT INDÍTÓ KÁRTYÁK (Inline Task Cards)
+  // ==========================================================================
   .inline-task-card {
     display: flex;
     justify-content: space-between;
@@ -207,6 +240,7 @@ $border-color: #e2e8f0;
     position: relative;
     overflow: hidden;
 
+    // A bal oldali színes sáv
     &::before {
       content: '';
       position: absolute;
@@ -241,11 +275,13 @@ $border-color: #e2e8f0;
         border-radius: 6px;
         margin-bottom: 8px;
       }
+
       h3 {
         margin: 0;
         color: $text-main;
         font-size: 1.4rem;
       }
+
       p {
         margin: 4px 0 0 0;
         color: $text-muted;
@@ -253,12 +289,11 @@ $border-color: #e2e8f0;
       }
     }
 
+    // A "Task X" felirat pill formája
     .task-number-tag {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-
-      // Színek és háttér
       background: linear-gradient(
         135deg,
         rgba($brand-primary, 0.1) 0%,
@@ -266,27 +301,21 @@ $border-color: #e2e8f0;
       );
       color: $brand-primary;
       border: 1px solid rgba($brand-primary, 0.2);
-
-      // Formázás
       padding: 4px 14px;
-      border-radius: 99px; // Teljesen lekerekített "pill" forma
+      border-radius: 99px;
       font-size: 0.8rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-
-      // Elhelyezkedés
       margin-bottom: 16px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 
-      // Egy kis ikon az elejére (opcionális)
       &::before {
         content: '📝';
         margin-right: 6px;
         font-size: 0.9rem;
       }
 
-      // Animáció, ha ráközelít az egér
       &:hover {
         background: rgba($brand-primary, 0.15);
         border-color: $brand-primary;
@@ -305,6 +334,7 @@ $border-color: #e2e8f0;
       cursor: pointer;
       transition: all 0.2s;
       white-space: nowrap;
+
       &:hover {
         background: $brand-primary;
         transform: translateY(-2px);
@@ -319,6 +349,9 @@ $border-color: #e2e8f0;
   }
 }
 
+// ==========================================================================
+// KÉPEK ÉS KIFEJEZÉSEK (Phrases & Images)
+// ==========================================================================
 .image-container {
   display: flex;
   justify-content: center;
@@ -341,65 +374,190 @@ $border-color: #e2e8f0;
   grid-template-columns: 1fr;
   gap: 12px;
   margin: 24px 0;
-}
 
-.phrase-card {
-  display: flex;
-  align-items: center;
-  background: $white;
-  border: 1px solid $border-color;
-  padding: 12px 16px;
-  border-radius: 12px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: default;
-
-  // A szám jelölő a mondat előtt
-  .phrase-index {
-    width: 28px;
-    height: 28px;
-    background: rgba($brand-primary, 0.1);
-    color: $brand-primary;
-    border-radius: 8px;
+  .phrase-card {
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 0.85rem;
-    margin-right: 16px;
-    flex-shrink: 0;
-  }
-
-  .phrase-text {
-    color: $text-main;
-    font-size: 1.05rem;
-    font-weight: 500;
-  }
-
-  // Interaktív hatás
-  &:hover {
-    transform: translateX(8px);
-    border-color: $brand-primary;
-    background: linear-gradient(90deg, $white 0%, rgba($brand-primary, 0.02) 100%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    background: $white;
+    border: 1px solid $border-color;
+    padding: 12px 16px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: default;
 
     .phrase-index {
-      background: $brand-primary;
-      color: $white;
-      transform: scale(1.1);
-      transition: all 0.2s ease;
+      width: 28px;
+      height: 28px;
+      background: rgba($brand-primary, 0.1);
+      color: $brand-primary;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.85rem;
+      margin-right: 16px;
+      flex-shrink: 0;
+    }
+
+    .phrase-text {
+      color: $text-main;
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+
+    &:hover {
+      transform: translateX(8px);
+      border-color: $brand-primary;
+      background: linear-gradient(90deg, $white 0%, rgba($brand-primary, 0.02) 100%);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+      .phrase-index {
+        background: $brand-primary;
+        color: $white;
+        transform: scale(1.1);
+        transition: all 0.2s ease;
+      }
     }
   }
 }
-// Kiegészítés a Topic 2 stílusaihoz
 
+// ==========================================================================
+// EGYEDI SZAKASZOK (Történetfelvétel, Csoportmunka, Szerepjáték)
+// ==========================================================================
+
+// Kórelőzmény és tüdőhallgatás magyarázó blokk
+.history-auscultation-section {
+  @extend %task-card-base; // Felveszi az alap kártya stílusokat
+  background-color: #f8fafc;
+
+  .content-split {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+
+    .history-part,
+    .auscultation-part {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    h3 {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: #1e293b;
+      font-weight: normal;
+
+      strong {
+        font-weight: 700;
+      }
+    }
+
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #cbd5e1;
+      background: $white;
+
+      td {
+        border: 1px solid #cbd5e1;
+        padding: 12px 16px;
+        vertical-align: middle;
+        line-height: 1.6;
+        color: #334155;
+        font-size: 1.05rem;
+      }
+
+      .static-phrase {
+        font-weight: 600;
+        text-align: center;
+        width: 30%;
+      }
+
+      .middle-col {
+        white-space: nowrap;
+      }
+    }
+
+    .auscultation-part {
+      ul {
+        list-style-type: disc;
+        padding-left: 20px;
+        line-height: 1.6;
+        color: #334155;
+        font-size: 1.05rem;
+
+        li {
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
+}
+
+// 16-os Role Play (Szerepjáték) Feladat
+.role-play-task {
+  @extend %task-card-base; // Felveszi az alap kártya stílusokat
+
+  .task-header {
+    margin-bottom: 25px;
+
+    .task-number-tag {
+      display: inline-block;
+      background: #f3e8ff;
+      color: #9333ea;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+    }
+
+    h3 {
+      display: inline;
+      color: #1e293b;
+      margin-right: 8px;
+    }
+
+    p {
+      display: inline;
+      color: #1e293b;
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+  }
+
+  .role-play-container {
+    border: 1px solid #1e293b;
+    border-radius: 4px;
+    background: $white;
+
+    .role-card {
+      padding: 16px 20px;
+      border-bottom: 1px solid #1e293b;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      p {
+        color: #334155;
+        line-height: 1.6;
+        font-size: 1.05rem;
+        margin: 0;
+
+        strong {
+          color: #0f172a;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+// 10-es Csoportmunka Táblázat (Beírható)
 .inline-table-task {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 30px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e2e8f0;
-  margin-top: 30px; // Távolság a felette lévő elemektől
-  margin-bottom: 30px;
+  @extend %task-card-base; // Felveszi az alap kártya stílusokat
 
   .task-header {
     margin-bottom: 20px;
@@ -407,17 +565,19 @@ $border-color: #e2e8f0;
     .task-number-tag {
       display: inline-block;
       background: #e0e7ff;
-      color: #6366f1; // Brand primary
+      color: $brand-primary;
       padding: 4px 10px;
       border-radius: 6px;
       font-weight: bold;
       font-size: 0.85rem;
       margin-bottom: 10px;
     }
+
     h3 {
       color: #1e293b;
       margin-bottom: 8px;
     }
+
     p {
       color: #64748b;
       line-height: 1.5;
@@ -426,7 +586,7 @@ $border-color: #e2e8f0;
 
   .table-responsive {
     width: 100%;
-    overflow-x: auto; // Ha túl kicsi a képernyő (mobil), lehessen görgetni oldalra
+    overflow-x: auto;
   }
 
   .group-work-table {
@@ -442,8 +602,8 @@ $border-color: #e2e8f0;
     }
 
     th {
-      background-color: #475569; // A tankönyvi képhez hasonló sötét szürkéskék
-      color: #ffffff;
+      background-color: #475569;
+      color: $white;
       font-weight: 600;
       font-size: 1.05rem;
     }
@@ -455,31 +615,30 @@ $border-color: #e2e8f0;
       &.allergen-name {
         color: #1e293b;
         font-weight: 500;
-        width: 20%; // Az első oszlop ne foglaljon túl nagy helyet
+        width: 20%;
         vertical-align: middle;
       }
 
-      // A szövegbeviteli mezők stílusai
       textarea {
         width: 100%;
-        min-height: 70px; // Elég hely több mondatnak
+        min-height: 70px;
         padding: 10px;
         border: 2px dashed #cbd5e1;
         border-radius: 8px;
-        background: #ffffff;
+        background: $white;
         font-family: inherit;
         font-size: 0.95rem;
         color: #1e293b;
-        resize: vertical; // Csak lefelé lehessen nagyítani
+        resize: vertical;
         outline: none;
         transition:
           border-color 0.2s,
           box-shadow 0.2s;
 
         &:focus {
-          border-color: #6366f1;
+          border-color: $brand-primary;
           border-style: solid;
-          box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+          box-shadow: 0 0 0 3px rgba($brand-primary, 0.1);
         }
 
         &::placeholder {

@@ -48,6 +48,15 @@ export class HomeComponent {
       color: '#8b5cf6',
       isAvailable: true,
     },
+    {
+      id: 5,
+      title: 'Topic 5: People in Dentistry',
+      description:
+        'Explore the dental team, practice types, and specializations in modern dentistry.',
+      icon: '🦷',
+      color: '#6137cd',
+      isAvailable: true,
+    },
   ];
 
   // --- ÚJ: Szavazás adatai (Mentimeter alapján) ---
