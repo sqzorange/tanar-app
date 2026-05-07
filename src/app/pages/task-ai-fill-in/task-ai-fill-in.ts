@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AI_FILL_IN_DATABASE, AiFillInTask } from '../../tasks-data';
+import { AI_FILL_IN_DATABASE, AiFillInTask } from '../../taskData/tasks-data';
 
 import { AiGradingService, GradingResult } from '../../services/ai-grading';
 

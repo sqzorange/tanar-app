@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of } from 'rxjs';
-import { ListeningQuestion } from '../tasks-data';
+import { ListeningQuestion } from '../taskData/tasks-data';
 
 export interface GradingResult {
   status: 'correct' | 'partial' | 'incorrect';

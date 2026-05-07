@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QUIZ_DATABASE, QuizTask } from '../../tasks-data'; // Importáld a megfelelő útvonalról!
+import { QUIZ_DATABASE, QuizTask } from '../../taskData/tasks-data'; // Importáld a megfelelő útvonalról!
 
 @Component({
   selector: 'app-task-quiz',

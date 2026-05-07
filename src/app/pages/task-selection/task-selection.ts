@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SELECTION_DATABASE, SelectionTask } from '../../tasks-data';
+import { SELECTION_DATABASE, SelectionTask } from '../../taskData/tasks-data';
 
 @Component({
   selector: 'app-task-selection',

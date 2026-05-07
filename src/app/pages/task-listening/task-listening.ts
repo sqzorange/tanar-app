@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { LISTENING_DATABASE, ListeningTask } from '../../tasks-data';
+import { LISTENING_DATABASE, ListeningTask } from '../../taskData/tasks-data';
 import { AiGradingService, GradingResult } from '../../services/ai-grading';
 
 @Component({

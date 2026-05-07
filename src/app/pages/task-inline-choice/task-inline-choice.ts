@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { INLINE_CHOICE_DATABASE, InlineChoiceTask } from '../../tasks-data';
+import { INLINE_CHOICE_DATABASE, InlineChoiceTask } from '../../taskData/tasks-data';
 
 @Component({
   selector: 'app-task-inline-choice',

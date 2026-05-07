@@ -9,7 +9,7 @@ import {
   CdkDrag,
   CdkDropList,
 } from '@angular/cdk/drag-drop';
-import { DRAG_DROP_DATABASE, DragDropTask } from '../../tasks-data';
+import { DRAG_DROP_DATABASE, DragDropTask } from '../../taskData/tasks-data';
 
 @Component({
   selector: 'app-task-drag-drop',
