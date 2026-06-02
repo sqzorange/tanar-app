@@ -1,5 +1,5 @@
 <div class="lesson-layout">
-  <header class="lesson-header">
+  <header class="lesson-header no-print">
     <button class="back-btn" (click)="goBack()">⬅ Back to Dashboard</button>
     <h1>Unit 2: Health and Illness</h1>
     <p class="subtitle">
@@ -27,7 +27,7 @@
       </p>
     </section>
 
-    <div class="inline-task-card accent-blue">
+    <div class="inline-task-card accent-blue screen-only">
       <div class="task-info">
         <div class="task-number-tag">Task 1 - Collect synonyms for the following expressions</div>
         <span class="task-badge">Vocabulary</span>
@@ -35,6 +35,19 @@
         <p>Find medical and common synonyms for "ill" and "not ill".</p>
       </div>
       <button class="start-task-btn" (click)="openTask('dragdrop', '2_1')">Start Task ➡️</button>
+    </div>
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 1</span>
+        <h3>Synonym Collection (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div *ngFor="let zone of dragDropData['2_1']?.dropZones" class="dnd-row">
+          <span class="dnd-label">{{ zone.label }}</span>
+          <span class="dnd-arrow">➔</span>
+          <span class="dnd-answer">{{ zone.correctAnswer }}</span>
+        </div>
+      </div>
     </div>
 
     <section class="text-block">
@@ -51,7 +64,7 @@
       </p>
     </section>
 
-    <div class="inline-task-card accent-orange">
+    <div class="inline-task-card accent-orange screen-only">
       <div class="task-info">
         <div class="task-number-tag">
           Task 2 - What can the patient mean. What can be the possible meanings of the following
@@ -62,6 +75,19 @@
         <p>Analyze statements like "I was sick this morning" to find the possible meaning.</p>
       </div>
       <button class="start-task-btn" (click)="openTask('dragdrop', '2_2')">Analyze ➡️</button>
+    </div>
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 2</span>
+        <h3>What can the patient mean? (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div *ngFor="let zone of dragDropData['2_2']?.dropZones" class="dnd-row">
+          <span class="dnd-label">{{ zone.label }}</span>
+          <span class="dnd-arrow">➔</span>
+          <span class="dnd-answer">{{ zone.correctAnswer }}</span>
+        </div>
+      </div>
     </div>
 
     <section class="text-block">
@@ -92,7 +118,7 @@
       </p>
     </section>
 
-    <div class="inline-task-card accent-orange">
+    <div class="inline-task-card accent-orange screen-only">
       <div class="task-info">
         <div class="task-number-tag">
           Task 3 - Complete the conversation with expressions from above. Use one word in each gap.
@@ -103,13 +129,25 @@
       </div>
       <button class="start-task-btn" (click)="openTask('dragdrop', '2_3')">Give Advice ➡️</button>
     </div>
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 3</span>
+        <h3>Healthy Living Advice pt. 1 (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div *ngFor="let zone of dragDropData['2_3']?.dropZones" class="dnd-row">
+          <span class="dnd-label">{{ zone.label }}</span>
+          <span class="dnd-arrow">➔</span>
+          <span class="dnd-answer">{{ zone.correctAnswer }}</span>
+        </div>
+      </div>
+    </div>
 
-    <div class="inline-task-card accent-orange">
+    <div class="inline-task-card accent-orange screen-only">
       <div class="task-info">
         <div class="task-number-tag">
           Task 4 - Choose the correct word to complete each sentence..
         </div>
-
         <span class="task-badge">Discussion</span>
         <h3>Healthy Living Advice pt. 2</h3>
         <p>Choose the correct word to complete each sentence.</p>
@@ -117,6 +155,24 @@
       <button class="start-task-btn" (click)="openTask('inline-choice', '2_4_sentences')">
         Start Task ➡️
       </button>
+    </div>
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 4</span>
+        <h3>Healthy Living Advice pt. 2 (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div
+          *ngFor="let s of inlineChoiceData['2_4_sentences']?.sentences; let i = index"
+          class="q-block"
+        >
+          <p class="q-text">
+            <strong>{{ i + 1 }}.</strong> {{ s.before }}
+            <span class="filled-answer">{{ s.correctAnswer }}</span>
+            {{ s.after }}
+          </p>
+        </div>
+      </div>
     </div>
 
     <section class="text-block">
@@ -150,7 +206,7 @@
       </p>
     </section>
 
-    <div class="inline-task-card accent-green">
+    <div class="inline-task-card accent-green screen-only">
       <div class="task-info">
         <div class="task-number-tag">
           Task 5 - Fill in the table with an appropriate expression.
@@ -166,8 +222,26 @@
         Start Task ➡️
       </button>
     </div>
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 5</span>
+        <h3>Clinical Symptom Questions (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div
+          *ngFor="let s of aiFillInData['2_5_ai_fill']?.sentences; let i = index"
+          class="q-block"
+        >
+          <p class="q-text">
+            <strong>{{ i + 1 }}.</strong> {{ s.before }}
+            <span class="filled-answer">{{ formatAiAnswer(s.correctAnswer) }}</span>
+            {{ s.after }}
+          </p>
+        </div>
+      </div>
+    </div>
 
-    <div class="inline-task-card accent-orange">
+    <div class="inline-task-card accent-orange screen-only">
       <div class="task-info">
         <div class="task-number-tag">
           Task 6 - Fill in the table with the right form or expression.
@@ -177,6 +251,38 @@
         <p>Fill in the table with the right form or expression.</p>
       </div>
       <button class="start-task-btn" (click)="openTask('dragdrop', '2_6')">Match Terms ➡️</button>
+    </div>
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 6</span>
+        <h3>Other functions (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <table *ngIf="dragDropData['2_6']?.type === 'list-to-table'" class="print-table">
+          <thead>
+            <tr>
+              <th *ngFor="let header of dragDropData['2_6']?.tableHeaders">{{ header }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of dragDropData['2_6']?.tableRows">
+              <td *ngFor="let cell of row">
+                <span *ngIf="cell.type === 'static'">{{ cell.value }}</span>
+                <span *ngIf="cell.type === 'drop'" class="filled-answer">
+                  {{ getDropAnswer(cell.value, dragDropData['2_6']?.dropZones) }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="dragDropData['2_6']?.type !== 'list-to-table'">
+          <div *ngFor="let zone of dragDropData['2_6']?.dropZones" class="dnd-row">
+            <span class="dnd-label">{{ zone.label }}</span>
+            <span class="dnd-arrow">➔</span>
+            <span class="dnd-answer">{{ zone.correctAnswer }}</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <section class="text-block history-auscultation-section">
@@ -207,7 +313,7 @@
       </div>
     </section>
 
-    <div class="inline-task-card accent-purple">
+    <div class="inline-task-card accent-purple screen-only">
       <div class="task-info">
         <div class="task-number-tag">Task 7</div>
         <span class="task-badge">Matching</span>
@@ -219,8 +325,21 @@
       </div>
       <button class="start-task-btn" (click)="openTask('dragdrop', '2_7')">Start Task ➡️</button>
     </div>
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 7</span>
+        <h3>Symptoms and Questions (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div *ngFor="let zone of dragDropData['2_7']?.dropZones" class="dnd-row">
+          <span class="dnd-label">{{ zone.label }}</span>
+          <span class="dnd-arrow">➔</span>
+          <span class="dnd-answer">{{ zone.correctAnswer }}</span>
+        </div>
+      </div>
+    </div>
 
-    <div class="inline-task-card accent-blue">
+    <div class="inline-task-card accent-blue screen-only">
       <div class="task-info">
         <div class="task-number-tag">Task 8</div>
         <span class="task-badge">AI Fill-in</span>
@@ -234,8 +353,26 @@
         Start Task ➡️
       </button>
     </div>
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 8</span>
+        <h3>Describing Symptoms (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div
+          *ngFor="let s of aiFillInData['2_8_ai_fill']?.sentences; let i = index"
+          class="q-block"
+        >
+          <p class="q-text">
+            <strong>{{ i + 1 }}.</strong> {{ s.before }}
+            <span class="filled-answer">{{ formatAiAnswer(s.correctAnswer) }}</span>
+            {{ s.after }}
+          </p>
+        </div>
+      </div>
+    </div>
 
-    <div class="inline-task-card accent-green">
+    <div class="inline-task-card accent-green screen-only">
       <div class="task-info">
         <div class="task-number-tag">Task 9</div>
         <span class="task-badge">Inline Choice</span>
@@ -248,6 +385,24 @@
       <button class="start-task-btn" (click)="openTask('inline-choice', '2_9_expressions')">
         Start Task ➡️
       </button>
+    </div>
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 9</span>
+        <h3>Body Functions Expressions (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div
+          *ngFor="let s of inlineChoiceData['2_9_expressions']?.sentences; let i = index"
+          class="q-block"
+        >
+          <p class="q-text">
+            <strong>{{ i + 1 }}.</strong> {{ s.before }}
+            <span class="filled-answer">{{ s.correctAnswer }}</span>
+            {{ s.after }}
+          </p>
+        </div>
+      </div>
     </div>
 
     <div class="task-section inline-table-task">
@@ -272,33 +427,33 @@
           <tbody>
             <tr>
               <td class="allergen-name">Computers</td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
             </tr>
             <tr>
               <td class="allergen-name">Chocolate</td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
             </tr>
             <tr>
               <td class="allergen-name">Shopping malls</td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
             </tr>
             <tr>
               <td class="allergen-name">Paper</td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
             </tr>
             <tr>
               <td class="allergen-name">Flowers</td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
             </tr>
             <tr>
               <td class="allergen-name">Plastic</td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
-              <td><textarea placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
+              <td><textarea class="no-print" placeholder="Type your ideas here..."></textarea></td>
             </tr>
           </tbody>
         </table>
@@ -333,7 +488,7 @@
       <div class="task-footer">Giving babies peanuts and eggs may avoid allergies</div>
     </div>
 
-    <div class="inline-task-card accent-purple">
+    <div class="inline-task-card accent-purple screen-only">
       <div class="task-info">
         <div class="task-number-tag">Task 12</div>
         <span class="task-badge">True / False</span>
@@ -347,7 +502,26 @@
         Start Task ➡️
       </button>
     </div>
-    <div class="inline-task-card accent-purple">
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 12</span>
+        <h3>Before Listening - True/False (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div
+          *ngFor="let s of inlineChoiceData['2_12_tf']?.sentences; let i = index"
+          class="q-block"
+        >
+          <p class="q-text">
+            <strong>{{ i + 1 }}.</strong> {{ s.before }}
+            <span class="filled-answer">{{ s.correctAnswer }}</span>
+            {{ s.after }}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="inline-task-card accent-purple screen-only">
       <div class="task-info">
         <div class="task-number-tag">Task 12 part 2</div>
         <span class="task-badge">SYNONYM MATCH</span>
@@ -357,7 +531,21 @@
         Start Task ➡️
       </button>
     </div>
-    <div class="inline-task-card accent-purple">
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 12 pt. 2</span>
+        <h3>Synonym Match (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div *ngFor="let zone of dragDropData['2_12_part2_match']?.dropZones" class="dnd-row">
+          <span class="dnd-label">{{ zone.label }}</span>
+          <span class="dnd-arrow">➔</span>
+          <span class="dnd-answer">{{ zone.correctAnswer }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="inline-task-card accent-purple screen-only">
       <div class="task-info">
         <div class="task-number-tag">Task 13 - Listening: Comprehension Questions.</div>
         <span class="task-badge">Assessment</span>
@@ -368,7 +556,27 @@
         Start Task ➡️
       </button>
     </div>
-    <div class="inline-task-card accent-purple">
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 13</span>
+        <h3>Listening Comprehension (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div
+          *ngFor="let q of listeningData['2_13_listening']?.questions; let i = index"
+          class="q-block"
+        >
+          <p class="q-text">
+            <strong>Q{{ i + 1 }}.</strong> {{ q.text }}
+          </p>
+          <p class="q-answer">
+            ➔ <strong>{{ q.correctAnswer }}</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="inline-task-card accent-purple screen-only">
       <div class="task-info">
         <div class="task-number-tag">Task 15 - Phrase Selection</div>
         <span class="task-badge">Assessment</span>
@@ -378,6 +586,22 @@
       <button class="start-task-btn" (click)="openTask('phrase-selection', '2_15_phrases')">
         Start Task ➡️
       </button>
+    </div>
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 15</span>
+        <h3>Phrase Selection (REFERENCE LIST)</h3>
+      </div>
+      <div class="task-questions">
+        <div *ngFor="let cat of phraseSelectionData['2_15_phrases']?.categories" class="q-block">
+          <p class="q-text">
+            <strong>{{ cat.title }}</strong>
+          </p>
+          <ul style="margin-top: 4px; padding-left: 20px">
+            <li *ngFor="let phrase of cat.phrases" style="margin-bottom: 4px">{{ phrase }}</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="task-section role-play-task">
@@ -423,4 +647,6 @@
       </div>
     </div>
   </article>
+
+  <button class="print-btn no-print" (click)="printPage()">🖨️ Print Document</button>
 </div>
