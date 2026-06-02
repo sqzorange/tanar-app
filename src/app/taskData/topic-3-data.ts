@@ -324,4 +324,38 @@ export const topic3AiFillIn: { [key: string]: AiFillInTask } = {
       },
     ],
   },
+  '3_3': {
+    id: '3_3',
+    title: 'Missing Letters',
+    instruction:
+      'Fill in the missing letters in the words representing parts of different body systems.',
+    sentences: [
+      {
+        before: '1. _ _ b _ c _ _ _ s (gland) — This is a part of the integumentary system. →',
+        after: '',
+        correctAnswer: 'sebaceous',
+      },
+      {
+        before: '2. _ _ r _ _ l _ _ _ — This is a part of the musculoskeletal system. →',
+        after: '',
+        correctAnswer: 'cartilage',
+      },
+      {
+        before: '3. _ _ r _ _ h _ _ _ _ d — This is a part of the endocrine system. →',
+        after: '',
+        correctAnswer: 'parathyroid',
+      },
+      {
+        before: '4. n _ _ _ p _ _ r _ _ _ — This is a part of the respiratory system. →',
+        after: '',
+        correctAnswer: 'nasopharynx',
+      },
+      {
+        before:
+          '5. g _ _ _ _ _ i _ _ _ _ t _ _ _ _ (tract) — This is a part of the digestive system. →',
+        after: '',
+        correctAnswer: 'gastrointestinal',
+      },
+    ],
+  },
 };

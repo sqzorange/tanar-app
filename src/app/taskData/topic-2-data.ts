@@ -469,6 +469,33 @@ export const topic2InlineChoice: { [key: string]: InlineChoiceTask } = {
 };
 
 export const topic2AiFillIn: { [key: string]: AiFillInTask } = {
+  '2_5_ai_fill': {
+    id: '2_5_ai_fill',
+    title: 'Task 5 - Clinical Expressions',
+    instruction: 'Fill in the missing expressions based on typical doctor-patient questions.',
+    sentences: [
+      {
+        before: 'Is your',
+        after: 'smell / taste normal?',
+        correctAnswer: 'sense of',
+      },
+      {
+        before: 'Is your sense of smell / taste',
+        after: '?',
+        correctAnswer: 'normal | okay | fine',
+      },
+      {
+        before: 'Have you',
+        after: 'any numbness in your fingers or toes?',
+        correctAnswer: 'noticed | experienced | had | felt',
+      },
+      {
+        before: 'Have you noticed any numbness',
+        after: 'your fingers or toes?',
+        correctAnswer: 'in',
+      },
+    ],
+  },
   '2_8_ai_fill': {
     id: '2_8_ai_fill',
     title: 'Task 8 - Describing Symptoms',
