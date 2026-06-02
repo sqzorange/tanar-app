@@ -1,3 +1,4 @@
+/* pages/topic-four/topic-four.scss */
 $brand-primary: #6366f1;
 $bg-app: #f8fafc;
 $white: #ffffff;
@@ -5,22 +6,23 @@ $text-main: #1e293b;
 $text-muted: #475569;
 $border-color: #e2e8f0;
 
+.print-only {
+  display: none !important;
+}
+
 .lesson-layout {
   min-height: 100vh;
   background-color: $bg-app;
   padding: 40px 20px;
-
   .lesson-header {
     max-width: 800px;
     margin: 0 auto 40px auto;
-
     .back-btn {
       background: $white;
       border: none;
       color: $text-muted;
       font-weight: 600;
       cursor: pointer;
-      margin-bottom: 24px;
       padding: 10px 16px;
       border-radius: 8px;
       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -30,13 +32,11 @@ $border-color: #e2e8f0;
         transform: translateX(-4px);
       }
     }
-
     h1 {
       font-size: 2.5rem;
       font-weight: 800;
       color: $text-main;
-      margin-bottom: 8px;
-      line-height: 1.2;
+      margin-top: 16px;
     }
     .subtitle {
       font-size: 1.15rem;
@@ -52,14 +52,12 @@ $border-color: #e2e8f0;
   border-radius: 16px;
   padding: 40px 48px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-
   @media (max-width: 768px) {
     padding: 24px;
   }
 
   .text-block {
     margin-bottom: 40px;
-
     h2 {
       font-size: 1.75rem;
       color: $text-main;
@@ -69,164 +67,131 @@ $border-color: #e2e8f0;
       display: inline-block;
     }
     h3 {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: $text-main;
       margin-top: 32px;
-      margin-bottom: 16px;
       font-weight: 700;
     }
     p {
       font-size: 1.1rem;
       line-height: 1.7;
       color: $text-muted;
-      margin-bottom: 16px;
     }
-
-    .medical-term {
-      color: $brand-primary;
-      cursor: help;
-      position: relative;
-      border-bottom: 2px dashed rgba($brand-primary, 0.3);
-      transition: all 0.2s;
-
-      &:hover {
-        background-color: rgba($brand-primary, 0.05);
-        border-bottom-color: $brand-primary;
-
-        &::after,
-        &::before {
-          opacity: 1;
-          visibility: visible;
-          transform: translateX(-50%) translateY(0);
-        }
-      }
-
-      &::after {
-        content: attr(data-desc);
-        position: absolute;
-        bottom: 140%;
-        left: 50%;
-        transform: translateX(-50%) translateY(10px);
-        width: 220px;
-        padding: 12px 16px;
-        background: $text-main;
-        color: $white;
-        font-size: 0.9rem;
-        line-height: 1.4;
-        font-weight: 400;
-        text-align: center;
-        border-radius: 10px;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.25);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 100;
-        pointer-events: none;
-      }
-
-      &::before {
-        content: '';
-        position: absolute;
-        bottom: 125%;
-        left: 50%;
-        transform: translateX(-50%) translateY(10px);
-        border: 8px solid transparent;
-        border-top-color: $text-main;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 100;
-      }
+    .summary {
+      background: #f1f5f9;
+      padding: 16px;
+      border-radius: 8px;
+      line-height: 1.8;
+      margin-top: 20px;
+      color: $text-main;
+      font-size: 1.05rem;
     }
-
-    .vocab-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-
-      .vocab-item {
-        background: #f1f5f9;
-        padding: 16px;
-        border-radius: 12px;
-        font-size: 1.05rem;
-        color: $text-main;
-        border-left: 4px solid $brand-primary;
-        display: flex;
-        flex-direction: column;
-        transition: all 0.2s ease;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-
-        &:hover {
-          background: #f8fafc;
-          border-color: darken($brand-primary, 10%);
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-
-        .word-header {
-          display: flex;
-          align-items: center;
-          justify-content: flex-start;
-          gap: 12px;
-
-          strong {
-            font-size: 1.1rem;
-            color: $text-main;
-          }
-
-          .tts-btn {
-            background-color: rgba($brand-primary, 0.1);
-            color: $brand-primary;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-
-            &:hover {
-              background-color: $brand-primary;
-              color: $white;
-              transform: scale(1.1);
-              box-shadow: 0 2px 4px rgba($brand-primary, 0.3);
-            }
-          }
-        }
-
-        span {
-          font-size: 0.95rem;
-          color: $text-muted;
-          margin-top: 8px;
-          margin-left: 46px;
-          font-style: italic;
-        }
-      }
-    }
-
     .idiom-list {
-      list-style-type: none;
+      list-style: none;
       padding: 0;
       li {
         font-size: 1.1rem;
-        line-height: 1.6;
+        margin-bottom: 12px;
         color: $text-muted;
-        margin-bottom: 16px;
-        padding-left: 28px;
-        position: relative;
-        &::before {
-          content: '💡';
-          position: absolute;
-          left: 0;
-          top: 0;
+      }
+      &.no-bullets li {
+        padding-left: 0;
+      }
+    }
+  }
+
+  // A TANKÖNYVI KÁRTYÁS SZÓSZEDET (pl. Teacher Titles)
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+    .vocab-item {
+      background: #f8fafc;
+      padding: 16px;
+      border-radius: 12px;
+      border-left: 4px solid $brand-primary;
+      border: 1px solid $border-color;
+      page-break-inside: avoid;
+      .word-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        .tts-btn {
+          background: rgba($brand-primary, 0.1);
+          border: none;
+          cursor: pointer;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          color: $brand-primary;
+          transition: all 0.2s;
+          &:hover {
+            background: $brand-primary;
+            color: $white;
+            transform: scale(1.1);
+          }
         }
+      }
+      span {
+        display: block;
+        font-size: 0.9rem;
+        color: $text-muted;
+        margin-top: 6px;
+        font-style: italic;
+      }
+    }
+  }
+
+  // AZ EGYSZERŰSÍTETT SZÓSZEDET (Academic Glossary a lap alján)
+  .simple-glossary {
+    column-count: 1;
+    @media (min-width: 600px) {
+      column-count: 2;
+    }
+    @media (min-width: 900px) {
+      column-count: 3;
+    }
+    column-gap: 32px;
+    margin-top: 24px;
+
+    .simple-glossary-item {
+      break-inside: avoid;
+      margin-bottom: 12px;
+      font-size: 1.05rem;
+      line-height: 1.4;
+      color: $text-main;
+      border-bottom: 1px dashed $border-color;
+      padding-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      .tts-btn-small {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        padding: 0;
+        color: $brand-primary;
+        opacity: 0.6;
+        transition: opacity 0.2s;
+        margin-top: 2px;
+        &:hover {
+          opacity: 1;
+          transform: scale(1.1);
+        }
+      }
+      .term-text {
+        flex: 1;
         strong {
-          color: $text-main;
           display: block;
-          margin-bottom: 4px;
+          color: $text-main;
+          font-weight: 600;
+        }
+        span {
+          color: $text-muted;
+          font-style: italic;
+          font-size: 0.95rem;
         }
       }
     }
@@ -240,16 +205,9 @@ $border-color: #e2e8f0;
     border: 1px solid $border-color;
     border-radius: 12px;
     padding: 24px 32px;
-    margin: 48px 0;
+    margin: 40px 0;
     position: relative;
     overflow: hidden;
-
-    @media (max-width: 600px) {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 20px;
-    }
-
     &::before {
       content: '';
       position: absolute;
@@ -258,7 +216,6 @@ $border-color: #e2e8f0;
       width: 6px;
       height: 100%;
     }
-
     &.accent-blue::before {
       background-color: #3b82f6;
     }
@@ -271,62 +228,206 @@ $border-color: #e2e8f0;
     &.accent-purple::before {
       background-color: #8b5cf6;
     }
-    &.accent-red::before {
-      background-color: #ef4444;
-    }
     &.accent-dark::before {
       background-color: #334155;
     }
-    &.accent-success::before {
-      background-color: #22c55e;
-    }
-
     .task-info {
-      max-width: 65%;
-      @media (max-width: 600px) {
-        max-width: 100%;
-      }
-
+      max-width: 100%;
       .task-badge {
         display: inline-block;
         background: #e2e8f0;
-        color: #475569;
-        font-size: 0.8rem;
-        font-weight: 700;
-        text-transform: uppercase;
         padding: 4px 8px;
         border-radius: 6px;
-        margin-bottom: 12px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #475569;
+        margin-bottom: 8px;
       }
       h3 {
-        margin: 0 0 8px 0;
-        color: $text-main;
-        font-size: 1.4rem;
+        margin: 6px 0;
+        font-size: 1.3rem;
       }
       p {
         margin: 0;
         color: $text-muted;
-        font-size: 1rem;
-        line-height: 1.5;
       }
     }
-
     .start-task-btn {
       background: $text-main;
       color: $white;
       border: none;
-      padding: 14px 24px;
-      border-radius: 10px;
-      font-size: 1.05rem;
+      padding: 12px 20px;
+      border-radius: 8px;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
+      margin-left: 12px;
       white-space: nowrap;
       &:hover {
         background: $brand-primary;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
       }
+    }
+    @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      .start-task-btn {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.print-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+  transition: all 0.2s;
+  &:hover {
+    background: #059669;
+    transform: translateY(-2px);
+  }
+}
+
+// ==========================================================
+// NYOMTATÁSI BEÁLLÍTÁSOK (@media print)
+// ==========================================================
+@media print {
+  .screen-only,
+  .no-print,
+  .tts-btn,
+  .print-btn,
+  .back-btn {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+
+  .lesson-layout,
+  .lesson-content {
+    background: white !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+  }
+  .text-block,
+  .vocab-item,
+  .printable-task {
+    page-break-inside: avoid !important;
+  }
+
+  .printable-task {
+    margin: 35px 0 !important;
+    padding: 20px !important;
+    border: 2px solid #000 !important;
+    border-radius: 6px !important;
+    background: #fff !important;
+    .task-heading {
+      border-bottom: 2px solid #666 !important;
+      padding-bottom: 8px !important;
+      margin-bottom: 16px !important;
+      h3 {
+        margin: 8px 0 0 0 !important;
+        font-size: 1.15rem !important;
+        color: #000 !important;
+        line-height: 1.4;
+      }
+      .print-badge {
+        font-size: 0.8rem;
+        font-weight: bold;
+        color: #333;
+      }
+    }
+  }
+
+  .dashed-line {
+    width: 100%;
+    border-bottom: 1px dashed #000 !important;
+    height: 35px;
+  }
+  .square-box {
+    display: inline-block;
+    width: 30px;
+    height: 20px;
+    border: 1px solid #000 !important;
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+
+  .image-style-questions {
+    .scan-row {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 16px !important;
+      line-height: 1.5;
+      font-size: 1.05rem;
+      .scan-question {
+        margin-right: 8px;
+      }
+      .scan-line-answer {
+        flex: 1;
+        border-bottom: 1px solid #000 !important;
+        font-family: 'Courier New', Courier, monospace !important;
+        font-weight: bold !important;
+        padding-left: 6px;
+        color: #000 !important;
+      }
+    }
+  }
+
+  .print-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    th,
+    td {
+      border: 1px solid #000 !important;
+      padding: 10px !important;
+      text-align: left;
+      font-size: 0.95rem !important;
+      line-height: 1.4;
+      vertical-align: middle;
+    }
+    th {
+      background-color: #f2f2f2 !important;
+      font-weight: bold;
+    }
+    .match-cell {
+      text-align: center !important;
+      font-family: 'Courier New', monospace !important;
+      font-weight: bold !important;
+      font-size: 1.1rem !important;
+      background: #fafafa !important;
+    }
+    .filled-answer {
+      font-weight: bold !important;
+      text-decoration: underline !important;
+      font-family: 'Courier New', monospace !important;
+      color: #000 !important;
+    }
+  }
+
+  // 3-OSZLOPOS SZÓSZEDET (GLOSSARY) STÍLUSA PAPÍRON
+  .print-glossary {
+    margin-top: 40px !important;
+    .glossary-columns {
+      column-count: 3;
+      column-gap: 40px;
+    }
+    .glossary-print-item {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      margin-bottom: 16px !important;
+      font-family: 'Times New Roman', Times, serif !important;
+      font-size: 1.05rem !important;
+      line-height: 1.3 !important;
+      color: #000 !important;
     }
   }
 }

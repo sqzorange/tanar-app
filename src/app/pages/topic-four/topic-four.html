@@ -1,334 +1,460 @@
 <div class="lesson-layout">
-  <header class="lesson-header">
+  <header class="lesson-header no-print">
     <button class="back-btn" (click)="goBack()">⬅ Back to Dashboard</button>
     <h1>Topic 4: Dental Education</h1>
     <p class="subtitle">
       Explore the goals of education, the structure of dental studies at the University of Szeged,
-      international degree titles, and essential academic vocabulary.
+      international degree titles, and academic regulations.
     </p>
   </header>
 
   <article class="lesson-content">
-    <div class="inline-task-card accent-blue">
+    <div class="inline-task-card accent-blue screen-only">
       <div class="task-info">
         <span class="task-badge">Task 1</span>
         <h3>Opinion Exchange</h3>
         <p>
-          What are the main goals of education? Discuss with your neighbour and order the sentences
-          by importance.
+          What are the main goals of education? Put the following sentences in your order of
+          importance.
         </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('discussion', 1)">Start Task 1 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('dragdrop', '4_1')">Start Task 1 ➡️</button>
+    </div>
+
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 1</span>
+        <h3>
+          1) Opinion exchange - What are the main goals of education? Put the following sentences in
+          your order of importance. (WORKSHEET)
+        </h3>
+      </div>
+      <div class="task-questions">
+        <p>
+          <em
+            >Rank the items below by placing numbers (1-9) in the boxes based on your priority:</em
+          >
+        </p>
+        <div *ngFor="let opt of dragDropData['4_1']?.availableOptions" class="scan-row">
+          <span class="square-box"></span>
+          <span class="scan-question">{{ opt }}</span>
+        </div>
+      </div>
     </div>
 
     <section class="text-block">
-      <h2>The Value of Education</h2>
-      <p>
-        Education serves many purposes in our lives and society. Consider how you would rank the
-        following goals:
-      </p>
-      <ul class="idiom-list">
-        <li>
-          <strong>Knowledge & Skills:</strong> Education provides knowledge to and develops skills
-          in individuals.
-        </li>
-        <li>
-          <strong>Career Preparation:</strong> It prepares you for your future job and broadens your
-          options of seeking a career.
-        </li>
-        <li>
-          <strong>Worldview:</strong> It enables you to achieve greater understanding and
-          appreciation of our world, and opens your horizons.
-        </li>
-        <li><strong>Financial Success:</strong> It enables you to earn a lot of money.</li>
-        <li>
-          <strong>Personal Growth:</strong> It allows clever youth to develop themselves and is the
-          key to success.
-        </li>
-        <li>
-          <strong>Global Impact:</strong> It is a powerful weapon to make a change in the world.
-        </li>
+      <h2>Education</h2>
+      <ul class="idiom-list no-bullets">
+        <li>a) provides knowledge to and develops skills in individuals</li>
+        <li>b) prepares you for your future job</li>
+        <li>c) enables you to achieve greater understanding and appreciation of our world</li>
+        <li>d) enables you to earn a lot of money</li>
+        <li>e) opens your horizons</li>
+        <li>f) allows clever youth to develop themselves</li>
+        <li>g) broadens your options of seeking a career</li>
+        <li>h) is the key to success</li>
+        <li>i) is a powerful weapon to make a change in the world</li>
       </ul>
     </section>
 
-    <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
-
-    <div class="inline-task-card accent-orange">
-      <div class="task-info">
+    <div class="inline-task-card accent-orange screen-only">
+      <div class="task-info" style="max-width: 100%">
         <span class="task-badge">Task 2</span>
-        <h3>Reading Comprehension</h3>
+        <h3>Partner Discussion</h3>
+        <p>Discuss the questions below with a partner about your university choice.</p>
+
+        <ul style="margin-top: 20px; padding-left: 24px; list-style-type: none">
+          <li style="font-size: 1.15rem; color: #1e293b; margin-bottom: 12px; position: relative">
+            <span style="position: absolute; left: -24px">💬</span>
+            <strong>Why did you choose dentistry to study?</strong>
+          </li>
+          <li style="font-size: 1.15rem; color: #1e293b; position: relative">
+            <span style="position: absolute; left: -24px">💬</span>
+            <strong>Why did you choose the University of Szeged?</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 2</span>
+        <h3>2) Discuss the questions below with a partner.</h3>
+      </div>
+      <div class="task-questions">
+        <p>• Why did you choose dentistry to study?</p>
+        <div class="dashed-line"></div>
+        <p style="margin-top: 15px">• Why did you choose the University of Szeged?</p>
+        <div class="dashed-line"></div>
+      </div>
+    </div>
+
+    <hr class="no-print" style="margin: 32px 0; border: none; border-top: 1px dashed #e2e8f0" />
+
+    <div class="inline-task-card accent-green screen-only">
+      <div class="task-info">
+        <span class="task-badge">Task 3</span>
+        <h3>Scan and Find Information</h3>
         <p>
-          Discuss why you chose dentistry and the University of Szeged. Then, scan the text to find
-          specific information about the program.
+          Scan the text below to find specific info about the dental faculty program milestones.
         </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('quiz', 2)">Start Task 2 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('ai-fill-in', '4_3')">
+        Start Task 3 ➡️
+      </button>
+    </div>
+
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 3</span>
+        <h3>3) Scan the text and find the information: (SOLUTION)</h3>
+      </div>
+      <div class="task-questions image-style-questions">
+        <div *ngFor="let s of aiFillInData['4_3']?.sentences" class="scan-row">
+          <span class="scan-question">{{ s.before }}</span>
+          <span class="scan-line-answer">{{ s.correctAnswer }}</span>
+        </div>
+      </div>
     </div>
 
     <section class="text-block">
       <h2>Faculty of Dentistry, University of Szeged</h2>
       <p>
-        Dental education was introduced in the University of Szeged in 1960, and the School of
-        Dentistry was transformed into the Faculty of Dentistry in 2007. The English-language dental
-        program was launched in the academic year of 2004/2005. The programme is an undivided
-        master's programme lasting 10 semesters (300 EU Credits), and graduates acquire the title
-        <em>Doctor Medicinae Dentaire</em>.
+        <strong>Hungary:</strong> Dental education was introduced in the University of Szeged in
+        1960. The School of Dentistry was transformed into the Faculty of Dentistry in 2007. The
+        English-language dental program was launched in the academic year of 2004/2005.
       </p>
       <p>
-        The programme is designed to unify basic and clinical sciences, proceeding concurrently
-        throughout the curriculum. In the first three years, students are taught the basic sciences
-        of medicine and dentistry. From the second year on, there is more emphasis on the study of
-        dental diseases and their treatment.
+        This programme is designed to unify the basic and clinical sciences, as it is believed that
+        scientific and professional development cannot be separated but should proceed concurrently
+        throughout the programme. In the first three years students are taught the basic sciences of
+        medicine and dentistry. From the second year on, there is more emphasis on the study of
+        dental diseases and their treatment. The last two years serve as the intensive clinical
+        study of each of the various disciplines of dentistry. In the final year students
+        participate in elective programmes, clinical conferences and hospital-based trainings.
       </p>
       <p>
-        The last two years serve as the intensive clinical study of each of the various disciplines
-        of dentistry. In the final year, students participate in elective programmes, clinical
-        conferences, and hospital-based trainings. Furthermore, citizens of the EU will receive
-        their licenses automatically within the Community, and graduates can apply for hospital
-        residency positions worldwide.
+        The Faculty of Dentistry is the regional centre established for dental care in the
+        southeastern region of Hungary. The graduates of the University are entitled to apply for
+        hospital residency positions worldwide. Citizens of the EU will receive their licenses
+        automatically within the Community.
+      </p>
+      <p class="summary">
+        • <strong>Level of the programme:</strong> undivided master's programme<br />
+        • <strong>Title acquired:</strong> Doctor Medicinae Dentaire<br />
+        • <strong>Duration of the programme:</strong> 10 semesters<br />
+        • <strong>Registered in:</strong> EU, Credits 300
       </p>
     </section>
 
-    <div class="inline-task-card accent-green">
-      <div class="task-info">
-        <span class="task-badge">Task 3</span>
-        <h3>Faculty Departments</h3>
-        <p>
-          Fill in the missing letters in the departments of the faculty and match them with their
-          short descriptions.
-        </p>
-      </div>
-      <button class="start-task-btn" (click)="openTask('match', 3)">Start Task 3 ➡️</button>
-    </div>
-
-    <section class="text-block">
-      <h3>Specialized Dental Departments</h3>
-      <p>
-        During your clinical years, you will rotate through various specialized departments. Here is
-        what they focus on:
-      </p>
-      <ul class="idiom-list">
-        <li>
-          <strong
-            class="medical-term"
-            data-desc="Focuses on diagnosis and management of medically related diseases affecting the oral and maxillofacial region."
-            >Oral Medicine / Pathology</strong
-          >
-          It is primarily a non-surgical specialty consisting of diagnostic biopsies, small
-          excisions, and therapeutic injections.
-        </li>
-        <li>
-          <strong
-            class="medical-term"
-            data-desc="Deals with prevention and treatment of diseases or defects of the teeth."
-            >Restorative and Esthetic Dentistry</strong
-          >
-          Focuses on restorations, providing harmonious form and function, including cosmetic and
-          digital dentistry.
-        </li>
-        <li>
-          <strong class="medical-term" data-desc="Concerned with the replacement of natural teeth."
-            >Prosthodontics</strong
-          >
-          Utilizes fixed or removable appliances, including dentures, bridges, and implants.
-        </li>
-        <li>
-          <strong
-            class="medical-term"
-            data-desc="Concerned with the diagnosis, prevention, and correction of malpositioned teeth or jaws."
-            >Orthodontics and Pediatric Dentistry</strong
-          >
-          Also includes the treatment of conditions and diseases related to oral health in children.
-        </li>
-        <li>
-          <strong
-            class="medical-term"
-            data-desc="Prevention and treatment of gums and underlying bones."
-            >Periodontology</strong
-          >
-          Focuses on the tissues that support the teeth.
-        </li>
-        <li>
-          <strong
-            class="medical-term"
-            data-desc="Focuses on the surgical management of the jaw and oral cavity."
-            >Oral and Maxillofacial Surgery</strong
-          >
-          Handles complex surgical procedures in the facial region.
-        </li>
-      </ul>
-    </section>
-
-    <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
-
-    <div class="inline-task-card accent-purple">
+    <div class="inline-task-card accent-purple screen-only">
       <div class="task-info">
         <span class="task-badge">Task 4</span>
-        <h3>Titles by Countries</h3>
+        <h3>Specialized Dental Departments</h3>
         <p>
-          Read about dental degrees in other countries. What is the main difference between Hungary
-          and English-speaking countries regarding dental education?
+          Fill the missing letters in the departments of the faculty and match them with
+          descriptions.
         </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('discussion', 4)">Start Task 4 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('dragdrop', '4_4')">Start Task 4 ➡️</button>
+    </div>
+
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 4</span>
+        <h3>
+          4) Fill the missing letters in the departments of the faculty and match them with their
+          short descriptions. (SOLUTION)
+        </h3>
+      </div>
+      <div class="task-questions">
+        <table class="print-table dental-dept-table">
+          <thead>
+            <tr>
+              <th style="width: 38%">Department</th>
+              <th style="width: 12%; text-align: center">Match</th>
+              <th style="width: 50%">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                a. Department of <span class="filled-answer">Orthodonti</span>cs and Pe<span
+                  class="filled-answer"
+                  >diatr</span
+                >ic Dentistry
+              </td>
+              <td class="match-cell">a - 4</td>
+              <td>
+                4. concerned with the diagnosis, prevention, and correction of malpositioned teeth
+                or jaws as well as the treatment of a wide variety of conditions and diseases
+                related to oral health in children
+              </td>
+            </tr>
+            <tr>
+              <td>
+                b. Department of <span class="filled-answer">Operative</span> and Esthetic Dentistry
+              </td>
+              <td class="match-cell">b - 2</td>
+              <td>
+                2 deals with the prevention and treatment of diseases or defects of the teeth that
+                may or may not require a restoration, providing harmonious form and function, that
+                includes all aspects of cosmetic and digital dentistry
+              </td>
+            </tr>
+            <tr>
+              <td>c. Department of <span class="filled-answer">Periodontol</span>ogy</td>
+              <td class="match-cell">c - 5</td>
+              <td>
+                5. concerned with the prevention and treatment of gums and underlying bones and
+                tissues that support the teeth
+              </td>
+            </tr>
+            <tr>
+              <td>
+                d. Department of <span class="filled-answer">Oral and Maxillofacial Surgery</span>
+              </td>
+              <td class="match-cell">d - 6</td>
+              <td>6. focuses on the surgical management of the jaw and oral cavity</td>
+            </tr>
+            <tr>
+              <td>e. Department of <span class="filled-answer">Prosthodonti</span>cs</td>
+              <td class="match-cell">e - 3</td>
+              <td>
+                3. concerned with the replacement of natural teeth with fixed or removable
+                appliances, including dentures, bridges, and implants.
+              </td>
+            </tr>
+            <tr>
+              <td>
+                f. Department of Oral <span class="filled-answer">Biology</span> and Experimental
+                Dental <span class="filled-answer">Research</span>
+              </td>
+              <td class="match-cell">f - 1</td>
+              <td>
+                1. focuses on research into, diagnosis, and management of medically related
+                diseases, disorders, and conditions affecting the oral and maxillofacial region. It
+                is primarily a non-surgical specialty...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="inline-task-card accent-dark screen-only">
+      <div class="task-info" style="max-width: 100%">
+        <span class="task-badge">Task 5</span>
+        <h3>Titles by Countries</h3>
+        <p>Read about some other countries and their dental degrees below.</p>
+        <ul style="margin-top: 20px; padding-left: 24px; list-style-type: none">
+          <li style="font-size: 1.15rem; color: #1e293b; position: relative">
+            <span style="position: absolute; left: -24px">💬</span>
+            <strong
+              >What is the main difference between Hungary and these English-speaking countries as
+              concerning dental education?</strong
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 5</span>
+        <h3>5) Read about some other countries and their dental degrees. (WORKSHEET)</h3>
+      </div>
+      <div class="task-questions">
+        <p>
+          <strong>Question:</strong> What is the main difference between Hungary and these
+          English-speaking countries as concerning dental education?
+        </p>
+        <div class="dashed-line"></div>
+        <div class="dashed-line" style="margin-top: 15px"></div>
+      </div>
     </div>
 
     <section class="text-block">
-      <h2>Dental Degrees Worldwide</h2>
+      <h2>Titles by countries</h2>
       <p>
-        <strong>USA & Canada:</strong> Dentists earn either a D.D.S. (Doctor of Dental Surgery) or a
-        D.M.D. (Doctor of Medicine in Dentistry) degree. These programs are different only in name
-        and signify the same capabilities to practice dentistry. Candidates must first complete a
-        bachelor's degree (usually in biology or chemistry) before applying to a 4-year D.M.D. or
-        D.D.S. program. The first two years focus on classroom learning, while the last two years
-        involve clinical rotations.
+        <strong>USA, Canada:</strong> DDS (Doctor of Dental Surgery) or DMD (Doctor of Medicine)
+        degree - have Dr. in front of their names. D.M.D. and D.D.S. programs are different only in
+        name. They signify the same capabilities to practice dentistry and use identical curriculum
+        requirements. Candidates must complete a bachelor's degree first before applying to the
+        4-year dental school.
       </p>
       <p>
-        <strong>UK & Australia:</strong> Students earn a B.D.S., B.Ch.D., or B.Dent.S. (Bachelor of
-        Dental Surgery). Later, they can pursue a 1-5 year Master of Dentistry course (M.D.S. or
-        M.Ch.D.). Most UK universities prefer applicants to have at least two years of clinical
-        experience working as a dentist before applying for a postgraduate degree.
+        <strong>UK, Australia:</strong> BDS/BChD/BDentS (Bachelor of Dental Surgery); later on (3
+        year postgraduate specialisation): MDS/MChD (Master of Dental Surgery). Master of Dentistry
+        courses take 1-5 years. Most universities strongly prefer that applicants have at least two
+        years of clinical experience as a practicing dentist before applying.
       </p>
       <p>
-        <strong>Other Nations:</strong> In Germany, the title is <em>Dr. med. dent.</em> (Doctor of
-        Dentistry). In Brazil, it is <em>Doutor em Odontologia</em>, and in France,
-        <em>Docteur en Chirurgie Dentaire</em>.
+        <strong>Other Nations:</strong> Germany: Doctor of Dentistry (Dr. med. dent.) | Brazil:
+        Doutor em Odontologia | France: Docteur en Chirurgie Dentaire.
       </p>
     </section>
 
-    <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
+    <section class="text-block" style="margin-top: 48px">
+      <div class="inline-task-card accent-blue screen-only">
+        <div class="task-info">
+          <span class="task-badge">Task 6</span>
+          <h3>Teachers' Titles in English</h3>
+          <p>
+            Look at the collections of terms from the academic regulations. Type the missing English
+            titles.
+          </p>
+        </div>
+        <button class="start-task-btn" (click)="openTask('ai-fill-in', '4_6')">
+          Start Task 6 ➡️
+        </button>
+      </div>
 
-    <div class="inline-task-card accent-dark">
+      <div class="printable-task print-only" style="margin-bottom: 32px">
+        <div class="task-heading">
+          <span class="print-badge">Task 6</span>
+          <h3>
+            6) Look at the collections of terms from the academic and Examination Regulations of the
+            University. Fill the missing information. What are teachers’ titles in English?
+            (SOLUTION)
+          </h3>
+        </div>
+        <table class="print-table regulations-table">
+          <tbody>
+            <tr>
+              <td style="width: 45%">tanársegéd</td>
+              <td class="filled-answer">assistant lecturer</td>
+            </tr>
+            <tr>
+              <td>adjunktus</td>
+              <td class="filled-answer">senior lecturer</td>
+            </tr>
+            <tr>
+              <td>docens</td>
+              <td class="filled-answer">associate professor</td>
+            </tr>
+            <tr>
+              <td>egyetemi tanár</td>
+              <td class="filled-answer">professor</td>
+            </tr>
+            <tr>
+              <td>tanszékvezető</td>
+              <td class="filled-answer">head of department</td>
+            </tr>
+            <tr>
+              <td>dékán</td>
+              <td class="filled-answer">dean</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="screen-only">Teacher Titles</h3>
+      <div class="vocab-grid screen-only">
+        <div
+          class="vocab-item"
+          *ngFor="
+            let item of [
+              { e: 'Assistant lecturer', h: 'tanársegéd' },
+              { e: 'Senior lecturer', h: 'adjunktus' },
+              { e: 'Associate professor', h: 'docens' },
+              { e: 'Professor', h: 'egyetemi tanár' },
+              { e: 'Head of Department', h: 'tanszékvezető' },
+              { e: 'Dean', h: 'dékán' },
+            ]
+          "
+        >
+          <div class="word-header">
+            <button class="tts-btn" (click)="playSound(item.e)">🔊</button>
+            <strong>{{ item.e }}</strong>
+          </div>
+          <span>{{ item.h }}</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="inline-task-card accent-blue screen-only">
       <div class="task-info">
-        <span class="task-badge">Task 5</span>
+        <span class="task-badge">Task 7</span>
         <h3>Academic Scenarios</h3>
         <p>
-          Use academic terms to describe what happens when you fail an exam, or who to contact if
-          you have a problem with your studies.
+          Answer case study scenarios regarding university regulations and coursework structure.
         </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('roleplay', 5)">Start Task 5 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('discussion', '4_7')">
+        Start Task 7 ➡️
+      </button>
     </div>
 
-    <section class="text-block">
-      <h2>Academic Vocabulary</h2>
-      <h3>Teacher Titles</h3>
-      <div class="vocab-grid">
-        <div class="vocab-item">
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 7</span>
+        <h3>7) Use some of these other terms from the list to describe: (WORKSHEET)</h3>
+      </div>
+      <div class="task-questions">
+        <p>• What happens to you when you fail an exam?</p>
+        <div class="dashed-line"></div>
+        <p style="margin-top: 15px">
+          • What can you do or have if you already completed some subject in another city/ Faculty?
+        </p>
+        <div class="dashed-line"></div>
+        <p style="margin-top: 15px">• What kinds of courses do/can you have?</p>
+        <div class="dashed-line"></div>
+        <p style="margin-top: 15px">
+          • Who can you go to if you have some greater problem with your studies?
+        </p>
+        <div class="dashed-line"></div>
+      </div>
+    </div>
+
+    <div class="inline-task-card accent-purple screen-only">
+      <div class="task-info">
+        <span class="task-badge">Task 8</span>
+        <h3>Describe Your Studies</h3>
+        <p>
+          Utilize the academic vocabulary terms to explain your dental program requirements to a
+          peer.
+        </p>
+      </div>
+      <button class="start-task-btn" (click)="openTask('presentation', '4_8')">
+        Start Task 8 ➡️
+      </button>
+    </div>
+
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Task 8</span>
+        <h3>
+          8) Use at least five of the terms below plus any from above to describe your dental
+          studies to a foreign student.
+        </h3>
+      </div>
+      <div class="task-questions">
+        <div style="height: 200px; border: 1px dashed #333; margin-top: 10px"></div>
+      </div>
+    </div>
+
+    <section class="text-block glossary-section" style="margin-top: 40px">
+      <h2 class="screen-only">Academic Glossary (University of Szeged Guidelines)</h2>
+      <div class="vocab-grid screen-only">
+        <div class="vocab-item" *ngFor="let term of glossaryTerms">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Assistant lecturer')" title="Listen">
-              🔊
-            </button>
-            <strong>Assistant lecturer</strong>
+            <button class="tts-btn no-print" (click)="playSound(term.e)">🔊</button>
+            <strong>{{ term.e }}</strong>
           </div>
-          <span>tanársegéd</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Senior lecturer')" title="Listen">
-              🔊
-            </button>
-            <strong>Senior lecturer</strong>
-          </div>
-          <span>egyetemi adjunktus</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Associate professor')" title="Listen">
-              🔊
-            </button>
-            <strong>Associate professor</strong>
-          </div>
-          <span>egyetemi docens</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Professor')" title="Listen">🔊</button>
-            <strong>Professor</strong>
-          </div>
-          <span>egyetemi tanár</span>
+          <span>{{ term.h }}</span>
         </div>
       </div>
 
-      <h3 style="margin-top: 32px">University Structure & Studies</h3>
-      <div class="vocab-grid">
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Dean')" title="Listen">🔊</button>
-            <strong>Dean</strong>
+      <div class="print-glossary print-only">
+        <div class="glossary-columns">
+          <div class="glossary-print-item" *ngFor="let term of glossaryTerms">
+            {{ term.h }}- {{ term.e }}
           </div>
-          <span>dékán (Head of the faculty)</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Rector')" title="Listen">🔊</button>
-            <strong>Rector</strong>
-          </div>
-          <span>egyetemi rektor</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Department')" title="Listen">🔊</button>
-            <strong>Department</strong>
-          </div>
-          <span>tanszék</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Academic Office')" title="Listen">
-              🔊
-            </button>
-            <strong>Academic Office</strong>
-          </div>
-          <span>tanulmányi osztály</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Prerequisite')" title="Listen">🔊</button>
-            <strong>Prerequisite</strong>
-          </div>
-          <span>előkövetelmény</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Obligatory course-unit')" title="Listen">
-              🔊
-            </button>
-            <strong>Obligatory course</strong>
-          </div>
-          <span>kötelező tantárgy</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Elective course-unit')" title="Listen">
-              🔊
-            </button>
-            <strong>Elective course</strong>
-          </div>
-          <span>kötelezően választható tantárgy</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Retake examination')" title="Listen">
-              🔊
-            </button>
-            <strong>Retake exam</strong>
-          </div>
-          <span>javító vizsga</span>
         </div>
       </div>
     </section>
-
-    <div class="inline-task-card accent-blue" style="margin-top: 48px">
-      <div class="task-info">
-        <span class="task-badge">Task 6</span>
-        <h3>Describe Your Studies</h3>
-        <p>
-          Use at least five of the academic terms from the lists above to describe your dental
-          studies to a foreign student.
-        </p>
-      </div>
-      <button class="start-task-btn" (click)="openTask('presentation', 6)">Start Task 6 ➡️</button>
-    </div>
   </article>
+
+  <button class="print-btn no-print" (click)="printPage()">🖨️ Print Document</button>
 </div>

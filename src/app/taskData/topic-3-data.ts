@@ -1,5 +1,10 @@
-// topic-3-data.ts
-import { DragDropTask, QuizTask, AiFillInTask } from './task-interfaces';
+import {
+  DragDropTask,
+  QuizTask,
+  AiFillInTask,
+  ImageFillInTask,
+  SingleImageFillInTask,
+} from './task-interfaces';
 
 export const topic3DragDrop: { [key: string]: DragDropTask } = {
   '3_5': {
@@ -356,6 +361,80 @@ export const topic3AiFillIn: { [key: string]: AiFillInTask } = {
         after: '',
         correctAnswer: 'gastrointestinal',
       },
+    ],
+  },
+};
+
+// JAVÍTVA: A 10 képes feladat a 3-as témában
+export const topic3ImageFillIn: { [key: string]: ImageFillInTask } = {
+  '3_vocab_3_4': {
+    id: '3_vocab_3_4',
+    title: 'Vocabulary 3-4) Body Systems',
+    instruction: 'NAME THE BODY SYSTEMS ILLUSTRATED IN THE PICTURES BELOW.',
+    images: [
+      { id: 1, imageSrc: 'assets/system_1_nervous.png', correctAnswer: 'Nervous system' },
+      { id: 2, imageSrc: 'assets/system_2_skeletal.png', correctAnswer: 'Skeletal system' },
+      {
+        id: 3,
+        imageSrc: 'assets/system_3_cardiovascular.png',
+        correctAnswer: 'Cardiovascular system | Circulatory system',
+      },
+      { id: 4, imageSrc: 'assets/system_4_respiratory.png', correctAnswer: 'Respiratory system' },
+      { id: 5, imageSrc: 'assets/system_5_digestive.png', correctAnswer: 'Digestive system' },
+      {
+        id: 6,
+        imageSrc: 'assets/system_6_integumentary.png',
+        correctAnswer: 'Integumentary system | Skin',
+      },
+      {
+        id: 7,
+        imageSrc: 'assets/system_7_urinary.png',
+        correctAnswer: 'Urinary system | Excretory system',
+      },
+      { id: 8, imageSrc: 'assets/system_8_reproductive.png', correctAnswer: 'Reproductive system' },
+      {
+        id: 9,
+        imageSrc: 'assets/system_9_lymphatic.png',
+        correctAnswer: 'Lymphatic system | Immune system',
+      },
+      { id: 10, imageSrc: 'assets/system_10_endocrine.png', correctAnswer: 'Endocrine system' },
+    ],
+  },
+};
+
+// JAVÍTVA: Az 1 képes táblázatos feladat a 3-as témában
+export const topic3ImageTable: { [key: string]: SingleImageFillInTask } = {
+  '3_6_digestive': {
+    id: '3_6_digestive',
+    title: 'Task 6 - Digestive System Terminology',
+    instruction:
+      'Identify the digestive system parts. Provide the English equivalents for the Hungarian and Latin terms shown in the table.',
+    imageSrc: 'assets/digestive_system_main.png',
+    rows: [
+      { id: 1, label: 'szájüreg: cavum oris', correctAnswer: 'mouth | oral cavity' },
+      { id: 2, label: 'nyelv: lingua', correctAnswer: 'tongue' },
+      {
+        id: 3,
+        label: 'nyálmirigy: glandula salivaris',
+        correctAnswer: 'salivary gland | salivary glands',
+      },
+      { id: 4, label: 'máj: hepar', correctAnswer: 'liver' },
+      {
+        id: 5,
+        label: 'epehólyag: cholecysta/vesica fellea',
+        correctAnswer: 'gallbladder | gall bladder',
+      },
+      {
+        id: 6,
+        label: 'vastagbél: intestinum crassum/colon',
+        correctAnswer: 'large intestine | colon',
+      },
+      { id: 7, label: 'végbél: rectum', correctAnswer: 'rectum' },
+      { id: 8, label: 'vékonybél: intestinum tenue', correctAnswer: 'small intestine' },
+      { id: 9, label: 'hasnyálmirigy: pancreas', correctAnswer: 'pancreas' },
+      { id: 10, label: 'gyomor: ventriculus/gaster', correctAnswer: 'stomach' },
+      { id: 11, label: 'nyelőcső: oesophagus', correctAnswer: 'oesophagus | esophagus' },
+      { id: 12, label: 'garat: pharynx', correctAnswer: 'pharynx | throat' },
     ],
   },
 };

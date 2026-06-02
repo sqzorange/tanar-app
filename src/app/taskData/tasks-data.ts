@@ -1,7 +1,5 @@
-// tasks-data.ts
-
-// 1. Re-exportáljuk az interfészeket, hogy a többi komponens importjai ne törjenek el
 export * from './task-interfaces';
+
 import {
   DragDropTask,
   QuizTask,
@@ -10,9 +8,10 @@ import {
   AiFillInTask,
   ListeningTask,
   PhraseSelectionTask,
+  ImageFillInTask,
+  SingleImageFillInTask,
 } from './task-interfaces';
 
-// 2. Beimportáljuk a feldarabolt topic fájlokat
 import { topic1DragDrop, topic1Quiz, topic1Selection } from './topic-1-data';
 import {
   topic2DragDrop,
@@ -21,14 +20,21 @@ import {
   topic2AiFillIn,
   topic2PhraseSelection,
 } from './topic-2-data';
-import { topic3DragDrop, topic3Quiz, topic3AiFillIn } from './topic-3-data';
+import {
+  topic3DragDrop,
+  topic3Quiz,
+  topic3AiFillIn,
+  topic3ImageFillIn, // <-- Innen jön a 10 képes feladat
+  topic3ImageTable, // <-- Innen jön a táblázatos feladat
+} from './topic-3-data';
+import { topic4DragDrop, topic4AiFillIn } from './topic-4-data';
 import { topic5DragDrop, topic5Quiz, topic5AiFillIn } from './topic-5-data';
 
-// 3. Összefűzzük az adatbázisokat az Angular komponensek számára
 export const DRAG_DROP_DATABASE: { [key: string]: DragDropTask } = {
   ...topic1DragDrop,
   ...topic2DragDrop,
   ...topic3DragDrop,
+  ...topic4DragDrop,
   ...topic5DragDrop,
 };
 
@@ -53,9 +59,19 @@ export const LISTENING_DATABASE: { [key: string]: ListeningTask } = {
 export const AI_FILL_IN_DATABASE: { [key: string]: AiFillInTask } = {
   ...topic2AiFillIn,
   ...topic3AiFillIn,
+  ...topic4AiFillIn,
   ...topic5AiFillIn,
 };
 
 export const PHRASE_SELECTION_DATABASE: { [key: string]: PhraseSelectionTask } = {
   ...topic2PhraseSelection,
+};
+
+// --- KÉPES FELADATOK ---
+export const IMAGE_FILL_IN_DATABASE: { [key: string]: ImageFillInTask } = {
+  ...topic3ImageFillIn,
+};
+
+export const IMAGE_TABLE_DATABASE: { [key: string]: SingleImageFillInTask } = {
+  ...topic3ImageTable,
 };

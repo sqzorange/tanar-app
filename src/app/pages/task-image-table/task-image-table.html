@@ -1,0 +1,61 @@
+<div class="task-layout" *ngIf="currentTask">
+  <header class="task-header">
+    <button class="back-btn" (click)="goBack()">⬅ Back</button>
+    <h2>{{ currentTask.title }}</h2>
+    <p [innerHTML]="currentTask.instruction"></p>
+  </header>
+
+  <div class="split-container">
+    <div class="sticky-image-pane">
+      <div class="image-wrapper">
+        <img [src]="currentTask.imageSrc" alt="Anatomy Diagram" class="main-anatomy-image" />
+      </div>
+    </div>
+
+    <div class="table-pane">
+      <div class="table-header-row">
+        <div class="header-cell label-col">Hungarian and Latin</div>
+        <div class="header-cell input-col">English</div>
+      </div>
+
+      <div class="table-body">
+        <div class="table-data-row" *ngFor="let row of currentTask.rows; let i = index">
+          <div class="cell label-cell">
+            <span class="row-badge">{{ row.id }}</span>
+            <span class="label-text">{{ row.label }}</span>
+          </div>
+
+          <div class="cell input-cell">
+            <input
+              type="text"
+              class="fill-in-input"
+              [(ngModel)]="userAnswers[i]"
+              [disabled]="isGrading"
+              placeholder="Type English equivalent..."
+              [class.correct-border]="gradingResults?.[i]?.status === 'correct'"
+              [class.partial-border]="gradingResults?.[i]?.status === 'partial'"
+              [class.incorrect-border]="gradingResults?.[i]?.status === 'incorrect'"
+            />
+
+            <div class="feedback-box" *ngIf="gradingResults" [ngClass]="gradingResults[i].status">
+              <span class="icon">{{
+                gradingResults[i].status === 'correct'
+                  ? '✅'
+                  : gradingResults[i].status === 'partial'
+                    ? '⚠️'
+                    : '❌'
+              }}</span>
+              <span class="feedback-text">{{ gradingResults[i].feedback }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="action-footer">
+    <button class="submit-btn ai-btn" (click)="submitTask()" [disabled]="isGrading">
+      {{ isGrading ? '🤖 AI is analyzing...' : 'Evaluate with AI 🤖' }}
+    </button>
+  </footer>
+</div>

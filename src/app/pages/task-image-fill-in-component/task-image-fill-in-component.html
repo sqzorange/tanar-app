@@ -1,0 +1,48 @@
+<div class="task-layout" *ngIf="currentTask">
+  <header class="task-header">
+    <button class="back-btn" (click)="goBack()">⬅ Back</button>
+    <h2>{{ currentTask.title }}</h2>
+    <p [innerHTML]="currentTask.instruction"></p>
+  </header>
+
+  <div class="task-container">
+    <div class="image-grid">
+      <div class="image-card" *ngFor="let item of currentTask.images; let i = index">
+        <div class="image-wrapper">
+          <img [src]="item.imageSrc" alt="Body System {{ item.id }}" class="system-image" />
+        </div>
+        <div class="input-section">
+          <div class="input-row">
+            <span class="item-number">{{ item.id }}.</span>
+            <input
+              type="text"
+              class="fill-in-input"
+              [(ngModel)]="userAnswers[i]"
+              [disabled]="isGrading"
+              placeholder="System name..."
+              [class.correct-border]="gradingResults?.[i]?.status === 'correct'"
+              [class.partial-border]="gradingResults?.[i]?.status === 'partial'"
+              [class.incorrect-border]="gradingResults?.[i]?.status === 'incorrect'"
+            />
+          </div>
+          <div class="feedback-box" *ngIf="gradingResults" [ngClass]="gradingResults[i].status">
+            <span class="icon">{{
+              gradingResults[i].status === 'correct'
+                ? '✅'
+                : gradingResults[i].status === 'partial'
+                  ? '⚠️'
+                  : '❌'
+            }}</span>
+            <span class="feedback-text">{{ gradingResults[i].feedback }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="action-footer">
+    <button class="submit-btn ai-btn" (click)="submitTask()" [disabled]="isGrading">
+      {{ isGrading ? '🤖 AI is analyzing...' : 'Evaluate with AI 🤖' }}
+    </button>
+  </footer>
+</div>

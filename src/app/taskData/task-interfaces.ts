@@ -1,5 +1,3 @@
-// task-interfaces.ts
-
 export interface DropZone {
   label: string;
   top?: number;
@@ -15,19 +13,7 @@ export interface TableCell {
   textAfter?: string;
   rowspan?: number;
 }
-export interface PhraseCategory {
-  title: string;
-  description?: string;
-  phrases: string[];
-  requiredCount: number;
-}
 
-export interface PhraseSelectionTask {
-  id: string;
-  title: string;
-  instruction: string;
-  categories: PhraseCategory[];
-}
 export interface DragDropTask {
   id: string;
   title: string;
@@ -105,4 +91,47 @@ export interface AiFillInTask {
   title: string;
   instruction: string;
   sentences: AiFillInSentence[];
+}
+
+export interface PhraseCategory {
+  title: string;
+  description?: string;
+  phrases: string[];
+  requiredCount: number;
+}
+
+export interface PhraseSelectionTask {
+  id: string;
+  title: string;
+  instruction: string;
+  categories: PhraseCategory[];
+}
+
+// --- TÖBB KIS KÉPES FELADAT (Ami a 2-es topicban van) ---
+export interface ImageFillItem {
+  id: number;
+  imageSrc: string;
+  correctAnswer: string;
+}
+
+export interface ImageFillInTask {
+  id: string;
+  title: string;
+  instruction: string;
+  images: ImageFillItem[];
+}
+
+// --- EGY NAGY KÉP + TÁBLÁZAT FELADAT (Ami a 3-as topicban van) ---
+export interface SingleImageRow {
+  id: number;
+  label: string;
+  correctAnswer: string;
+}
+
+export interface SingleImageFillInTask {
+  id: string;
+  title: string;
+  instruction: string;
+  imageSrc: string;
+  rows: SingleImageRow[];
 }

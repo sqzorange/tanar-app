@@ -1,0 +1,186 @@
+$brand-primary: #6366f1;
+$white: #ffffff;
+$text-main: #1e293b;
+$text-muted: #64748b;
+$border-color: #e2e8f0;
+$color-correct: #10b981;
+$color-partial: #f59e0b;
+$color-incorrect: #ef4444;
+
+.task-layout {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  .task-header {
+    margin-bottom: 30px;
+    .back-btn {
+      background: $white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+      &:hover {
+        color: $brand-primary;
+      }
+    }
+    h2 {
+      margin-top: 15px;
+      color: $text-main;
+    }
+    p {
+      color: $text-muted;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  }
+}
+.task-container {
+  background: $white;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid $border-color;
+}
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+}
+.image-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #f8fafc;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  padding: 15px;
+  transition: transform 0.2s;
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  }
+  .image-wrapper {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    background: $white;
+    border-radius: 8px;
+    border: 1px dashed #cbd5e1;
+    overflow: hidden;
+    .system-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  }
+  .input-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      .item-number {
+        font-weight: 800;
+        color: $brand-primary;
+        font-size: 1.1rem;
+      }
+      .fill-in-input {
+        flex: 1;
+        padding: 8px;
+        border: 2px solid #cbd5e1;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: $text-main;
+        text-align: center;
+        outline: none;
+        &:focus {
+          border-color: $brand-primary;
+          box-shadow: 0 0 0 3px rgba($brand-primary, 0.1);
+        }
+        &:disabled {
+          background: #e2e8f0;
+          cursor: not-allowed;
+        }
+        &.correct-border {
+          border-color: $color-correct;
+          background: rgba($color-correct, 0.05);
+          color: darken($color-correct, 10%);
+        }
+        &.partial-border {
+          border-color: $color-partial;
+          background: rgba($color-partial, 0.05);
+          color: darken($color-partial, 10%);
+        }
+        &.incorrect-border {
+          border-color: $color-incorrect;
+          background: rgba($color-incorrect, 0.05);
+          color: $color-incorrect;
+        }
+      }
+    }
+  }
+}
+.feedback-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  .feedback-text {
+    font-weight: 500;
+    line-height: 1.4;
+  }
+  &.correct {
+    background-color: rgba($color-correct, 0.1);
+    color: darken($color-correct, 20%);
+  }
+  &.partial {
+    background-color: rgba($color-partial, 0.15);
+    color: darken($color-partial, 30%);
+  }
+  &.incorrect {
+    background-color: rgba($color-incorrect, 0.1);
+    color: darken($color-incorrect, 20%);
+  }
+}
+.action-footer {
+  margin-top: 30px;
+  text-align: center;
+  .ai-btn {
+    width: 100%;
+    max-width: 350px;
+    padding: 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, $brand-primary, #8b5cf6);
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba($brand-primary, 0.3);
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba($brand-primary, 0.4);
+    }
+    &:disabled {
+      background: #94a3b8;
+      box-shadow: none;
+      cursor: wait;
+      filter: grayscale(0.5);
+    }
+  }
+}
