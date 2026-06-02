@@ -1,5 +1,11 @@
 // topic-2-data.ts
-import { DragDropTask, InlineChoiceTask, ListeningTask, AiFillInTask } from './task-interfaces';
+import {
+  DragDropTask,
+  InlineChoiceTask,
+  ListeningTask,
+  AiFillInTask,
+  PhraseSelectionTask,
+} from './task-interfaces';
 
 export const topic2DragDrop: { [key: string]: DragDropTask } = {
   '2_1': {
@@ -228,6 +234,80 @@ export const topic2DragDrop: { [key: string]: DragDropTask } = {
       { label: 'gap_c_speech', correctAnswer: 'dysphasia' },
       { label: 'gap_d_swallowing', correctAnswer: 'dysphagia' },
       { label: 'gap_e_vision', correctAnswer: 'diplopia' },
+    ],
+  },
+  '2_12_part2_match': {
+    id: '2_12_part2_match',
+    title: 'SYNONYM MATCH',
+    instruction: 'Match the following synonyms by dragging the correct words to the table cells.',
+    type: 'list-to-table',
+    availableOptions: [
+      'probable',
+      'just',
+      'look at',
+      'lethal',
+      'safeguard',
+      'such as',
+      'giving',
+      'get',
+      'prevent',
+      'usual',
+    ],
+    requiredCount: 10,
+    tableHeaders: ['Word', 'Synonym'],
+    tableRows: [
+      [
+        { type: 'static', value: '1. like' },
+        { type: 'drop', value: 'gap_1_like' },
+      ],
+      [
+        { type: 'static', value: '2. deadly' },
+        { type: 'drop', value: 'gap_2_deadly' },
+      ],
+      [
+        { type: 'static', value: '3. stop' },
+        { type: 'drop', value: 'gap_3_stop' },
+      ],
+      [
+        { type: 'static', value: '4. likely' },
+        { type: 'drop', value: 'gap_4_likely' },
+      ],
+      [
+        { type: 'static', value: '5. develop' },
+        { type: 'drop', value: 'gap_5_develop' },
+      ],
+      [
+        { type: 'static', value: '6. common' },
+        { type: 'drop', value: 'gap_6_common' },
+      ],
+      [
+        { type: 'static', value: '7. only' },
+        { type: 'drop', value: 'gap_7_only' },
+      ],
+      [
+        { type: 'static', value: '8. protect' },
+        { type: 'drop', value: 'gap_8_protect' },
+      ],
+      [
+        { type: 'static', value: '9. check' },
+        { type: 'drop', value: 'gap_9_check' },
+      ],
+      [
+        { type: 'static', value: '10. feeding' },
+        { type: 'drop', value: 'gap_10_feeding' },
+      ],
+    ],
+    dropZones: [
+      { label: 'gap_1_like', correctAnswer: 'such as' },
+      { label: 'gap_2_deadly', correctAnswer: 'lethal' },
+      { label: 'gap_3_stop', correctAnswer: 'prevent' },
+      { label: 'gap_4_likely', correctAnswer: 'probable' },
+      { label: 'gap_5_develop', correctAnswer: 'get' },
+      { label: 'gap_6_common', correctAnswer: 'usual' },
+      { label: 'gap_7_only', correctAnswer: 'just' },
+      { label: 'gap_8_protect', correctAnswer: 'safeguard' },
+      { label: 'gap_9_check', correctAnswer: 'look at' },
+      { label: 'gap_10_feeding', correctAnswer: 'giving' },
     ],
   },
 };
@@ -475,6 +555,68 @@ export const topic2Listening: { [key: string]: ListeningTask } = {
       {
         text: 'What thing did the researchers say needed to be done more?',
         correctAnswer: 'research | studies | study | investigate',
+      },
+    ],
+  },
+};
+export const topic2PhraseSelection: { [key: string]: PhraseSelectionTask } = {
+  '2_15_phrases': {
+    id: '2_15_phrases',
+    title: 'Task 15 - Agreeing and Disagreeing, Asking for Opinion and Giving Opinion',
+    instruction:
+      'Expressions to use in speaking and writing. We often give our opinions to friends and colleagues. <strong>Select your favorite phrases from each category!</strong>',
+    categories: [
+      {
+        title: 'Giving your opinion',
+        requiredCount: 3,
+        phrases: [
+          'In my opinion, this one would be better.',
+          "To my mind this one's better.",
+          "If you ask me, this one's better.",
+          "To my way of thinking, this one's fine.",
+          'In my view, this one is best.',
+          "Know what I think? That one's best.",
+          "I'd say tomorrow that one's better.",
+          "What I think is that one's better.",
+          "For me, that one's better.",
+          "I tell you what I think, that one's best.",
+        ],
+      },
+      {
+        title: 'Asking for approval',
+        description:
+          "Sometimes we are not sure if it's a good idea to do something. So we need useful expressions for asking if other people agree with an idea or intended action.",
+        requiredCount: 3,
+        phrases: [
+          "Do you think it's all right to do it?",
+          'What do you think about (me doing that)?',
+          'Do you think / reckon I ought to (do it)?',
+          'What would you say if I (did it)?',
+          'Would you approve of (doing something)?',
+          'What is your attitude to the idea of...',
+          'Are you in favour of (me doing something)?',
+          "You are in favour of ... aren't you?",
+          'Do you think anyone would mind if I...',
+          'Do you think it would be really awful if I...',
+        ],
+      },
+      {
+        title: 'Disagreeing with people',
+        description:
+          "Sometimes people give an opinion and you don't agree with it. We have many ways to show disagreement in English. Here are ten of them.",
+        requiredCount: 3,
+        phrases: [
+          "I'm not sure about that!",
+          'You could be right, but...',
+          "(I'm afraid) I don't agree.",
+          'I agree up to a point, but..',
+          "That's an interesting idea, but..",
+          'Do you really think...?',
+          'Rubbish! / Nonsense!',
+          "You can't be serious!",
+          'Actually, as a matter of fact. I think..',
+          "That's not how I see it.",
+        ],
       },
     ],
   },

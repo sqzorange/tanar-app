@@ -9,6 +9,7 @@ import {
   SelectionTask,
   AiFillInTask,
   ListeningTask,
+  PhraseSelectionTask,
 } from './task-interfaces';
 
 // 2. Beimportáljuk a feldarabolt topic fájlokat
@@ -18,6 +19,7 @@ import {
   topic2InlineChoice,
   topic2Listening,
   topic2AiFillIn,
+  topic2PhraseSelection,
 } from './topic-2-data';
 import { topic3DragDrop, topic3Quiz, topic3AiFillIn } from './topic-3-data';
 import { topic5DragDrop, topic5Quiz, topic5AiFillIn } from './topic-5-data';
@@ -52,4 +54,8 @@ export const AI_FILL_IN_DATABASE: { [key: string]: AiFillInTask } = {
   ...topic2AiFillIn,
   ...topic3AiFillIn,
   ...topic5AiFillIn,
+};
+
+export const PHRASE_SELECTION_DATABASE: { [key: string]: PhraseSelectionTask } = {
+  ...topic2PhraseSelection,
 };

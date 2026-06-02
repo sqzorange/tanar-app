@@ -1,0 +1,43 @@
+<div class="task-layout" *ngIf="currentTask">
+  <header class="task-header">
+    <button class="back-btn" (click)="goBack()">⬅ Back</button>
+    <h2>{{ currentTask.title }}</h2>
+    <p [innerHTML]="currentTask.instruction"></p>
+  </header>
+
+  <div class="task-container">
+    <section
+      class="category-section"
+      *ngFor="let cat of currentTask.categories; let cIndex = index"
+    >
+      <div class="category-header">
+        <h3>{{ cat.title }}</h3>
+        <span
+          class="selection-counter"
+          [class.complete]="selectedPhrases[cIndex]?.length === cat.requiredCount"
+        >
+          {{ selectedPhrases[cIndex]?.length || 0 }} / {{ cat.requiredCount }} selected
+        </span>
+      </div>
+      <p class="category-desc" *ngIf="cat.description">{{ cat.description }}</p>
+
+      <div class="phrase-container">
+        <div
+          class="phrase-card"
+          *ngFor="let phrase of cat.phrases; let pIndex = index"
+          [class.selected]="selectedPhrases[cIndex]?.includes(pIndex)"
+          (click)="togglePhrase(cIndex, pIndex)"
+        >
+          <div class="phrase-index">{{ pIndex + 1 }}</div>
+          <div class="phrase-text">{{ phrase }}</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="action-footer">
+    <button class="submit-btn" (click)="submitTask()" [disabled]="!isComplete()">
+      Finish Task ✅
+    </button>
+  </footer>
+</div>

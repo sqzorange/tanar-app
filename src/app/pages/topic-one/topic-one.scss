@@ -5,6 +5,11 @@ $text-main: #1e293b;
 $text-muted: #475569;
 $border-color: #e2e8f0;
 
+// Alapértelmezett beállítás (Monitoron): a nyomtatási elemeket rejtjük!
+.print-only {
+  display: none !important;
+}
+
 .lesson-layout {
   min-height: 100vh;
   background-color: $bg-app;
@@ -57,6 +62,7 @@ $border-color: #e2e8f0;
     padding: 24px;
   }
 
+  // Szöveg formázások
   .text-block {
     margin-bottom: 40px;
 
@@ -75,12 +81,6 @@ $border-color: #e2e8f0;
       margin-bottom: 16px;
       font-weight: 700;
     }
-    h4 {
-      font-size: 1.25rem;
-      color: $text-main;
-      margin-top: 32px;
-      margin-bottom: 12px;
-    }
     p {
       font-size: 1.1rem;
       line-height: 1.7;
@@ -88,27 +88,23 @@ $border-color: #e2e8f0;
       margin-bottom: 16px;
     }
 
-    // --- INTERAKTÍV HOVER KÁRTYA STÍLUSA ---
     .medical-term {
       color: $brand-primary;
       cursor: help;
       position: relative;
       border-bottom: 2px dashed rgba($brand-primary, 0.3);
       transition: all 0.2s;
-
       &:hover {
         background-color: rgba($brand-primary, 0.05);
         border-bottom-color: $brand-primary;
-
-        &::after,
-        &::before {
-          opacity: 1;
-          visibility: visible;
-          transform: translateX(-50%) translateY(0);
-        }
       }
-
-      // A kártya (Tooltip)
+      // Hover Tooltip ... (Eredeti kód megtartva)
+      &:hover::after,
+      &:hover::before {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+      }
       &::after {
         content: attr(data-desc);
         position: absolute;
@@ -121,18 +117,14 @@ $border-color: #e2e8f0;
         color: $white;
         font-size: 0.9rem;
         line-height: 1.4;
-        font-weight: 400;
         text-align: center;
         border-radius: 10px;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.25);
         opacity: 0;
         visibility: hidden;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.2s;
         z-index: 100;
         pointer-events: none;
       }
-
-      // Kis háromszög a kártya alján
       &::before {
         content: '';
         position: absolute;
@@ -143,7 +135,7 @@ $border-color: #e2e8f0;
         border-top-color: $text-main;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.2s;
         z-index: 100;
       }
     }
@@ -153,8 +145,6 @@ $border-color: #e2e8f0;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
       margin-bottom: 24px;
-
-      // --- ÚJ SZÓTÁR KÁRTYA ÉS GOMB FORMÁZÁS ---
       .vocab-item {
         background: #f1f5f9;
         padding: 16px;
@@ -162,56 +152,33 @@ $border-color: #e2e8f0;
         font-size: 1.05rem;
         color: $text-main;
         border-left: 4px solid $brand-primary;
-        display: flex;
-        flex-direction: column;
-        transition: all 0.2s ease;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-
-        &:hover {
-          background: #f8fafc;
-          border-color: darken($brand-primary, 10%);
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        }
-
         .word-header {
           display: flex;
           align-items: center;
-          justify-content: flex-start;
-          gap: 12px; // Gomb és szöveg közti távolság
-
+          gap: 12px;
           strong {
             font-size: 1.1rem;
             color: $text-main;
           }
-
           .tts-btn {
-            background-color: rgba($brand-primary, 0.1); // Halványkék háttér
+            background-color: rgba($brand-primary, 0.1);
             color: $brand-primary;
             border: none;
             cursor: pointer;
             font-size: 1rem;
             width: 34px;
             height: 34px;
-            border-radius: 50%; // Kerek gomb
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
-
-            &:hover {
-              background-color: $brand-primary; // Hoverre kék lesz
-              color: $white;
-              transform: scale(1.1); // Kicsit megnő
-              box-shadow: 0 2px 4px rgba($brand-primary, 0.3);
-            }
           }
         }
-
         span {
           font-size: 0.95rem;
           color: $text-muted;
           margin-top: 8px;
-          margin-left: 46px; // Igazítás a fenti szöveg vonalához (34px gomb + 12px gap)
+          margin-left: 46px;
           font-style: italic;
         }
       }
@@ -242,7 +209,7 @@ $border-color: #e2e8f0;
     }
   }
 
-  /* Színes beágyazott kártyák a feladatokhoz */
+  // Interaktív Kártyák (Csak képernyőn látszanak)
   .inline-task-card {
     display: flex;
     justify-content: space-between;
@@ -254,13 +221,11 @@ $border-color: #e2e8f0;
     margin: 48px 0;
     position: relative;
     overflow: hidden;
-
     @media (max-width: 600px) {
       flex-direction: column;
       align-items: flex-start;
       gap: 20px;
     }
-
     &::before {
       content: '';
       position: absolute;
@@ -282,22 +247,12 @@ $border-color: #e2e8f0;
     &.accent-purple::before {
       background-color: #8b5cf6;
     }
-    &.accent-red::before {
-      background-color: #ef4444;
-    }
-    &.accent-dark::before {
-      background-color: #334155;
-    }
     &.accent-success::before {
       background-color: #22c55e;
     }
 
     .task-info {
-      max-width: 65%;
-      @media (max-width: 600px) {
-        max-width: 100%;
-      }
-
+      max-width: 100%;
       .task-badge {
         display: inline-block;
         background: #e2e8f0;
@@ -310,15 +265,9 @@ $border-color: #e2e8f0;
         margin-bottom: 12px;
       }
       h3 {
-        margin: 0 0 8px 0;
+        margin: 0 0 4px 0;
         color: $text-main;
         font-size: 1.4rem;
-      }
-      p {
-        margin: 0;
-        color: $text-muted;
-        font-size: 1rem;
-        line-height: 1.5;
       }
     }
 
@@ -337,6 +286,168 @@ $border-color: #e2e8f0;
         background: $brand-primary;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      }
+    }
+  }
+}
+
+.print-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+  transition: all 0.2s;
+  &:hover {
+    background: #059669;
+  }
+}
+
+// ==========================================================
+// VALÓDI FIZIKAI NYOMTATÁSI BEÁLLÍTÁSOK (@media print)
+// ==========================================================
+@media print {
+  // 1. REJTSD EL A KÉPERNYŐS ELEMEKET ÉS GOMBOKAT
+  .screen-only,
+  .no-print,
+  .tts-btn,
+  .print-btn,
+  .back-btn {
+    display: none !important;
+  }
+
+  // 2. JELENÍTSD MEG A KÉSZ FELADATLAPOKAT
+  .print-only {
+    display: block !important;
+  }
+
+  // Oldal alapszínének és margóinak eltüntetése a tiszta papírért
+  .lesson-layout {
+    background: white !important;
+    padding: 0 !important;
+  }
+  .lesson-content {
+    padding: 0 !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+  }
+  .medical-term {
+    border-bottom: none !important;
+    color: #000 !important;
+    font-weight: bold;
+  }
+  .text-block,
+  .vocab-item {
+    page-break-inside: avoid !important;
+  }
+
+  // 3. A NYOMTATHATÓ FELADATLAP (TESZTLAP) STÍLUSA
+  .printable-task {
+    margin: 30px 0 !important;
+    padding: 24px !important;
+    border: 2px solid #333 !important; // Keret a feladat körül
+    border-radius: 8px !important;
+    background: #fff !important;
+    page-break-inside: avoid !important;
+
+    // Fejléc
+    .task-heading {
+      border-bottom: 2px solid #ccc !important;
+      padding-bottom: 12px !important;
+      margin-bottom: 24px !important;
+      h3 {
+        margin: 8px 0 0 0 !important;
+        font-size: 1.4rem !important;
+        color: #000 !important;
+      }
+      .print-badge {
+        font-size: 0.85rem !important;
+        text-transform: uppercase !important;
+        color: #555 !important;
+        font-weight: bold !important;
+        letter-spacing: 0.05em;
+      }
+    }
+
+    // Kérdések (Quiz)
+    .q-block {
+      margin-bottom: 20px !important;
+      .q-text {
+        font-weight: bold !important;
+        margin-bottom: 8px !important;
+        font-size: 1.1rem !important;
+      }
+      .options-list {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        padding-left: 20px;
+        .option {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          font-size: 1.05rem;
+          .checkbox {
+            font-family: monospace;
+            font-size: 1.4rem;
+          }
+          &.is-correct {
+            font-weight: bold !important;
+            text-decoration: underline !important;
+            color: #000 !important;
+          }
+        }
+      }
+    }
+
+    // Drag and Drop sorok
+    .dnd-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 14px !important;
+      border-bottom: 1px dashed #ccc !important;
+      padding-bottom: 6px !important;
+      .dnd-label {
+        flex: 1;
+        font-weight: bold !important;
+        font-size: 1.1rem !important;
+      }
+      .dnd-arrow {
+        padding: 0 16px;
+        color: #666;
+        font-size: 1.2rem;
+      }
+      .dnd-answer {
+        flex: 1;
+        font-family: 'Courier New', Courier, monospace !important;
+        font-size: 1.15rem !important;
+        font-weight: bold !important;
+      }
+    }
+
+    // Táblázatok
+    .print-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      th,
+      td {
+        border: 1px solid #666 !important;
+        padding: 10px !important;
+        text-align: left;
+      }
+      th {
+        background-color: #eee !important;
+        font-weight: bold;
+      }
+      .filled-answer {
+        font-family: 'Courier New', Courier, monospace !important;
+        font-weight: bold !important;
+        text-decoration: underline;
       }
     }
   }

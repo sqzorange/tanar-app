@@ -16,6 +16,7 @@ import { TaskAiFillInComponent } from './pages/task-ai-fill-in/task-ai-fill-in';
 import { TopicFiveComponent } from './pages/topic-five/topic-five';
 import { adminGuard } from './services/admin.guard';
 import { AdminComponent } from './pages/admin/admin';
+import { TaskPhraseSelectionComponent } from './pages/task-phrase-selection/task-phrase-selection';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -44,6 +45,13 @@ export const routes: Routes = [
 
   // --- ÚJ AI-FILL-IN ÚTVONAL ---
   { path: 'task/ai-fill-in/:id', component: TaskAiFillInComponent, canActivate: [authGuard] },
+
+  // --- ÚJ PHRASE-SELECTION ÚTVONAL ---
+  {
+    path: 'task/phrase-selection/:id',
+    component: TaskPhraseSelectionComponent,
+    canActivate: [authGuard],
+  },
 
   // Minden más Topic a "Hamarosan érkezik" oldalra visz
   { path: 'topic/:id', component: TaskComingSoonComponent, canActivate: [authGuard] },

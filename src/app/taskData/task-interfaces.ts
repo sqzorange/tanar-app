@@ -15,7 +15,19 @@ export interface TableCell {
   textAfter?: string;
   rowspan?: number;
 }
+export interface PhraseCategory {
+  title: string;
+  description?: string;
+  phrases: string[];
+  requiredCount: number;
+}
 
+export interface PhraseSelectionTask {
+  id: string;
+  title: string;
+  instruction: string;
+  categories: PhraseCategory[];
+}
 export interface DragDropTask {
   id: string;
   title: string;

@@ -300,17 +300,32 @@
       </div>
     </div>
 
-    <div class="inline-task-card accent-purple">
-      <div class="task-info">
-        <div class="task-number-tag">
-          Task 11 - GROUP WORK – ALLERGIC: Rank these with your partner(s). Put the worst things to
-          be allergic to at the top as No 1 . Change partners often and share your rankings.
-        </div>
-        <span class="task-badge">Assessment</span>
-        <h3>Unit 2 Final Review</h3>
-        <p>Check your understanding of health, recovery, and bodily functions.</p>
+    <div class="worksheet-task">
+      <div class="task-header">
+        <strong>11) GROUP WORK – ALLERGIC:</strong>
+        <strong
+          >Rank these with your partner(s). Put the worst things to be allergic to at the top as № 1
+          . Change partners often and share your rankings.</strong
+        >
       </div>
-      <button class="start-task-btn" (click)="openTask('quiz', '2_4')">Launch Test ➡️</button>
+
+      <div class="task-columns">
+        <ul class="column">
+          <li>eggs</li>
+          <li>dust</li>
+          <li>penicillin</li>
+          <li>dogs</li>
+        </ul>
+
+        <ul class="column">
+          <li>peanuts</li>
+          <li>pollen</li>
+          <li>chocolate</li>
+          <li>fish</li>
+        </ul>
+      </div>
+
+      <div class="task-footer">Giving babies peanuts and eggs may avoid allergies</div>
     </div>
 
     <div class="inline-task-card accent-purple">
@@ -327,7 +342,16 @@
         Start Task ➡️
       </button>
     </div>
-
+    <div class="inline-task-card accent-purple">
+      <div class="task-info">
+        <div class="task-number-tag">Task 12 part 2</div>
+        <span class="task-badge">SYNONYM MATCH</span>
+        <h3>Match the following synonyms.</h3>
+      </div>
+      <button class="start-task-btn" (click)="openTask('dragdrop', '2_12_part2_match')">
+        Start Task ➡️
+      </button>
+    </div>
     <div class="inline-task-card accent-purple">
       <div class="task-info">
         <div class="task-number-tag">Task 13 - Listening: Comprehension Questions.</div>
@@ -339,193 +363,17 @@
         Start Task ➡️
       </button>
     </div>
-
     <div class="inline-task-card accent-purple">
       <div class="task-info">
-        <div class="task-number-tag">
-          Task 15 - Agreeing and Disagreeing, Asking for Opinion and Giving Opinion
-        </div>
+        <div class="task-number-tag">Task 15 - Phrase Selection</div>
         <span class="task-badge">Assessment</span>
-        <h3>Giving your opinion</h3>
-        <p>
-          Expressions to use in speaking and writing. We often give our opinions to friends and
-          collegues.
-        </p>
+        <h3>Agreeing and Disagreeing</h3>
+        <p>Expressions to use in speaking and writing. Select your favorite phrases!</p>
       </div>
+      <button class="start-task-btn" (click)="openTask('phrase-selection', '2_15_phrases')">
+        Start Task ➡️
+      </button>
     </div>
-    <section class="text-block">
-      <div class="phrase-container">
-        <div class="phrase-card">
-          <div class="phrase-index">1</div>
-          <div class="phrase-text">In my opinion, this one would be better.</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">2</div>
-          <div class="phrase-text">To my mind this one's better.</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">3</div>
-          <div class="phrase-text">If you ask me, this one's better.</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">4</div>
-          <div class="phrase-text">To my way of thinking, this one's fine.</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">5</div>
-          <div class="phrase-text">In my view, this one is best.</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">6</div>
-          <div class="phrase-text">Know what I think? That one's best.</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">7</div>
-          <div class="phrase-text">I'd say tomorrow that one's better.</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">8</div>
-          <div class="phrase-text">What I think is that one's better.</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">9</div>
-          <div class="phrase-text">For me, that one's better.</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">10</div>
-          <div class="phrase-text">I tell you what I think, that one's best.</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="text-block">
-      <h2>Asking for approval</h2>
-      <p>
-        Sometimes we are not sure if it's a good idea to do something. So we need useful expressions
-        for asking if other people agree with an idea or intended action.
-      </p>
-
-      <div class="phrase-container">
-        <div class="phrase-card">
-          <div class="phrase-index">1</div>
-          <div class="phrase-text">Do you think it's all right to do it?</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">2</div>
-          <div class="phrase-text">What do you think about (me doing that)?</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">3</div>
-          <div class="phrase-text">Do you think / reckon I ought to (do it)?</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">4</div>
-          <div class="phrase-text">What would you say if I (did it)?</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">5</div>
-          <div class="phrase-text">Would you approve of (doing something)?</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">6</div>
-          <div class="phrase-text">What is your attitude to the idea of...</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">7</div>
-          <div class="phrase-text">Are you in favour of (me doing something)?</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">8</div>
-          <div class="phrase-text">You are in favour of ... aren't you?</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">9</div>
-          <div class="phrase-text">Do you think anyone would mind if I...</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">10</div>
-          <div class="phrase-text">Do you think it would be really awful if I</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="text-block">
-      <h2>Disagreeing with people</h2>
-      <p>
-        Sometimes people give an opinion and you don't agree with it. We have many ways to show
-        disagreement in English. Here are ten of them.
-      </p>
-
-      <div class="phrase-container">
-        <div class="phrase-card">
-          <div class="phrase-index">1</div>
-          <div class="phrase-text">I'm not sure about that!</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">2</div>
-          <div class="phrase-text">You could be right, but...</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">3</div>
-          <div class="phrase-text">(I'm afraid) I don't agree.(I'm afraid) I don't agree.</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">4</div>
-          <div class="phrase-text">I agree up to a point, but..</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">5</div>
-          <div class="phrase-text">That's an interesting idea, but..</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">6</div>
-          <div class="phrase-text">Do you really think...?</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">7</div>
-          <div class="phrase-text">Rubbish! / Nonsense!</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">8</div>
-          <div class="phrase-text">You can't be serious!</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">9</div>
-          <div class="phrase-text">Actually, as a matter of fact. I think..</div>
-        </div>
-
-        <div class="phrase-card">
-          <div class="phrase-index">10</div>
-          <div class="phrase-text">That's not how I see it.</div>
-        </div>
-      </div>
-    </section>
 
     <div class="task-section role-play-task">
       <div class="task-header">

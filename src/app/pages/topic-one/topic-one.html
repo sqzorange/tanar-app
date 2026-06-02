@@ -1,5 +1,5 @@
 <div class="lesson-layout">
-  <header class="lesson-header">
+  <header class="lesson-header no-print">
     <button class="back-btn" (click)="goBack()">⬅ Back to Dashboard</button>
     <h1>Unit 1: Introduction to the Body</h1>
     <p class="subtitle">
@@ -8,12 +8,35 @@
   </header>
 
   <article class="lesson-content">
-    <div class="inline-task-card accent-blue">
+    <div class="inline-task-card accent-blue screen-only">
       <div class="task-info">
         <span class="task-badge">Icebreaker</span>
         <h3>Critical Thinking: Self-Diagnosis</h3>
       </div>
       <button class="start-task-btn" (click)="openTask('quiz', 11)">Start Discussion ➡️</button>
+    </div>
+
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Icebreaker</span>
+        <h3>Critical Thinking: Self-Diagnosis (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div *ngFor="let q of quizData['11']?.questions; let i = index" class="q-block">
+          <p class="q-text">
+            <strong>{{ i + 1 }}.</strong> {{ q.text }}
+          </p>
+          <div class="options-list">
+            <span
+              *ngFor="let opt of q.options; let j = index"
+              class="option"
+              [class.is-correct]="j === q.correctIndex"
+            >
+              <span class="checkbox">{{ j === q.correctIndex ? '☒' : '☐' }}</span> {{ opt }}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <section class="text-block">
@@ -101,9 +124,9 @@
       </p>
     </section>
 
-    <hr style="margin: 40px 0; border: none; border-top: 1px solid #e2e8f0" />
+    <hr class="no-print" style="margin: 40px 0; border: none; border-top: 1px solid #e2e8f0" />
 
-    <div class="inline-task-card accent-orange">
+    <div class="inline-task-card accent-orange screen-only">
       <div class="task-info">
         <span class="task-badge">Anatomy Practice</span>
         <h3>Head and Neck Identification</h3>
@@ -111,52 +134,19 @@
       <button class="start-task-btn" (click)="openTask('dragdrop', 9)">Begin Exercise ➡️</button>
     </div>
 
-    <section class="text-block">
-      <h2>Grammar & Main words</h2>
-      <h3>Collocations</h3>
-      <div class="vocab-grid">
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Forehead')" title="Listen">🔊</button>
-            <strong>Forehead</strong>
-          </div>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Adam\'s apple')" title="Listen">🔊</button>
-            <strong>Adam's apple</strong>
-          </div>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Mandible')" title="Listen">🔊</button>
-            <strong>Mandible</strong>
-          </div>
-          <span>Lower jaw</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Zygoma')" title="Listen">🔊</button>
-            <strong>Zygoma</strong>
-          </div>
-          <span>Cheekbone</span>
-        </div>
-        <div class="vocab-item">
-          <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Mentum')" title="Listen">🔊</button>
-            <strong>Mentum</strong>
-          </div>
-          <span>Chin</span>
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Anatomy Practice</span>
+        <h3>Head and Neck Identification (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <p><em>Match the anatomical terms to their correct locations:</em></p>
+        <div *ngFor="let zone of dragDropData['9']?.dropZones" class="dnd-row">
+          <span class="dnd-label">{{ zone.label }}</span>
+          <span class="dnd-arrow">➔</span>
+          <span class="dnd-answer">{{ zone.correctAnswer }}</span>
         </div>
       </div>
-    </section>
-
-    <div class="inline-task-card accent-orange">
-      <div class="task-info">
-        <span class="task-badge">Anatomy Practice</span>
-        <h3>Trunk & Thorax Challenge</h3>
-      </div>
-      <button class="start-task-btn" (click)="openTask('dragdrop', 12)">Start Trunk task ➡️</button>
     </div>
 
     <section class="text-block">
@@ -165,56 +155,166 @@
       <div class="vocab-grid">
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Axilla')" title="Listen">🔊</button>
+            <button class="tts-btn no-print" (click)="playSound('Forehead')" title="Listen">
+              🔊
+            </button>
+            <strong>Forehead</strong>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn no-print" (click)="playSound('Adam\'s apple')" title="Listen">
+              🔊
+            </button>
+            <strong>Adam's apple</strong>
+          </div>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn no-print" (click)="playSound('Mandible')" title="Listen">
+              🔊
+            </button>
+            <strong>Mandible</strong>
+          </div>
+          <span>Lower jaw</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn no-print" (click)="playSound('Zygoma')" title="Listen">
+              🔊
+            </button>
+            <strong>Zygoma</strong>
+          </div>
+          <span>Cheekbone</span>
+        </div>
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn no-print" (click)="playSound('Mentum')" title="Listen">
+              🔊
+            </button>
+            <strong>Mentum</strong>
+          </div>
+          <span>Chin</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="inline-task-card accent-orange screen-only">
+      <div class="task-info">
+        <span class="task-badge">Anatomy Practice</span>
+        <h3>Trunk & Thorax Challenge</h3>
+      </div>
+      <button class="start-task-btn" (click)="openTask('dragdrop', 12)">Start Trunk task ➡️</button>
+    </div>
+
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Anatomy Practice</span>
+        <h3>Trunk & Thorax Challenge (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <table *ngIf="dragDropData['12']?.type === 'list-to-table'" class="print-table">
+          <thead>
+            <tr>
+              <th *ngFor="let header of dragDropData['12']?.tableHeaders">{{ header }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of dragDropData['12']?.tableRows">
+              <td *ngFor="let cell of row">
+                <span *ngIf="cell.type === 'static'">{{ cell.value }}</span>
+                <span *ngIf="cell.type === 'drop'" class="filled-answer">
+                  {{ getDropAnswer(cell.value, dragDropData['12']?.dropZones) }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div *ngIf="dragDropData['12']?.type !== 'list-to-table'">
+          <div *ngFor="let zone of dragDropData['12']?.dropZones" class="dnd-row">
+            <span class="dnd-label">{{ zone.label }}</span>
+            <span class="dnd-arrow">➔</span>
+            <span class="dnd-answer">{{ zone.correctAnswer }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="text-block">
+      <h2>Grammar & Main words</h2>
+      <h3>Collocations</h3>
+      <div class="vocab-grid">
+        <div class="vocab-item">
+          <div class="word-header">
+            <button class="tts-btn no-print" (click)="playSound('Axilla')" title="Listen">
+              🔊
+            </button>
             <strong>Axilla</strong>
           </div>
           <span>armpit</span>
         </div>
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Clavicula')" title="Listen">🔊</button>
+            <button class="tts-btn no-print" (click)="playSound('Clavicula')" title="Listen">
+              🔊
+            </button>
             <strong>Clavicula</strong>
           </div>
           <span>collar bone, clavicle</span>
         </div>
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Sternum')" title="Listen">🔊</button>
+            <button class="tts-btn no-print" (click)="playSound('Sternum')" title="Listen">
+              🔊
+            </button>
             <strong>Sternum</strong>
           </div>
           <span>breast bone</span>
         </div>
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Costae')" title="Listen">🔊</button>
+            <button class="tts-btn no-print" (click)="playSound('Costae')" title="Listen">
+              🔊
+            </button>
             <strong>Costae</strong>
           </div>
           <span>ribs</span>
         </div>
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Abdomen')" title="Listen">🔊</button>
+            <button class="tts-btn no-print" (click)="playSound('Abdomen')" title="Listen">
+              🔊
+            </button>
             <strong>Abdomen</strong>
           </div>
           <span>belly, tummy, stomach</span>
         </div>
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Umbilicus')" title="Listen">🔊</button>
+            <button class="tts-btn no-print" (click)="playSound('Umbilicus')" title="Listen">
+              🔊
+            </button>
             <strong>Umbilicus</strong>
           </div>
           <span>navel, belly button</span>
         </div>
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Thorax')" title="Listen">🔊</button>
+            <button class="tts-btn no-print" (click)="playSound('Thorax')" title="Listen">
+              🔊
+            </button>
             <strong>Thorax</strong>
           </div>
           <span>chest</span>
         </div>
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Antecubital fossa')" title="Listen">
+            <button
+              class="tts-btn no-print"
+              (click)="playSound('Antecubital fossa')"
+              title="Listen"
+            >
               🔊
             </button>
             <strong>Antecubital fossa</strong>
@@ -224,7 +324,7 @@
       </div>
     </section>
 
-    <div class="inline-task-card accent-green">
+    <div class="inline-task-card accent-green screen-only">
       <div class="task-info">
         <span class="task-badge">Terminology Master</span>
         <h3>Anterior vs. Posterior Classification</h3>
@@ -234,12 +334,50 @@
       </button>
     </div>
 
-    <div class="inline-task-card accent-purple">
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Terminology Master</span>
+        <h3>Anterior vs. Posterior Classification (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <p><em>Classify the following terms correctly:</em></p>
+        <div *ngFor="let zone of dragDropData['15']?.dropZones" class="dnd-row">
+          <span class="dnd-label">{{ zone.label }}</span>
+          <span class="dnd-arrow">➔</span>
+          <span class="dnd-answer">{{ zone.correctAnswer }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="inline-task-card accent-purple screen-only">
       <div class="task-info">
         <span class="task-badge">Anatomy Practice</span>
         <h3>Distal Extremities Quiz</h3>
       </div>
       <button class="start-task-btn" (click)="openTask('quiz', 10)">Start Quiz ➡️</button>
+    </div>
+
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Anatomy Practice</span>
+        <h3>Distal Extremities Quiz (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div *ngFor="let q of quizData['10']?.questions; let i = index" class="q-block">
+          <p class="q-text">
+            <strong>{{ i + 1 }}.</strong> {{ q.text }}
+          </p>
+          <div class="options-list">
+            <span
+              *ngFor="let opt of q.options; let j = index"
+              class="option"
+              [class.is-correct]="j === q.correctIndex"
+            >
+              <span class="checkbox">{{ j === q.correctIndex ? '☒' : '☐' }}</span> {{ opt }}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <section class="text-block">
@@ -248,28 +386,28 @@
       <div class="vocab-grid">
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Tip')" title="Listen">🔊</button>
+            <button class="tts-btn no-print" (click)="playSound('Tip')" title="Listen">🔊</button>
             <strong>Tip</strong>
           </div>
           <span>of the nose / tongue</span>
         </div>
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Palm')" title="Listen">🔊</button>
+            <button class="tts-btn no-print" (click)="playSound('Palm')" title="Listen">🔊</button>
             <strong>Palm</strong>
           </div>
           <span>of the hand</span>
         </div>
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Nape')" title="Listen">🔊</button>
+            <button class="tts-btn no-print" (click)="playSound('Nape')" title="Listen">🔊</button>
             <strong>Nape</strong>
           </div>
           <span>of the neck</span>
         </div>
         <div class="vocab-item">
           <div class="word-header">
-            <button class="tts-btn" (click)="playSound('Sole')" title="Listen">🔊</button>
+            <button class="tts-btn no-print" (click)="playSound('Sole')" title="Listen">🔊</button>
             <strong>Sole / heel</strong>
           </div>
           <span>of the foot</span>
@@ -285,12 +423,37 @@
       </ul>
     </section>
 
-    <div class="inline-task-card accent-success">
+    <div class="inline-task-card accent-success screen-only">
       <div class="task-info">
         <span class="task-badge">Unit Summary</span>
         <h3>Final Review: Unit 1 Assessment</h3>
       </div>
       <button class="start-task-btn" (click)="openTask('quiz', 10)">Launch Review ➡️</button>
     </div>
+
+    <div class="printable-task print-only">
+      <div class="task-heading">
+        <span class="print-badge">Unit Summary</span>
+        <h3>Final Review: Unit 1 Assessment (SOLUTION)</h3>
+      </div>
+      <div class="task-questions">
+        <div *ngFor="let q of quizData['10']?.questions; let i = index" class="q-block">
+          <p class="q-text">
+            <strong>{{ i + 1 }}.</strong> {{ q.text }}
+          </p>
+          <div class="options-list">
+            <span
+              *ngFor="let opt of q.options; let j = index"
+              class="option"
+              [class.is-correct]="j === q.correctIndex"
+            >
+              <span class="checkbox">{{ j === q.correctIndex ? '☒' : '☐' }}</span> {{ opt }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </article>
+
+  <button class="print-btn no-print" (click)="printPage()">🖨️ Print Document</button>
 </div>
