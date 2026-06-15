@@ -1,11 +1,23 @@
+topic 3:
+9
+11
+12
+13
+14
+15
+16
+17
+18
+
+topic 4:
+7
+8
+
+topic 5:
+2
+6
+7
+9
 
 
-5: UI kész
-Hiányzik:
 
-5_2 Kahoot
-5_7 Kahoot
-5_7= alatti szöveg
-
-overall:
-hibaüzenetek/kiértékelés

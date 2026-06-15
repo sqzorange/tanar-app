@@ -87,6 +87,54 @@ $border-color: #e2e8f0;
       color: $text-muted;
       margin-bottom: 16px;
     }
+    // --- ÚJ KÓD A SZÖVEG KÖRBEFUTTATÁSÁHOZ ---
+
+    .wrapped-content-container {
+      margin-top: 24px;
+      margin-bottom: 24px;
+      position: relative;
+
+      // A float törlése a konténer után
+      &::after {
+        content: '';
+        display: table;
+        clear: both;
+      }
+
+      .floating-lesson-image {
+        float: left;
+        margin-right: 20px; // Térköz a kép és a szöveg között
+        margin-bottom: 10px; // Térköz az alsó szöveg számára
+        width: 140px; // Kisebb méret
+        height: 140px;
+        border-radius: 50%; // Kör alak
+        object-fit: cover; // Hogy az arc ne torzuljon
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); // Finom árnyék
+      }
+
+      .indented-sub-para {
+        padding-left: 160px; // A kép szélessége + margin-right
+        margin-bottom: 12px; // Tömörebb térköz a sub-bekezdések között
+        color: $text-muted; // Hogy ne legyen olyan éles a színe
+        font-size: 1.05rem;
+
+        strong {
+          color: $text-main;
+          font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+          padding-left: 0; // Mobilon kikapcsoljuk az indentálást
+        }
+      }
+    }
+
+    // A float törlése segédosztály (biztonsági okokból)
+    .clearfix::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
 
     // --- INTERAKTÍV HOVER KÁRTYA STÍLUSA ---
     .medical-term {

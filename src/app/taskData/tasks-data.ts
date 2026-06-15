@@ -10,6 +10,7 @@ import {
   PhraseSelectionTask,
   ImageFillInTask,
   SingleImageFillInTask,
+  TrueFalseImageTask,
 } from './task-interfaces';
 
 import { topic1DragDrop, topic1Quiz, topic1Selection } from './topic-1-data';
@@ -24,8 +25,11 @@ import {
   topic3DragDrop,
   topic3Quiz,
   topic3AiFillIn,
-  topic3ImageFillIn, // <-- Innen jön a 10 képes feladat
-  topic3ImageTable, // <-- Innen jön a táblázatos feladat
+  topic3ImageFillIn,
+  topic3ImageTable,
+  topic3TrueFalseImage,
+  topic3InlineChoice,
+  topic3Listening,
 } from './topic-3-data';
 import { topic4DragDrop, topic4AiFillIn } from './topic-4-data';
 import { topic5DragDrop, topic5Quiz, topic5AiFillIn } from './topic-5-data';
@@ -46,6 +50,7 @@ export const QUIZ_DATABASE: { [key: string]: QuizTask } = {
 
 export const INLINE_CHOICE_DATABASE: { [key: string]: InlineChoiceTask } = {
   ...topic2InlineChoice,
+  ...topic3InlineChoice,
 };
 
 export const SELECTION_DATABASE: { [key: string]: SelectionTask } = {
@@ -54,6 +59,7 @@ export const SELECTION_DATABASE: { [key: string]: SelectionTask } = {
 
 export const LISTENING_DATABASE: { [key: string]: ListeningTask } = {
   ...topic2Listening,
+  ...topic3Listening,
 };
 
 export const AI_FILL_IN_DATABASE: { [key: string]: AiFillInTask } = {
@@ -67,11 +73,14 @@ export const PHRASE_SELECTION_DATABASE: { [key: string]: PhraseSelectionTask } =
   ...topic2PhraseSelection,
 };
 
-// --- KÉPES FELADATOK ---
 export const IMAGE_FILL_IN_DATABASE: { [key: string]: ImageFillInTask } = {
   ...topic3ImageFillIn,
 };
 
 export const IMAGE_TABLE_DATABASE: { [key: string]: SingleImageFillInTask } = {
   ...topic3ImageTable,
+};
+
+export const TRUE_FALSE_IMAGE_DATABASE: { [key: string]: TrueFalseImageTask } = {
+  ...topic3TrueFalseImage,
 };

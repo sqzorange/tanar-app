@@ -1,0 +1,61 @@
+<div class="task-layout" *ngIf="currentTask">
+  <header class="task-header">
+    <button class="back-btn" (click)="goBack()">⬅ Back</button>
+    <h2>{{ currentTask.title }}</h2>
+    <p [innerHTML]="currentTask.instruction"></p>
+  </header>
+
+  <div class="task-container">
+    <div class="image-section">
+      <img [src]="currentTask.imageSrc" alt="Task Diagram" class="reference-image" />
+    </div>
+
+    <div class="questions-section">
+      <div
+        class="question-row"
+        *ngFor="let q of currentTask.questions; let i = index"
+        [class.evaluated-correct]="gradingResults?.[i] === 'correct'"
+        [class.evaluated-incorrect]="gradingResults?.[i] === 'incorrect'"
+      >
+        <div class="question-text">
+          <span class="q-number">{{ q.id }}.</span>
+          <span class="q-content">{{ q.text }}</span>
+        </div>
+
+        <div class="answer-actions">
+          <button
+            class="tf-btn yes-btn"
+            [class.selected]="userAnswers[i] === true"
+            [disabled]="isEvaluated"
+            (click)="selectAnswer(i, true)"
+          >
+            Yes
+          </button>
+          <button
+            class="tf-btn no-btn"
+            [class.selected]="userAnswers[i] === false"
+            [disabled]="isEvaluated"
+            (click)="selectAnswer(i, false)"
+          >
+            No
+          </button>
+
+          <div class="feedback-icon" *ngIf="isEvaluated">
+            <span *ngIf="gradingResults?.[i] === 'correct'">✅</span>
+            <span *ngIf="gradingResults?.[i] === 'incorrect'">❌</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="action-footer">
+    <button
+      class="submit-btn"
+      (click)="submitTask()"
+      [disabled]="!allQuestionsAnswered() || isEvaluated"
+    >
+      {{ isEvaluated ? 'Task Completed' : 'Check Answers ✅' }}
+    </button>
+  </footer>
+</div>

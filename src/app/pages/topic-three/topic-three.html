@@ -144,9 +144,7 @@
         <h3>Organ Movements</h3>
         <p>Answer the question in the table: What movement is involved in each organ?</p>
       </div>
-      <button class="start-task-btn" (click)="openTask('ai-fill-in', '3_8')">
-        Start Task 8 ➡️
-      </button>
+      <button class="start-task-btn" (click)="openTask('dragdrop', '3_8')">Start Task 8 ➡️</button>
     </div>
 
     <section class="text-block">
@@ -159,16 +157,28 @@
         the muscle in front of the food relaxes to allow the food to move. The digestive process
         starts when you put food in your mouth.
       </p>
-      <p>
-        <strong>Mouth.</strong> Food starts to move through your GI tract when you eat. When you
-        swallow, your tongue pushes the food into your throat. A small flap of tissue, called the
-        <strong class="medical-term" data-desc="cartilage flap over windpipe">epiglottis</strong>,
-        folds over your windpipe to prevent choking and the food passes into your oesophagus.
-      </p>
-      <p>
-        <strong>Oesophagus.</strong> Once you begin swallowing, the process becomes automatic. Your
-        brain signals the muscles of the oesophagus and peristalsis begins.
-      </p>
+
+      <div class="wrapped-content-container">
+        <img
+          src="assets\eating_salad_pic.png"
+          alt="Eating and Digestion diagram"
+          class="floating-lesson-image"
+        />
+
+        <p>The digestive process starts when you put food in your mouth.</p>
+
+        <p class="indented-sub-para">
+          <strong>Mouth.</strong> Food starts to move through your GI tract when you eat. When you
+          swallow, your tongue pushes the food into your throat. A small flap of tissue, called the
+          <strong class="medical-term" data-desc="cartilage flap over windpipe">epiglottis</strong>,
+          folds over your windpipe to prevent choking and the food passes into your oesophagus.
+        </p>
+        <p class="indented-sub-para">
+          <strong>Oesophagus.</strong> Once you begin swallowing, the process becomes automatic.
+          Your brain signals the muscles of the oesophagus and peristalsis begins.
+        </p>
+        <div class="clearfix"></div>
+      </div>
     </section>
 
     <section class="text-block">
@@ -231,6 +241,25 @@
         Stools that are large in volume are described as bulky. A bad smell is described as foul or
         offensive.
       </p>
+
+      <img
+        src="assets\poop_chart.png"
+        alt="Eating and Digestion diagram"
+        class="floating-lesson-image"
+      />
+
+      <h3>BUT WHAT CAN THE BRISTOL STOOL SCALE TELL YOU ABOUT YOUR HEALTH?</h3>
+      <ol>
+        <li><strong>Signs of Healthy Digestion:</strong></li>
+        <p>The good news is that if you have Bristol Type 3 or 4 – your poop is normal;</p>
+        <li><strong>Indicator of Constipation:</strong></li>
+        <p>Bristol Type 1 or 2, where the poop is hard and difficult to pass;</p>
+        <li><strong>Indicator of Diarrhoea:</strong></li>
+        <p>
+          Bristol Types 5 through 7. Type 5 suggests that a lack of fibre is the main problem, while
+          6 and 7 suggest an inflammatory process.
+        </p>
+      </ol>
     </section>
 
     <div class="inline-task-card accent-dark">
@@ -242,7 +271,9 @@
           patients.
         </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('dragdrop', 3_9)">Start Task 9 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('ai-fill-in', '3_9')">
+        Start Task 9 ➡️
+      </button>
     </div>
 
     <div class="inline-task-card accent-purple">
@@ -262,25 +293,34 @@
     <hr style="margin: 48px 0; border: none; border-top: 2px solid #e2e8f0" />
 
     <section class="text-block" style="margin-bottom: 24px">
-      <h2>Nutrition and Obesity</h2>
-      <p>
-        Understanding what fuels the body is just as important as knowing how it is digested. Let's
-        explore the essential nutrients and current dietary challenges.
-      </p>
+      <img
+        src="assets\Nutrition_and_obesity.png"
+        alt="Eating and Digestion diagram"
+        class="floating-lesson-image"
+      />
     </section>
 
-    <div class="inline-task-card accent-success">
-      <div class="task-info">
+    <div class="inline-task-card accent-success screen-only">
+      <div class="task-info" style="max-width: 100%">
         <span class="task-badge">Task 11</span>
         <h3>Speaking: Pairwork</h3>
-        <p>
-          Talk about why our body needs the things shown. What does it contain? Which part of the
-          body is it especially good for?
-        </p>
+        <p>Discuss the items shown with your partner based on the following prompts:</p>
+
+        <ul style="margin-top: 20px; padding-left: 24px; list-style-type: none">
+          <li style="font-size: 1.15rem; color: #1e293b; margin-bottom: 12px; position: relative">
+            <span style="position: absolute; left: -24px">💬</span>
+            <strong>Talk about why our body needs the things shown.</strong>
+          </li>
+          <li style="font-size: 1.15rem; color: #1e293b; margin-bottom: 12px; position: relative">
+            <span style="position: absolute; left: -24px">💬</span>
+            <strong>What does it contain?</strong>
+          </li>
+          <li style="font-size: 1.15rem; color: #1e293b; position: relative">
+            <span style="position: absolute; left: -24px">💬</span>
+            <strong>Which part of the body is it especially good for?</strong>
+          </li>
+        </ul>
       </div>
-      <button class="start-task-btn" (click)="openTask('discussion', 3_11)">
-        Start Task 11 ➡️
-      </button>
     </div>
 
     <div class="inline-task-card accent-blue">
@@ -292,32 +332,58 @@
           skin, bones, nervous system).
         </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('fill-in', 3_12)">Start Task 12 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('dragdrop', '3_12')">
+        Start Task 12 ➡️
+      </button>
     </div>
 
-    <div class="inline-task-card accent-orange">
-      <div class="task-info">
+    <div class="inline-task-card accent-orange screen-only">
+      <div class="task-info" style="max-width: 100%">
         <span class="task-badge">Task 13</span>
         <h3>Project Work</h3>
         <p>
-          Research substances like Vitamin E, Vitamin K, Potassium, etc., and write about why our
-          body needs them.
+          Research one of the following substances:
+          <strong>Vitamin E, Vitamin K, Potassium, Selenium, Folic acid</strong>.
         </p>
+
+        <ul style="margin-top: 20px; padding-left: 24px; list-style-type: none">
+          <li style="font-size: 1.15rem; color: #1e293b; margin-bottom: 12px; position: relative">
+            <span style="position: absolute; left: -24px">📝</span>
+            <strong>Write about why our body needs them.</strong>
+          </li>
+          <li style="font-size: 1.15rem; color: #1e293b; margin-bottom: 12px; position: relative">
+            <span style="position: absolute; left: -24px">📝</span>
+            <strong>What foods are they found in?</strong>
+          </li>
+          <li style="font-size: 1.15rem; color: #1e293b; position: relative">
+            <span style="position: absolute; left: -24px">💡</span>
+            <strong>Try to use some of the language and vocabulary learned above!</strong>
+          </li>
+        </ul>
       </div>
-      <button class="start-task-btn" (click)="openTask('project', 3_13)">Start Task 13 ➡️</button>
     </div>
 
-    <div class="inline-task-card accent-red">
-      <div class="task-info">
+    <div class="inline-task-card accent-red screen-only">
+      <div class="task-info" style="max-width: 100%">
         <span class="task-badge">Task 14</span>
         <h3>Pre-Reading Discussion</h3>
-        <p>
-          Pairwork: Do you like fast food? How often do you eat it? Do you think it is addictive?
-        </p>
+        <p>Discuss the questions below with a partner before reading the article.</p>
+
+        <ul style="margin-top: 20px; padding-left: 24px; list-style-type: none">
+          <li style="font-size: 1.15rem; color: #1e293b; margin-bottom: 12px; position: relative">
+            <span style="position: absolute; left: -24px">💬</span>
+            <strong>Do you like fast food?</strong>
+          </li>
+          <li style="font-size: 1.15rem; color: #1e293b; margin-bottom: 12px; position: relative">
+            <span style="position: absolute; left: -24px">💬</span>
+            <strong>How often do you eat it?</strong>
+          </li>
+          <li style="font-size: 1.15rem; color: #1e293b; position: relative">
+            <span style="position: absolute; left: -24px">💬</span>
+            <strong>Do you think it is addictive?</strong>
+          </li>
+        </ul>
       </div>
-      <button class="start-task-btn" (click)="openTask('discussion', 3_14)">
-        Start Task 14 ➡️
-      </button>
     </div>
 
     <div class="inline-task-card accent-purple">
@@ -325,10 +391,12 @@
         <span class="task-badge">Task 15</span>
         <h3>Reading: Fast Food</h3>
         <p>
-          Read the article 'Super Size Me' and decide if the sentences are True (T) or False (F).
+          Read the article 'Super Size Me' and decide if the sentences are True (Yes) or False (No).
         </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('quiz', 3_15)">Start Task 15 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('true-false-image', '3_15')">
+        Start Task 15 ➡️
+      </button>
     </div>
 
     <div class="inline-task-card accent-green">
@@ -340,25 +408,29 @@
           diet.
         </p>
       </div>
-      <button class="start-task-btn" (click)="openTask('fill-in', 3_16)">Start Task 16 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('dragdrop', '3_16')">
+        Start Task 16 ➡️
+      </button>
     </div>
 
-    <div class="inline-task-card accent-dark">
+    <div class="inline-task-card accent-dark screen-only">
       <div class="task-info">
         <span class="task-badge">Task 17</span>
         <h3>Energy Drinks: Headlines</h3>
-        <p>Read the headlines about energy drinks and guess if they are true or false.</p>
+        <p>Read the statements about energy drinks and decide if they are true or false.</p>
       </div>
-      <button class="start-task-btn" (click)="openTask('quiz', 3_17)">Start Task 17 ➡️</button>
+      <button class="start-task-btn" (click)="openTask('inline-choice', '3_17')">
+        Start Task 17 ➡️
+      </button>
     </div>
 
-    <div class="inline-task-card accent-blue">
+    <div class="inline-task-card accent-blue screen-only">
       <div class="task-info">
         <span class="task-badge">Task 18</span>
         <h3>Listening Comprehension</h3>
-        <p>Listen to the recording about energy drinks and discuss the questions in pairs.</p>
+        <p>Listen to the recording about energy drinks and discuss the questions.</p>
       </div>
-      <button class="start-task-btn" (click)="openTask('discussion', 3_18)">
+      <button class="start-task-btn" (click)="openTask('listening', '3_18')">
         Start Task 18 ➡️
       </button>
     </div>

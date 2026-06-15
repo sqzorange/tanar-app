@@ -135,3 +135,17 @@ export interface SingleImageFillInTask {
   imageSrc: string;
   rows: SingleImageRow[];
 }
+
+export interface TrueFalseQuestion {
+  id: number;
+  text: string;
+  correctAnswer: boolean;
+}
+
+export interface TrueFalseImageTask {
+  id: string;
+  title: string;
+  instruction: string;
+  imageSrc: string;
+  questions: TrueFalseQuestion[];
+}

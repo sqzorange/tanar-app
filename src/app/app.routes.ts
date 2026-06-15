@@ -19,6 +19,7 @@ import { AdminComponent } from './pages/admin/admin';
 import { TaskPhraseSelectionComponent } from './pages/task-phrase-selection/task-phrase-selection';
 import { TaskImageFillInComponent } from './pages/task-image-fill-in-component/task-image-fill-in-component';
 import { TaskImageTableComponent } from './pages/task-image-table/task-image-table';
+import { TaskTrueFalseImageComponent } from './pages/task-true-false-image/task-true-false-image';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -61,7 +62,11 @@ export const routes: Routes = [
   { path: 'topic/:id', component: TaskComingSoonComponent, canActivate: [authGuard] },
 
   { path: 'task/image-table/:id', component: TaskImageTableComponent, canActivate: [authGuard] },
-
+  {
+    path: 'task/true-false-image/:id',
+    component: TaskTrueFalseImageComponent,
+    canActivate: [authGuard],
+  },
   // "Biztonsági háló": Ha semmi sem illeszkedik, irány a login!
   { path: '**', redirectTo: 'login' },
 ];
