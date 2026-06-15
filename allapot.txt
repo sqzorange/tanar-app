@@ -1,4 +1,4 @@
-topic 3:
+topic 3:done
 9
 11
 12
@@ -9,7 +9,7 @@ topic 3:
 17
 18
 
-topic 4:
+topic 4:done
 7
 8
 
