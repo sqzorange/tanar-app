@@ -31,4 +31,7 @@ export class TopicFiveComponent {
       window.speechSynthesis.speak(utterance);
     }
   }
+  openExternalLink(url: string) {
+    window.open(url, '_blank'); // A '_blank' gondoskodik róla, hogy új lapon nyíljon meg
+  }
 }

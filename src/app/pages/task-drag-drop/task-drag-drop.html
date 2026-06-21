@@ -13,6 +13,7 @@
         id="availableList"
         [cdkDropListData]="availableOptions"
         [cdkDropListConnectedTo]="zoneLists"
+        [cdkDropListDisabled]="isEvaluated"
         class="item-list source-grid"
       >
         <div class="item-box" *ngFor="let item of availableOptions" cdkDrag [cdkDragData]="item">
@@ -21,47 +22,77 @@
       </div>
     </div>
 
-    <!-- KÉPES FELADATOK (list-to-image) -->
+    <!-- KÉPES FELADATOK -->
     <div class="image-map-container" *ngIf="currentTask.type === 'list-to-image'">
-      <img [src]="currentTask.imageSrc" alt="Anatomy" class="anatomy-image" />
+      <img [src]="currentTask.imageSrc" alt="Diagram" class="anatomy-image" />
       <div
         *ngFor="let zone of currentTask.dropZones"
         class="image-drop-zone"
         cdkDropList
         [id]="zone.label"
         [cdkDropListConnectedTo]="['availableList']"
+        [cdkDropListDisabled]="isEvaluated"
         (cdkDropListDropped)="dropOnZone($event, zone.label)"
         [style.top.%]="zone.top"
         [style.left.%]="zone.left"
       >
         <span class="placeholder" *ngIf="!droppedItems[zone.label]">???</span>
-        <div class="dropped-item" *ngIf="droppedItems[zone.label]">
+        <div
+          class="dropped-item"
+          *ngIf="droppedItems[zone.label]"
+          [style.borderColor]="
+            isEvaluated
+              ? gradingResults[zone.label] === 'correct'
+                ? '#10b981'
+                : '#ef4444'
+              : 'inherit'
+          "
+          [style.backgroundColor]="isEvaluated ? 'white' : 'inherit'"
+        >
           {{ droppedItems[zone.label] }}
+        </div>
+        <!-- HINT a képhez -->
+        <div
+          class="correct-hint"
+          *ngIf="showAnswers && gradingResults[zone.label] === 'incorrect'"
+          style="
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            color: #10b981;
+            font-size: 0.85rem;
+            padding: 4px;
+            border-radius: 4px;
+            font-weight: bold;
+            white-space: nowrap;
+            z-index: 10;
+            border: 1px solid #10b981;
+            margin-top: 4px;
+          "
+        >
+          💡 {{ getHintFor(zone.label) }}
         </div>
       </div>
     </div>
 
-    <!-- DINAMIKUS TÁBLÁZAT FELADATOK (list-to-table) -->
+    <!-- TÁBLÁZAT FELADATOK -->
     <div class="list-container" *ngIf="currentTask.type === 'list-to-table'">
-      <h3>Anatomy Table</h3>
-      <!-- Maga a container lett a rács! -->
+      <h3>Table</h3>
       <div
         class="interactive-table"
         [style.grid-template-columns]="
           'repeat(' + (currentTask.tableHeaders?.length || 1) + ', 1fr)'
         "
       >
-        <!-- Dinamikus Fejléc -->
         <ng-container *ngIf="currentTask.tableHeaders">
           <div class="cell header-cell" *ngFor="let header of currentTask.tableHeaders">
             {{ header }}
           </div>
         </ng-container>
 
-        <!-- Dinamikus Sorok ömlesztve, a Grid lerendezi! -->
         <ng-container *ngFor="let row of currentTask.tableRows">
           <ng-container *ngFor="let cell of row">
-            <!-- Ha sima szöveg (Figyeld a grid-row span kötést!) -->
             <div
               class="cell static"
               *ngIf="cell.type === 'static'"
@@ -70,7 +101,6 @@
               {{ cell.value }}
             </div>
 
-            <!-- Ha bedobó zóna -->
             <div
               class="cell drop-cell"
               *ngIf="cell.type === 'drop'"
@@ -78,40 +108,86 @@
               cdkDropList
               [id]="cell.value"
               [cdkDropListConnectedTo]="['availableList']"
+              [cdkDropListDisabled]="isEvaluated"
               (cdkDropListDropped)="dropOnZone($event, cell.value)"
             >
               <span class="static-text" *ngIf="cell.textBefore">{{ cell.textBefore }}</span>
-
               <span class="placeholder" *ngIf="!droppedItems[cell.value]">???</span>
-              <div class="dropped-val" *ngIf="droppedItems[cell.value]">
+
+              <div
+                class="dropped-val"
+                *ngIf="droppedItems[cell.value]"
+                [style.color]="
+                  isEvaluated
+                    ? gradingResults[cell.value] === 'correct'
+                      ? '#10b981'
+                      : '#ef4444'
+                    : 'inherit'
+                "
+                [style.fontWeight]="isEvaluated ? 'bold' : 'normal'"
+              >
                 {{ droppedItems[cell.value] }}
+                <span *ngIf="isEvaluated">{{
+                  gradingResults[cell.value] === 'correct' ? '✅' : '❌'
+                }}</span>
               </div>
 
               <span class="static-text" *ngIf="cell.textAfter">{{ cell.textAfter }}</span>
+
+              <!-- HINT a táblázathoz -->
+              <div
+                class="correct-hint"
+                *ngIf="showAnswers && gradingResults[cell.value] === 'incorrect'"
+                style="color: #10b981; font-weight: bold; font-size: 0.9rem; margin-top: 8px"
+              >
+                💡 {{ getHintFor(cell.value) }}
+              </div>
             </div>
           </ng-container>
         </ng-container>
       </div>
     </div>
 
+    <!-- LYUKAS SZÖVEG FELADATOK -->
     <div class="list-container" *ngIf="currentTask.type === 'list-to-text'">
-      <h3>Dialogue</h3>
+      <h3>Text with gaps</h3>
       <div class="text-with-gaps">
         <ng-container *ngFor="let zone of currentTask.dropZones">
           <span class="text-part" [innerHTML]="(zone.textWithGap || '').split('{gap}')[0]"></span>
 
-          <div
-            *ngIf="(zone.textWithGap || '').includes('{gap}')"
-            class="inline-drop-zone"
-            cdkDropList
-            [id]="zone.label"
-            [cdkDropListConnectedTo]="['availableList']"
-            (cdkDropListDropped)="dropOnZone($event, zone.label)"
-          >
-            <span class="placeholder" *ngIf="!droppedItems[zone.label]">???</span>
-            <div class="dropped-val" *ngIf="droppedItems[zone.label]">
-              {{ droppedItems[zone.label] }}
+          <div *ngIf="(zone.textWithGap || '').includes('{gap}')" style="display: inline-block">
+            <div
+              class="inline-drop-zone"
+              cdkDropList
+              [id]="zone.label"
+              [cdkDropListConnectedTo]="['availableList']"
+              [cdkDropListDisabled]="isEvaluated"
+              (cdkDropListDropped)="dropOnZone($event, zone.label)"
+            >
+              <span class="placeholder" *ngIf="!droppedItems[zone.label]">???</span>
+              <div
+                class="dropped-val"
+                *ngIf="droppedItems[zone.label]"
+                [style.color]="
+                  isEvaluated
+                    ? gradingResults[zone.label] === 'correct'
+                      ? '#10b981'
+                      : '#ef4444'
+                    : 'inherit'
+                "
+                [style.fontWeight]="isEvaluated ? 'bold' : 'normal'"
+              >
+                {{ droppedItems[zone.label] }}
+              </div>
             </div>
+            <!-- HINT a lyukas szöveghez -->
+            <span
+              class="correct-hint"
+              *ngIf="showAnswers && gradingResults[zone.label] === 'incorrect'"
+              style="color: #10b981; font-weight: bold; font-size: 0.95rem; margin-left: 8px"
+            >
+              (💡 {{ getHintFor(zone.label) }})
+            </span>
           </div>
 
           <span
@@ -123,7 +199,7 @@
       </div>
     </div>
 
-    <!-- KÉT OSZLOPOS FELADATOK (list-to-list) -->
+    <!-- KÉT OSZLOPOS FELADATOK -->
     <div class="list-to-list-container" *ngIf="currentTask.type === 'list-to-list'">
       <div class="classification-board">
         <div class="classification-column">
@@ -134,10 +210,27 @@
             cdkDropList
             [cdkDropListData]="anteriorList"
             [cdkDropListConnectedTo]="['availableList', 'posteriorList']"
+            [cdkDropListDisabled]="isEvaluated"
             (cdkDropListDropped)="dropToList($event)"
           >
-            <div class="classification-item" *ngFor="let item of anteriorList" cdkDrag>
+            <div
+              class="classification-item"
+              *ngFor="let item of anteriorList"
+              cdkDrag
+              [style.borderColor]="
+                isEvaluated ? (gradingResults[item] === 'correct' ? '#10b981' : '#ef4444') : ''
+              "
+            >
               {{ item }}
+              <span *ngIf="isEvaluated" style="float: right">{{
+                gradingResults[item] === 'correct' ? '✅' : '❌'
+              }}</span>
+              <div
+                *ngIf="showAnswers && gradingResults[item] === 'incorrect'"
+                style="color: #10b981; font-size: 0.85rem; margin-top: 4px; font-weight: bold"
+              >
+                💡 Belongs to: {{ getHintFor(item) }}
+              </div>
             </div>
             <div class="empty-row" *ngIf="anteriorList.length === 0">Drop items here</div>
           </div>
@@ -151,10 +244,27 @@
             cdkDropList
             [cdkDropListData]="posteriorList"
             [cdkDropListConnectedTo]="['availableList', 'anteriorList']"
+            [cdkDropListDisabled]="isEvaluated"
             (cdkDropListDropped)="dropToList($event)"
           >
-            <div class="classification-item" *ngFor="let item of posteriorList" cdkDrag>
+            <div
+              class="classification-item"
+              *ngFor="let item of posteriorList"
+              cdkDrag
+              [style.borderColor]="
+                isEvaluated ? (gradingResults[item] === 'correct' ? '#10b981' : '#ef4444') : ''
+              "
+            >
               {{ item }}
+              <span *ngIf="isEvaluated" style="float: right">{{
+                gradingResults[item] === 'correct' ? '✅' : '❌'
+              }}</span>
+              <div
+                *ngIf="showAnswers && gradingResults[item] === 'incorrect'"
+                style="color: #10b981; font-size: 0.85rem; margin-top: 4px; font-weight: bold"
+              >
+                💡 Belongs to: {{ getHintFor(item) }}
+              </div>
             </div>
             <div class="empty-row" *ngIf="posteriorList.length === 0">Drop items here</div>
           </div>
@@ -164,12 +274,52 @@
   </div>
 
   <footer class="action-footer">
+    <!-- Beadási gomb -->
     <button
+      *ngIf="!isEvaluated"
       class="submit-btn"
       (click)="submitTask()"
       [disabled]="getDroppedItemsCount() !== currentTask.requiredCount"
     >
       Check Answers ✅
     </button>
+
+    <!-- Közös eredményjelző kártya -->
+    <div
+      *ngIf="isEvaluated"
+      class="result-summary"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        background: #f8fafc;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      "
+    >
+      <h3 style="margin: 0; color: #1e293b">Your Score: {{ score }} / {{ maxScore }}</h3>
+
+      <div style="display: flex; gap: 12px">
+        <button
+          class="submit-btn"
+          style="background: #ef4444; padding: 10px 20px"
+          (click)="retryTask()"
+        >
+          Try Again 🔄
+        </button>
+        <button
+          class="submit-btn"
+          style="background: #3b82f6; padding: 10px 20px"
+          (click)="toggleAnswers()"
+        >
+          {{ showAnswers ? 'Hide Answers 🙈' : 'Show Answers 💡' }}
+        </button>
+      </div>
+    </div>
   </footer>
 </div>

@@ -19,6 +19,10 @@ export class TaskListeningComponent implements OnInit {
   gradingState: 'idle' | 'grading' | 'completed' = 'idle';
   aiFeedback: GradingResult[] = [];
 
+  // Egységesített értékelő változók
+  score = 0;
+  showAnswers = false;
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -29,6 +33,8 @@ export class TaskListeningComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id && LISTENING_DATABASE[id]) {
       this.currentTask = LISTENING_DATABASE[id];
+      // Inicializáljuk a válaszokat
+      this.currentTask.questions.forEach((_, i) => (this.userAnswers[i] = ''));
     } else {
       this.location.back();
     }
@@ -36,26 +42,40 @@ export class TaskListeningComponent implements OnInit {
 
   isAllAnswered(): boolean {
     if (!this.currentTask) return false;
-    return this.currentTask.questions.some(
+    return this.currentTask.questions.every(
       (_, i) => this.userAnswers[i] && this.userAnswers[i].trim() !== '',
     );
   }
 
   submitTask() {
-    this.gradingState = 'grading';
+    if (!this.currentTask || !this.isAllAnswered()) return;
 
-    // Itt volt a TS7006 hiba, amit a : GradingResult[] megadásával javítottam
+    this.gradingState = 'grading';
+    this.showAnswers = false;
+    this.score = 0;
+
     this.aiGrading
       .gradeAnswers(this.currentTask.questions, this.userAnswers)
       .subscribe((results: GradingResult[]) => {
         this.aiFeedback = results;
         this.gradingState = 'completed';
+
+        // Pontszámítás: minden tökéletesen helyes válasz ér 1 pontot
+        this.score = results.filter((r) => r.status === 'correct').length;
       });
+  }
+
+  toggleAnswers() {
+    this.showAnswers = !this.showAnswers;
   }
 
   retryTask() {
     this.gradingState = 'idle';
     this.aiFeedback = [];
+    this.score = 0;
+    this.showAnswers = false;
+    // Töröljük a beírt válaszokat
+    this.currentTask.questions.forEach((_, i) => (this.userAnswers[i] = ''));
   }
 
   goBack() {

@@ -111,9 +111,13 @@
       <div class="task-info">
         <span class="task-badge">Task 2</span>
         <h3>Reading Comprehension: Quiz</h3>
-        <p>Answer the questions about the text in a quiz.</p>
+        <p>Answer the questions in a Kahoot.</p>
+        <p>Can you think of synonyms for the words in bold?</p>
+        <p>Can you think of synonyms for the words in bold?</p>
       </div>
-      <button class="start-task-btn" (click)="openTask('quiz', '5_2')">Start Task ➡️</button>
+      <button class="start-task-btn" (click)="openExternalLink('about:blank')">
+        Start Task ➡️
+      </button>
     </div>
 
     <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
@@ -211,16 +215,54 @@
       </div>
     </div>
 
-    <div class="inline-task-card accent-purple">
+    <div class="inline-task-card accent-purple video-task-card">
       <div class="task-info">
         <span class="task-badge">Task 6</span>
         <h3>Listening: Dental Hygienist</h3>
-        <p>Watch the video, note unknown words, and discuss the hygienist's role.</p>
-      </div>
-      <button class="start-task-btn" (click)="openTask('listening', '5_6')">Start Task ➡️</button>
-    </div>
+        <p>Watch the video and complete the following steps:</p>
 
-    <hr style="margin: 48px 0; border: none; border-top: 2px dashed #e2e8f0" />
+        <ul class="emoji-list">
+          <li>
+            <span class="emoji-icon">📝</span>
+            <strong>Note three words</strong> that you do not know exactly what they mean, and three
+            that you find useful and almost new.
+          </li>
+          <li>
+            <span class="emoji-icon">💬</span>
+            <strong>Talk about</strong> why their work is useful and what you think about their
+            role.
+          </li>
+          <li>
+            <span class="emoji-icon">👤</span>
+            <strong>Share your experience:</strong> Have you got experience with this profession?
+            How frequently do you meet dental hygienists?
+          </li>
+          <li>
+            <span class="emoji-icon">🔍</span>
+            <strong>Do some internet research</strong> to find out the present state of assistant
+            training versus dental hygienist training in Hungary.
+          </li>
+        </ul>
+      </div>
+
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/4SKiWwepNDo?si=qOkV166A4eU1c4Ek"
+          title="Dental Hygienist Video"
+          frameborder="0"
+          allow="
+            accelerometer;
+            autoplay;
+            clipboard-write;
+            encrypted-media;
+            gyroscope;
+            picture-in-picture;
+          "
+          allowfullscreen
+        >
+        </iframe>
+      </div>
+    </div>
 
     <!-- === SECTION 3: Dental Specializations === -->
     <section class="text-block">
@@ -230,9 +272,9 @@
         <div class="task-info">
           <span class="task-badge">Task 7</span>
           <h3>Brainstorm: Fields of Dentistry</h3>
-          <p>What main fields of dentistry can you think of?</p>
+          <p>Read the text, highlight words you find useful and do the Kahoot.</p>
         </div>
-        <button class="start-task-btn" (click)="openTask('discussion', '5_7')">
+        <button class="start-task-btn" (click)="openExternalLink('about:blank')">
           Start Task ➡️
         </button>
       </div>
@@ -390,14 +432,87 @@
         </ul>
       </div>
     </div>
-
-    <div class="inline-task-card accent-dark">
-      <div class="task-info">
-        <span class="task-badge">Task 9</span>
-        <h3>Final Quiz: Specializations</h3>
-        <p>Test your knowledge of dental specializations in a fun quiz!</p>
-      </div>
-      <button class="start-task-btn" (click)="openTask('quiz', '5_9')">Start Task ➡️</button>
-    </div>
   </article>
+  <hr style="margin: 60px 0 30px 0; border: none; border-top: 2px dashed #cbd5e1" />
+
+  <div
+    style="
+      text-align: center;
+      padding: 24px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      margin-bottom: 40px;
+    "
+  >
+    <h4
+      style="
+        margin-top: 0;
+        margin-bottom: 12px;
+        color: #475569;
+        font-size: 1.05rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      "
+    >
+      Sources
+    </h4>
+    <div style="display: flex; flex-direction: column; gap: 8px">
+      <a
+        href="https://southgablesdental.com/7-different-types-of-dentists/"
+        target="_blank"
+        style="color: #6366f1; text-decoration: none; font-weight: 600"
+        >🔗 7 Different Types of Dentists (South Gables Dental)</a
+      >
+
+      <a
+        href="https://medschoolinsiders.com/pre-med/so-you-want-to-be-a-dentist/"
+        target="_blank"
+        style="color: #6366f1; text-decoration: none; font-weight: 600"
+        >🔗 So You Want to be a Dentist? (Med School Insiders)</a
+      >
+
+      <a
+        href="https://semmelweis.hu/fszoi/files/2019/10/Dr.-Kivovics-Pe%CC%81ter-A-foga%CC%81szati-team-e%CC%81s-Az-a%CC%81gyhoz-laka%CC%81shoz-ko%CC%88to%CC%88tt-betegek-foga%CC%81szati-ella%CC%81ta%CC%81sa%CC%81nak-e%CC%81s-gondoza%CC%81sa%CC%81nak-leheto%CC%88se%CC%81gei-2019.pdf"
+        target="_blank"
+        style="color: #6366f1; text-decoration: none; font-weight: 600"
+        >🔗 A fogászati team és az ágyhoz kötött betegek ellátása (Semmelweis PDF)</a
+      >
+
+      <a
+        href="https://www.healthcareers.nhs.uk/explore-roles/dental-team/roles-dental-team"
+        target="_blank"
+        style="color: #6366f1; text-decoration: none; font-weight: 600"
+        >🔗 Roles in the Dental Team (NHS Health Careers)</a
+      >
+
+      <a
+        href="https://www.cda.org/Home/Public-Health/Careers-in-Oral-Health/The-Dental-Team"
+        target="_blank"
+        style="color: #6366f1; text-decoration: none; font-weight: 600"
+        >🔗 The Dental Team (CDA)</a
+      >
+
+      <a
+        href="https://www.bls.gov/ooh/healthcare/dental-hygienists.htm"
+        target="_blank"
+        style="color: #6366f1; text-decoration: none; font-weight: 600"
+        >🔗 Dental Hygienists (BLS)</a
+      >
+
+      <a
+        href="https://www.youtube.com/watch?v=4SKiWwepNDo&ab_channel=TeethTalkGirl"
+        target="_blank"
+        style="color: #6366f1; text-decoration: none; font-weight: 600"
+        >🔗 Dental Hygienist vs Dental Assistant (YouTube)</a
+      >
+
+      <a
+        href="https://youtu.be/r7E2YVdfMpM?si=xBpKMP31s5nxszfO"
+        target="_blank"
+        style="color: #6366f1; text-decoration: none; font-weight: 600"
+        >🔗 Dental Video Resource (YouTube)</a
+      >
+    </div>
+  </div>
 </div>

@@ -341,3 +341,54 @@ $border-color: #e2e8f0;
     }
   }
 }
+// --- KÖZÉPRE ZÁRT VIDEÓS KÁRTYA (Task 6) ---
+.video-task-card {
+  flex-direction: column; // Egymás alá teszi az elemeket
+  align-items: flex-start; // <--- EZ HÚZZA BALRA AZ EGÉSZET
+  text-align: left; // <--- SZÖVEG BALRA ZÁRÁSA
+  gap: 32px; // Távolság a szöveg és a videó között
+
+  .task-info {
+    max-width: 100%;
+
+    // Az ikonos lista formázása
+    .emoji-list {
+      margin: 24px 0 0 0; // <--- KIVETTÜK AZ AUTO-T, ÍGY BALRA MARAD
+      padding: 0;
+      list-style-type: none;
+      display: block;
+      max-width: 800px; // Kicsit szélesebb lehet, ha már balra van
+
+      li {
+        font-size: 1.05rem;
+        color: $text-main;
+        margin-bottom: 16px;
+        position: relative;
+        line-height: 1.5;
+        padding-left: 36px; // Helyet csinálunk az ikonnak
+
+        .emoji-icon {
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+    }
+  }
+
+  // A videó formázása
+  .video-wrapper {
+    width: 100%;
+    max-width: 600px; // Nem engedjük, hogy túl nagy legyen
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 4px solid $white;
+    aspect-ratio: 16 / 9; // Automatikusan tartja a szélesvásznú arányt
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

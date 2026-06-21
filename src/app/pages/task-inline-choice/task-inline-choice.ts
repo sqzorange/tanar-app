@@ -13,8 +13,14 @@ import { INLINE_CHOICE_DATABASE, InlineChoiceTask } from '../../taskData/tasks-d
 export class TaskInlineChoiceComponent implements OnInit {
   currentTask!: InlineChoiceTask;
 
-  // A felhasználó választásait tároljuk, index szerint
-  selectedAnswers: { [sentenceIndex: number]: string } = {};
+  // Válaszok tárolása: null (még nincs válasz) vagy a kiválasztott string
+  selectedAnswers: { [sentenceIndex: number]: string | null } = {};
+
+  // Értékelés állapota
+  gradingResults: { [index: number]: 'correct' | 'incorrect' } | null = null;
+  isEvaluated = false;
+  score = 0;
+  showAnswers = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +31,8 @@ export class TaskInlineChoiceComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id && INLINE_CHOICE_DATABASE[id]) {
       this.currentTask = INLINE_CHOICE_DATABASE[id];
+      // Inicializáljuk a válaszokat
+      this.currentTask.sentences.forEach((_, i) => (this.selectedAnswers[i] = null));
     } else {
       console.error('Inline Choice task not found!');
       this.location.back();
@@ -32,30 +40,50 @@ export class TaskInlineChoiceComponent implements OnInit {
   }
 
   selectOption(sentenceIndex: number, option: string) {
+    if (this.isEvaluated) return; // Ha már értékeltük, ne lehessen kattintani
     this.selectedAnswers[sentenceIndex] = option;
   }
 
   isAllAnswered(): boolean {
     if (!this.currentTask) return false;
-    return Object.keys(this.selectedAnswers).length === this.currentTask.sentences.length;
+    return Object.values(this.selectedAnswers).every((answer) => answer !== null);
   }
 
   submitTask() {
-    let isPerfect = true;
+    if (!this.currentTask || !this.isAllAnswered()) return;
+
+    this.gradingResults = {};
+    this.score = 0;
+    this.showAnswers = false;
+    let allCorrect = true;
 
     this.currentTask.sentences.forEach((sentence, index) => {
-      if (this.selectedAnswers[index] !== sentence.correctAnswer) {
-        isPerfect = false;
+      if (this.selectedAnswers[index] === sentence.correctAnswer) {
+        this.gradingResults![index] = 'correct';
+        this.score++;
+      } else {
+        this.gradingResults![index] = 'incorrect';
+        allCorrect = false;
       }
     });
 
-    if (isPerfect) {
-      alert('Excellent work! You selected all the correct words. 🏆');
-      this.location.back();
-    } else {
-      alert('There are a few mistakes. Review your choices and try again! ❌');
-      // Opcionális: itt törölhetnéd a rossz válaszokat, de most csak figyelmeztetünk
+    this.isEvaluated = true;
+
+    if (allCorrect) {
+      setTimeout(() => alert('Perfect score! Well done! 🏆'), 300);
     }
+  }
+
+  toggleAnswers(): void {
+    this.showAnswers = !this.showAnswers;
+  }
+
+  retryTask(): void {
+    this.isEvaluated = false;
+    this.gradingResults = null;
+    this.score = 0;
+    this.showAnswers = false;
+    this.currentTask.sentences.forEach((_, i) => (this.selectedAnswers[i] = null));
   }
 
   goBack() {

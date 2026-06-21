@@ -15,7 +15,7 @@
             type="text"
             class="fill-in-input"
             [(ngModel)]="userAnswers[i]"
-            [disabled]="isGrading"
+            [disabled]="isGrading || isEvaluated"
             placeholder="type your answer..."
             [class.correct-border]="gradingResults?.[i]?.status === 'correct'"
             [class.partial-border]="gradingResults?.[i]?.status === 'partial'"
@@ -25,7 +25,6 @@
           <span class="text-part">{{ sentence.after }}</span>
         </div>
 
-        <!-- AI Visszajelző Doboz (Csak ellenőrzés után jelenik meg) -->
         <div class="feedback-box" *ngIf="gradingResults" [ngClass]="gradingResults[i].status">
           <span class="icon">
             {{
@@ -38,14 +37,71 @@
           </span>
           <span class="feedback-text">{{ gradingResults[i].feedback }}</span>
         </div>
+
+        <div
+          class="correct-hint"
+          *ngIf="showAnswers && gradingResults?.[i]?.status !== 'correct'"
+          style="
+            color: #10b981;
+            font-weight: bold;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            padding-left: 12px;
+          "
+        >
+          💡 Ideal answer: {{ sentence.correctAnswer }}
+        </div>
       </div>
     </div>
   </div>
 
   <footer class="action-footer">
-    <button class="submit-btn ai-btn" (click)="submitTask()" [disabled]="isGrading">
-      <!-- Kis animációs szöveg gombnyomáskor -->
+    <button
+      *ngIf="!isEvaluated"
+      class="submit-btn ai-btn"
+      (click)="submitTask()"
+      [disabled]="isGrading || !isAllAnswered()"
+    >
       {{ isGrading ? '🤖 AI is analyzing...' : 'Evaluate with AI 🤖' }}
     </button>
+
+    <div
+      *ngIf="isEvaluated"
+      class="result-summary"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        background: #f8fafc;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      "
+    >
+      <h3 style="margin: 0; color: #1e293b">
+        Your Score: {{ score }} / {{ currentTask.sentences.length }}
+      </h3>
+
+      <div style="display: flex; gap: 12px">
+        <button
+          class="submit-btn"
+          style="background: #ef4444; padding: 10px 20px"
+          (click)="retryTask()"
+        >
+          Try Again 🔄
+        </button>
+        <button
+          class="submit-btn"
+          style="background: #3b82f6; padding: 10px 20px"
+          (click)="toggleAnswers()"
+        >
+          {{ showAnswers ? 'Hide Ideal Answers 🙈' : 'Show Ideal Answers 💡' }}
+        </button>
+      </div>
+    </div>
   </footer>
 </div>

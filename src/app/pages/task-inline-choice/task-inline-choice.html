@@ -7,31 +7,101 @@
 
   <div class="task-container">
     <div class="sentences-list">
-      <div class="sentence-row" *ngFor="let sentence of currentTask.sentences; let i = index">
+      <div
+        class="sentence-row"
+        *ngFor="let sentence of currentTask.sentences; let i = index"
+        [class.evaluated-correct]="gradingResults?.[i] === 'correct'"
+        [class.evaluated-incorrect]="gradingResults?.[i] === 'incorrect'"
+      >
         <div class="sentence-number">{{ i + 1 }}.</div>
-        <p class="sentence-text">
-          {{ sentence.before }}
 
-          <span class="inline-options">
-            <button
-              *ngFor="let opt of sentence.options"
-              class="choice-btn"
-              [class.selected]="selectedAnswers[i] === opt"
-              (click)="selectOption(i, opt)"
-            >
-              {{ opt }}
-            </button>
+        <div style="flex: 1">
+          <p class="sentence-text" style="display: inline-block; margin: 0">
+            {{ sentence.before }}
+
+            <span class="inline-options">
+              <button
+                *ngFor="let opt of sentence.options"
+                class="choice-btn"
+                [class.selected]="selectedAnswers[i] === opt"
+                [disabled]="isEvaluated"
+                (click)="selectOption(i, opt)"
+              >
+                {{ opt }}
+              </button>
+            </span>
+
+            {{ sentence.after }}
+          </p>
+
+          <!-- Értékelő ikonok a mondat végén -->
+          <span class="feedback-icon" *ngIf="isEvaluated" style="margin-left: 12px">
+            <span *ngIf="gradingResults?.[i] === 'correct'">✅</span>
+            <span *ngIf="gradingResults?.[i] === 'incorrect'">❌</span>
           </span>
 
-          {{ sentence.after }}
-        </p>
+          <!-- HINT: Helyes válasz megjelenítése (csak ha rontotta és bekapcsolta) -->
+          <div
+            class="correct-hint"
+            *ngIf="showAnswers && gradingResults?.[i] === 'incorrect'"
+            style="color: #10b981; font-weight: bold; margin-top: 8px; font-size: 0.9rem"
+          >
+            💡 Correct answer: {{ sentence.correctAnswer }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <footer class="action-footer">
-    <button class="submit-btn" [disabled]="!isAllAnswered()" (click)="submitTask()">
+    <!-- Beadási gomb -->
+    <button
+      *ngIf="!isEvaluated"
+      class="submit-btn"
+      [disabled]="!isAllAnswered()"
+      (click)="submitTask()"
+    >
       Check Answers ✅
     </button>
+
+    <!-- Eredményjelző blokk (Kiértékelés után) -->
+    <div
+      *ngIf="isEvaluated"
+      class="result-summary"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        background: #f8fafc;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      "
+    >
+      <h3 style="margin: 0; color: #1e293b">
+        Your Score: {{ score }} / {{ currentTask.sentences.length }}
+      </h3>
+
+      <div style="display: flex; gap: 12px">
+        <button
+          class="submit-btn"
+          style="background: #ef4444; padding: 10px 20px"
+          (click)="retryTask()"
+        >
+          Try Again 🔄
+        </button>
+        <button
+          class="submit-btn"
+          style="background: #3b82f6; padding: 10px 20px"
+          (click)="toggleAnswers()"
+        >
+          {{ showAnswers ? 'Hide Answers 🙈' : 'Show Answers 💡' }}
+        </button>
+      </div>
+    </div>
   </footer>
 </div>

@@ -20,6 +20,14 @@
         <div class="question-text">
           <span class="q-number">{{ q.id }}.</span>
           <span class="q-content">{{ q.text }}</span>
+
+          <div
+            class="correct-hint"
+            *ngIf="showAnswers && gradingResults?.[i] === 'incorrect'"
+            style="color: #10b981; font-weight: bold; margin-top: 4px; font-size: 0.9rem"
+          >
+            💡 Correct answer: {{ q.correctAnswer ? 'Yes' : 'No' }}
+          </div>
         </div>
 
         <div class="answer-actions">
@@ -51,11 +59,51 @@
 
   <footer class="action-footer">
     <button
+      *ngIf="!isEvaluated"
       class="submit-btn"
       (click)="submitTask()"
-      [disabled]="!allQuestionsAnswered() || isEvaluated"
+      [disabled]="!allQuestionsAnswered()"
     >
-      {{ isEvaluated ? 'Task Completed' : 'Check Answers ✅' }}
+      Check Answers ✅
     </button>
+
+    <div
+      *ngIf="isEvaluated"
+      class="result-summary"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        background: #f8fafc;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      "
+    >
+      <h3 style="margin: 0; color: #1e293b">
+        Your Score: {{ score }} / {{ currentTask.questions.length }}
+      </h3>
+
+      <div style="display: flex; gap: 12px">
+        <button
+          class="submit-btn"
+          style="background: #ef4444; padding: 10px 20px"
+          (click)="retryTask()"
+        >
+          Try Again 🔄
+        </button>
+        <button
+          class="submit-btn"
+          style="background: #3b82f6; padding: 10px 20px"
+          (click)="toggleAnswers()"
+        >
+          {{ showAnswers ? 'Hide Answers 🙈' : 'Show Answers 💡' }}
+        </button>
+      </div>
+    </div>
   </footer>
 </div>

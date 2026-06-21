@@ -6,7 +6,7 @@
   </header>
 
   <div class="quiz-container">
-    <div *ngIf="!isQuizFinished" class="quiz-card">
+    <div *ngIf="!isEvaluated" class="quiz-card">
       <div class="progress-info">
         <span>Question {{ currentQuestionIndex + 1 }} of {{ currentTask.questions.length }}</span>
         <div class="progress-bar">
@@ -33,17 +33,114 @@
 
       <button class="next-btn" [disabled]="selectedOptionIndex === null" (click)="nextQuestion()">
         {{
-          currentQuestionIndex === currentTask.questions.length - 1 ? 'Finish' : 'Next Question ➡️'
+          currentQuestionIndex === currentTask.questions.length - 1
+            ? 'Finish & Check Answers ✅'
+            : 'Next Question ➡️'
         }}
       </button>
     </div>
 
-    <div *ngIf="isQuizFinished" class="quiz-card result-card">
-      <div class="score-display">
-        <span class="points">{{ score }}</span>
-        <span class="total">/ {{ currentTask.questions.length }} points</span>
+    <div *ngIf="isEvaluated">
+      <div
+        class="answers-review"
+        *ngIf="showAnswers"
+        style="
+          background: white;
+          border-radius: 12px;
+          padding: 24px;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+          margin-bottom: 24px;
+        "
+      >
+        <h3
+          style="
+            margin-top: 0;
+            color: #1e293b;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+          "
+        >
+          Review your answers:
+        </h3>
+
+        <div
+          *ngFor="let q of currentTask.questions; let i = index"
+          style="margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid #f1f5f9"
+        >
+          <p style="font-weight: bold; color: #334155; margin-bottom: 8px">
+            {{ i + 1 }}. {{ q.text }}
+          </p>
+
+          <div style="display: flex; flex-direction: column; gap: 4px; font-size: 0.95rem">
+            <span [style.color]="userAnswers[i] === q.correctIndex ? '#10b981' : '#ef4444'">
+              <strong>Your answer:</strong> {{ q.options[userAnswers[i]] }}
+              {{ userAnswers[i] === q.correctIndex ? '✅' : '❌' }}
+            </span>
+
+            <span
+              *ngIf="userAnswers[i] !== q.correctIndex"
+              style="color: #10b981; font-weight: 600"
+            >
+              💡 Correct answer: {{ q.options[q.correctIndex] }}
+            </span>
+          </div>
+        </div>
       </div>
-      <button class="home-btn" (click)="goBack()">Back</button>
+
+      <div
+        class="result-summary"
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+          background: #f8fafc;
+          padding: 20px;
+          border-radius: 12px;
+          border: 1px solid #e2e8f0;
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
+        "
+      >
+        <h3 style="margin: 0; color: #1e293b">
+          Your Score: {{ score }} / {{ currentTask.questions.length }}
+        </h3>
+
+        <div style="display: flex; gap: 12px">
+          <button
+            class="submit-btn"
+            style="
+              background: #ef4444;
+              padding: 10px 20px;
+              color: white;
+              border: none;
+              border-radius: 8px;
+              font-weight: bold;
+              cursor: pointer;
+            "
+            (click)="retryTask()"
+          >
+            Try Again 🔄
+          </button>
+          <button
+            class="submit-btn"
+            style="
+              background: #3b82f6;
+              padding: 10px 20px;
+              color: white;
+              border: none;
+              border-radius: 8px;
+              font-weight: bold;
+              cursor: pointer;
+            "
+            (click)="toggleAnswers()"
+          >
+            {{ showAnswers ? 'Hide Answers 🙈' : 'Show Answers 💡' }}
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

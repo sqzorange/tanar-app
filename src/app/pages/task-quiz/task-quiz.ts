@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { QUIZ_DATABASE, QuizTask } from '../../taskData/tasks-data'; // Importáld a megfelelő útvonalról!
+import { QUIZ_DATABASE, QuizTask } from '../../taskData/tasks-data';
 
 @Component({
   selector: 'app-task-quiz',
@@ -14,8 +14,14 @@ export class TaskQuizComponent implements OnInit {
   currentTask!: QuizTask;
   currentQuestionIndex = 0;
   selectedOptionIndex: number | null = null;
+
+  // A felhasználó válaszainak indexeit tároljuk
+  userAnswers: number[] = [];
+
+  // Egységesített értékelő változók
   score = 0;
-  isQuizFinished = false;
+  isEvaluated = false;
+  showAnswers = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,14 +30,11 @@ export class TaskQuizComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Kiolvassuk az ID-t az URL-ből (pl. /task/quiz/10 -> id = '10')
     const id = this.route.snapshot.paramMap.get('id');
 
-    // Ha van ilyen ID az adatbázisunkban, betöltjük
     if (id && QUIZ_DATABASE[id]) {
       this.currentTask = QUIZ_DATABASE[id];
     } else {
-      // Ha érvénytelen az ID, visszadobjuk az előző oldalra
       console.error('Quiz task not found!');
       this.location.back();
     }
@@ -46,21 +49,40 @@ export class TaskQuizComponent implements OnInit {
   }
 
   nextQuestion() {
-    if (this.selectedOptionIndex === this.currentQuestion.correctIndex) {
-      this.score++;
+    if (this.selectedOptionIndex !== null) {
+      // Elmentjük a választást
+      this.userAnswers[this.currentQuestionIndex] = this.selectedOptionIndex;
+
+      // Pontozás
+      if (this.selectedOptionIndex === this.currentQuestion.correctIndex) {
+        this.score++;
+      }
     }
-    this.selectedOptionIndex = null;
+
+    this.selectedOptionIndex = null; // Visszaállítjuk a következő kérdéshez
+
+    // Ha van még kérdés, lépünk, ha nincs, lezárjuk és értékelünk
     if (this.currentQuestionIndex < this.currentTask.questions.length - 1) {
       this.currentQuestionIndex++;
     } else {
-      this.isQuizFinished = true;
+      this.isEvaluated = true;
+      if (this.score === this.currentTask.questions.length) {
+        setTimeout(() => alert('Perfect score! Well done! 🏆'), 300);
+      }
     }
   }
 
-  restartQuiz() {
+  toggleAnswers() {
+    this.showAnswers = !this.showAnswers;
+  }
+
+  retryTask() {
     this.currentQuestionIndex = 0;
     this.score = 0;
-    this.isQuizFinished = false;
+    this.isEvaluated = false;
+    this.showAnswers = false;
+    this.userAnswers = [];
+    this.selectedOptionIndex = null;
   }
 
   goBack() {

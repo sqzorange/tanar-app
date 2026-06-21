@@ -17,12 +17,12 @@ import {
 export class TaskTrueFalseImageComponent implements OnInit {
   currentTask!: TrueFalseImageTask;
 
-  // A felhasználó válaszai: null (még nem válaszolt), true (Yes), false (No)
   userAnswers: { [index: number]: boolean | null } = {};
-
-  // Értékelés után: 'correct' vagy 'incorrect'
   gradingResults: { [index: number]: 'correct' | 'incorrect' } | null = null;
+
   isEvaluated = false;
+  score = 0; // Eltalált válaszok száma
+  showAnswers = false; // Mutassuk-e a helyes megoldást
 
   constructor(
     private route: ActivatedRoute,
@@ -34,8 +34,6 @@ export class TaskTrueFalseImageComponent implements OnInit {
       const taskId = params.get('id');
       if (taskId && TRUE_FALSE_IMAGE_DATABASE[taskId]) {
         this.currentTask = TRUE_FALSE_IMAGE_DATABASE[taskId];
-
-        // Inicializáljuk a válaszokat null-ra
         this.currentTask.questions.forEach((_, i) => (this.userAnswers[i] = null));
       }
     });
@@ -46,11 +44,10 @@ export class TaskTrueFalseImageComponent implements OnInit {
   }
 
   selectAnswer(index: number, answer: boolean): void {
-    if (this.isEvaluated) return; // Ha már kiértékeltük, nem lehet változtatni
+    if (this.isEvaluated) return;
     this.userAnswers[index] = answer;
   }
 
-  // Megnézzük, hogy minden kérdésre válaszolt-e
   allQuestionsAnswered(): boolean {
     if (!this.currentTask) return false;
     return Object.values(this.userAnswers).every((answer) => answer !== null);
@@ -60,22 +57,30 @@ export class TaskTrueFalseImageComponent implements OnInit {
     if (!this.currentTask || !this.allQuestionsAnswered()) return;
 
     this.gradingResults = {};
-    let allCorrect = true;
+    this.score = 0;
+    this.showAnswers = false; // Újraértékelésnél elrejtjük a hinteket
 
-    // Helyi (kliens oldali) kiértékelés AI nélkül
     this.currentTask.questions.forEach((q: TrueFalseQuestion, i: number) => {
       if (this.userAnswers[i] === q.correctAnswer) {
         this.gradingResults![i] = 'correct';
+        this.score++;
       } else {
         this.gradingResults![i] = 'incorrect';
-        allCorrect = false;
       }
     });
 
     this.isEvaluated = true;
+  }
 
-    if (allCorrect) {
-      setTimeout(() => alert('Perfect score! Well done! 🏆'), 300);
-    }
+  toggleAnswers(): void {
+    this.showAnswers = !this.showAnswers;
+  }
+
+  retryTask(): void {
+    this.isEvaluated = false;
+    this.gradingResults = null;
+    this.score = 0;
+    this.showAnswers = false;
+    this.currentTask.questions.forEach((_, i) => (this.userAnswers[i] = null));
   }
 }

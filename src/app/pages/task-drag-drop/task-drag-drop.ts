@@ -6,8 +6,6 @@ import {
   DragDropModule,
   moveItemInArray,
   transferArrayItem,
-  CdkDrag,
-  CdkDropList,
 } from '@angular/cdk/drag-drop';
 import { DRAG_DROP_DATABASE, DragDropTask } from '../../taskData/tasks-data';
 
@@ -22,13 +20,18 @@ export class TaskDragDropComponent implements OnInit {
   currentTask!: DragDropTask;
   availableOptions: string[] = [];
 
-  // Változók a képhez, táblázathoz és a lyukas szöveghez (list-to-text)
   droppedItems: { [key: string]: string | null } = {};
   zoneLists: string[] = [];
 
-  // Változók a list-to-list (két oszlopos) feladathoz
   anteriorList: string[] = [];
   posteriorList: string[] = [];
+
+  // --- ÚJ VÁLTOZÓK AZ ÉRTÉKELÉSHEZ ---
+  isEvaluated = false;
+  score = 0;
+  maxScore = 0;
+  showAnswers = false;
+  gradingResults: { [key: string]: 'correct' | 'incorrect' } = {};
 
   constructor(
     private router: Router,
@@ -37,27 +40,20 @@ export class TaskDragDropComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // A snapshot helyett feliratkozunk (subscribe) a paraméterek változására
     this.route.paramMap.subscribe((params) => {
       const taskId = params.get('id');
 
       if (taskId && DRAG_DROP_DATABASE[taskId]) {
         this.currentTask = DRAG_DROP_DATABASE[taskId];
-
-        // Opciók összekeverése
         this.availableOptions = [...this.currentTask.availableOptions].sort(
           () => Math.random() - 0.5,
         );
 
         if (this.currentTask.type === 'list-to-list') {
-          // A CDK-nak tudnia kell, hova húzhatunk
           this.zoneLists = ['anteriorList', 'posteriorList'];
-
-          // Ha visszatérünk egy feladatra, nullázzuk a listákat
           this.anteriorList = [];
           this.posteriorList = [];
         } else if (this.currentTask.dropZones) {
-          // Ez fut le a list-to-table, list-to-image ÉS a list-to-text esetében is!
           this.droppedItems = {};
           this.currentTask.dropZones.forEach((zone) => {
             this.droppedItems[zone.label] = null;
@@ -65,14 +61,13 @@ export class TaskDragDropComponent implements OnInit {
           this.zoneLists = this.currentTask.dropZones.map((z) => z.label);
         }
       } else {
-        console.error('Drag & Drop task not found!');
         this.location.back();
       }
     });
   }
 
-  // Drop metódus a képhez, táblázathoz és szöveghez
   dropOnZone(event: CdkDragDrop<any>, zoneLabel: string) {
+    if (this.isEvaluated) return; // Értékelés után letiltjuk a mozgatást
     const droppedItem = event.item.data;
     if (this.droppedItems[zoneLabel]) {
       this.availableOptions.push(this.droppedItems[zoneLabel]!);
@@ -84,8 +79,8 @@ export class TaskDragDropComponent implements OnInit {
     }
   }
 
-  // Drop metódus a List-to-List feladathoz
   dropToList(event: CdkDragDrop<string[]>) {
+    if (this.isEvaluated) return;
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -105,42 +100,59 @@ export class TaskDragDropComponent implements OnInit {
     return Object.values(this.droppedItems).filter((item) => item !== null).length;
   }
 
+  // --- ÚJ EGYSÉGES KIÉRTÉKELŐ FÜGGVÉNY ---
   submitTask() {
-    let isPerfect = true;
+    this.isEvaluated = true;
+    this.score = 0;
+    this.gradingResults = {};
+    this.showAnswers = false;
 
     if (this.currentTask.type === 'list-to-list') {
-      // JAVÍTÁS: Dinamikusan olvassuk ki a helyes válaszokat a feladat adatbázisából!
       const correctList1 = this.currentTask.dropZones?.[0]?.correctAnswer.split(',') || [];
       const correctList2 = this.currentTask.dropZones?.[1]?.correctAnswer.split(',') || [];
+      this.maxScore = this.currentTask.requiredCount;
 
-      // Ellenőrizzük az első oszlopot (pl. Anterior vagy Sick)
       this.anteriorList.forEach((item) => {
-        if (!correctList1.includes(item)) isPerfect = false;
+        if (correctList1.includes(item)) {
+          this.score++;
+          this.gradingResults[item] = 'correct';
+        } else this.gradingResults[item] = 'incorrect';
       });
 
-      // Ellenőrizzük a második oszlopot (pl. Posterior vagy Not Sick)
       this.posteriorList.forEach((item) => {
-        if (!correctList2.includes(item)) isPerfect = false;
+        if (correctList2.includes(item)) {
+          this.score++;
+          this.gradingResults[item] = 'correct';
+        } else this.gradingResults[item] = 'incorrect';
       });
     } else {
-      // Ellenőrzés a képhez, táblázathoz és lyukas szöveghez
+      this.maxScore = this.currentTask.dropZones?.length || 0;
       this.currentTask.dropZones?.forEach((zone) => {
-        if (this.droppedItems[zone.label] !== zone.correctAnswer) {
-          isPerfect = false;
+        if (this.droppedItems[zone.label] === zone.correctAnswer) {
+          this.score++;
+          this.gradingResults[zone.label] = 'correct';
+        } else {
+          this.gradingResults[zone.label] = 'incorrect';
         }
       });
     }
 
-    if (isPerfect) {
-      alert('Perfect job! 🏆');
-      this.location.back();
-    } else {
-      alert('Unfortunately, there are some mistakes! ❌ Try again!');
-      this.resetTask();
+    if (this.score === this.maxScore) {
+      setTimeout(() => alert('Perfect score! Well done! 🏆'), 300);
     }
   }
 
-  resetTask() {
+  toggleAnswers(): void {
+    this.showAnswers = !this.showAnswers;
+  }
+
+  retryTask(): void {
+    this.isEvaluated = false;
+    this.gradingResults = {};
+    this.score = 0;
+    this.showAnswers = false;
+
+    // Visszaállítjuk az eredeti állapotot (reset)
     if (this.currentTask.type === 'list-to-list') {
       this.availableOptions.push(...this.anteriorList, ...this.posteriorList);
       this.anteriorList = [];
@@ -156,6 +168,18 @@ export class TaskDragDropComponent implements OnInit {
       }
     }
     this.availableOptions.sort(() => Math.random() - 0.5);
+  }
+
+  // Segédfüggvény a hintekhez
+  getHintFor(key: string): string {
+    if (this.currentTask.type === 'list-to-list') {
+      const correctList1 = this.currentTask.dropZones?.[0]?.correctAnswer.split(',') || [];
+      return correctList1.includes(key)
+        ? this.currentTask.dropZones![0].label
+        : this.currentTask.dropZones![1].label;
+    }
+    const zone = this.currentTask.dropZones?.find((z) => z.label === key);
+    return zone ? zone.correctAnswer : '';
   }
 
   goBack() {

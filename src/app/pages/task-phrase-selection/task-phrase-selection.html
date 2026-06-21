@@ -26,6 +26,8 @@
           class="phrase-card"
           *ngFor="let phrase of cat.phrases; let pIndex = index"
           [class.selected]="selectedPhrases[cIndex]?.includes(pIndex)"
+          [style.opacity]="isSubmitted && !selectedPhrases[cIndex]?.includes(pIndex) ? '0.5' : '1'"
+          [style.cursor]="isSubmitted ? 'default' : 'pointer'"
           (click)="togglePhrase(cIndex, pIndex)"
         >
           <div class="phrase-index">{{ pIndex + 1 }}</div>
@@ -36,8 +38,54 @@
   </div>
 
   <footer class="action-footer">
-    <button class="submit-btn" (click)="submitTask()" [disabled]="!isComplete()">
+    <button
+      *ngIf="!isSubmitted"
+      class="submit-btn"
+      (click)="submitTask()"
+      [disabled]="!isComplete()"
+    >
       Finish Task ✅
     </button>
+
+    <!-- Beküldés utáni egységesített kártya -->
+    <div
+      *ngIf="isSubmitted"
+      class="result-summary"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        background: #f8fafc;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      "
+    >
+      <h3 style="margin: 0; color: #1e293b">Task Completed! 🎉</h3>
+      <p style="margin: 0; color: #475569; text-align: center">
+        Your phrases are successfully grouped. Excellent work!
+      </p>
+
+      <div style="display: flex; gap: 12px; margin-top: 8px">
+        <button
+          class="submit-btn"
+          style="background: #ef4444; padding: 10px 20px"
+          (click)="retryTask()"
+        >
+          Change Selection 🔄
+        </button>
+        <button
+          class="submit-btn"
+          style="background: #10b981; padding: 10px 20px"
+          (click)="goBack()"
+        >
+          Continue ➡️
+        </button>
+      </div>
+    </div>
   </footer>
 </div>

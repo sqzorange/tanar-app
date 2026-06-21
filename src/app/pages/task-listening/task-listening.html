@@ -29,21 +29,29 @@
         <p class="q-text">{{ q.text }}</p>
       </div>
 
-      <div class="answer-group" *ngIf="gradingState === 'idle'">
+      <!-- Válaszadó mező (Mindig látszik, de kiértékelés után letiltva) -->
+      <div class="answer-group">
         <textarea
           class="answer-input"
           rows="2"
           placeholder="Type your answer here..."
           [(ngModel)]="userAnswers[i]"
+          [disabled]="gradingState === 'completed'"
+          [style.borderColor]="
+            gradingState === 'completed'
+              ? aiFeedback[i].status === 'correct'
+                ? '#10b981'
+                : aiFeedback[i].status === 'partial'
+                  ? '#f59e0b'
+                  : '#ef4444'
+              : '#e2e8f0'
+          "
         >
         </textarea>
       </div>
 
-      <div class="ai-feedback-group" *ngIf="gradingState === 'completed'">
-        <div class="user-answer-display">
-          <strong>Your answer:</strong> {{ userAnswers[i] || '— No answer provided —' }}
-        </div>
-
+      <!-- AI Visszajelzés (Csak értékelés után) -->
+      <div class="ai-feedback-group" *ngIf="gradingState === 'completed'" style="margin-top: 16px">
         <div class="feedback-card" [ngClass]="'status-' + aiFeedback[i].status">
           <div class="status-icon">
             <span *ngIf="aiFeedback[i].status === 'correct'">✅</span>
@@ -55,21 +63,68 @@
             <p>{{ aiFeedback[i].feedback }}</p>
           </div>
         </div>
+
+        <!-- HINT: Ideális válasz megjelenítése (ha a válasz nem volt tökéletes) -->
+        <div
+          class="correct-hint"
+          *ngIf="showAnswers && aiFeedback[i].status !== 'correct'"
+          style="color: #10b981; font-weight: bold; margin-top: 12px; font-size: 0.95rem"
+        >
+          💡 Ideal answer: {{ q.correctAnswer }}
+        </div>
       </div>
     </div>
   </div>
 
   <footer class="action-footer" *ngIf="gradingState !== 'grading'">
+    <!-- Beadási gomb (Amíg nincs kiértékelve) -->
     <button
       *ngIf="gradingState === 'idle'"
-      class="submit-btn"
+      class="submit-btn ai-btn"
       [disabled]="!isAllAnswered()"
       (click)="submitTask()"
     >
       Submit for AI Grading 🤖
     </button>
-    <button *ngIf="gradingState === 'completed'" class="submit-btn retry-btn" (click)="retryTask()">
-      Try Again 🔄
-    </button>
+
+    <!-- Közös eredményjelző kártya -->
+    <div
+      *ngIf="gradingState === 'completed'"
+      class="result-summary"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        background: #f8fafc;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      "
+    >
+      <h3 style="margin: 0; color: #1e293b">
+        Your Score: {{ score }} / {{ currentTask.questions.length }}
+      </h3>
+
+      <div style="display: flex; gap: 12px">
+        <button
+          class="submit-btn"
+          style="background: #ef4444; padding: 10px 20px"
+          (click)="retryTask()"
+        >
+          Try Again 🔄
+        </button>
+        <button
+          class="submit-btn"
+          style="background: #3b82f6; padding: 10px 20px"
+          (click)="toggleAnswers()"
+        >
+          {{ showAnswers ? 'Hide Ideal Answers 🙈' : 'Show Ideal Answers 💡' }}
+        </button>
+      </div>
+    </div>
   </footer>
 </div>

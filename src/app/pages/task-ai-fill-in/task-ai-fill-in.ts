@@ -19,6 +19,11 @@ export class TaskAiFillInComponent implements OnInit {
   gradingResults: GradingResult[] | null = null;
   isGrading = false;
 
+  // Egységesített értékelő változók
+  isEvaluated = false;
+  score = 0;
+  showAnswers = false;
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -37,15 +42,20 @@ export class TaskAiFillInComponent implements OnInit {
     });
   }
 
-  goBack() {
-    this.location.back();
+  isAllAnswered(): boolean {
+    if (!this.currentTask) return false;
+    return this.currentTask.sentences.every(
+      (_, i) => this.userAnswers[i] && this.userAnswers[i].trim() !== '',
+    );
   }
 
   submitTask() {
-    if (!this.currentTask) return;
+    if (!this.currentTask || !this.isAllAnswered()) return;
 
     this.isGrading = true;
-    this.gradingResults = null; // Előző eredmények törlése
+    this.gradingResults = null;
+    this.isEvaluated = false;
+    this.showAnswers = false;
 
     // Átalakítjuk a mondatokat olyan formátumra, amit a te AiGradingService-ed vár
     const adaptedQuestions = this.currentTask.sentences.map((s) => ({
@@ -56,7 +66,28 @@ export class TaskAiFillInComponent implements OnInit {
     // Hívjuk a szervizt
     this.aiGradingService.gradeAnswers(adaptedQuestions, this.userAnswers).subscribe((results) => {
       this.gradingResults = results;
-      this.isGrading = false; // Kikapcsoljuk a töltőképernyőt
+      this.isGrading = false;
+      this.isEvaluated = true;
+
+      // Kiszámoljuk a pontszámot (csak a tökéletesen helyes válaszok érnek 1 pontot)
+      this.score = results.filter((r) => r.status === 'correct').length;
     });
+  }
+
+  toggleAnswers() {
+    this.showAnswers = !this.showAnswers;
+  }
+
+  retryTask() {
+    this.isEvaluated = false;
+    this.gradingResults = null;
+    this.score = 0;
+    this.showAnswers = false;
+    // Töröljük a beírt válaszokat
+    this.currentTask.sentences.forEach((_, i) => (this.userAnswers[i] = ''));
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

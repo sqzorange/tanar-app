@@ -22,6 +22,11 @@ export class TaskImageTableComponent implements OnInit {
   gradingResults: GradingResult[] | null = null;
   isGrading = false;
 
+  // Egységesített értékelő változók
+  isEvaluated = false;
+  score = 0;
+  showAnswers = false;
+
   constructor(
     private route: ActivatedRoute,
     private location: Location,
@@ -38,14 +43,24 @@ export class TaskImageTableComponent implements OnInit {
     });
   }
 
+  isAllAnswered(): boolean {
+    if (!this.currentTask) return false;
+    return this.currentTask.rows.every(
+      (_, i) => this.userAnswers[i] && this.userAnswers[i].trim() !== '',
+    );
+  }
+
   goBack(): void {
     this.location.back();
   }
 
   submitTask(): void {
-    if (!this.currentTask) return;
+    if (!this.currentTask || !this.isAllAnswered()) return;
+
     this.isGrading = true;
     this.gradingResults = null;
+    this.isEvaluated = false;
+    this.showAnswers = false;
 
     const adaptedQuestions = this.currentTask.rows.map((row: SingleImageRow) => ({
       text: `Translate: ${row.label}`,
@@ -55,6 +70,23 @@ export class TaskImageTableComponent implements OnInit {
     this.aiGradingService.gradeAnswers(adaptedQuestions, this.userAnswers).subscribe((results) => {
       this.gradingResults = results;
       this.isGrading = false;
+      this.isEvaluated = true;
+
+      // Pontszámítás: minden 'correct' státusz egy pont
+      this.score = results.filter((r) => r.status === 'correct').length;
     });
+  }
+
+  toggleAnswers() {
+    this.showAnswers = !this.showAnswers;
+  }
+
+  retryTask() {
+    this.isEvaluated = false;
+    this.gradingResults = null;
+    this.score = 0;
+    this.showAnswers = false;
+    // Töröljük a beírt válaszokat
+    this.currentTask.rows.forEach((_, i) => (this.userAnswers[i] = ''));
   }
 }

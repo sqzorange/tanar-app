@@ -35,4 +35,7 @@ export class TopicThreeComponent {
       console.error('Sajnos a böngésződ nem támogatja a felolvasást (Text-to-Speech).');
     }
   }
+  printPage() {
+    window.print();
+  }
 }

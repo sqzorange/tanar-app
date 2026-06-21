@@ -14,6 +14,9 @@ export class TaskPhraseSelectionComponent implements OnInit {
   currentTask!: PhraseSelectionTask;
   selectedPhrases: { [categoryIndex: number]: number[] } = {};
 
+  // Egységesített állapot
+  isSubmitted = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -37,6 +40,8 @@ export class TaskPhraseSelectionComponent implements OnInit {
   }
 
   public togglePhrase(catIndex: number, phraseIndex: number): void {
+    if (this.isSubmitted) return; // Ne engedjük módosítani beküldés után
+
     if (!this.selectedPhrases[catIndex]) return;
 
     const selected = this.selectedPhrases[catIndex];
@@ -50,7 +55,6 @@ export class TaskPhraseSelectionComponent implements OnInit {
     }
   }
 
-  // Explicit public és védve van undefined ellen
   public isComplete(): boolean {
     if (!this.currentTask || !this.currentTask.categories) {
       return false;
@@ -64,9 +68,16 @@ export class TaskPhraseSelectionComponent implements OnInit {
 
   public submitTask(): void {
     if (this.isComplete()) {
-      alert('Great selections! Task completed. ✅');
-      this.location.back();
+      this.isSubmitted = true;
     }
+  }
+
+  public retryTask(): void {
+    this.isSubmitted = false;
+    // Töröljük a válogatásokat
+    this.currentTask.categories.forEach((_, index) => {
+      this.selectedPhrases[index] = [];
+    });
   }
 
   public goBack(): void {

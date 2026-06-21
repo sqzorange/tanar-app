@@ -14,6 +14,9 @@ export class TaskSelectionComponent implements OnInit {
   currentTask!: SelectionTask;
   selectedIds: number[] = [];
 
+  // Egységesített állapot (nincs pontozás, csak beküldés)
+  isSubmitted = false;
+
   constructor(
     private location: Location,
     private router: Router,
@@ -21,7 +24,6 @@ export class TaskSelectionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Kiolvassuk az URL-ből az ID-t
     const id = this.route.snapshot.paramMap.get('id');
 
     if (id && SELECTION_DATABASE[id]) {
@@ -33,6 +35,8 @@ export class TaskSelectionComponent implements OnInit {
   }
 
   toggleSelection(id: number) {
+    if (this.isSubmitted) return; // Beküldés után nem engedjük módosítani
+
     const index = this.selectedIds.indexOf(id);
     if (index > -1) {
       this.selectedIds.splice(index, 1);
@@ -50,10 +54,13 @@ export class TaskSelectionComponent implements OnInit {
 
   submitSelection() {
     if (this.selectedIds.length === this.currentTask.requiredCount) {
-      console.log('Selected option IDs:', this.selectedIds);
-      alert('Thank you for your feedback! Your selection has been recorded.');
-      this.router.navigate(['/home']);
+      this.isSubmitted = true;
     }
+  }
+
+  retryTask() {
+    this.isSubmitted = false;
+    this.selectedIds = [];
   }
 
   goBack() {

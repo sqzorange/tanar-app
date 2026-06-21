@@ -11,6 +11,8 @@
         *ngFor="let option of currentTask.options"
         class="option-row"
         [class.selected]="isSelected(option.id)"
+        [style.opacity]="isSubmitted && !isSelected(option.id) ? '0.5' : '1'"
+        [style.cursor]="isSubmitted ? 'default' : 'pointer'"
         (click)="toggleSelection(option.id)"
       >
         <div class="checkbox-wrapper">
@@ -26,25 +28,69 @@
     </div>
 
     <footer class="card-footer">
-      <div class="status-bar">
-        <div class="progress-label">
-          Selected: <strong>{{ selectedIds.length }}</strong> / {{ currentTask.requiredCount }}
+      <!-- Amíg nincs beküldve -->
+      <ng-container *ngIf="!isSubmitted">
+        <div class="status-bar">
+          <div class="progress-label">
+            Selected: <strong>{{ selectedIds.length }}</strong> / {{ currentTask.requiredCount }}
+          </div>
+          <div class="progress-track">
+            <div
+              class="progress-fill"
+              [style.width.%]="(selectedIds.length / currentTask.requiredCount) * 100"
+            ></div>
+          </div>
         </div>
-        <div class="progress-track">
-          <div
-            class="progress-fill"
-            [style.width.%]="(selectedIds.length / currentTask.requiredCount) * 100"
-          ></div>
+
+        <button
+          class="submit-btn"
+          [disabled]="selectedIds.length !== currentTask.requiredCount"
+          (click)="submitSelection()"
+        >
+          Submit Selection ✅
+        </button>
+      </ng-container>
+
+      <!-- Beküldés utáni egységesített kártya -->
+      <div
+        *ngIf="isSubmitted"
+        class="result-summary"
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+          background: #f8fafc;
+          padding: 20px;
+          border-radius: 12px;
+          border: 1px solid #e2e8f0;
+          width: 100%;
+          margin: 0 auto;
+        "
+      >
+        <h3 style="margin: 0; color: #1e293b">Task Completed! 🎉</h3>
+        <p style="margin: 0; color: #475569; text-align: center">
+          Your selection has been successfully recorded. You can now discuss your choices with your
+          partner.
+        </p>
+
+        <div style="display: flex; gap: 12px; margin-top: 8px">
+          <button
+            class="submit-btn"
+            style="background: #ef4444; padding: 10px 20px"
+            (click)="retryTask()"
+          >
+            Change Selection 🔄
+          </button>
+          <button
+            class="submit-btn"
+            style="background: #10b981; padding: 10px 20px"
+            (click)="goBack()"
+          >
+            Continue ➡️
+          </button>
         </div>
       </div>
-
-      <button
-        class="submit-btn"
-        [disabled]="selectedIds.length !== currentTask.requiredCount"
-        (click)="submitSelection()"
-      >
-        Submit Selection
-      </button>
     </footer>
   </div>
 </div>
